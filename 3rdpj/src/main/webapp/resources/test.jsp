@@ -7,6 +7,6 @@
 <title>test</title>
 </head>
 <body>
-<h1>resources폴더 생성때문에 임시로 만들어놨음</h1>
+<h1>dsfresources폴더 생성때문에 임시로 만들어놨음</h1>
 </body>
 </html>
