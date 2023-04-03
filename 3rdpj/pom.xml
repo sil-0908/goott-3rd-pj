@@ -158,8 +158,63 @@
 		    <artifactId>mysql-connector-java</artifactId>
 		    <version>8.0.28</version>
 		</dependency>
-		<!-- db end -->      
+		<!-- db end -->
+		<!-- json -->		
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>2.13.0</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.13.0</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.9.13</version>
+		</dependency> 
+		<!-- json 끝 -->
+		<!-- Spring-websocket -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-websocket</artifactId>
+		    <version>${org.springframework-version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>javax.websocket</groupId>
+			<artifactId>javax.websocket-api</artifactId>
+	   		<version>1.1</version>
+		</dependency>
+		
+		<!-- JSON -->
+		<dependency>
+			<groupId>com.googlecode.json-simple</groupId>
+		  	<artifactId>json-simple</artifactId>
+		  	<version>1.1.1</version>
+		</dependency>
+		<!-- socket end -->
+		<!-- 아임포트  -->
+		<dependency>
+  			<groupId>com.github.iamport</groupId>
+  			<artifactId>iamport-rest-client-java</artifactId>
+  			<version>0.2.14</version>
+		</dependency>
+		<!-- 아임포트  -->
+		
 	</dependencies>
+	<!-- 아임포트 repo-->
+	<repositories>
+		<repository>
+			<id>jitpack.io</id>
+			<url>https://jitpack.io</url>
+		</repository>
+	</repositories>
+	<!-- 아임포트 -->
     <build>
         <plugins>
             <plugin>
