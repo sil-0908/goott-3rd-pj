@@ -12,6 +12,7 @@ MANIFEST.MF
 .metadata
 .settings/
 bin/
+.project
 
 # sbteclipse plugin
 .target
