@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="user">
+	<insert id="signup">
+		insert into user (user_id, pw, birth, email, hp)
+		values (#{user_id}, #{pw}, #{birth}, #{email}, #{hp})
+	</insert>
+	
+	<select id="get_auth" resultType="String">
+		select auth
+		  from user
+		 where user_id=#{user_id}
+	</select>
+	
+	<select id="signin" resultType="String">
+		select user_id
+		  from user
+		 where user_id=#{user_id}
+		   and pw=#{pw}
+	</select>	
+	
+	<update id="to_planner">
+		update user
+		   set auth="auth_b"
+		 where user_id=#{user_id}
+	</update>
+</mapper>
