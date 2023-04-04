@@ -1,3 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="admin"></mapper>
+<mapper namespace="admin">
+
+<select id="noticelist" resultType="com.goott.pj3.admin.dto.NoticeDTO">
+	select qna_idx, user_id, category, auth, qna_title, qna_content, q_del_yn, create_date, update_date
+	  from qna
+	  where category="N"
+</select>
+
+<insert id="noticeinsert">
+	insert into qna(user_id, category, auth, qna_title,qna_content , create_date)
+	VALUES (#{user_id}, #{category}, #{auth}, #{qna_title}, #{qna_content}, current_timestamp)
+</insert>
+
+<select id="noticedetail" parameterType="int" resultType="com.goott.pj3.admin.dto.NoticeDTO">
+	select qna_idx, user_id, category, auth, qna_title, qna_content, q_del_yn, create_date, update_date
+	  from qna
+	 where qna_idx=#{qna_idx}
+</select>
+
+</mapper>
