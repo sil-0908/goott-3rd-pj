@@ -39,6 +39,11 @@ public class NoticeDAO {
 		// TODO Auto-generated method stub
 		sqlSession.update("noticeupdate", dto);
 	}
+
+	public void noticedelete(NoticeDTO dto) {
+		// TODO Auto-generated method stub
+		sqlSession.delete("noticedelete", dto);
+	}
 	
 	
 }

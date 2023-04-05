@@ -16,4 +16,6 @@ public interface NoticeService {
 
 	void noticeupdate(NoticeDTO dto);
 
+	void noticedelete(NoticeDTO dto);
+
 }

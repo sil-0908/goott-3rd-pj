@@ -13,16 +13,22 @@
 </head>
 <script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-$("#btnSave").click(function(){
-	let category = document.form1.category.value;
-	if(category!="N"){
-		alert("공지사항 카테고리는 N입니다")
-		document.form1.category.focus();
-		return;
-	}
-	document.form1.submit();
-	
-});
+$(document).ready(function() {
+		var originalContent = $("#qna_content").val();
+		$("#btnUpdate").click(function(){
+			var currentContent = $("#qna_content").val();
+			if (currentContent !== originalContent) {
+			  document.form1.action="/admin/noticeupdate";
+			  document.form1.submit();
+		  }
+		});
+	    $("#btnDelete").click(function(){
+	        if(confirm("공지를 삭제하시겠습니까?")){
+	            document.form1.action="/admin/noticedelete";
+	            document.form1.submit();
+	        }
+	    });
+	});
 </script>
 
 <body>
@@ -36,23 +42,21 @@ $("#btnSave").click(function(){
                     <div class="panel-heading">공지사항 </div>
                     <div class="panel-body">
 					<form id="form1" name="form1" method="post">
+						<div>작성자 : ${dto.user_id}</div>
 						<div>
-							<input name="user_id" id="user_id" value="admin">
+							제목 : <input name="qna_title" id="qna_title" value="${dto.qna_title}">
 						</div>
 						<div>
-							<input name="qna_title" id="qna_title" size="80" placeholder=" 제목을 입력하세요.">
+							권한 :${dto.auth}
 						</div>
-						<div>
-							<input name="auth" id="auth" value="auth_a">
-						</div>
-						<div>
-							<input name="category" id="category"  value="N">
-						</div>
-						<div style="width:800px">
-							<textarea rows="5" cols="80" id="qna_content" name="qna_content" placeholder="내용을 입력하세요"></textarea>
+						<div>카테고리 : ${dto.category}</div>
+						<div>내용 : 
+							<textarea rows="5" cols="80" id="qna_content" name="qna_content">${dto.qna_content}</textarea>
 						</div>
 						<div style="width:700px; text-align:center;">
-						<button style="button" id="btnSave">등록하기</button>
+							<input type="hidden" name="qna_idx" value="${dto.qna_idx}">
+							<button style="button" id="btnUpdate">수정</button>
+							<button style="button" id="btnDelete">삭제</button>
 						</div>
 					</form>
                     </div>
