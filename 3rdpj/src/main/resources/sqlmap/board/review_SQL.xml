@@ -1,3 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="review"></mapper>
+<mapper namespace="review">
+
+    <!--리뷰 생성-->
+    <insert id="insert" parameterType="hashMap" useGeneratedKeys="true" keyProperty="review_idx">
+        insert into plan_review(user_id, plan_idx, review_content, review_img, review_rating)
+             values (#{user_id}, #{plan_idx}, #{review_content}, #{review_img}, #{review_rating})
+    </insert>
+
+    <!--디테일 생성-->
+    <select id="detail" parameterType="hashMap" resultType="hashMap">
+        select review_idx, user_id, plan_idx, review_content, review_img, review_rating, create_date
+          from plan_review
+         where review_idx = #{review_idx}
+    </select>
+
+</mapper>
+
