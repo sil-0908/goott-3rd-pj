@@ -51,6 +51,16 @@
 	    <url-pattern>/*</url-pattern>
 	</filter-mapping>
 
+	<!-- PUT, DELETE 메소드 사용가능 필터 2023.04.06 길영준  START -->
+	<filter>
+		<filter-name>httpMethodFilter</filter-name>
+		<filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>httpMethodFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<!-- PUT, DELETE 메소드 사용가능 필터 2023.04.06 길영준  END -->
 
 
 </web-app>
