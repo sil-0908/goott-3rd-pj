@@ -7,6 +7,7 @@ import com.goott.pj3.board.review.service.ReviewService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
@@ -38,7 +39,7 @@ public class ReviewController {
 	 * @return
 	 */
 	@RequestMapping(value = "create", method = RequestMethod.POST)
-	public ModelAndView createPost(@RequestParam Map<String, Object> map, HttpSession httpSession){
+	public ModelAndView createPost(@RequestParam Map<String, Object> map, HttpSession httpSession, MultipartFile multipartFile){
 		String userId = httpSession.getAttribute("user_id").toString();
 		ModelAndView mv = new ModelAndView();
 		map.put("user_id", userId);
