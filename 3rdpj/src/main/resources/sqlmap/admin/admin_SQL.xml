@@ -27,7 +27,7 @@
 
 <delete id="noticedelete">
 	update qna 
-	   set q_del_yn='Y' 
+	   set q_del_yn='Y', update_date=NOW()
 	 where qna_idx=#{qna_idx}
 </delete>
 
