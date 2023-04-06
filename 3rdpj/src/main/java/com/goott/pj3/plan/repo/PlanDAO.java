@@ -25,7 +25,15 @@ public class PlanDAO {
     }
 
 
-    public PlanDTO detail(int planIdx) {
-        return  ss.selectOne("plan.detail", planIdx);
+    public PlanDTO detail(int plan_idx) {
+        return  ss.selectOne("plan.detail", plan_idx);
+    }
+
+    public void edit(PlanDTO planDTO) {
+        ss.update("plan.edit", planDTO);
+    }
+
+    public void delete(int plan_idx) {
+        ss.delete("plan.delete", plan_idx);
     }
 }

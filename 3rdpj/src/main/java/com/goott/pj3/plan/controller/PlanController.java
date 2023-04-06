@@ -46,13 +46,33 @@ public class PlanController {
     }
 
     @GetMapping("list/{plan_idx}")
-    public ModelAndView planDetail(ModelAndView modelAndView, @PathVariable int plan_idx) {
-    modelAndView.addObject("data", planService.detail(plan_idx));
-            modelAndView.setViewName("plan/plan_detail");
-            return modelAndView;
+    public ModelAndView planDetail(ModelAndView modelAndView, @PathVariable("plan_idx") int plan_idx) {
+        modelAndView.addObject("data", planService.detail(plan_idx));
+        modelAndView.setViewName("plan/plan_detail");
+        return modelAndView;
+    }
+
+    @GetMapping("list/edit/{plan_idx}")
+    public ModelAndView planEdit(ModelAndView modelAndView, @PathVariable("plan_idx") int plan_idx) {
+        modelAndView.addObject("data", planService.detail(plan_idx));
+        modelAndView.setViewName("plan/plan_edit");
+        return modelAndView;
     }
 
 
+    @PutMapping("list/edit/{plan_idx}")
+    public String planEditPut(PlanDTO planDTO, @PathVariable("plan_idx") int plan_idx) {
+        planDTO.setPlan_idx(plan_idx);
+        planService.planEdit(planDTO);
+        return "redirect:/plan/list";
+    }
+
+    @PostMapping("list/delete")
+    public String planDelete(int plan_idx) {
+        System.out.println(plan_idx);
+        planService.planDelete(plan_idx);
+        return "redirect:/plan/list";
+    }
 
 
 }

@@ -29,8 +29,18 @@ public class PlanServiceImpl implements PlanService {
     }
 
     @Override
-    public PlanDTO detail(int planIdx) {
-        return planDAO.detail(planIdx);
+    public PlanDTO detail(int plan_idx) {
+        return planDAO.detail(plan_idx);
+    }
+
+    @Override
+    public void planEdit(PlanDTO planDTO) {
+        planDAO.edit(planDTO);
+    }
+
+    @Override
+    public void planDelete(int planIdx) {
+        planDAO.delete(planIdx);
     }
 
 

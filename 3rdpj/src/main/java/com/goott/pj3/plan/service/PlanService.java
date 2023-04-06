@@ -10,5 +10,9 @@ public interface PlanService {
 
     List<PlanDTO> list();
 
-    PlanDTO detail(int planIdx);
+    PlanDTO detail(int plan_idx);
+
+    void planEdit(PlanDTO planDTO);
+
+    void planDelete(int plan_idx);
 }
