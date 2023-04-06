@@ -10,5 +10,9 @@ public class AdminController {
 
 	@Autowired
 	AdminService adminService;
+
+	
+	
+	
 	
 }
