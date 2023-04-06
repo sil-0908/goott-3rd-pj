@@ -225,7 +225,12 @@
 		    <version>5.2.13.RELEASE</version>
 		</dependency>
 		<!-- security end -->
-		
+		<!-- 23.04.06 조원재 파일업로드 관련 라이브러리 -->
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.4</version>
+		</dependency>
 	</dependencies>
 	<!-- 아임포트 repo-->
 	<repositories>
