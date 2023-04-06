@@ -51,7 +51,7 @@ $(function(){
                                 <c:forEach var="row" items="${noticelist}">
                                     <tr>
                                         <td>${row.user_id}</td>
-                                        <td>${row.qna_title}</td>
+                                        <td><a href="/admin/noticedetail?idx=${row.qna_idx}">${row.qna_title}</a></td>
                                         <td>${row.qna_content}</td>
                                         <td>${row.q_del_yn}</td>
                                         <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${row.create_date}"/></td> 

@@ -16,8 +16,6 @@ import com.goott.pj3.admin.dto.NoticeDTO;
 import com.goott.pj3.admin.service.NoticeService;
 
 
-
-
 @Controller
 @RequestMapping("/admin/**")
 public class NoticeController {
@@ -25,7 +23,7 @@ public class NoticeController {
 	@Autowired
 	NoticeService noticeService;
 	
-//	°øÁö»çÇ×¸®½ºÆ®
+// ê³µì§€ì‚¬í•­ ë¦¬ìŠ¤íŠ¸
 	@RequestMapping("noticelist")
 	public ModelAndView noticeList(@RequestParam(defaultValue = "all") String search_option, 
 			@RequestParam(defaultValue ="") String keyword,ModelAndView mv ) {
@@ -37,21 +35,21 @@ public class NoticeController {
 		mv.addObject("noticelist",noticelist);
 		return mv;
 	}
-//	°øÁö»çÇ× ÀÛ¼º
+//	ê³µì§€ì‚¬í•­ ì‘ì„±
 	@RequestMapping("noticewrite")
 	public String noticeWrite() {
 		return "admin/noticewrite";
 	}
-// °øÁö»çÇ× µ¥ÀÌÅÍ ³Ö±â
+// ê³µì§€ì‚¬í•­ ì‘ì„±
 	@RequestMapping("noticeinsert")
 	public String insert(NoticeDTO dto, HttpSession session) {
 		System.out.println(dto);
-//		String writer = (String)session.getAttribute("user_id");
-//		dto.setUser_id(writer);
+		String user_id = (String)session.getAttribute("user_id");
+		dto.setUser_id(user_id);
 		noticeService.noticeinsert(dto);
 		return "redirect:/admin/noticelist";
 	}
-	
+// ê³µì§€ì‚¬í•­ ìƒì„¸ì •ë³´
 	@RequestMapping("noticedetail")
 	public ModelAndView noticedetail(int idx) {
 		ModelAndView mv = new ModelAndView();
@@ -59,10 +57,16 @@ public class NoticeController {
 		mv.addObject("dto", noticeService.noticedetail(idx));
 		return mv;
 	}
-	
+// ê³µì§€ì‚¬í•­ ìˆ˜ì •	
 	@RequestMapping("noticeupdate")
 	public String noticeupdate(NoticeDTO dto) {
 		noticeService.noticeupdate(dto);
+		return "redirect:/admin/noticelist";
+	}
+// ê³µì§€ì‚¬í•­ ì‚­ì œ	
+	@RequestMapping("noticedelete")
+	public String noticedelete(NoticeDTO dto) {
+		noticeService.noticedelete(dto);
 		return "redirect:/admin/noticelist";
 	}
 

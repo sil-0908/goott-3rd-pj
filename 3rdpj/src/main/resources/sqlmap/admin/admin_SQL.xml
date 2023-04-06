@@ -5,7 +5,7 @@
 <select id="noticelist" resultType="com.goott.pj3.admin.dto.NoticeDTO">
 	select qna_idx, user_id, category, auth, qna_title, qna_content, q_del_yn, create_date, update_date
 	  from qna
-	  where category="N"
+	  where category="N" and user_id="admin"
 </select>
 
 <insert id="noticeinsert">
@@ -14,9 +14,21 @@
 </insert>
 
 <select id="noticedetail" parameterType="int" resultType="com.goott.pj3.admin.dto.NoticeDTO">
-	select qna_idx, user_id, category, auth, qna_title, qna_content, q_del_yn, create_date, update_date
+	select qna_idx, user_id, category, auth, qna_title, qna_content, q_del_yn, update_date
 	  from qna
 	 where qna_idx=#{qna_idx}
 </select>
+
+<update id="noticeupdate">
+	update qna
+	   set qna_title=#{qna_title}, qna_content=#{qna_content}, update_date=NOW()
+	 where qna_idx=#{qna_idx}
+</update>
+
+<delete id="noticedelete">
+	update qna 
+	   set q_del_yn='Y', update_date=NOW()
+	 where qna_idx=#{qna_idx}
+</delete>
 
 </mapper>
