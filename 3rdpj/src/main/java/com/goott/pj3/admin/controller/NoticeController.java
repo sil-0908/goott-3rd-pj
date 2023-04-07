@@ -73,5 +73,11 @@ public class NoticeController {
 		noticeService.noticedelete(dto);
 		return "redirect:/admin/noticelist";
 	}
+// 공지사항 삭제	
+	@RequestMapping("noticedeletere")
+	public String noticedeletere(NoticeDTO dto) {
+		noticeService.noticedeletere(dto);
+		return "redirect:/admin/noticelist";
+	}
 
 }

@@ -15,4 +15,6 @@ public interface AdminUserService {
 
 	void adminuserdelete(AdminUserDTO dto);
 
+	void adminuserdeletere(AdminUserDTO dto);
+
 }

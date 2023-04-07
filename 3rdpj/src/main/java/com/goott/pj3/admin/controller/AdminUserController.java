@@ -47,5 +47,11 @@ public class AdminUserController {
 		a_u_Service.adminuserdelete(dto);
 		return "redirect:/admin/userlist";
 	}
+// 회원 탈퇴 복원
+	@RequestMapping("userdeletere")
+	public String adminUserDeleteRe(AdminUserDTO dto) {
+		a_u_Service.adminuserdeletere(dto);
+		return "redirect:/admin/userlist";
+	}
 	
 }

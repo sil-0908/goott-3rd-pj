@@ -49,6 +49,12 @@ public class NoticeServiceImpl implements NoticeService {
 		// TODO Auto-generated method stub
 		noticeDAO.noticedelete(dto);
 	}
+
+	@Override
+	public void noticedeletere(NoticeDTO dto) {
+		// TODO Auto-generated method stub
+		noticeDAO.noticedeletere(dto);
+	}
 	
 	
 

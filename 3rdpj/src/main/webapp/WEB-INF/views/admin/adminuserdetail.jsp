@@ -72,6 +72,12 @@ $(document).ready(function() {
             document.form1.submit();
         }
     });
+    $("#btnDeleteRe").click(function(){
+        if(confirm("회원을 복원시키겠습니까?")){
+            document.form1.action="/admin/userdeletere";
+            document.form1.submit();
+        }
+    });
 });
 </script>
 <body>
@@ -122,12 +128,14 @@ $(document).ready(function() {
                                <tr>
                                     <td>결제성공횟수 :<input name="success_count" id="success_count" value="${dto.success_count}"></td>
                                </tr>
-							    <tr class="hidden">
-							        <td>플래너 좋아요 수 :<input name="planner_like" id="planner_like" value="${dto.planner_like}"></td>
-							    </tr>
-							    <tr class="hidden">
-							        <td>플래너 싫어요 수 :<input name="planner_unlike" id="planner_unlike" value="${dto.planner_unlike}"></td>
-							    </tr>
+                               <c:if test="${dto.auth == 'auth_b' }">
+								    <tr>
+								        <td>플래너 좋아요 수 :<input name="planner_like" id="planner_like" value="${dto.planner_like}"></td>
+								    </tr>
+								    <tr>
+								        <td>플래너 싫어요 수 :<input name="planner_unlike" id="planner_unlike" value="${dto.planner_unlike}"></td>
+								    </tr>
+							    </c:if>
 								<tr>
                                     <td>계좌번호 :<input name="acount" id="acount" value="${dto.acount}"></td>
                                </tr>
@@ -141,7 +149,8 @@ $(document).ready(function() {
 		                    <div style="width:700px; text-align:center;">
 								<input type="hidden" name="user_id" value="${dto.user_id}">
 								<button style="button" id="btnUpdate">수정</button>
-								<button style="button" id="btnDelete">삭제</button>
+								<button style="button" id="btnDelete">탈퇴</button>
+								<button style="button" id="btnDeleteRe">회원복원</button>
 							</div>
                         </form>
                     </div>

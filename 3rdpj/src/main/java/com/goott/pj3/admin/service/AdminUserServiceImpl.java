@@ -40,5 +40,11 @@ public class AdminUserServiceImpl implements AdminUserService {
 		adminUserDAO.adminuserdelete(dto);
 	}
 
+	@Override
+	public void adminuserdeletere(AdminUserDTO dto) {
+		// TODO Auto-generated method stub
+		adminUserDAO.adminuserdeletere(dto);
+	}
+
 
 }

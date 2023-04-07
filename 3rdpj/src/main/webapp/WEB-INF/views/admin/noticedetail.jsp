@@ -28,6 +28,12 @@ $(document).ready(function() {
 	            document.form1.submit();
 	        }
 	    });
+	    $("#btnDeleteRe").click(function(){
+	        if(confirm("공지를 복원하시겠습니까?")){
+	            document.form1.action="/admin/noticedeletere";
+	            document.form1.submit();
+	        }
+	    });
 	});
 </script>
 
@@ -57,6 +63,7 @@ $(document).ready(function() {
 							<input type="hidden" name="qna_idx" value="${dto.qna_idx}">
 							<button style="button" id="btnUpdate">수정</button>
 							<button style="button" id="btnDelete">삭제</button>
+							<button style="button" id="btnDeleteRe">복원</button>
 						</div>
 					</form>
                     </div>

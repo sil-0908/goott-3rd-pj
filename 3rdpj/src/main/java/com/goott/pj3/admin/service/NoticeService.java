@@ -18,4 +18,6 @@ public interface NoticeService {
 
 	void noticedelete(NoticeDTO dto);
 
+	void noticedeletere(NoticeDTO dto);
+
 }

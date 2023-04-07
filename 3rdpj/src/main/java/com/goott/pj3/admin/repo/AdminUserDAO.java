@@ -36,5 +36,10 @@ public class AdminUserDAO {
 		sqlSession.delete("adminuserdelete",dto);
 	}
 
+	public void adminuserdeletere(AdminUserDTO dto) {
+		// TODO Auto-generated method stub
+		sqlSession.update("adminuserdeletere", dto);
+	}
+
 
 }
