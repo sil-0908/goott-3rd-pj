@@ -13,6 +13,11 @@ public class ReviewDTO {
     Date create_date;
     Date upate_date;
 
+    /**
+     * 조원재 23.04.05. 리뷰 DTO
+     * @return
+     */
+
     public int getReview_idx() {
         return review_idx;
     }
