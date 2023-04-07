@@ -1,3 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="qna"></mapper>
+<mapper namespace="qna">
+
+    <insert id="insert">
+        insert into qna(user_id, qna_title, qna_content)
+        values (#{user_id}, #{qna_title}, #{qna_content})
+    </insert>
+
+    <select id="list" resultType="com.goott.pj3.board.qna.dto.QnaDTO">
+        select qna_idx, qna_title, qna_content, user_id, create_date
+          from qna
+         where <if test ="category == 'n'"> category = 'N'</if>
+               <if test ="category == 'r'"> category = 'R'</if>
+               <if test ="category == 'u'"> category = 'U'</if>
+               <if test ="category == 'e'"> category = 'E'</if>
+        and q_del_yn = 'n'
+         order by qna_idx desc
+         limit #{pageStart}, #{perPageNum}
+    </select>
+
+    <select id="totalCount" resultType="int">
+        <![CDATA[
+        select count(qna_idx)
+          from qna
+         where q_del_yn = 'n'
+        ]]>
+    </select>
+
+    <select id="detail" resultType="com.goott.pj3.board.qna.dto.QnaDTO">
+        select qna_idx, qna_title, qna_content, create_date
+          from qna
+         where qna_idx = #{qna_idx}
+    </select>
+
+    <update id="modify">
+        update qna
+           set qna_title = #{qna_title}, qna_content = #{qna_content}
+         where qna_idx = #{qna_idx}
+    </update>
+
+    <update id="delete">
+        update qna
+           set q_del_yn = 'y'
+         where qna_idx = #{qna_idx}
+    </update>
+
+    <select id="list_n" resultType="com.goott.pj3.board.qna.dto.QnaDTO">
+        <![CDATA[
+        select qna_idx, qna_title
+        from qna
+        where q_del_yn = 'n'
+          and category = 'n'
+        order by qna_idx DESC
+        ]]>
+    </select>
+
+    <select id="list_u" resultType="com.goott.pj3.board.qna.dto.QnaDTO">
+        <![CDATA[
+        select qna_idx, qna_title
+        from qna
+        where q_del_yn = 'n'
+          and category = 'u'
+        order by qna_idx DESC
+        ]]>
+    </select>
+
+    <select id="list_r" resultType="com.goott.pj3.board.qna.dto.QnaDTO">
+        <![CDATA[
+        select qna_idx, qna_title
+        from qna
+        where q_del_yn = 'n'
+          and category = 'r'
+        order by qna_idx DESC
+        ]]>
+    </select>
+
+    <select id="list_e" resultType="com.goott.pj3.board.qna.dto.QnaDTO">
+        <![CDATA[
+        select qna_idx, qna_title
+        from qna
+        where q_del_yn = 'n'
+          and category = 'e'
+        order by qna_idx DESC
+        ]]>
+    </select>
+</mapper>
