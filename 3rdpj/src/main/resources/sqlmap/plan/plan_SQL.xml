@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="plan">
+    <insert id="create">
+    INSERT into plan(user_id, start_date, end_date, price, plan_title, plan_detail)
+    values (#{user_id},#{start_date}, #{end_date}, #{price}, #{plan_title}, #{plan_detail})
+    </insert>
+    <select id="list" resultType="com.goott.pj3.plan.dto.PlanDTO">
+        select plan_idx, plan_title, price, user_id
+        from plan
+        where p_del_yn = 'N'
+    </select>
+    <select id="detail" resultType="com.goott.pj3.plan.dto.PlanDTO">
+        select plan_title, plan_detail, user_id, start_date, end_date, price, plan_idx
+        from plan
+        where plan_idx = #{plan_idx}
+    </select>
+    <update id="edit">
+        update plan
+        set plan_title = #{plan_title},
+            plan_detail=#{plan_detail},
+            start_date=#{start_date},
+            end_date=#{end_date},
+            price=#{price}
+        where plan_idx = #{plan_idx}
+    </update>
+    <update id="delete">
+        update plan
+        set p_del_yn = 'Y'
+        where plan_idx=#{plan_idx}
+    </update>
+</mapper>

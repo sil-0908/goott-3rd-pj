@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="user">
+   <!-- 회원가입 -->
+   <insert id="sign_up">
+      <![CDATA[
+      insert into user (user_id, pw, birth, email, hp)
+      values (#{user_id}, #{pw}, #{birth}, #{email}, #{hp})
+      ]]>
+   </insert>
+   
+   <!-- 아이디 중복체크 -->
+   <select id="id_chk" parameterType="String" resultType="int">
+      select count(user_id)
+        from user
+       where user_id = #{user_id}
+   </select>
+   
+   <!-- 로그인할때 입력받은 id값으로 비밀번호랑 받아와서 로그인하기 -->
+   <select id="user_cnt" parameterType="com.goott.pj3.user.dto.UserDTO" resultType="int">
+      select count(user_id)
+        from user
+       where user_id = #{user_id}
+         and pw = #{pw}
+   </select>
+   
+   <!-- 세션에 저장시킬 유저정보 받아오기 -->
+   <select id="find_user" resultType="com.goott.pj3.user.dto.UserDTO">
+      <![CDATA[
+      select user_id, auth
+        from user
+       where user_id = #{user_id}
+      ]]>
+   </select>
+</mapper>

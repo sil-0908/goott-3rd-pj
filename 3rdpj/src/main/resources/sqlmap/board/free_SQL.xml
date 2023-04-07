@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="free">
+	
+	<insert id="insert">
+		insert into free(user_id, free_title, free_content)
+		values (#{user_id}, #{free_title}, #{free_content})
+	</insert>
+
+	<select id="list" resultType="com.goott.pj3.board.free.dto.FreeBoardDTO">
+    <![CDATA[
+		select free_idx, free_title, free_content, user_id, create_date
+		  from free
+		 where f_del_yn = 'n'
+		 order by free_idx DESC
+		 limit #{pageStart}, #{perPageNum}
+		 ]]>
+	</select>
+
+	<select id="totalCount" resultType="int">
+    <![CDATA[
+		select count(free_idx)
+		  from free
+		 where f_del_yn = 'n'
+		]]>
+	</select>
+
+	<select id="detail" resultType="com.goott.pj3.board.free.dto.FreeBoardDTO">
+		select free_idx, free_title, free_content, create_date
+		  from free
+		 where free_idx = #{free_idx}
+	</select>
+	
+	<update id="modify">
+		update free
+		   set free_title = #{free_title}, free_content = #{free_content}
+		 where free_idx = #{free_idx}
+	</update>
+
+	<update id="delete">
+		update free
+		   set f_del_yn = 'y'
+		 where free_idx = #{free_idx}
+	</update>
+
+</mapper>
