@@ -16,6 +16,7 @@ import com.goott.pj3.admin.dto.NoticeDTO;
 import com.goott.pj3.admin.service.NoticeService;
 
 
+
 @Controller
 @RequestMapping("/admin/**")
 public class NoticeController {
@@ -23,10 +24,13 @@ public class NoticeController {
 	@Autowired
 	NoticeService noticeService;
 	
-// 공지사항 리스트
+// 공지사항 등록 리스트
 	@RequestMapping("noticelist")
 	public ModelAndView noticeList(@RequestParam(defaultValue = "all") String search_option, 
-			@RequestParam(defaultValue ="") String keyword,ModelAndView mv ) {
+			@RequestParam(defaultValue ="") String keyword,ModelAndView mv, HttpSession session ) {
+		if(session.getAttribute("user_id") == null) { 
+			return new ModelAndView("redirect:/user/signin"); 
+		}
 		List<NoticeDTO> noticelist = noticeService.noticeList(search_option, keyword);
 		Map<String, Object> map = new HashMap<>();
 		mv.setViewName("admin/noticelist");
@@ -40,7 +44,7 @@ public class NoticeController {
 	public String noticeWrite() {
 		return "admin/noticewrite";
 	}
-// 공지사항 작성
+// 공지사항 상세 작성
 	@RequestMapping("noticeinsert")
 	public String insert(NoticeDTO dto, HttpSession session) {
 		System.out.println(dto);
@@ -67,6 +71,12 @@ public class NoticeController {
 	@RequestMapping("noticedelete")
 	public String noticedelete(NoticeDTO dto) {
 		noticeService.noticedelete(dto);
+		return "redirect:/admin/noticelist";
+	}
+// 공지사항 삭제	
+	@RequestMapping("noticedeletere")
+	public String noticedeletere(NoticeDTO dto) {
+		noticeService.noticedeletere(dto);
 		return "redirect:/admin/noticelist";
 	}
 
