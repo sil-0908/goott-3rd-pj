@@ -165,10 +165,19 @@ public class NoticeDTO {
 
 	@Override
 	public String toString() {
-		return "QnaDTO[qna_idx=" +qna_idx+",user_id="+user_id+",category="+category+",auth="+auth
-				+",qna_title="+qna_title+", qna_content="+qna_content+", qna_answer="+qna_answer
-				+", qna_pw= " + qna_pw+", answer="+ answer+",q_del_yn="+q_del_yn+",create_date="+create_date
-				+", update_date="+update_date+ "]";
+		return "QnaDTO [ qna_idx =" +qna_idx
+				+",user_id="+user_id
+				+",category="+category
+				+",auth="+auth
+				+",qna_title="+qna_title
+				+", qna_content="+qna_content
+				+", qna_answer="+qna_answer
+				+", qna_pw= " + qna_pw
+				+", answer="+ answer
+				+",q_del_yn="+q_del_yn
+				+",create_date="+create_date
+				+", update_date="+update_date
+				+ "]";
 	}
 
 }
