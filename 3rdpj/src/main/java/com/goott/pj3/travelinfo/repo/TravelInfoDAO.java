@@ -1,5 +1,6 @@
 package com.goott.pj3.travelinfo.repo;
 
+import com.goott.pj3.travelinfo.dto.TravelInfoDTO;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -13,13 +14,13 @@ public class TravelInfoDAO {
 	@Autowired
 	SqlSession ss;
 
-	public int insert(Map<String, Object> map){
+	public int insert(Map<String, Object> map) {
 		return this.ss.insert("travelinfo.insert", map);
 	}
 
-//	public Map<String, Object> detail(Map<String, Object> map){
-//		return this.ss.selectOne("review.detail", map);
-//	}
+	public Map<String, Object> detail(Map<String, Object> map) {
+		return this.ss.selectOne("travelinfo.detail", map);
+	}
 //
 //    public int update(Map<String, Object> map) {
 //		return this.ss.update("review.update", map);

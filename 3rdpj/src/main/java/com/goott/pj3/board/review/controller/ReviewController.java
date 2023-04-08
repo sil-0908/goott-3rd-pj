@@ -38,10 +38,10 @@ public class ReviewController {
 	 * @return
 	 */
 	@RequestMapping(value = "create", method = RequestMethod.POST)
-	public ModelAndView createPost(@RequestParam Map<String, Object> map, HttpSession httpSession, MultipartFile multipartFile){
-		String userId = httpSession.getAttribute("user_id").toString();
+	public ModelAndView createPost(@RequestParam Map<String, Object> map, HttpSession httpSession){
+		String user_id = httpSession.getAttribute("user_id").toString();
 		ModelAndView mv = new ModelAndView();
-		map.put("user_id", userId);
+		map.put("user_id", user_id);
 		String review_idx = this.reviewService.create(map);
 		if(review_idx.equals(null)) {
 			mv.setViewName("redirect:/review/review_create");

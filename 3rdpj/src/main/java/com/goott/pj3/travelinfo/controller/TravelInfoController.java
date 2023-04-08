@@ -1,8 +1,10 @@
 package com.goott.pj3.travelinfo.controller;
 
+import com.goott.pj3.travelinfo.dto.TravelInfoDTO;
 import com.goott.pj3.travelinfo.service.TravelInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,35 +22,51 @@ public class TravelInfoController {
 	@Autowired
 	TravelInfoService travelInfoService;
 
+	/**
+	 * 조원재 23.04.07. 여행지 정보 생성 페이지 호출
+	 * @return
+	 */
 	@RequestMapping("create")
 	public ModelAndView create(){
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("/travelinfo/travelinfo_create");
 		return mv;
 	}
+
+	/**
+	 * 조원재 23.04.7 여행지 정보 생성
+	 * @param map
+	 * @param httpSession
+	 * @return
+	 */
 	@RequestMapping(value = "create", method = RequestMethod.POST)
 	public ModelAndView createPost(@RequestParam Map<String, Object> map, HttpSession httpSession){
-		String userId = httpSession.getAttribute("user_id").toString();
 		ModelAndView mv = new ModelAndView();
-		map.put("user_id", userId);
-		String travel_loction_idx = this.travelInfoService.create(map);
-		if(travel_loction_idx.equals(null)) {
-			mv.setViewName("redirect:/travelinfo/travelinfo_create");
+		String user_id = httpSession.getAttribute("user_id").toString();
+		map.put("user_id", user_id);
+		String travel_location_idx = this.travelInfoService.insert(map);
+		if(travel_location_idx == null){
+			mv.setViewName("travelinfo/travelinfo_create");
 		}else {
-			mv.setViewName("redirect:/travelinfo/detail?review_idx="+travel_loction_idx);
+			mv.setViewName("rediect:/travelinfo/detail?travel_location_idx="+travel_location_idx);
 		}
 		return mv;
 	}
-//	@RequestMapping("detail")
-//	public ModelAndView detail(@RequestParam Map<String, Object> map){
-//		ModelAndView mv = new ModelAndView();
-//		Map<String, Object> detail = this.travelInfoService.detail(map);
-//		mv.addObject("data", detail);
-//		String review_idx = map.get("review_idx").toString();
-//		mv.addObject("review_idx", review_idx);
-//		mv.setViewName("/board/review/review_detail");
-//		return mv;
-//	}
+
+	/**
+	 * 조원재 23.04.08 여행지 정보 디테일 페이지 호출
+	 */
+	@RequestMapping("detail")
+	public ModelAndView detail(@RequestParam Map<String, Object> map){
+		ModelAndView mv = new ModelAndView();
+		Map<String, Object> detail = this.travelInfoService.detail(map);
+		System.out.println("detail"+detail);
+		mv.addObject("data", detail);
+		String travel_location_idx = map.get("travel_location_idx").toString();
+		mv.addObject("travel_location_idx", travel_location_idx);
+		mv.setViewName("travelinfo/travelinfo_detail");
+		return mv;
+	}
 //	@RequestMapping("update")
 //	public ModelAndView update(@RequestParam Map<String, Object> map) {
 //		ModelAndView mv = new ModelAndView();

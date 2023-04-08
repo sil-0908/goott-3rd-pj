@@ -8,30 +8,30 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<%--<html>--%>
-<%--<head>--%>
-<%--    <title>리뷰 화면</title>--%>
-<%--</head>--%>
-<%--<body>--%>
-<%--<h1> 리뷰 화면</h1>--%>
+<html>
+<head>
+    <title>여행지</title>
+</head>
+<body>
+<h1>여행지</h1>
+<p>번호 : ${data.travel_location_idx}</p>
+<p>리뷰 사진 : <img src="${data.country_img}" height="200px" width="200px" style="border: 1px solid red;"></p>
+<p>장소 : ${data.country_c}</p>
+<p>국가 : ${data.country_a}</p>
+<p>위치 : ${data.country_b}"</p>
+<p>상세주소 : ${data.country_script}</p>
+<p>여행제 상세 내용 : ${data.contry_detail}</p>
+<p>
+    <a href="/travelinfo/update?travel_location_idx=${travel_location_idx}">수정</a>
+</p>
 
-<%--<p>번호 : ${data.review_idx}</p>--%>
-<%--<p>리뷰 사진 : <img src="${data.reiew_img} height="200px" width="200px" style="border: 1px solid red;"></p>--%>
-<%--<p>내용 : ${data.review_content}</p>--%>
-<%--<p>작성자 : ${data.user_id}</p>--%>
-<%--<p>작성일 : ${data.create_date}"</p>--%>
+<form method="POST" action="/travelinfo/delete">
+    <input type="hidden" name="travel_location_idx" value="${travel_location_idx}">
+    <input type="submit" value="삭제">
+</form>
 
-<%--<p>--%>
-<%--    <a href="/review/update?review_idx=${review_idx}">수정</a>--%>
-<%--</p>--%>
-
-<%--<form method="POST" action="/review/delete">--%>
-<%--    <input type="hidden" name="review_idx" value="${review_idx}">--%>
-<%--    <input type="submit" value="삭제">--%>
-<%--</form>--%>
-
-<%--<p>--%>
-<%--    <a href="/review/list">목록</a>--%>
-<%--</p>--%>
-<%--</body>--%>
-<%--</html>--%>
+<p>
+    <a href="/travelinfo/list">목록</a>
+</p>
+</body>
+</html>

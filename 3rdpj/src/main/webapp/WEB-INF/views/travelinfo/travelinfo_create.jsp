@@ -16,7 +16,7 @@
 </head>
 <body>
 <h1>여행지 정보 작성</h1>
-<form method="POST" name="travel_form">
+<form method="POST">
     <p>여행지 이름 : <input type="text" name="country_c"></p>
     <p>국가 : <input type="text" name="country_a"></p></p>
     <p>지역 : <input type="text" name="country_b"></p></p>

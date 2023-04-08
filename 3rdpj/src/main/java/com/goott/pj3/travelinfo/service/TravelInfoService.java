@@ -1,11 +1,14 @@
 package com.goott.pj3.travelinfo.service;
 
+import com.goott.pj3.travelinfo.dto.TravelInfoDTO;
+
 import java.util.List;
 import java.util.Map;
 
 public interface TravelInfoService {
+    String insert(Map<String, Object> map);
 
-    public String create(Map<String, Object>map);
+    Map<String, Object> detail(Map<String, Object> map);
 
 //    public Map<String, Object> detail(Map<String, Object> map);
 //

@@ -8,11 +8,12 @@
              values (#{user_id}, #{country_a}, #{country_b}, #{country_c}, #{country_detail}, #{country_script}, #{country_img})
     </insert>
 
-<!--    <select id="detail" parameterType="hashMap" resultType="hashMap">-->
-<!--        select review_idx, user_id, plan_idx, review_content, review_img, review_rating, create_date-->
-<!--          from plan_review-->
-<!--         where review_idx = #{review_idx}-->
-<!--    </select>-->
+    <select id="detail" parameterType="hashMap" resultType="hashMap">
+        select travel_location_idx, user_id, country_a, country_b, country_c,
+               country_detail, country_script, country_img, create_date, update_date
+          from travel_location
+         where travel_location_idx = #{travel_location_idx}
+    </select>
 
 <!--    <update id="update" parameterType="hashMap">-->
 <!--        update plan_review-->

@@ -5,15 +5,9 @@ import java.util.Date;
 
 public class TravelInfoDTO {
    int travel_location_idx;
-   String user_id;
-   String country_a;
-   String country_b;
-   String country_c;
-   String country_detail;
-   String country_script;
+   String user_id, country_a, country_b, country_c, country_detail, country_script;
    String[] country_img;
-   Date create_date;
-   Date update_date;
+   Date create_date, update_date;
 
     public int getTravel_location_idx() {
         return travel_location_idx;

@@ -15,7 +15,7 @@
 </head>
 <body>
 <h1>리뷰 작성</h1>
-<form method="POST" enctype="multipart/form-data">
+<form method="POST">
     <input type="hidden" name="plan_idx" value="1">
     <p>내용 : <input type="text" name="review_content"></p>
     <p>사진 : <input id="fileItem" type="file" multiple name="review_img"></p>

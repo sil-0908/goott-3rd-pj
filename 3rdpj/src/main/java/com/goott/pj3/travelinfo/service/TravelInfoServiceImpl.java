@@ -1,5 +1,6 @@
 package com.goott.pj3.travelinfo.service;
 
+import com.goott.pj3.travelinfo.dto.TravelInfoDTO;
 import com.goott.pj3.travelinfo.repo.TravelInfoDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,14 +15,17 @@ public class TravelInfoServiceImpl implements TravelInfoService {
 	TravelInfoDAO travelInfoDAO;
 
 	@Override
-	public String create(Map<String, Object> map) {
-		int cnt = this.travelInfoDAO.insert(map);
-		if(cnt==1){
+	public String insert(Map<String, Object> map) {
+		int attectRowCnt = this.travelInfoDAO.insert(map);
+		if(attectRowCnt==1){
 			return map.get("travel_location_idx").toString();
 		}
 		return null;
 	}
-
+	@Override
+	public Map<String, Object> detail(Map<String, Object> map) {
+		return this.travelInfoDAO.detail(map);
+	}
 //	@Override
 //	public Map<String, Object> detail(Map<String, Object> map) {
 //		return this.travelInfoDAO.detail(map);
