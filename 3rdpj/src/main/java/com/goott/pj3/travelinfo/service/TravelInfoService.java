@@ -6,15 +6,40 @@ import java.util.List;
 import java.util.Map;
 
 public interface TravelInfoService {
+
+    /**
+     * 조원재 23.04.08. 여행지 정보 생성
+     * @param map
+     * @return
+     */
     String insert(Map<String, Object> map);
 
+    /**
+     * 조원재 23,04.08. 여행지 디테일 페이지
+     * @param map
+     * @return
+     */
     Map<String, Object> detail(Map<String, Object> map);
 
-//    public Map<String, Object> detail(Map<String, Object> map);
-//
-//    boolean update(Map<String, Object> map);
-//
-//    boolean delete(Map<String, Object> map);
-//
-//    List<Map<String, Object>> list(Map<String, Object> map);
+    /**
+     * 조원재 23.04.08. 여행지 정보 수정
+     * @param map
+     * @return
+     */
+    boolean update(Map<String, Object> map);
+
+    /**
+     * 조원재 23.04.08 여행지 정보 삭제
+     * @param map
+     * @return
+     */
+    boolean delete(Map<String, Object> map);
+
+    /**
+     * 조원재 23.04.08. 여행지 정보 리스트
+     * @param map
+     * @return
+     */
+    List<Map<String, Object>> list(Map<String, Object> map);
+    
 }

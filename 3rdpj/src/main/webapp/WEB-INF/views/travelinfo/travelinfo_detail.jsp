@@ -22,11 +22,11 @@
 <p>상세주소 : ${data.country_script}</p>
 <p>여행제 상세 내용 : ${data.contry_detail}</p>
 <p>
-    <a href="/travelinfo/update?travel_location_idx=${travel_location_idx}">수정</a>
+    <a href="/travelinfo/update?travel_location_idx=${data.travel_location_idx}">수정</a>
 </p>
 
 <form method="POST" action="/travelinfo/delete">
-    <input type="hidden" name="travel_location_idx" value="${travel_location_idx}">
+    <input type="hidden" name="travel_location_idx" value="${data.travel_location_idx}">
     <input type="submit" value="삭제">
 </form>
 

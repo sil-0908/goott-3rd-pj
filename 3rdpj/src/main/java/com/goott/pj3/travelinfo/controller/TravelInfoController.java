@@ -4,11 +4,9 @@ import com.goott.pj3.travelinfo.dto.TravelInfoDTO;
 import com.goott.pj3.travelinfo.service.TravelInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
@@ -52,63 +50,67 @@ public class TravelInfoController {
 		}
 		return mv;
 	}
-
 	/**
 	 * 조원재 23.04.08 여행지 정보 디테일 페이지 호출
 	 */
 	@RequestMapping("detail")
 	public ModelAndView detail(@RequestParam Map<String, Object> map){
 		ModelAndView mv = new ModelAndView();
-		Map<String, Object> detail = this.travelInfoService.detail(map);
-		System.out.println("detail"+detail);
-		mv.addObject("data", detail);
-		String travel_location_idx = map.get("travel_location_idx").toString();
-		mv.addObject("travel_location_idx", travel_location_idx);
+		Map<String, Object> detailData = this.travelInfoService.detail(map);
+		mv.addObject("data", detailData);
 		mv.setViewName("travelinfo/travelinfo_detail");
 		return mv;
 	}
-//	@RequestMapping("update")
-//	public ModelAndView update(@RequestParam Map<String, Object> map) {
-//		ModelAndView mv = new ModelAndView();
-//		Map<String, Object> detail = this.travelInfoService.detail(map);
-//		mv.addObject("data", detail);
-//		mv.setViewName("board/review/review_update");
-//		return mv;
-//	}
-//	@RequestMapping(value = "update", method = RequestMethod.POST)
-//	public ModelAndView updatePost(@RequestParam Map<String, Object> map){
-//		ModelAndView mv = new ModelAndView();
-//		boolean update = this.travelInfoService.update(map);
-//		if(update){
-//			String review_idx = map.get("review_idx").toString();
-//			mv.setViewName("redirect:/review/detail?review_idx="+review_idx);
-//		} else {
-//			mv = this.update(map);
-//		}
-//		return mv;
-//	}
-//	@RequestMapping("delete")
-//	public ModelAndView delete(@RequestParam Map<String, Object> map){
-//		ModelAndView mv = new ModelAndView();
-//		boolean delete = this.travelInfoService.delete(map);
-//		if (delete){
-//			mv.setViewName("redirect:/review/review_list");
-//		} else {
-//			String review_idx = map.get("review_idx").toString();
-//			mv.setViewName("redirect:/review/detail?review_idx="+review_idx);
-//		}
-//		return mv;
-//	}
-//	@RequestMapping("list")
-//	public ModelAndView list(@RequestParam Map<String, Object> map){
-//		System.out.println("listMap : " + map);
-//		ModelAndView mv = new ModelAndView();
-//		List<Map<String, Object>> reviewList = this.travelInfoService.list(map);
-//		mv.addObject("data", reviewList);
-//		if(map.containsKey("keyword")){
-//			mv.addObject("keyword", map.get("keyword"));
-//		}
-//		mv.setViewName("/board/review/review_list");
-//		return mv;
-//	}
+	/**
+	 * 조원재 23.04.08. 여행정보 수정 페이지 호출
+	 */
+	@RequestMapping("update")
+	public ModelAndView update(@RequestParam Map<String, Object> map) {
+		ModelAndView mv = new ModelAndView();
+		Map<String, Object> detailData = this.travelInfoService.detail(map);
+		mv.addObject("data", detailData);
+		mv.setViewName("travelinfo/travelinfo_update");
+		return mv;
+	}
+	/**
+	 * 조원재 23.04.08. 여행 정보 수정
+	 */
+	@RequestMapping(value = "update", method = RequestMethod.POST)
+	public ModelAndView updatePost(@RequestParam Map<String, Object> map){
+		ModelAndView mv = new ModelAndView();
+		boolean update = this.travelInfoService.update(map);
+		if(update){
+			String travel_location_idx = map.get("travel_location_idx").toString();
+			mv.setViewName("redirect:/travelinfo/detail?travel_location_idx="+travel_location_idx);
+		} else {
+			mv = this.update(map);
+		}
+		return mv;
+	}
+	/**
+	 * 조원재 23.04.08. 여행지 정보 삭제
+	 */
+	@RequestMapping("delete")
+	public ModelAndView delete(@RequestParam Map<String, Object> map){
+		ModelAndView mv = new ModelAndView();
+		boolean delete = this.travelInfoService.delete(map);
+		if (delete){
+			mv.setViewName("redirect:/travelinfo/list");
+		} else {
+			String travel_location_idx = map.get("travel_location_idx").toString();
+			mv.setViewName("redirect:/travelinfo/detail?travel_location_idx="+travel_location_idx);
+		}
+		return mv;
+	}
+	@RequestMapping("list")
+	public ModelAndView list(@RequestParam Map<String, Object> map){
+		ModelAndView mv = new ModelAndView();
+		List<Map<String, Object>> travelinfoData = this.travelInfoService.list(map);
+		mv.addObject("data", travelinfoData);
+		if(map.containsKey("keyword")){
+			mv.addObject("keyword", map.get("keyword"));
+		}
+		mv.setViewName("/travelinfo/travelinfo_list");
+		return mv;
+	}
 }
