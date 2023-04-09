@@ -231,6 +231,12 @@
 			<artifactId>commons-fileupload</artifactId>
 			<version>1.4</version>
 		</dependency>
+		<!-- 23.04.09 길영준 파일업로드 관련 라이브러리-->
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.4</version>
+		</dependency>
 	</dependencies>
 	<!-- 아임포트 repo-->
 	<repositories>
