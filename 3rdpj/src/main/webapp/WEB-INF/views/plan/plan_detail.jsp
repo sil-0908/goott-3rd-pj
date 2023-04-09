@@ -1,3 +1,4 @@
+<%--@elvariable id="data" type="com.goott.pj3.plan.dto.PlanDTO"--%>
 <%--
   Created by IntelliJ IDEA.
   User: goott4
