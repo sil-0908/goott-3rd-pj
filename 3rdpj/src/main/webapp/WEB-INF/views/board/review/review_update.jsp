@@ -17,7 +17,7 @@
 
 <form method="POST">
     <p>리뷰 내용 : <input type="text" name="review_content" value="${data.review_content}"></p>
-    <p>리뷰 사진 : <input type="file" name="review_img"></p>
+    <p>리뷰 사진 : <input type="file" multiple name="review_img" value="${data.review_img}"></p>
     <input type="submit" value="저장">
 </form>
 

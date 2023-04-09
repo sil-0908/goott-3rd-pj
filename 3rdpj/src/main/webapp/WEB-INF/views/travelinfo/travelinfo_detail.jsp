@@ -18,9 +18,9 @@
 <p>리뷰 사진 : <img src="${data.country_img}" height="200px" width="200px" style="border: 1px solid red;"></p>
 <p>장소 : ${data.country_c}</p>
 <p>국가 : ${data.country_a}</p>
-<p>위치 : ${data.country_b}"</p>
+<p>위치 : ${data.country_b}</p>
 <p>상세주소 : ${data.country_script}</p>
-<p>여행제 상세 내용 : ${data.contry_detail}</p>
+<p>여행지 상세 내용 : ${data.country_detail}</p>
 <p>
     <a href="/travelinfo/update?travel_location_idx=${data.travel_location_idx}">수정</a>
 </p>

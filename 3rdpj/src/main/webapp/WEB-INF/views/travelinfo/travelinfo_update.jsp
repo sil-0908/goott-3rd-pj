@@ -15,7 +15,7 @@
 <body>
 <h1>여행지 정보 작성</h1>
 <p>기존 이미지 : <img src="${data.country_img}" height="200px" width="200px" style="border: 1px solid red;"></p>
-<form method="POST">
+<form method="POST" onsubmit="travelAdress();">
     <p>여행지 이름 : <input type="text" name="country_c" value="${data.country_c}"></p>
     <p>국가 : <input type="text" name="country_a" value="${data.country_b}"></p>
     <p>지역 : <input type="text" name="country_b" value="${data.country_a}"></p>
@@ -23,37 +23,35 @@
     <p>기존 여행지 주소 : ${data.country_script}</p>
     <div id="travel_adress">
         <p> 변경할 여행지 주소 :
-            <input type="hidden" name="country_script" value="">
-            <input type="text" id="travel_postcode" class="d_form mini" placeholder="우편번호">
+            <input id="total_adress" type="hidden" name="country_script" value="">
+            <input type="text" id="travel_postcode" class="address_item" placeholder="우편번호">
             <input type="button" onclick="travelPostcode()" value="우편번호 찾기" class="d_btn"><br>
-            <input type="text" id="travel_roadAddress" class="d_form std" placeholder="도로명주소">
-            <input type="text" id="travel_jibunAddress" class="d_form std" placeholder="지번주소">
+            <input type="text" id="travel_roadAddress" class="address_item" placeholder="도로명주소">
+            <input type="text" id="travel_jibunAddress" class="address_item" placeholder="지번주소">
             <span id="guide" style="color:#999;display:none"></span>
-            <input type="text" id="travel_detailAddress" class="d_form" placeholder="상세주소">
-            <input type="text" id="travel_extraAddress" class="d_form" placeholder="참고항목">
+            <input type="text" id="travel_detailAddress" class="address_item" placeholder="상세주소">
+            <input type="text" id="travel_extraAddress" class="address_item" placeholder="참고항목">
         </p>
     </div>
-    <p>변경할 이미지 : <input type="file" multiple name="country_img"></p> </p>
-    <input id="push" onclick="travelAdress()" type="submit" value="저장">
+    <p>변경할 이미지 : <input type="file" multiple name="country_img" value="${data.country_img}"></p> </p>
+    <input type="submit" value="저장">
 </form>
 </body>
 </html>
 
 <script>
-    let travel_postcode = document.querySelector("#travel_postcode");
-    let travel_roadAddress = document.querySelector("#travel_roadAddress");
-    let travel_jibunAddress = document.querySelector("#travel_jibunAddress");
-    let travel_detailAddress = document.querySelector("travel_detailAddress");
-    let travel_extraAddress = document.querySelector("#travel_extraAddress");
-    let push = document.querySelector("#push");
+    /**
+     * 조원재 23.04.09. 여행지 주소 값 더하는 로직
+     * @type {NodeListOf<Element>}
+     */
+    let addressItem = document.querySelectorAll(".address_item");
+    let total_adress = document.querySelector("#total_adress");
 
     function travelAdress(){
-        let travel_address_data = travel_postcode.value + " " + travel_roadAddress.value + " " +
-            travel_detailAddress.value + " " + travel_extraAddress.value;
-        document.querySelector("#travel_form input[name='country_script']").value = travel_address_data;
-        preventDefault();
+        for(item of addressItem){
+            total_adress.value += item.value+" ";
+        }
     }
-
     /**
      * 조원재 23.04.07.카카오 우편 번호 API
      */

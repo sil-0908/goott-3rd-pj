@@ -46,7 +46,7 @@ public class TravelInfoController {
 		if(travel_location_idx == null){
 			mv.setViewName("travelinfo/travelinfo_create");
 		}else {
-			mv.setViewName("rediect:/travelinfo/detail?travel_location_idx="+travel_location_idx);
+			mv.setViewName("redirect:/travelinfo/detail?travel_location_idx="+travel_location_idx);
 		}
 		return mv;
 	}
