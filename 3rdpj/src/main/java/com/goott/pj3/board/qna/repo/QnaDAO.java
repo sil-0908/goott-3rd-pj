@@ -1,6 +1,6 @@
 package com.goott.pj3.board.qna.repo;
 
-import com.goott.pj3.board.free.dto.Criteria;
+import com.goott.pj3.common.util.Criteria;
 import com.goott.pj3.board.qna.dto.QnaDTO;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,8 +34,8 @@ public class QnaDAO {
         ss.update("qna.modify",qnaDTO);
     }
 
-    public void delete(int qna_idx) {
-        ss.update("qna.delete", qna_idx);
+    public void delete(QnaDTO qnaDTO) {
+        ss.update("qna.delete", qnaDTO);
     }
 
     public List<QnaDTO> list_n() {
@@ -52,5 +52,9 @@ public class QnaDAO {
 
     public List<QnaDTO> list_e() {
         return ss.selectList("qna.list_e");
+    }
+
+    public String get_category(QnaDTO qnaDTO) {
+        return ss.selectOne("qna.get_category",qnaDTO);
     }
 }

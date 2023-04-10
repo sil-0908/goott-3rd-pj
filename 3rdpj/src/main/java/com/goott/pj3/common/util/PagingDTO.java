@@ -1,6 +1,6 @@
-package com.goott.pj3.board.free.dto;
+package com.goott.pj3.common.util;
 
-public class PagingDTO {
+public class PagingDTO { // - 04.02 김범수
     private Criteria cri; // Criteria 인스턴스 형성 -> 게시글 시작 번호 등을 구하기 위함
     private int totalCount; // 총 게시글의 갯수
     private int startPage; // 시작

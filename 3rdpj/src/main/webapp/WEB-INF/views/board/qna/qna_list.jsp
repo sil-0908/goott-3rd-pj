@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
@@ -10,20 +10,47 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
-	<a href="/qna/create">°Ô½ÃÆÇ µî·Ï</a>
+	<a href="/qna/create">ê²Œì‹œíŒ ë“±ë¡</a>
+
+	<form name="keyword_transfer">
+		<div>
+			<div>
+				<select id="selectBox" name="option">
+					<option value="">=======</option>
+					<option value="user_id">ID</option>
+					<option value="title">ì œëª©</option>
+					<option value="content">ë‚´ìš©</option>
+					<option value="title,content">ì œëª©+ë‚´ìš©</option>
+				</select>
+			</div>
+			<div class="search_wrap">
+				<div class="search_area">
+					<input type="text" name="keyword" value="${paging.cri.keyword }">
+					<button id="search">Search</button>
+				</div>
+			</div>
+		</div>
+	</form>
 	<table>
 		<tr>
-			<th>¹øÈ£</th>
-			<th>Á¦¸ñ</th>
-			<th>ÀÛ¼ºÀÚ</th>
-			<th>ÀÛ¼ºÀÏ(¼öÁ¤ÀÏÀÚ)</th>
+			<th>ë²ˆí˜¸</th>
+			<th>ì œëª©</th>
+			<th>ì‘ì„±ì</th>
+			<th>ì‘ì„±ì¼(ìˆ˜ì •ì¼ì)</th>
 		</tr>
 		<c:forEach items="${list}" var="list">
 			<tr>
 				<td>${list.qna_idx}</td>
 				<td class="title"><c:out value="${list.qna_title}"/></td>
 				<td><c:out value="${list.user_id}"/></td>
-				<td><fmt:formatDate pattern="yyyy/MM/dd" value="${list.create_date}"/></td>
+				<td>
+					<c:if test="'${list.create_date}' eq '${list.update_date}' ">
+						<fmt:formatDate pattern="yyyy/MM/dd" value="${list.create_date}"/>(<fmt:formatDate pattern="yyyy/MM/dd" value="${list.update_date}"/>)
+					</c:if>
+					<c:if test="'${list.create_date}' ne '${list.update_date}' ">
+						<fmt:formatDate pattern="yyyy/MM/dd" value="${list.create_date}"/>
+					</c:if>
+				</td>
 			</tr>
 		</c:forEach>
 	</table>
@@ -52,6 +79,15 @@
 				location.href='/qna/detail/'+idx.textContent
 			})
 		})
+
+
+		$('#search').click(function(){
+			if($("input[name=keyword]").val() == 'undefined' || $('input[name=keyword]').val() == ''){
+				alert("ê²€ìƒ‰ì–´ë¥¼ ì…ë ¥í•˜ì„¸ìš”");
+				return;
+			}
+			document.keyword_transfer.submit();
+		});
 	</script>
 </body>
 </html>

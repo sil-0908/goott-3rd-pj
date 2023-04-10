@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
@@ -9,32 +9,35 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
-	<h1>Á¶È¸ ÆäÀÌÁö</h1>
+	<h1>ì¡°íšŒ í˜ì´ì§€</h1>
 	<div class="input_wrap">
-		<label>°Ô½ÃÆÇ ¹øÈ£</label>
-		<input type="text" name="qna_idx" value="${data.qna_idx}" id="test4" readonly>
+		<label>ê²Œì‹œíŒ ë²ˆí˜¸</label>
+		<input type="text" value="${data.qna_idx}" id="qna_id" readonly>
 	</div>
 	<div class="input_wrap">
-		<label>°Ô½ÃÆÇ Á¦¸ñ</label>
+		<label>ê²Œì‹œíŒ ì œëª©</label>
 		<input type="text" name="qna_title" value="${data.qna_title}" >
 	</div>
 	<div class="input_wrap">
-		<label>°Ô½ÃÆÇ ³»¿ë</label>
+		<label>ê²Œì‹œíŒ ë‚´ìš©</label>
 		<textarea name="qna_content">${data.qna_content}</textarea>
 	</div>
 	<div class="input_wrap">
-		<label>°Ô½ÃÆÇ µî·ÏÀÏ</label>
+		<label>ê²Œì‹œíŒ ë“±ë¡ì¼</label>
 		<p><fmt:formatDate pattern="yyyy/MM/dd" value="${data.create_date}"/></p>
 	</div>
-	<button id="modify">°Ô½Ã±Û ¼öÁ¤</button>
-	<button id="delete">°Ô½Ã±Û »èÁ¦</button>
-	
+	<button onclick="location.href='/qna/list'">ê²Œì‹œê¸€ ëª©ë¡</button>
+	<button id="modify">ê²Œì‹œê¸€ ìˆ˜ì •</button>
+	<button id="delete">ê²Œì‹œê¸€ ì‚­ì œ</button>
+
+
+
 	<script>
 		$(function() {
 			$('#modify').click(function() {
 				const qna_title = document.querySelector('input[name=qna_title]').value;
 				const qna_content = document.querySelector('textarea[name=qna_content]').value;
-				const qna_idx = document.querySelector('input[name=qna_idx]').value;
+				const qna_idx = document.querySelector('#qna_id').value;
 
 				$.ajax({
 					url : '/qna/modify',
@@ -42,28 +45,52 @@
 					type : 'post',
 					dataType : 'text',
 					success : function(data) {
-						if(data === "¼öÁ¤¿Ï·á"){
-							alert("°Ô½Ã±ÛÀÌ ¼öÁ¤µÇ¾ú½À´Ï´Ù.")
-							location.href = "/qna/list"
+						if(data == "N"){
+							alert("ê²Œì‹œê¸€ì´ ìˆ˜ì •ë˜ì—ˆìŠµë‹ˆë‹¤.")
+							location.href = "/qna/list_n"
+						}
+						else if(data == "U"){
+							alert("ê²Œì‹œê¸€ì´ ìˆ˜ì •ë˜ì—ˆìŠµë‹ˆë‹¤.")
+							location.href = "/qna/list_u"
+						}
+						else if(data == "R"){
+							alert("ê²Œì‹œê¸€ì´ ìˆ˜ì •ë˜ì—ˆìŠµë‹ˆë‹¤.")
+							location.href = "/qna/list_r"
+						}
+						else{
+							alert("ê²Œì‹œê¸€ì´ ìˆ˜ì •ë˜ì—ˆìŠµë‹ˆë‹¤.")
+							location.href = "/qna/list_e"
 						}
 					}
 				})
 			})
-		})
 
-		$(function() {
-			$('#delete').click(function() {
-				const qna_idx = document.querySelector('input[name=qna_idx]').value;
+			$(function() {
+				$('#delete').click(function() {
+					const qna_idx = document.querySelector('input[name=qna_idx]').value;
 
-				$.ajax({
-					url : '/qna/delete',
-					data : {"qna_idx" : qna_idx},
-					type : 'post',
-					success : function() {
-						alert("°Ô½Ã±ÛÀÌ »èÁ¦µÇ¾ú½À´Ï´Ù.")
-						location.href = "/qna/list"
-					}
+					$.ajax({
+						url : '/qna/delete',
+						data : {"qna_idx" : qna_idx},
+						type : 'post',
+						success : function(data) {
+							alert(data)
+							if (data == "N") {
+								alert("ê²Œì‹œê¸€ì´ ì‚­ì œë˜ì—ˆìŠµë‹ˆë‹¤.")
+								location.href = "/qna/list_n"
+							} else if (data == "U") {
+								alert("ê²Œì‹œê¸€ì´ ì‚­ì œë˜ì—ˆìŠµë‹ˆë‹¤.")
+								location.href = "/qna/list_u"
+							} else if (data == "R") {
+								alert("ê²Œì‹œê¸€ì´ ì‚­ì œë˜ì—ˆìŠµë‹ˆë‹¤.")
+								location.href = "/qna/list_r"
+							} else {
+								alert("ê²Œì‹œê¸€ì´ ì‚­ì œë˜ì—ˆìŠµë‹ˆë‹¤.")
+								location.href = "/qna/list_e"
+							}
+						}
 
+					})
 				})
 			})
 		})

@@ -1,7 +1,7 @@
 package com.goott.pj3.board.qna.controller;
 
-import com.goott.pj3.board.free.dto.Criteria;
-import com.goott.pj3.board.free.dto.PagingDTO;
+import com.goott.pj3.common.util.Criteria;
+import com.goott.pj3.common.util.PagingDTO;
 import com.goott.pj3.board.qna.dto.QnaDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -47,42 +47,30 @@ public class QnaController {
 		return "redirect:/qna/list";
 	}
 
-	@RequestMapping(value = {"list_n","list_u","list_r","list_e"}, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = {"list_n","list_u","list_r","list_e", "list"}, produces="application/text; charset=UTF-8;")
 	public ModelAndView list(ModelAndView mv, Criteria cri, HttpServletRequest request) {
 		String requestUrl = request.getRequestURL().toString();
 		PagingDTO paging = new PagingDTO();
 		if(requestUrl.contains("list_n")){
-			cri.setCategory("n");
+			cri.setCategory("N");
 			paging.setCri(cri); // page / perpagenum 설정
-			paging.setTotalCount(qnaService.totalCount(cri)); // 총게시글 갯수 불러오는 것
-			mv.addObject("paging", paging);
-			mv.addObject("list", qnaService.list(cri));
-			mv.setViewName("board/qna/qna_list");
-		}
-		else if(requestUrl.contains("list_u")){
-			cri.setCategory("u");
+
+		} else if(requestUrl.contains("list_u")){
+			cri.setCategory("U");
 			paging.setCri(cri); // page / perpagenum 설정
-			paging.setTotalCount(qnaService.totalCount(cri)); // 총게시글 갯수 불러오는 것
-			mv.addObject("paging", paging);
-			mv.addObject("list", qnaService.list(cri));
-			mv.setViewName("board/qna/qna_list");
-		}
-		else if(requestUrl.contains("list_r")){
-			cri.setCategory("r");
+
+		} else if(requestUrl.contains("list_r")){
+			cri.setCategory("R");
 			paging.setCri(cri); // page / perpagenum 설정
-			paging.setTotalCount(qnaService.totalCount(cri)); // 총게시글 갯수 불러오는 것
-			mv.addObject("paging", paging);
-			mv.addObject("list", qnaService.list(cri));
-			mv.setViewName("board/qna/qna_list");
-		}
-		else{
-			cri.setCategory("e");
+
+		} else {
+			cri.setCategory("E");
 			paging.setCri(cri); // page / perpagenum 설정
-			paging.setTotalCount(qnaService.totalCount(cri)); // 총게시글 갯수 불러오는 것
-			mv.addObject("paging", paging);
-			mv.addObject("list", qnaService.list(cri));
-			mv.setViewName("board/qna/qna_list");
 		}
+		paging.setTotalCount(qnaService.totalCount(cri)); // 총게시글 갯수 불러오는 것
+		mv.addObject("paging", paging);
+		mv.addObject("list", qnaService.list(cri));
+		mv.setViewName("board/qna/qna_list");
 		return mv;
 	}
 
@@ -97,12 +85,17 @@ public class QnaController {
 	@ResponseBody
 	public String modify(QnaDTO qnaDTO) {
 		qnaService.modify(qnaDTO);
-		return "수정완료";
+		String category = qnaService.get_category(qnaDTO); // 각각의 리스트로 연결하기 위함 - 04.10 김범수
+		System.out.println(category);
+		return "redirect:/qna/list_"+category;
 	}
+
 	//
 	@RequestMapping("delete")
-	public String delete(int qna_idx) {
-		qnaService.delete(qna_idx);
-		return "redirect:/qna/list";
+	public String delete(QnaDTO qnaDTO) {
+		qnaService.delete(qnaDTO);
+		String category = qnaService.get_category(qnaDTO);
+		System.out.println(category);
+		return "redirect:/qna/list_"+category;
 	}
 }

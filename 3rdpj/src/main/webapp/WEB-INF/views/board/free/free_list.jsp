@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
@@ -10,13 +10,13 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
-	<a href="/free/create">°Ô½ÃÆÇ µî·Ï</a>
+	<a href="/free/create">ê²Œì‹œíŒ ë“±ë¡</a>
 	<table>
 		<tr>
-			<th>¹øÈ£</th>
-			<th>Á¦¸ñ</th>
-			<th>ÀÛ¼ºÀÚ</th>
-			<th>ÀÛ¼ºÀÏ(¼öÁ¤ÀÏÀÚ)</th>
+			<th>ë²ˆí˜¸</th>
+			<th>ì œëª©</th>
+			<th>ìž‘ì„±ìž</th>
+			<th>ìž‘ì„±ì¼(ìˆ˜ì •ì¼ìž)</th>
 		</tr>
 		<c:forEach items="${list}" var="list">
 			<tr>
