@@ -12,7 +12,8 @@ import java.util.Objects;
 import java.util.UUID;
 
 public class FileUpload {
-    //2023.04.09 길영준
+
+    // 2023.04.09 길영준
     // 공통으로 사용하게될 파일 업로드 메소드
     // 파일 저장소 확인 후 uploadDir 파라미터 변경 적용 가능.
     public static String saveFile(String uploadDir, MultipartFile multipartFile) throws IOException {
