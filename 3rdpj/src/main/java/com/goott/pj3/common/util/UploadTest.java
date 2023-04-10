@@ -28,7 +28,7 @@ public class UploadTest {
             try {
                 String fileName = FileUpload.saveFile(uploadDir, file);
                 model.addAttribute("fileName", fileName);
-                return "uploadSuccess";
+                return "plan/uploadResult";
             } catch (IOException e) {
                 model.addAttribute("error", "Error uploading file: " + e.getMessage());
                 return "plan/uploadForm";
