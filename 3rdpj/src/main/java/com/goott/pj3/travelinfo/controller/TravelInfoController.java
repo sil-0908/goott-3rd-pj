@@ -50,6 +50,7 @@ public class TravelInfoController {
 		}
 		return mv;
 	}
+
 	/**
 	 * 조원재 23.04.08 여행지 정보 디테일 페이지 호출
 	 */
@@ -61,6 +62,7 @@ public class TravelInfoController {
 		mv.setViewName("travelinfo/travelinfo_detail");
 		return mv;
 	}
+
 	/**
 	 * 조원재 23.04.08. 여행정보 수정 페이지 호출
 	 */
@@ -72,6 +74,7 @@ public class TravelInfoController {
 		mv.setViewName("travelinfo/travelinfo_update");
 		return mv;
 	}
+
 	/**
 	 * 조원재 23.04.08. 여행 정보 수정
 	 */
@@ -87,6 +90,7 @@ public class TravelInfoController {
 		}
 		return mv;
 	}
+
 	/**
 	 * 조원재 23.04.08. 여행지 정보 삭제
 	 */
@@ -102,10 +106,12 @@ public class TravelInfoController {
 		}
 		return mv;
 	}
+
 	@RequestMapping("list")
 	public ModelAndView list(@RequestParam Map<String, Object> map){
 		ModelAndView mv = new ModelAndView();
 		List<Map<String, Object>> travelinfoData = this.travelInfoService.list(map);
+		System.out.println(travelinfoData.toString());
 		mv.addObject("data", travelinfoData);
 		if(map.containsKey("keyword")){
 			mv.addObject("keyword", map.get("keyword"));

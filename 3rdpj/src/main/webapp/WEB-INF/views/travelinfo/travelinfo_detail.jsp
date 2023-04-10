@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <html>
 <head>
@@ -21,6 +22,7 @@
 <p>위치 : ${data.country_b}</p>
 <p>상세주소 : ${data.country_script}</p>
 <p>여행지 상세 내용 : ${data.country_detail}</p>
+<c:if test="${data.user_id == sessionScope.user_id}">
 <p>
     <a href="/travelinfo/update?travel_location_idx=${data.travel_location_idx}">수정</a>
 </p>
@@ -29,7 +31,7 @@
     <input type="hidden" name="travel_location_idx" value="${data.travel_location_idx}">
     <input type="submit" value="삭제">
 </form>
-
+</c:if>
 <p>
     <a href="/travelinfo/list">목록</a>
 </p>

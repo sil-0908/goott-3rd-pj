@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <html>
 <head>
@@ -20,7 +21,7 @@
 <p>내용 : ${data.review_content}</p>
 <p>작성자 : ${data.user_id}</p>
 <p>작성일 : ${data.create_date}"</p>
-
+<c:if test="${data.user_id == sessionScope.user_id}">
 <p>
     <a href="/review/update?review_idx=${review_idx}">수정</a>
 </p>
@@ -29,7 +30,7 @@
     <input type="hidden" name="review_idx" value="${review_idx}">
     <input type="submit" value="삭제">
 </form>
-
+</c:if>
 <p>
     <a href="/review/list">목록</a>
 </p>

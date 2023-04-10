@@ -15,9 +15,11 @@
 </head>
 <body>
 <h1>여행지 정보 목록</h1>
+<c:if test="${sessionScope.auth ne 'auth_c'}">
 <p>
   <a href="/travelinfo/create">리뷰 작성</a>
 </p>
+</c:if>
 <p>
   <form>
       <input type="text" placeholder="검색" name="keyword" value="${keyword}">

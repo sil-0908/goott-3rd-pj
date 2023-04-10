@@ -45,14 +45,13 @@
      * @type {NodeListOf<Element>}
      */
     let addressItem = document.querySelectorAll(".address_item");
-    let total_adress = document.querySelector("#total_adress");
+    let total_adress = document.querySelector("#total_adress").value;
 
     function travelAdress(){
         for(item of addressItem){
-            total_adress.value += item.value+" ";
+            total_adress += item.value+" ";
         }
     }
-
     /**
      * 조원재 23.04.07.카카오 우편 번호 API
      */
