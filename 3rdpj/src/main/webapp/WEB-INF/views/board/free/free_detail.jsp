@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
@@ -9,25 +9,25 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
-	<h1>Á¶È¸ ÆäÀÌÁö</h1>
+	<h1>ì¡°íšŒ í˜ì´ì§€</h1>
 	<div class="input_wrap">
-		<label>°Ô½ÃÆÇ ¹øÈ£</label>
+		<label>ê²Œì‹œíŒ ë²ˆí˜¸</label>
 		<input type="text" name="free_idx" value="${data.free_idx}" id="test4" readonly>
 	</div>
 	<div class="input_wrap">
-		<label>°Ô½ÃÆÇ Á¦¸ñ</label>
+		<label>ê²Œì‹œíŒ ì œëª©</label>
 		<input type="text" name="free_title" value="${data.free_title}" >
 	</div>
 	<div class="input_wrap">
-		<label>°Ô½ÃÆÇ ³»¿ë</label>
+		<label>ê²Œì‹œíŒ ë‚´ìš©</label>
 		<textarea name="free_content">${data.free_content}</textarea>
 	</div>
 	<div class="input_wrap">
-		<label>°Ô½ÃÆÇ µî·ÏÀÏ</label>
+		<label>ê²Œì‹œíŒ ë“±ë¡ì¼</label>
 		<p><fmt:formatDate pattern="yyyy/MM/dd" value="${data.create_date}"/></p>
 	</div>
-	<button id="modify">°Ô½Ã±Û ¼öÁ¤</button>
-	<button id="delete">°Ô½Ã±Û »èÁ¦</button>
+	<button id="modify">ê²Œì‹œê¸€ ìˆ˜ì •</button>
+	<button id="delete">ê²Œì‹œê¸€ ì‚­ì œ</button>
 
 	<script>
 		$(function() {
@@ -42,8 +42,8 @@
 					type : 'post',
 					dataType : 'text',
 					success : function(data) {
-						if(data === "¼öÁ¤¿Ï·á"){
-							alert("°Ô½Ã±ÛÀÌ ¼öÁ¤µÇ¾ú½À´Ï´Ù.")
+						if(data === "ìˆ˜ì •ì™„ë£Œ"){
+							alert("ê²Œì‹œê¸€ì´ ìˆ˜ì •ë˜ì—ˆìŠµë‹ˆë‹¤.")
 							location.href = "/free/list"
 						}
 					}
@@ -60,7 +60,7 @@
 					data : {"free_idx" : free_idx},
 					type : 'post',
 					success : function() {
-						alert("°Ô½Ã±ÛÀÌ »èÁ¦µÇ¾ú½À´Ï´Ù.")
+						alert("ê²Œì‹œê¸€ì´ ì‚­ì œë˜ì—ˆìŠµë‹ˆë‹¤.")
 						location.href = "/free/list"
 					}
 

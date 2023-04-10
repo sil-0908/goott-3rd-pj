@@ -1,79 +1,73 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: goott3
-  Date: 2023-04-06
-  Time: ø¿¿¸ 11:38
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-         pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="EUC-KR">
+	<meta charset="UTF-8">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<title>Insert title here</title>
 </head>
 <body>
     <h1>Q&A</h1>
     <div>
-        <h2>∞¯¡ˆªÁ«◊</h2>
+        <h2>Í≥µÏßÄÏÇ¨Ìï≠</h2>
         <table class="comment">
-            <c:forEach items="${list_n}" var="list_n">
+            <c:forEach items="${data_n}" var="list">
             <tr>
-                <td class="title"><input type="text" value="${list_n.qna_idx}"><c:out value="${list_n.qna_title}"/></td>
+                <td><input type="hidden" name="qna_idx" value="${list.qna_idx}"></td>
+                <td class="title">${list.qna_title}</td>
             </tr>
             </c:forEach>
         </table>
-        <a href="/qna/list_n">¥ı∫∏±‚</a>
+        <a href="/qna/list_n">ÎçîÎ≥¥Í∏∞</a>
     </div>
     <div>
-        <h2>∞¸±§¡ˆ πÆ¿«</h2>
+        <h2>Í¥ÄÍ¥ëÏßÄ Î¨∏Ïùò</h2>
         <table class="comment">
-            <c:forEach items="${list_u}" var="list_u">
+            <c:forEach items="${data_u}" var="list">
                 <tr>
-                    <td class="title"><input type="text" value="${list_u.qna_idx}"><c:out value="${list_u.qna_title}"/></td>
+                    <td><input type="hidden" name="qna_idx" value="${list.qna_idx}"></td>
+                    <td class="title">${list.qna_title}</td>
                 </tr>
             </c:forEach>
         </table>
-        <a href="/qna/list_u">¥ı∫∏±‚</a>
+        <a href="/qna/list_u">ÎçîÎ≥¥Í∏∞</a>
     </div>
     <div>
-        <h2>ø©«‡ πÆ¿«</h2>
+        <h2>Ïó¨Ìñâ Î¨∏Ïùò</h2>
         <table class="comment">
-            <c:forEach items="${list_r}" var="list_r">
+            <c:forEach items="${data_r}" var="list">
                 <tr>
-                    <td class="title"><input type="text" value="${list_r.qna_idx}"><c:out value="${list_r.qna_title}"/></td>
+                    <td><input type="hidden" name="qna_idx" value="${list.qna_idx}"></td>
+                    <td class="title">${list.qna_title}</td>
                 </tr>
             </c:forEach>
         </table>
-        <a href="/qna/list_r">¥ı∫∏±‚</a>
+        <a href="/qna/list_r">ÎçîÎ≥¥Í∏∞</a>
     </div>
     <div>
-        <h2>«√∑°≥  πÆ¿«</h2>
+        <h2>ÌîåÎûòÎÑà Î¨∏Ïùò</h2>
         <table class="comment">
-            <c:forEach items="${list_e}" var="list_e">
+            <c:forEach items="${data_e}" var="list">
                 <tr>
-                    <td class="title"><input type="text" value="${list_e.qna_idx}"><c:out value="${list_e.qna_title}"/></td>
+                    <td><input type="hidden" name="qna_idx" value="${list.qna_idx}"></td>
+                    <td class="title">${list.qna_title}</td>
                 </tr>
             </c:forEach>
         </table>
-        <a href="/qna/list_e">¥ı∫∏±‚</a>
+        <a href="/qna/list_e">ÎçîÎ≥¥Í∏∞</a>
     </div>
 
     <script>
-        // $(function (){
-        //     $(".comment").ready(function (){
-        //         $.ajax({
-        //             url : '/qna/main_list',
-        //             success : function (){
-        //
-        //             }
-        //         })
-        //     })
-        // })
+        $(function() {
+            $('.title').click(function(e) {
+                const idx = e.target.parentElement.children[0].children[0].value
+                location.href='/qna/detail/'+idx
+            })
+        })
     </script>
 </body>
 </html>

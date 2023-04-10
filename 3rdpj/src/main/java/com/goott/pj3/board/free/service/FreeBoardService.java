@@ -2,7 +2,7 @@ package com.goott.pj3.board.free.service;
 
 import java.util.List;
 
-import com.goott.pj3.board.free.dto.Criteria;
+import com.goott.pj3.common.util.Criteria;
 import com.goott.pj3.board.free.dto.FreeBoardDTO;
 
 public interface FreeBoardService {

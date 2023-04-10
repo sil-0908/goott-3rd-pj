@@ -1,6 +1,6 @@
 package com.goott.pj3.board.qna.service;
 
-import com.goott.pj3.board.free.dto.Criteria;
+import com.goott.pj3.common.util.Criteria;
 import com.goott.pj3.board.qna.dto.QnaDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,8 +41,8 @@ public class QnaServiceImpl implements QnaService {
 	}
 
 	@Override
-	public void delete(int qna_idx) {
-		qnaDAO.delete(qna_idx);
+	public void delete(QnaDTO qnaDTO) {
+		qnaDAO.delete(qnaDTO);
 	}
 
 	@Override
@@ -63,6 +63,11 @@ public class QnaServiceImpl implements QnaService {
 	@Override
 	public List<QnaDTO> list_e() {
 		return qnaDAO.list_e();
+	}
+
+	@Override
+	public String get_category(QnaDTO qnaDTO) {
+		return qnaDAO.get_category(qnaDTO);
 	}
 
 
