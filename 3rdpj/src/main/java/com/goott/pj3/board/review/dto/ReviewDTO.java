@@ -4,14 +4,15 @@ import java.util.Arrays;
 import java.util.Date;
 
 public class ReviewDTO {
-    int review_idx;
-    String user_id;
-    int plan_idx;
-    String review_content;
+    int review_idx, plan_idx, review_rating;
+    String user_id, review_content;
     String[] reivew_img;
-    int review_rating;
-    Date create_date;
-    Date upate_date;
+    Date create_date, update_date;
+
+    /**
+     * 조원재 23.04.05. 리뷰 DTO
+     * @return
+     */
 
     public int getReview_idx() {
         return review_idx;
@@ -70,18 +71,23 @@ public class ReviewDTO {
     }
 
     public Date getUpate_date() {
-        return upate_date;
+        return update_date;
     }
 
     public void setUpate_date(Date upate_date) {
-        this.upate_date = upate_date;
+        this.update_date = upate_date;
     }
 
     @Override
     public String toString() {
-        return "ReviewDTO [review_idx=" + review_idx + ",user_id=" + user_id + ",plan_idx=" + plan_idx +
-                ",review_content=" + review_content + ",review_rating=" + review_rating +
+        return "ReviewDTO [review_idx=" + review_idx +
+                ",user_id=" + user_id +
+                ",plan_idx=" + plan_idx +
+                ",review_content=" + review_content +
+                ",review_rating=" + review_rating +
                 ", reivew_img=" + Arrays.toString(reivew_img) +
-                ",create_date=" + create_date + ",upate_date=" + upate_date + "]";
+                ",create_date=" + create_date +
+                ",update_date=" + update_date +
+                "]";
     }
 }

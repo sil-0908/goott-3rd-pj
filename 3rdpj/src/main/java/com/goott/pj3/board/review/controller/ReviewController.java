@@ -28,10 +28,9 @@ public class ReviewController {
 	@RequestMapping("create")
 	public ModelAndView create(){
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("/board/review/create");
+		mv.setViewName("/board/review/review_create");
 		return mv;
 	}
-
 	/**
 	 * 조원재 23.04.05 리뷰 생성
 	 * @param map
@@ -39,19 +38,18 @@ public class ReviewController {
 	 * @return
 	 */
 	@RequestMapping(value = "create", method = RequestMethod.POST)
-	public ModelAndView createPost(@RequestParam Map<String, Object> map, HttpSession httpSession, MultipartFile multipartFile){
-		String userId = httpSession.getAttribute("user_id").toString();
+	public ModelAndView createPost(@RequestParam Map<String, Object> map, HttpSession httpSession){
+		String user_id = httpSession.getAttribute("user_id").toString();
 		ModelAndView mv = new ModelAndView();
-		map.put("user_id", userId);
+		map.put("user_id", user_id);
 		String review_idx = this.reviewService.create(map);
 		if(review_idx.equals(null)) {
-			mv.setViewName("redirect:/review/create");
+			mv.setViewName("redirect:/review/review_create");
 		}else {
 			mv.setViewName("redirect:/review/detail?review_idx="+review_idx);
 		}
 		return mv;
 	}
-
 	/**
 	 * 조원재 23.04.05 리뷰 디테일 페이지 호출
 	 * @param map
@@ -64,10 +62,9 @@ public class ReviewController {
 		mv.addObject("data", detail);
 		String review_idx = map.get("review_idx").toString();
 		mv.addObject("review_idx", review_idx);
-		mv.setViewName("/board/review/detail");
+		mv.setViewName("/board/review/review_detail");
 		return mv;
 	}
-
 	/**
 	 * 조원재 23.04.05 리뷰 수정 화면 호출
 	 * @param map
@@ -78,10 +75,9 @@ public class ReviewController {
 		ModelAndView mv = new ModelAndView();
 		Map<String, Object> detail = this.reviewService.detail(map);
 		mv.addObject("data", detail);
-		mv.setViewName("board/review/update");
+		mv.setViewName("board/review/review_update");
 		return mv;
 	}
-
 	/**
 	 * 조원재 23.04.05 리뷰 수정 기능
 	 * @param map
@@ -99,7 +95,6 @@ public class ReviewController {
 		}
 		return mv;
 	}
-
 	/**
 	 * 조원재 23.04.05 리뷰 삭제
 	 * @param map
@@ -110,14 +105,13 @@ public class ReviewController {
 		ModelAndView mv = new ModelAndView();
 		boolean delete = this.reviewService.delete(map);
 		if (delete){
-			mv.setViewName("redirect:/review/list");
+			mv.setViewName("redirect:/review/review_list");
 		} else {
 			String review_idx = map.get("review_idx").toString();
 			mv.setViewName("redirect:/review/detail?review_idx="+review_idx);
 		}
 		return mv;
 	}
-
 	/**
 	 * 조원재 23.04.05 리뷰 리스트 조회 및 검색
 	 * @param map
@@ -132,10 +126,7 @@ public class ReviewController {
 		if(map.containsKey("keyword")){
 			mv.addObject("keyword", map.get("keyword"));
 		}
-		mv.setViewName("/board/review/list");
+		mv.setViewName("/board/review/review_list");
 		return mv;
-
 	}
-
-
 }
