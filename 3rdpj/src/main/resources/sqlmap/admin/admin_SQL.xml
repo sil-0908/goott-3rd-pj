@@ -2,6 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="admin">
 
+<select id="login_check" resultType="com.goott.pj3.admin.dto.AdminUserDTO">
+      select user_id, pw ,auth
+        from user
+       where user_id = #{user_id}
+         and pw = #{pw}
+         and auth = #{auth_a}
+</select>
+
 <select id="noticelist" resultType="com.goott.pj3.admin.dto.NoticeDTO">
 	select qna_idx, user_id, category, auth, qna_title, qna_content, q_del_yn, create_date, update_date
 	  from qna
