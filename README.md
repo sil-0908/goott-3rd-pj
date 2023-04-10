@@ -25,3 +25,37 @@
     
 
 </details>
+
+<hr>
+
+<details>
+<summary><h3>Ver 1.1 ( 2023.04.10 ) </h3></summary>
+
+    
+<br>
+
+    REVIEW Board
+    수정, 삭제 작성자만 가능하도록 수정 / 파일 업로드 예정
+    
+    여행정보 Board
+    CRUD, 검색 구현 / 파일 업로드 예정
+    
+    QnA Board
+    URI issue -> update, delete error
+
+    common
+    
+    file-upload api 제작중 (click, drag&drop)
+    페이징 클래스 -> common package 이동
+    
+<br>
+
+    common settings
+    
+    web.xml
+    error handling
+    
+    servlet-context.xml
+    multipartResolver
+
+</details>
