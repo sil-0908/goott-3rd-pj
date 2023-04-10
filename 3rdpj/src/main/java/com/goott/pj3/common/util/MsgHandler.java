@@ -13,16 +13,16 @@ public class MsgHandler extends TextWebSocketHandler {
 
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-		
+		System.out.println("afterConnectionEstablished : " + session);
 	}
-	
+
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-		
+		System.out.println("handleTextMessage: " + session + " : " + message);
 	}
-	
+
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-		
+		System.out.println("afterConnectionClosed : " + session + " : " + status);
 	}
 }
