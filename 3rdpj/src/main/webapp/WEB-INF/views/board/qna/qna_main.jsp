@@ -13,6 +13,7 @@
 </head>
 <body>
 <%@ include file="/WEB-INF/views/common/layout.jsp" %>
+<%@ include file="/WEB-INF/views/common/qna_modal.jsp" %>
 <main class="qna">
       <hgroup class="qna__title">
         <h1>Q&A</h1>
@@ -75,18 +76,6 @@
           </ul>
         </article>
       </section>
-      <dialog class="qna__guide">
-        <hgroup class="qna__guide--title">
-          <h1>도움이 더 필요하신가요?</h1>
-        </hgroup>
-        <article class="qna__guide--list">
-          <a href="">- 이용가이드 바로가기</a><br />
-          <a href="">- Q&A 문의글 작성</a>
-        </article>
-        <button class="qna__guide--btn-close">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
-      </dialog>
     </main>
     
 	<script src="/resources/js/common/layout.js"></script>

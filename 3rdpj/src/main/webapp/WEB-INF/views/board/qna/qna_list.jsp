@@ -12,6 +12,7 @@
 </head>
 <body>
 <%@ include file="/WEB-INF/views/common/layout.jsp" %>
+<%@ include file="/WEB-INF/views/common/qna_modal.jsp" %>
 	<a href="/qna/create">게시판 등록</a>
 
 	<form name="keyword_transfer">
@@ -74,6 +75,7 @@
 		</c:if>
 	</ul>
 	<script src="/resources/js/common/layout.js"></script>
+	<script src="/resources/js/common/qna_main.js"></script>
 
 	<script>
 		$(function() {
