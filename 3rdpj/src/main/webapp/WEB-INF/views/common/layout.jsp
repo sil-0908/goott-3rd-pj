@@ -16,7 +16,7 @@
       <div class="header__logo">
         <div class="logo">
           <a href="./index.html" class="logo__link">
-            <img src="../img/logo_suntour_purple.png" alt="" />
+            <img src="/resources/img/logo_suntour_purple.png" alt="" />
           </a>
         </div>
       </div>

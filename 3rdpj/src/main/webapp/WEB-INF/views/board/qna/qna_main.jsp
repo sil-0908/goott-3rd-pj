@@ -13,56 +13,84 @@
 </head>
 <body>
 <%@ include file="/WEB-INF/views/common/layout.jsp" %>
-    <h1>Q&A</h1>
-    <div>
-        <h2>공지사항</h2>
-        <table class="comment">
-            <c:forEach items="${data_n}" var="list">
-            <tr>
-                <td><input type="hidden" name="qna_idx" value="${list.qna_idx}"></td>
-                <td class="title">${list.qna_title}</td>
-            </tr>
+<main class="qna">
+      <hgroup class="qna__title">
+        <h1>Q&A</h1>
+      </hgroup>
+      <section class="qna__grid">
+        <article class="qna__card">
+          <hgroup class="qna__card--title">
+            <h1>공지사항</h1>
+          </hgroup>
+          <ul class="qna__card--list">
+            <c:forEach items="${data_n}" var="list" varStatus="status">
+            	<c:if test="${status.count <= 5}">
+            		<li><input type="hidden" name="qna_idx" value="${list.qna_idx}"></li>
+            		<li><a href="./qna_notice.html">${list.qna_title}</a></li>
+            	</c:if>
             </c:forEach>
-        </table>
-        <a href="/qna/list_n">더보기</a>
-    </div>
-    <div>
-        <h2>관광지 문의</h2>
-        <table class="comment">
-            <c:forEach items="${data_u}" var="list">
-                <tr>
-                    <td><input type="hidden" name="qna_idx" value="${list.qna_idx}"></td>
-                    <td class="title">${list.qna_title}</td>
-                </tr>
+        		<li><a href="/qna/list_n">더보기</a></li>
+          </ul>
+        </article>
+        <article class="qna__card">
+          <hgroup class="qna__card--title">
+            <h1>관광지 문의</h1>
+          </hgroup>
+          <ul class="qna__card--list">
+            <c:forEach items="${data_u}" var="list" varStatus="status">
+            	<c:if test="${status.count <= 5}">
+            		<li><input type="hidden" name="qna_idx" value="${list.qna_idx}"></li>
+            		<li><a href="./qna_notice.html">${list.qna_title}</a></li>
+            	</c:if>
             </c:forEach>
-        </table>
-        <a href="/qna/list_u">더보기</a>
-    </div>
-    <div>
-        <h2>여행 문의</h2>
-        <table class="comment">
-            <c:forEach items="${data_r}" var="list">
-                <tr>
-                    <td><input type="hidden" name="qna_idx" value="${list.qna_idx}"></td>
-                    <td class="title">${list.qna_title}</td>
-                </tr>
+        		<li><a href="/qna/list_u">더보기</a></li>
+          </ul>
+        </article>
+        <article class="qna__card">
+          <hgroup class="qna__card--title">
+            <h1>여행 문의</h1>
+          </hgroup>
+          <ul class="qna__card--list">
+            <c:forEach items="${data_r}" var="list" varStatus="status">
+            	<c:if test="${status.count <= 5}">
+            		<li><input type="hidden" name="qna_idx" value="${list.qna_idx}"></li>
+            		<li><a href="./qna_notice.html">${list.qna_title}</a></li>
+            	</c:if>
             </c:forEach>
-        </table>
-        <a href="/qna/list_r">더보기</a>
-    </div>
-    <div>
-        <h2>플래너 문의</h2>
-        <table class="comment">
-            <c:forEach items="${data_e}" var="list">
-                <tr>
-                    <td><input type="hidden" name="qna_idx" value="${list.qna_idx}"></td>
-                    <td class="title">${list.qna_title}</td>
-                </tr>
+        		<li><a href="/qna/list_r">더보기</a></li>
+          </ul>
+        </article>
+        <article class="qna__card">
+          <hgroup class="qna__card--title">
+            <h1>플래너 문의</h1>
+          </hgroup>
+          <ul class="qna__card--list">
+            <c:forEach items="${data_e}" var="list" varStatus="status">
+            	<c:if test="${status.count <= 5}">
+            		<li><input type="hidden" name="qna_idx" value="${list.qna_idx}"></li>
+            		<li><a href="./qna_notice.html">${list.qna_title}</a></li>
+            	</c:if>
             </c:forEach>
-        </table>
-        <a href="/qna/list_e">더보기</a>
-    </div>
+        		<li><a href="/qna/list_e">더보기</a></li>
+          </ul>
+        </article>
+      </section>
+      <dialog class="qna__guide">
+        <hgroup class="qna__guide--title">
+          <h1>도움이 더 필요하신가요?</h1>
+        </hgroup>
+        <article class="qna__guide--list">
+          <a href="">- 이용가이드 바로가기</a><br />
+          <a href="">- Q&A 문의글 작성</a>
+        </article>
+        <button class="qna__guide--btn-close">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </dialog>
+    </main>
+    
 	<script src="/resources/js/common/layout.js"></script>
+	<script src="/resources/js/common/qna_main.js"></script>
     <script>
         $(function() {
             $('.title').click(function(e) {
