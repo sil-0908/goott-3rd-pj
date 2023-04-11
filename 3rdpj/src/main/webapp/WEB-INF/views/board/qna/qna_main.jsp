@@ -7,10 +7,12 @@
 <head>
 	<meta charset="UTF-8">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"/>
+    <link rel="stylesheet" href="/resources/css/common/style.css"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <title>Insert title here</title>
 </head>
 <body>
+<%@ include file="/WEB-INF/views/common/layout.jsp" %>
     <h1>Q&A</h1>
     <div>
         <h2>공지사항</h2>
@@ -60,7 +62,7 @@
         </table>
         <a href="/qna/list_e">더보기</a>
     </div>
-
+	<script src="/resources/js/common/layout.js"></script>
     <script>
         $(function() {
             $('.title').click(function(e) {

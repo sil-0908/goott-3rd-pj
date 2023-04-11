@@ -7,9 +7,11 @@
 <head>
 <meta charset="EUC-KR">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"/>
+	<link rel="stylesheet" href="/resources/css/common/style.css"/>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
+<%@ include file="/WEB-INF/views/common/layout.jsp" %>
 	<a href="/qna/create">게시판 등록</a>
 
 	<form name="keyword_transfer">
@@ -71,6 +73,7 @@
 			</li>
 		</c:if>
 	</ul>
+	<script src="/resources/js/common/layout.js"></script>
 
 	<script>
 		$(function() {
