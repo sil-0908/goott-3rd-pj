@@ -10,12 +10,12 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
-	<c:if test="${dto.auth =='auth_a'}">
+<%-- 	<c:if test="${dto.auth =='auth_a'}"> --%>
 	<div>
 		<a href="admin/noticelist">공지사항</a>
 		<a href="admin/userlist">회원관리</a>
 	</div>
-	</c:if>
+<%-- 	</c:if> --%>
 
 </body>
 </html>

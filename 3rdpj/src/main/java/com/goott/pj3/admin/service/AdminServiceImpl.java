@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.goott.pj3.admin.dto.AdminUserDTO;
 import com.goott.pj3.admin.repo.AdminDAO;
+import com.goott.pj3.user.dto.UserDTO;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -17,5 +18,7 @@ public class AdminServiceImpl implements AdminService {
 		// TODO Auto-generated method stub
 		return adminDAO.login_check(dto);
 	}
+
+
 	
 }
