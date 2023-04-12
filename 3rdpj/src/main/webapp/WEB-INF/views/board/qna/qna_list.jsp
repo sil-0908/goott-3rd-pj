@@ -18,50 +18,21 @@
         <h1>공지사항</h1>
       </hgroup>
       <article class="qna__search">
-      <%-- <form name="keyword_transfer">
-		<div>
-			<div>
-				<select id="selectBox" name="option">
-					<option value="">=======</option>
-					<option value="user_id">ID</option>
-					<option value="title">제목</option>
-					<option value="content">내용</option>
-					<option value="title,content">제목+내용</option>
-				</select>
-			</div>
-			<div class="search_wrap">
-				<div class="search_area">
-					<input type="text" name="keyword" value="${paging.cri.keyword }">
-					<button id="search">Search</button>
-				</div>
-			</div>
-		</div>
-	</form> --%>
-        <form name="search_notice" action="#">
-          <input class="qna__typing" name="notice_kw" type="search" value="${paging.cri.notice_kw}" />
+        <form name="search_notice">
+          <input class="qna__typing" name="keyword" type="search" value="${paging.cri.keyword}" />
           <button class="qna__btn qna__submit" type="submit">검색</button>
         </form>
       </article>
       <section class="qna__notice">
         <ul class="qna__list">
-          <li class="qna__list--question">
-            플래너가 연락이 안되면 어떻게 하나요?
-          </li>
-          <li class="qna__list--question">
-            플래너가 연락이 안되면 어떻게 하나요?
-          </li>
-          <li class="qna__list--question">
-            플래너가 연락이 안되면 어떻게 하나요?
-          </li>
-          <li class="qna__list--question">
-            플래너가 연락이 안되면 어떻게 하나요?
-          </li>
-          <li class="qna__list--question">
-            플래너가 연락이 안되면 어떻게 하나요?
-          </li>
-          <li class="qna__list--question">
-            플래너가 연락이 안되면 어떻게 하나요?
-          </li>
+           <c:forEach items="${list}" var="list" varStatus="status">
+	          <c:if test="${status.count <= 6}">
+           		<li><input type="hidden" name="qna_idx" value="${list.qna_idx}"></li>
+	          	<li class="qna__list--question">
+					<c:out value="${list.qna_title}"/>
+	          	</li>
+        		</c:if>
+			</c:forEach>
         </ul>
       </section>
       <dialog class="qna__guide">
@@ -77,31 +48,6 @@
         </button>
       </dialog>
     </main>
-
-	
-	<table>
-		<tr>
-			<th>번호</th>
-			<th>제목</th>
-			<th>작성자</th>
-			<th>작성일(수정일자)</th>
-		</tr>
-		<c:forEach items="${list}" var="list">
-			<tr>
-				<td>${list.qna_idx}</td>
-				<td class="title"><c:out value="${list.qna_title}"/></td>
-				<td><c:out value="${list.user_id}"/></td>
-				<td>
-					<c:if test="'${list.create_date}' eq '${list.update_date}' ">
-						<fmt:formatDate pattern="yyyy/MM/dd" value="${list.create_date}"/>(<fmt:formatDate pattern="yyyy/MM/dd" value="${list.update_date}"/>)
-					</c:if>
-					<c:if test="'${list.create_date}' ne '${list.update_date}' ">
-						<fmt:formatDate pattern="yyyy/MM/dd" value="${list.create_date}"/>
-					</c:if>
-				</td>
-			</tr>
-		</c:forEach>
-	</table>
 	<ul class="btn-group pagination">
 		<c:if test="${paging.prev}">
 			<li>
