@@ -46,7 +46,6 @@ public class FileUploadUtil {
             byte[] bytes = Files.readAllBytes(new File(savePath, newFilename).toPath());
             String base64EncodedImage = Base64.getEncoder().encodeToString(bytes);
             String mimeType = Files.probeContentType(new File(savePath, newFilename).toPath());
-
             return "data:" + mimeType + ";base64," + base64EncodedImage;
         }
 
