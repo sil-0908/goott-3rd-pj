@@ -13,9 +13,12 @@
 <body>
 <%@ include file="/WEB-INF/views/common/layout.jsp" %>
 <%@ include file="/WEB-INF/views/common/qna_modal.jsp" %>
-	<a href="/qna/create">게시판 등록</a>
-
-	<form name="keyword_transfer">
+<main class="qna">
+      <hgroup class="qna__title">
+        <h1>공지사항</h1>
+      </hgroup>
+      <article class="qna__search">
+      <%-- <form name="keyword_transfer">
 		<div>
 			<div>
 				<select id="selectBox" name="option">
@@ -33,7 +36,49 @@
 				</div>
 			</div>
 		</div>
-	</form>
+	</form> --%>
+        <form name="search_notice" action="#">
+          <input class="qna__typing" name="notice_kw" type="search" value="${paging.cri.notice_kw}" />
+          <button class="qna__btn qna__submit" type="submit">검색</button>
+        </form>
+      </article>
+      <section class="qna__notice">
+        <ul class="qna__list">
+          <li class="qna__list--question">
+            플래너가 연락이 안되면 어떻게 하나요?
+          </li>
+          <li class="qna__list--question">
+            플래너가 연락이 안되면 어떻게 하나요?
+          </li>
+          <li class="qna__list--question">
+            플래너가 연락이 안되면 어떻게 하나요?
+          </li>
+          <li class="qna__list--question">
+            플래너가 연락이 안되면 어떻게 하나요?
+          </li>
+          <li class="qna__list--question">
+            플래너가 연락이 안되면 어떻게 하나요?
+          </li>
+          <li class="qna__list--question">
+            플래너가 연락이 안되면 어떻게 하나요?
+          </li>
+        </ul>
+      </section>
+      <dialog class="qna__guide">
+        <hgroup class="qna__guide--title">
+          <h1>도움이 더 필요하신가요?</h1>
+        </hgroup>
+        <article class="qna__guide--list">
+          <a href="">- 이용가이드 바로가기</a><br />
+          <a href="">- Q&A 문의글 작성</a>
+        </article>
+        <button class="qna__guide--btn-close">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </dialog>
+    </main>
+
+	
 	<table>
 		<tr>
 			<th>번호</th>

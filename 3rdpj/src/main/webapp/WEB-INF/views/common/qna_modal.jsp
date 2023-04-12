@@ -8,7 +8,7 @@
   </hgroup>
   <article class="qna__guide--list">
     <a href="">- 이용가이드 바로가기</a><br />
-    <a href="">- Q&A 문의글 작성</a>
+    <a href="/qna/create">- Q&A 문의글 작성</a>
   </article>
   <button class="qna__guide--btn-close">
     <i class="fa-solid fa-xmark"></i>
