@@ -7,11 +7,11 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>/WEB-INF/spring/root-context.xml</param-value>
-		</context-param>
-
+	</context-param>
+	
 	<!-- Creates the Spring Container shared by all Servlets and Filters -->
 	<listener>
-		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 
 	<!-- Processes application requests -->
@@ -22,30 +22,20 @@
 			<param-name>contextConfigLocation</param-name>
 			<param-value>
 				/WEB-INF/spring/appServlet/servlet-context.xml
-				/WEB-INF/spring/appServlet/security-context.xml
 				/WEB-INF/spring/appServlet/websocket-context.xml
 			</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
-
-		<!--23.04.06 조원재 업로드 관련 설정 -->
-		<multipart-config>
-			<location>C:\\upload\\temp</location>
-			<max-file-size>20971520</max-file-size>					<!-- 1MB * 20 -->
-			<max-request-size>41943040</max-request-size>			<!-- 40MB -->
-			<file-size-threshold>20971520</file-size-threshold>		<!-- 20MB -->
-		</multipart-config>
-
 	</servlet>
 		
 	<servlet-mapping>
 		<servlet-name>appServlet</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
-	
 	<filter>
-    	<filter-name>encodingFilter</filter-name>
-    	<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+	    <filter-name>encodingFilter</filter-name>
+	    <filter-class>org.springframework.web.filter.CharacterEncodingFilter
+	    </filter-class>
 	    <init-param>
 	        <param-name>encoding</param-name>
 	        <param-value>UTF-8</param-value>
@@ -59,27 +49,4 @@
 	    <filter-name>encodingFilter</filter-name>
 	    <url-pattern>/*</url-pattern>
 	</filter-mapping>
-
-	<!-- PUT, DELETE 메소드 사용가능 필터 2023.04.06 길영준  START -->
-	<filter>
-		<filter-name>httpMethodFilter</filter-name>
-		<filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
-	</filter>
-	<filter-mapping>
-		<filter-name>httpMethodFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
-	<!-- PUT, DELETE 메소드 사용가능 필터 2023.04.06 길영준  END -->
-
-	<!-- 에러페이지 처리 -->
-	<error-page>
-		<error-code>500</error-code>
-		<location>/WEB-INF/views/error/500.jsp</location>
-	</error-page>
-
-	<error-page>
-		<error-code>404</error-code>
-		<location>/WEB-INF/views/error/404.jsp</location>
-	</error-page>
-	<!-- 에러페이지 처리-->
 </web-app>
