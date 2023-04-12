@@ -28,9 +28,9 @@ public class NoticeController {
 	@RequestMapping("noticelist")
 	public ModelAndView noticeList(@RequestParam(defaultValue = "all") String search_option, 
 			@RequestParam(defaultValue ="") String keyword,ModelAndView mv, HttpSession session ) {
-		if(session.getAttribute("user_id") == null) { 
-			return new ModelAndView("redirect:/user/signin"); 
-		}
+//		if(session.getAttribute("user_id") == null) { 
+//			return new ModelAndView("redirect:/user/signin"); 
+//		}
 		List<NoticeDTO> noticelist = noticeService.noticeList(search_option, keyword);
 		Map<String, Object> map = new HashMap<>();
 		mv.setViewName("admin/noticelist");
@@ -47,7 +47,6 @@ public class NoticeController {
 // 공지사항 상세 작성
 	@RequestMapping("noticeinsert")
 	public String insert(NoticeDTO dto, HttpSession session) {
-		System.out.println(dto);
 		String user_id = (String)session.getAttribute("user_id");
 		dto.setUser_id(user_id);
 		noticeService.noticeinsert(dto);
