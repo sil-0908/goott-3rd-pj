@@ -7,53 +7,47 @@
 <head>
 <meta charset="EUC-KR">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"/>
+	<link rel="stylesheet" href="/resources/css/common/style.css"/>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
-	<a href="/qna/create">게시판 등록</a>
-
-	<form name="keyword_transfer">
-		<div>
-			<div>
-				<select id="selectBox" name="option">
-					<option value="">=======</option>
-					<option value="user_id">ID</option>
-					<option value="title">제목</option>
-					<option value="content">내용</option>
-					<option value="title,content">제목+내용</option>
-				</select>
-			</div>
-			<div class="search_wrap">
-				<div class="search_area">
-					<input type="text" name="keyword" value="${paging.cri.keyword }">
-					<button id="search">Search</button>
-				</div>
-			</div>
-		</div>
-	</form>
-	<table>
-		<tr>
-			<th>번호</th>
-			<th>제목</th>
-			<th>작성자</th>
-			<th>작성일(수정일자)</th>
-		</tr>
-		<c:forEach items="${list}" var="list">
-			<tr>
-				<td>${list.qna_idx}</td>
-				<td class="title"><c:out value="${list.qna_title}"/></td>
-				<td><c:out value="${list.user_id}"/></td>
-				<td>
-					<c:if test="'${list.create_date}' eq '${list.update_date}' ">
-						<fmt:formatDate pattern="yyyy/MM/dd" value="${list.create_date}"/>(<fmt:formatDate pattern="yyyy/MM/dd" value="${list.update_date}"/>)
-					</c:if>
-					<c:if test="'${list.create_date}' ne '${list.update_date}' ">
-						<fmt:formatDate pattern="yyyy/MM/dd" value="${list.create_date}"/>
-					</c:if>
-				</td>
-			</tr>
-		</c:forEach>
-	</table>
+<%@ include file="/WEB-INF/views/common/layout.jsp" %>
+<%@ include file="/WEB-INF/views/common/qna_modal.jsp" %>
+<main class="qna">
+      <hgroup class="qna__title">
+        <h1>공지사항</h1>
+      </hgroup>
+      <article class="qna__search">
+        <form name="search_notice">
+          <input class="qna__typing" name="keyword" type="search" value="${paging.cri.keyword}" />
+          <button class="qna__btn qna__submit" type="submit">검색</button>
+        </form>
+      </article>
+      <section class="qna__notice">
+        <ul class="qna__list">
+           <c:forEach items="${list}" var="list" varStatus="status">
+	          <c:if test="${status.count <= 6}">
+           		<li><input type="hidden" name="qna_idx" value="${list.qna_idx}"></li>
+	          	<li class="qna__list--question">
+					<c:out value="${list.qna_title}"/>
+	          	</li>
+        		</c:if>
+			</c:forEach>
+        </ul>
+      </section>
+      <dialog class="qna__guide">
+        <hgroup class="qna__guide--title">
+          <h1>도움이 더 필요하신가요?</h1>
+        </hgroup>
+        <article class="qna__guide--list">
+          <a href="">- 이용가이드 바로가기</a><br />
+          <a href="">- Q&A 문의글 작성</a>
+        </article>
+        <button class="qna__guide--btn-close">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </dialog>
+    </main>
 	<ul class="btn-group pagination">
 		<c:if test="${paging.prev}">
 			<li>
@@ -71,6 +65,8 @@
 			</li>
 		</c:if>
 	</ul>
+	<script src="/resources/js/common/layout.js"></script>
+	<script src="/resources/js/common/qna_main.js"></script>
 
 	<script>
 		$(function() {
