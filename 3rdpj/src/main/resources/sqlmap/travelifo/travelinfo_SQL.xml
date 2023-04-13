@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="travelinfo">
+
+    <!--조원재 23.04.08. 여행지 정보 생성-->
+    <insert id="insert" parameterType="hashMap" useGeneratedKeys="true" keyProperty="travel_location_idx">
+        insert into travel_location(user_id, country_a, country_b, country_c,
+                                    country_detail, country_script, country_img)
+             values (#{user_id}, #{country_a}, #{country_b}, #{country_c}, #{country_detail}, #{country_script}, #{country_img})
+    </insert>
+    <!--조원재 23.04.08. 여행지 정보 디테일 페이지 데이터 조회-->
+    <select id="detail" parameterType="hashMap" resultType="hashMap">
+        select travel_location_idx, user_id, country_a, country_b, country_c,
+               country_detail, country_script, country_img, create_date, update_date
+          from travel_location
+         where travel_location_idx = #{travel_location_idx}
+    </select>
+    <!--조원재 23.04.08. 여행지 정보 업데이트 -->
+    <update id="update" parameterType="hashMap">
+        update travel_location
+        set country_a=#{country_a}, country_b=#{country_b}, country_c=#{country_c},
+            country_detail=#{country_detail}, country_script=#{country_script},
+            country_img=#{country_img}
+         where travel_location_idx=#{travel_location_idx}
+    </update>
+    <!--조원재 23.04.08. 여행지 정보 삭제-->
+    <delete id="delete" parameterType="hashMap">
+        delete
+          from travel_location
+        where travel_location_idx=#{travel_location_idx}
+    </delete>
+    <!--조원재 23.04.08. 여행지 정보 리스트 & 검색-->
+    <select id="list" parameterType="hashMap" resultType="hashMap">
+        select travel_location_idx, user_id, country_a, country_b, country_c,
+               country_detail, country_script, country_img, create_date, update_date
+          from travel_location
+         where 1=1
+        <if test="keyword != null and keyword != ''">
+           and (country_a like CONCAT('%',#{keyword},'%')) or
+               (country_b like CONCAT('%',#{keyword},'%')) or
+               (country_c like CONCAT('%',#{keyword},'%')) or
+               (country_detail like CONCAT('%',#{keyword},'%')) or
+               (country_script like CONCAT('%',#{keyword},'%'))
+        </if>
+         order by travel_location_idx desc
+    </select>
+
+</mapper>
+
