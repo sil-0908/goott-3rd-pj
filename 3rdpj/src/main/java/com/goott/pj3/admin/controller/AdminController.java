@@ -1,5 +1,8 @@
 package com.goott.pj3.admin.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,26 +35,26 @@ public class AdminController {
 
     // 로그인
     @RequestMapping(value = "/admin/login_check", method = RequestMethod.POST)
-    @ResponseBody
     public ModelAndView login_check(@RequestParam String user_id, String pw, AdminUserDTO dto,
             HttpSession session, ModelAndView mv) {
+
         dto.setUser_id(user_id);
         dto.setPw(pw);
-        String login_chk = adminService.login_check(dto);
-        if (login_chk != null) { // 회원값 있음
-            session.setAttribute("user_id", dto.getUser_id());
-            session.setAttribute("auth", dto.getAuth());
+
+        Map<String, Object> map = adminService.login_check(dto);
+        
+        if (map != null) { // 회원값 있음
+            session.setAttribute("user_id", map.get("user_id"));
+			session.setAttribute("auth", map.get("auth"));
             session.setMaxInactiveInterval(1800);
             mv.setViewName("redirect:/admin/main");
-            mv.addObject("message","success");
         } else { // 회원값 없음
-            mv.addObject("message", "아이디 또는 비밀번호를 확인해주세요");
-            mv.setViewName("admin/login");
+            mv.setViewName("redirect:/admin/login");
         }
         return mv;
     }
 
-    // log out
+    // logout
     @RequestMapping("logout")
     public String logout(HttpSession session) {
         session.invalidate(); // session expires
@@ -60,10 +63,13 @@ public class AdminController {
 
     @RequestMapping("main")
     public ModelAndView main(HttpSession session, ModelAndView mv) {
-        if (session.getAttribute("user_id") != null && session.getAttribute("auth") != null) {
+    	System.out.println(session.getAttribute("auth"));
+        if ("auth_a".equals(session.getAttribute("auth"))) {
             mv.setViewName("admin/main");
+        } else if(session.getAttribute("auth") == null) {
+            mv.setViewName("admin/login");
         } else {
-            mv.setViewName("redirect:/admin/login");
+        	mv.setViewName("admin/login");
         }
         return mv;
     }
