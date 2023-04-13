@@ -1,5 +1,7 @@
 package com.goott.pj3.admin.service;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,10 +16,18 @@ public class AdminServiceImpl implements AdminService {
 	AdminDAO adminDAO;
 
 	@Override
-	public String login_check(AdminUserDTO dto) {
+	public Map<String, Object> login_check(AdminUserDTO dto) {
 		// TODO Auto-generated method stub
-		return adminDAO.login_check(dto);
+		Map<String, Object> map = adminDAO.login_check(dto);
+		if(map != null) {
+			return map;
+		}
+		else {
+			return null;
+		}
+		
 	}
+
 
 
 	
