@@ -16,17 +16,11 @@ public class AdminServiceImpl implements AdminService {
 	AdminDAO adminDAO;
 
 	@Override
-	public Map<String, Object> login_check(AdminUserDTO dto) {
+	public AdminUserDTO login_check(AdminUserDTO dto) {
 		// TODO Auto-generated method stub
-		Map<String, Object> map = adminDAO.login_check(dto);
-		if(map != null) {
-			return map;
-		}
-		else {
-			return null;
-		}
-		
+		return adminDAO.login_check(dto);
 	}
+
 
 
 
