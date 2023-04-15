@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="plan">
     <insert id="create">
-    INSERT into plan(user_id, start_date, end_date, price, plan_title, plan_detail)
-    values (#{user_id},#{start_date}, #{end_date}, #{price}, #{plan_title}, #{plan_detail})
+    INSERT into plan(user_id, start_date, end_date, price, plan_title, plan_detail, plan_detail_img)
+    values (#{user_id},#{start_date}, #{end_date}, #{price}, #{plan_title}, #{plan_detail}, #{plan_detail_img})
     </insert>
     <select id="list" resultType="com.goott.pj3.plan.dto.PlanDTO">
         select plan_idx, plan_title, price, user_id
