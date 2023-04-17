@@ -47,13 +47,11 @@
         var reader = new FileReader();
         reader.onloadend = function() {
             preview.innerHTML = '<img id="preview-img" src="' + reader.result + '">';
-            $('#upload').prop('disabled', false);
         }
         if (file) {
             reader.readAsDataURL(file);
         } else {
             preview.innerHTML = '';
-            $('#upload-btn').prop('disabled', true);
         }
     }
     /**

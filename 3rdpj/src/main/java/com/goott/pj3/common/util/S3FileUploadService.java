@@ -16,6 +16,7 @@ import java.util.UUID;
 
 @Service
 public class S3FileUploadService {
+
     @Autowired
     private final AmazonS3Client amazonS3Client;
     @Value("${aws.s3.bucket}")
