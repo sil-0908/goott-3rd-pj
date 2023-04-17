@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -33,47 +34,45 @@ public class AdminController {
         return "admin/login";
     }
 
+
     // 로그인
-    @RequestMapping(value = "/admin/login_check", method = RequestMethod.POST)
-    public ModelAndView login_check(@RequestParam String user_id, String pw, AdminUserDTO dto,
+    @RequestMapping(value = "login_check", method = RequestMethod.POST )
+    public ModelAndView login_check(AdminUserDTO dto,
             HttpSession session, ModelAndView mv) {
-
-        dto.setUser_id(user_id);
-        dto.setPw(pw);
-
-        Map<String, Object> map = adminService.login_check(dto);
-        
-        if (map != null) { // 회원값 있음
-            session.setAttribute("user_id", map.get("user_id"));
-			session.setAttribute("auth", map.get("auth"));
-            session.setMaxInactiveInterval(1800);
-            mv.setViewName("redirect:/admin/main");
-        } else { // 회원값 없음
-            mv.setViewName("redirect:/admin/login");
-        }
-        return mv;
+    	AdminUserDTO login_chk = adminService.login_check(dto);
+    	if(login_chk != null) {
+    		session.setAttribute("user_id", login_chk.getUser_id());
+    		session.setAttribute("auth", login_chk.getAuth());
+    		session.setMaxInactiveInterval(60*30);
+//    		mv.addObject("data", login_chk);
+    		mv.setViewName("admin/main");
+    		
+    	}else if(login_chk == null){
+    		mv.setViewName("admin/login");
+    		mv.addObject("data", "error");
+    	}
+    	return mv;
     }
+
 
     // logout
     @RequestMapping("logout")
     public String logout(HttpSession session) {
-        session.invalidate(); // session expires
-        return "redirect:/admin/noticelist";
+    	session.invalidate();
+    	return "redirect:/admin/login";
     }
+    
 
-    @RequestMapping("main")
-    public ModelAndView main(HttpSession session, ModelAndView mv) {
-    	System.out.println(session.getAttribute("auth"));
-        if ("auth_a".equals(session.getAttribute("auth"))) {
-            mv.setViewName("admin/main");
-        } else if(session.getAttribute("auth") == null) {
-            mv.setViewName("admin/login");
-        } else {
-        	mv.setViewName("admin/login");
-        }
-        return mv;
-    }
 
+     @RequestMapping("main")
+     public String main(HttpSession session) {
+     	if(session.getAttribute("auth") != "auth_a") {
+     		return "redirect:/admin/login";
+     	}else {
+     		return "/admin/main";
+     	}
+     	
+     }
 }
 	
 

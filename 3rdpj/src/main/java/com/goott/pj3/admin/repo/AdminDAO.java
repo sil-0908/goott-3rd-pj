@@ -14,9 +14,10 @@ public class AdminDAO {
 	@Autowired
 	SqlSession ss;
 
-	public Map<String, Object> login_check(AdminUserDTO dto) {
+	public AdminUserDTO login_check(AdminUserDTO dto) {
 		// TODO Auto-generated method stub
-		return ss.selectOne("admin.login_check", dto);
+		return ss.selectOne("admin.login_check",dto);
 	}
+
 	
 }
