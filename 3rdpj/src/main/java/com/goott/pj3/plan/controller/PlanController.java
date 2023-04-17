@@ -36,6 +36,7 @@ public class PlanController {
     @PostMapping("create")
     public String planPut(PlanDTO planDTO, HttpSession httpSession,@RequestParam("file") MultipartFile multipartFile) {
         String user = (String) httpSession.getAttribute("user_id");
+
         planDTO.setUser_id(user);
         try {
            if(multipartFile != null){ planDTO.setPlan_detail_img(s3FileUploadService.upload(multipartFile));}
