@@ -19,7 +19,6 @@ import java.io.IOException;
 public class PlanController {
 
     final PlanService planService;
-
     final UserService userService;
     final S3FileUploadService s3FileUploadService;
 
