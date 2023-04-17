@@ -1,5 +1,6 @@
 package com.goott.pj3.plan.controller;
 
+import com.goott.pj3.common.util.S3FileUploadService;
 import com.goott.pj3.plan.dto.PlanDTO;
 import com.goott.pj3.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,22 +8,24 @@ import org.springframework.stereotype.Controller;
 
 import com.goott.pj3.plan.service.PlanService;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 
 @Controller
 @RequestMapping("plan/*")
 public class PlanController {
 
-    final
-    PlanService planService;
-    final
-    UserService userService;
+    final PlanService planService;
+    final UserService userService;
+    final S3FileUploadService s3FileUploadService;
 
-    public PlanController(PlanService planService, UserService userService) {
+    public PlanController(PlanService planService, UserService userService, S3FileUploadService s3FileUploadService) {
         this.planService = planService;
         this.userService = userService;
+        this.s3FileUploadService = s3FileUploadService;
     }
 
     @GetMapping("create")
@@ -31,9 +34,15 @@ public class PlanController {
     }
 
     @PostMapping("create")
-    public String planPut(PlanDTO planDTO, HttpSession httpSession) {
+    public String planPut(PlanDTO planDTO, HttpSession httpSession,@RequestParam("file") MultipartFile multipartFile) {
         String user = (String) httpSession.getAttribute("user_id");
         planDTO.setUser_id(user);
+        try {
+           if(multipartFile != null){ planDTO.setPlan_detail_img(s3FileUploadService.upload(multipartFile));}
+           else{System.out.println("파일 어디갔냐아아아");}
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         planService.planCreate(planDTO);
         return "redirect:/plan/list";
     }

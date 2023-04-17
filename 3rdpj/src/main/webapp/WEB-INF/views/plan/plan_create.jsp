@@ -9,9 +9,10 @@
 <html>
 <head>
     <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
-<form name="create" method="POST">
+<form name="create" method="POST" action="/plan/create" enctype="multipart/form-data">
     <label for="title">제목<input id="title" type="text" name="plan_title"></label>
     <br>
     <label for="start_date">여행시작날짜</label>
@@ -25,8 +26,27 @@
     <br>
     <label for="plan_detail">내용</label>
     <textarea id="plan_detail" name="plan_detail"></textarea>
-    <button type="submit">등록</button>
+    <input type="file" name="file" id="file-input" onchange="previewFile()">
+    <button type="submit" id="upload-btn" disabled>Upload</button>
 </form>
+<div id="preview"></div>
+<script>
+    function previewFile() {
+        let preview = document.getElementById('preview');
+        let file = document.getElementById('file-input').files[0];
+        let reader = new FileReader();
+        reader.onloadend = function () {
+            preview.innerHTML = '<img id="preview-img" src="' + reader.result + '">';
+            $('#upload-btn').prop('disabled', false);
+        }
+        if (file) {
+            reader.readAsDataURL(file);
+        } else {
+            preview.innerHTML = '';
+            $('#upload-btn').prop('disabled', true);
+        }
+    }
+</script>
 
 
 </body>
