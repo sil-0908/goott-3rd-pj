@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"/>
 	<link rel="stylesheet" href="/resources/css/common/style.css"/>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -20,7 +20,7 @@
       <article class="qna__search">
         <form name="search_notice">
           <input class="qna__typing" name="keyword" type="search" value="${paging.cri.keyword}" />
-          <button class="qna__btn qna__submit" type="submit">검색</button>
+          <button id="search" class="qna__btn qna__submit" type="submit">검색</button>
         </form>
       </article>
       <section class="qna__notice">
@@ -34,6 +34,23 @@
         		</c:if>
 			</c:forEach>
         </ul>
+		<ul class="btn-group pagination">
+			<c:if test="${paging.prev}">
+				<li>
+					<a href='<c:url value="/qna/list?page=${paging.startPage-1}"/>'><i class="fa fa-chevron-left"></i></a>
+				</li>
+			</c:if>
+			<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="pageNum">
+				<li>
+					<a href='<c:url value="/qna/list?page=${pageNum}"/>'><i class="fa">${pageNum}</i></a>
+				</li>
+			</c:forEach>
+			<c:if test="${paging.next && paging.endPage >0 }">
+				<li>
+					<a href='<c:url value="/qna/list?page=${paging.endPage+1}"/>'><i class="fa fa-chevron-right"></i></a>
+				</li>
+			</c:if>
+		</ul>
       </section>
       <dialog class="qna__guide">
         <hgroup class="qna__guide--title">
@@ -48,29 +65,12 @@
         </button>
       </dialog>
     </main>
-	<ul class="btn-group pagination">
-		<c:if test="${paging.prev}">
-			<li>
-				<a href='<c:url value="/qna/list?page=${paging.startPage-1}"/>'><i class="fa fa-chevron-left"></i></a>
-			</li>
-		</c:if>
-		<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="pageNum">
-			<li>
-				<a href='<c:url value="/qna/list?page=${pageNum}"/>'><i class="fa">${pageNum}</i></a>
-			</li>
-		</c:forEach>
-		<c:if test="${paging.next && paging.endPage >0 }">
-			<li>
-				<a href='<c:url value="/qna/list?page=${paging.endPage+1}"/>'><i class="fa fa-chevron-right"></i></a>
-			</li>
-		</c:if>
-	</ul>
 	<script src="/resources/js/common/layout.js"></script>
 	<script src="/resources/js/common/qna_main.js"></script>
 
 	<script>
 		$(function() {
-			$('.title').click(function(e) {
+			$('.qna__list--question').click(function(e) {
 				const idx = e.target.parentElement.children[0]
 				location.href='/qna/detail/'+idx.textContent
 			})
