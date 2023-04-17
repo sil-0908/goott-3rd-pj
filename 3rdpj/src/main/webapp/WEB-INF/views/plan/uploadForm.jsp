@@ -23,7 +23,7 @@
 </head>
 <body>
 <h1>File Upload Example</h1>
-<form id="upload-form" action="/upload" method="post" enctype="multipart/form-data">
+<form id="upload-form" action="/plan/create" method="post" enctype="multipart/form-data">
     <input type="file" name="file" id="file-input" onchange="previewFile()">
     <br><br>
     <button type="submit" id="upload-btn" disabled>Upload</button>

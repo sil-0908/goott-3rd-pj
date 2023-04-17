@@ -1,12 +1,9 @@
 package com.goott.pj3.common.util;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
@@ -14,7 +11,7 @@ import java.io.IOException;
 //2023.04.12 길영준
 // 파일 공통클래스 컨트롤러 사용 예시
 @Controller
-public class UploadTest2 {
+public class UploadControllerSample {
 
     @Resource(name = "upload_path")
     private String uploadPath;

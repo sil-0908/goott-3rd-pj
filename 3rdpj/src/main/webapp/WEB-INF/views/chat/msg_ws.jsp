@@ -16,7 +16,7 @@
 <h1>실시간 채팅</h1>
   <div id="chat"></div>
     <div>
-
+      <div class="text"></div>
     </div>
       <input type="text" id="msg" value="1212">
       <button class="sendBtn">Send</button>
@@ -31,6 +31,7 @@
         if(socket.readyState !== 1) return;
         let msg = document.querySelector('input[id="msg"]').value;
         socket.send(msg);
+
     })
 
     // 소켓 연결
@@ -65,6 +66,7 @@
     }
     // 메세지 수신
     function onMessage(evt){
+      document.querySelector(".text").innerText += evt.data + "\n"
         console.log("ReceiveMessage : " + evt.data+'\n');
     }
     // 웹소켓 종료
