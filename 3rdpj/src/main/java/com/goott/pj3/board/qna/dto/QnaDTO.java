@@ -4,10 +4,10 @@ import java.util.Date;
 
 public class QnaDTO {
 
-    private int qna_idx, qna_pw;
+    private int qna_idx;
 
     private String user_id, category, auth, qna_title, qna_content,
-                qna_answer, answer, q_del_yn;
+                qna_answer, answer, q_del_yn, qna_pw;
 
     private Date create_date, update_date;
 
@@ -19,11 +19,14 @@ public class QnaDTO {
         this.qna_idx = qna_idx;
     }
 
-    public int getQna_pw() {
-        return qna_pw;
+    public String getQna_pw() {
+        if(this.qna_pw == null){
+            this.qna_pw="";
+        }
+        return this.qna_pw;
     }
 
-    public void setQna_pw(int qna_pw) {
+    public void setQna_pw(String qna_pw) {
         this.qna_pw = qna_pw;
     }
 
