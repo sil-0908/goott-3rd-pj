@@ -4,9 +4,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="/resources/css/common/style.css"/>
 <title>Insert title here</title>
 </head>
 <body>
+<%@ include file="/WEB-INF/views/common/layout.jsp" %>
 <form name="enroll" action="/qna/enroll" method="post">
     <div class="input_wrap">
         <label>문의 제목</label>
@@ -18,6 +20,7 @@
     </div>
 	<input type="button" value="등록" onclick="enroll()">
 </form>
+<script src="/resources/js/common/layout.js"></script>
 <script>
 function enroll() {
 	document.enroll.submit();

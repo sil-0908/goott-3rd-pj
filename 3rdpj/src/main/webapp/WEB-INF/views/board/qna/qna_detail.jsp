@@ -6,9 +6,11 @@
 <html>
 <head>
 <meta charset="EUC-KR">
+<link rel="stylesheet" href="/resources/css/common/style.css"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
+<%@ include file="/WEB-INF/views/common/layout.jsp" %>
 	<h1>조회 페이지</h1>
 	<div class="input_wrap">
 		<label>게시판 번호</label>
@@ -31,6 +33,7 @@
 	<button id="delete">게시글 삭제</button>
 
 
+	<script src="/resources/js/common/layout.js"></script>
 
 	<script>
 		$(function() {
