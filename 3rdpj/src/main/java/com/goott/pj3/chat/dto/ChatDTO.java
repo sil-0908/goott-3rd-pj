@@ -2,7 +2,7 @@ package com.goott.pj3.chat.dto;
 
 import java.util.Date;
 
-public class ChatMessage {
+public class ChatDTO {
 
     private int msg_idx;
     private String send_id;
