@@ -15,7 +15,10 @@
           <li class="nav__item">플랜</li>
           <li class="nav__item">플래너</li>
           <li class="nav__item">카테고리</li>
-          <li class="nav__item">로그인</li>
+          <li class="nav__item">
+          	<a href="/user/signin"></a>
+          	로그인
+    	  </li>
         </ul>
       </nav>
     </header>
