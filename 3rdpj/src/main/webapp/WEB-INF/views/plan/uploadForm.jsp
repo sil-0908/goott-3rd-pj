@@ -6,46 +6,62 @@
   To change this template use File | Settings | File Templates.
   2023.04.09 길영준 업로드 테스트용 jsp
 --%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<!DOCTYPE html>
+
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Image Upload Form</title>
+    <title>File Upload Example</title>
+    <style>
+        #preview {
+            max-width: 100%;
+            max-height: 400px;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
-<h1>Image Upload Form</h1>
-<form action="${pageContext.request.contextPath}/upload" method="post" enctype="multipart/form-data">
-    <div>
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" />
-    </div>
-    <div>
-        <label for="file">Choose an image:</label>
-        <input type="file" id="file" name="file" accept="image/*" onchange="previewImage()" />
-    </div>
-    <div>
-        <img id="imagePreview" src="#"  style="display: none; max-width: 100%; height: auto;">
-    </div>
-    <div>
-        <button type="submit">Upload</button>
-    </div>
+<h1>File Upload Example</h1>
+<form id="upload-form" action="/plan/create" method="post" enctype="multipart/form-data">
+    <input type="file" name="file" id="file-input" onchange="previewFile()">
+    <br><br>
+    <button type="submit" id="upload-btn" disabled>Upload</button>
 </form>
+<div id="preview"></div>
 <script>
-    function previewImage() {
-        let preview = document.getElementById("imagePreview");
-        let file = document.getElementById("file").files[0];
-        let reader = new FileReader();
-        reader.onloadend = function () {
-            preview.src = reader.result;
-            preview.style.display = "block";
+    function previewFile() {
+        var preview = document.getElementById('preview');
+        var file = document.getElementById('file-input').files[0];
+        var reader = new FileReader();
+        reader.onloadend = function() {
+            preview.innerHTML = '<img id="preview-img" src="' + reader.result + '">';
+            $('#upload-btn').prop('disabled', false);
         }
         if (file) {
             reader.readAsDataURL(file);
         } else {
-            preview.src = "";
-            preview.style.display = "none";
+            preview.innerHTML = '';
+            $('#upload-btn').prop('disabled', true);
         }
     }
+    // $('#fileUploadForm').submit(function (e) {
+    //     e.preventDefault();
+    //     $.ajax({
+    //         url: "/upload",
+    //         type: "POST",
+    //         data: new FormData(this),
+    //         contentType: false,
+    //         cache: false,
+    //         processData: false,
+    //         success: function (response) {
+    //             $('#imagePreview').attr('src', response);
+    //         },
+    //         error: function () {
+    //             alert('Error uploading file');
+    //         }
+    //     });
+    // });
 </script>
 </body>
 </html>

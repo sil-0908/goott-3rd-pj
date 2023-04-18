@@ -1,23 +1,24 @@
 package com.goott.pj3.board.qna.service;
 
-import com.goott.pj3.common.util.Criteria;
-import com.goott.pj3.board.qna.dto.QnaDTO;
-
 import java.util.List;
+
+import com.goott.pj3.board.qna.dto.QnaDTO;
+import com.goott.pj3.common.util.Criteria;
+import com.goott.pj3.common.util.PagingDTO;
 
 public interface QnaService {
 
-    void enroll(QnaDTO qnaDTO);
+    String enroll(QnaDTO qnaDTO);
 
     List<QnaDTO> list(Criteria cri);
 
-    int totalCount(Criteria cri);
+    PagingDTO paging(String requestUrl, Criteria cri);
 
     QnaDTO detail(int qna_idx);
 
-    void modify(QnaDTO qnaDTO);
+    String modify(QnaDTO qnaDTO);
 
-    void delete(QnaDTO qnaDTO);
+    String delete(QnaDTO qnaDTO);
 
     List<QnaDTO> list_n();
 
@@ -26,7 +27,4 @@ public interface QnaService {
     List<QnaDTO> list_r();
 
     List<QnaDTO> list_e();
-
-    String get_category(QnaDTO qnaDTO);
-
 }

@@ -56,7 +56,20 @@
       </main>   
 <script src="/resources/js/common/layout.js"></script>
 <script>
-function enroll() {
+function create() {
+    const title = document.querySelector('input[id=title]');
+    const content = document.querySelector('textarea[id=content]');
+
+    if(title.value == "") {
+        alert("제목을 입력하세요");
+        $('#title').focus();
+        return;
+    }
+    if(content.value == ""){
+        alert("내용을 입력하세요");
+        $('#content').focus();
+        return;
+    }
 	document.enroll.submit();
 }
 
