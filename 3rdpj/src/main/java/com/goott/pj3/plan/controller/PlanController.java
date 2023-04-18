@@ -1,9 +1,9 @@
 package com.goott.pj3.plan.controller;
 
+import com.goott.pj3.common.util.Auth;
 import com.goott.pj3.common.util.S3FileUploadService;
 import com.goott.pj3.plan.dto.PlanDTO;
 import com.goott.pj3.user.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import com.goott.pj3.plan.service.PlanService;
@@ -13,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-
+// 2023.04 길영준
 @Controller
 @RequestMapping("plan/*")
 public class PlanController {
@@ -27,7 +27,7 @@ public class PlanController {
         this.userService = userService;
         this.s3FileUploadService = s3FileUploadService;
     }
-
+    @Auth(role= Auth.Role.PLANNER)
     @GetMapping("create")
     public String planGet() {
         return "plan/plan_create";

@@ -13,7 +13,8 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
-
+//2023.4.15 길영준
+// S3 이미지 업로드 공통 서비스
 @Service
 public class S3FileUploadService {
     @Autowired
