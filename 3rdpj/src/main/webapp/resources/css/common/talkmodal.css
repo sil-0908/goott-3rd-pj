@@ -1,0 +1,102 @@
+.modal__talk {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.9);
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  z-index: 999;
+}
+.chatbox {
+  margin: auto;
+  width: 50vw;
+  height: 100vh;
+  background: linear-gradient(
+    120.76deg,
+    rgba(242, 191, 10, 0.7) 5.29%,
+    rgba(71, 175, 208, 0.7) 60.41%
+  );
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.chatbox__doc {
+  position: relative;
+  margin-top: 4vh;
+  width: 80%;
+  height: 80%;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  margin-bottom: 3vh;
+  border-radius: 1rem;
+}
+.chatbox__title {
+  border-bottom: 2px solid var(--blue);
+  display: flex;
+  justify-content: center;
+}
+.chatbox__title > h1 {
+  font-size: 1.5rem;
+  font-weight: 900;
+  margin: 1rem;
+  color: var(--black);
+}
+.chatbox__window {
+  /* border: 1px solid black; */
+  width: 100%;
+  height: 35rem;
+}
+.chatbox__form {
+  border: 2px solid var(--blue);
+  width: 90%;
+  height: 3rem;
+  bottom: 0;
+  border-radius: 1rem;
+  left: 4.6%;
+  position: relative;
+}
+.chatbox__typing {
+  width: 80%;
+  height: 3rem;
+  margin-left: 1rem;
+  font-size: 1.2rem;
+  border-style: none;
+}
+.chatbox__typing:focus {
+  outline: none;
+}
+.chatbox__submit {
+  position: absolute;
+  bottom: 0.4rem;
+  right: 0.6rem;
+}
+.chatbox__btns {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+.chatbox__btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 20px;
+  width: auto;
+  height: auto;
+  background: #47afd0;
+  border-radius: 10px;
+  transition: background-color 0.2s;
+  color: white;
+  font-weight: 900;
+}
+.chatbox__btn:hover {
+  background: var(--yellow);
+}
+.chatbox__btn > a {
+  color: white;
+}

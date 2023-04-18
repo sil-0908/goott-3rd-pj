@@ -1,0 +1,67 @@
+.qna__list--question > input {
+  width: 95%;
+  height: 2.5rem;
+  margin-left: 1rem;
+  font-size: 1.2rem;
+  border-style: none;
+}
+.qna__list--question-big {
+  display: flex;
+  align-items: center;
+  font-size: 1.1rem;
+  font-weight: 900;
+  width: 30vw;
+  height: auto;
+  background-color: white;
+  margin-bottom: 1rem;
+  border-radius: 1rem;
+  padding-left: 1rem;
+}
+.qna__list--question-big > textarea {
+  border-style: none;
+}
+.qna__list--question-big > textarea:focus {
+  outline: none;
+}
+.qna__sheet {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 40vw;
+  background: linear-gradient(
+    120.76deg,
+    rgba(242, 191, 10, 0.7) 5.29%,
+    rgba(71, 175, 208, 0.7) 60.41%
+  );
+  border-radius: 1rem;
+  margin-bottom: 26vh;
+  z-index: 999;
+}
+.qna__create {
+  border: 2px solid var(--blue);
+  width: 31vw;
+  height: 3rem;
+  border-radius: 1rem;
+  position: relative;
+  background-color: white;
+}
+.qna__selection {
+  width: 95%;
+  height: 3rem;
+  margin-left: 1rem;
+  font-size: 1.2rem;
+  border-style: none;
+}
+.qna__selection:focus {
+  outline: none;
+}
+.qna__send {
+  margin-bottom: 1rem;
+}
+.qna__label {
+  line-height: 2.5rem;
+  color: var(--black);
+  font-weight: 900;
+  font-size: 1.4rem;
+}
