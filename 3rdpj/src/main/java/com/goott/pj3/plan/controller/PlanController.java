@@ -13,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-// 2023.04 길영준
+
 @Controller
 @RequestMapping("plan/*")
 public class PlanController {
@@ -27,20 +27,24 @@ public class PlanController {
         this.userService = userService;
         this.s3FileUploadService = s3FileUploadService;
     }
-    @Auth(role= Auth.Role.PLANNER)
+
+    @Auth(role = Auth.Role.PLANNER)
     @GetMapping("create")
     public String planGet() {
         return "plan/plan_create";
     }
 
     @PostMapping("create")
-    public String planPut(PlanDTO planDTO, HttpSession httpSession,@RequestParam("file") MultipartFile multipartFile) {
+    public String planPut(PlanDTO planDTO, HttpSession httpSession, @RequestParam("file") MultipartFile multipartFile) {
         String user = (String) httpSession.getAttribute("user_id");
 
         planDTO.setUser_id(user);
         try {
-           if(multipartFile != null){ planDTO.setPlan_detail_img(s3FileUploadService.upload(multipartFile));}
-           else{System.out.println("파일 어디갔냐아아아");}
+            if (multipartFile != null) {
+                planDTO.setPlan_detail_img(s3FileUploadService.upload(multipartFile));
+            } else {
+                System.out.println("파일 어디갔냐아아아");
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
