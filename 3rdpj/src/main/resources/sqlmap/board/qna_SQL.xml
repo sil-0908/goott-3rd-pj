@@ -27,14 +27,12 @@
         </choose>
         and q_del_yn = 'n'
         and
-        <choose>
-            <when test="keyword != ''">
-                qna_content like CONCAT('%',#{keyword},'%')
-            </when>
-            <otherwise>
-                1=1
-            </otherwise>
-        </choose>
+        <if test="option == 'user_id'"> user_id like CONCAT('%',#{keyword},'%')</if>
+        <if test="option == 'title'"> qna_title like CONCAT('%',#{keyword},'%')</if>
+        <if test="option == 'content'"> qna_content like CONCAT('%',#{keyword},'%')</if>
+        <if test="option == 'title,content'"> qna_title like CONCAT('%',#{keyword},'%')
+            or qna_content like CONCAT('%',#{keyword},'%')</if>
+        <if test="option == null or option == ''">1=1</if>
         order by qna_idx desc
         limit #{pageStart}, #{perPageNum}
     </select>
@@ -59,14 +57,12 @@
         </choose>
         and q_del_yn = 'n'
         and
-        <choose>
-            <when test="keyword != ''">
-                qna_content like CONCAT('%',#{keyword},'%')
-            </when>
-            <otherwise>
-                1=1
-            </otherwise>
-        </choose>
+        <if test="option == 'user_id'"> user_id like CONCAT('%',#{keyword},'%')</if>
+        <if test="option == 'title'"> qna_title like CONCAT('%',#{keyword},'%')</if>
+        <if test="option == 'content'"> qna_content like CONCAT('%',#{keyword},'%')</if>
+        <if test="option == 'title,content'"> qna_title like CONCAT('%',#{keyword},'%')
+            or qna_content like CONCAT('%',#{keyword},'%')</if>
+        <if test="option == null or option == ''">1=1</if>
     </select>
 
     <select id="detail" resultType="com.goott.pj3.board.qna.dto.QnaDTO">

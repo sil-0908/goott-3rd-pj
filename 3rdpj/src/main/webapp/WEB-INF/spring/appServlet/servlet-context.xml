@@ -32,6 +32,11 @@
 	<beans:bean id="upload_path" class="java.lang.String">
 		<beans:constructor-arg value="c:/upload"/><!--첨부파일 저장할 디렉토리 설정 @Resource 로 끌고갈것-->
 	</beans:bean>
-
-
+<!--23.04.18 길영준 세션권한체크 인터셉터-->
+<interceptors>
+	<interceptor>
+		<mapping path="/**"/>
+		<beans:bean id="authInterceptor" class="com.goott.pj3.common.util.AuthInterceptor"/>
+	</interceptor>
+</interceptors>
 </beans:beans>
