@@ -4,11 +4,11 @@
 @import "./layout.css";
 @import "./main.css";
 @import "./planner.css";
-@import "./search.css";
 @import "./plannermodal.css";
 @import "./talkmodal.css";
 @import "./payment.css";
 @import "./qna.css";
+@import "./qna_create.css";
 
 :root {
   --black: #181823;
@@ -26,6 +26,6 @@ body {
 main {
   height: 100%;
   min-height: 100%;
-  margin: 7vh 0 40vh 0;
+  margin: 7vh 0 25vh 0;
   /* border: 2px solid green; */
 }

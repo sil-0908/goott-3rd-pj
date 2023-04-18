@@ -11,11 +11,13 @@
   width: 31.5vw;
   font-size: 2.5rem;
   font-weight: 900;
+  color: black;
 }
 .qna__grid {
   display: flex;
   flex-wrap: wrap;
   width: 50vw;
+  margin-top: 2rem;
 }
 .qna__card {
   display: flex;
@@ -28,6 +30,7 @@
   margin-bottom: 3rem;
   border-radius: 1rem;
   overflow: hidden;
+  z-index: 99;
 }
 .qna__card--title {
   background: linear-gradient(
@@ -65,15 +68,14 @@
   width: 15rem;
   height: 15rem;
   position: fixed;
-  top: 70%;
+  top: 60%;
   left: 88%;
-  transform: translate(-50%, -60%);
+  transform: translate(-50%, -50%);
   border-radius: 1rem;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   z-index: 999;
   border-style: none;
   overflow: hidden;
-  z-index: 999;
 }
 .qna__guide--title {
   background-color: var(--blue);
@@ -106,13 +108,20 @@
   color: white;
   font-size: 1.2rem;
 }
+.search__selectBox{
+	width: 15vw;
+	height: 2rem;
+	border: 2px solid var(--blue);
+	border-radius: 0.7rem;
+}
 .qna__search {
   border: 2px solid var(--blue);
   width: 31vw;
   height: 3rem;
   border-radius: 1rem;
   position: relative;
-  margin-top: 2rem;
+  margin-bottom: 2rem;
+  margin-top: 1rem;
   background-color: white;
 }
 .qna__typing {
@@ -161,9 +170,11 @@
     rgba(71, 175, 208, 0.7) 60.41%
   );
   border-radius: 1rem;
+  margin-bottom: 26vh;
+  z-index: 99;
 }
 .qna__list {
-  margin: 2.5rem;
+  margin: 1rem;
 }
 .qna__list--question {
   display: flex;
@@ -173,7 +184,19 @@
   width: 30vw;
   height: 3rem;
   background-color: white;
-  margin-bottom: 1rem;
+  margin: 1rem 0;
   border-radius: 1rem;
   padding-left: 1rem;
+}
+.pagination{
+	display: flex;
+	width: auto;
+	height: 2.5rem;
+	background-color: white;
+	margin-bottom: 1rem;
+	align-items: center;
+	border-radius: 1rem;
+}
+.pagination > li{
+	margin: 0 0.6rem;
 }
