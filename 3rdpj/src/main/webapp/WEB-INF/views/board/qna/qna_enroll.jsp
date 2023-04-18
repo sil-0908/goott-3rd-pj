@@ -19,7 +19,7 @@
       <section class="qna__sheet">
         <form name="enroll" method="post" class="qna__list" action="/qna/enroll">
           <ul class="qna__list">
-            <!-- <label class="qna__label" for="question">문의사항을 선택하세요.</label>
+            <label class="qna__label" for="question">문의사항을 선택하세요.</label>
 	        <li class="qna__create">
 	          <select class="qna__selection" id="question" name="qna_selection">
 	            <option value="criminal">플래너가 범죄자입니다.</option>
@@ -35,7 +35,7 @@
             <label class="qna__label" for="email">이메일 주소</label>
             <li class="qna__list--question">
               <input name="qna_email" class="qna__typing" id="email" type="email" />
-            </li> -->
+            </li>
             <label class="qna__label" for="title">제목</label>
             <li class="qna__list--question">
               <input name="qna_title" class="qna__typing" id="title" type="text" />

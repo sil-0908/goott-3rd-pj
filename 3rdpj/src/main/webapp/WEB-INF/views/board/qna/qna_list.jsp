@@ -17,12 +17,19 @@
       <hgroup class="qna__title">
         <h1>공지사항</h1>
       </hgroup>
-      <article class="qna__search">
         <form name="search_notice">
-          <input class="qna__typing" name="keyword" type="search" value="${paging.cri.keyword}" />
-          <button id="search" class="qna__btn qna__submit" type="submit">검색</button>
+  			<select class="search__selectBox" id="selectBox" name="category">
+  				<option selected="" value="">검색조건을 입력하세요.</option>
+	            <option selected="" value="user_id">ID</option>
+	            <option selected="selected" value="title">제목</option>
+	            <option selected="" value="content">내용</option>
+	            <option selected="" value="title,content">제목+내용</option>
+   			</select>		
+		    <article class="qna__search">
+       			<input class="qna__typing" name="keyword" type="search" value="${paging.cri.keyword}" />
+       			<button id="search" class="qna__btn qna__submit" type="submit">검색</button>
+		    </article>
         </form>
-      </article>
       <section class="qna__notice">
         <ul class="qna__list">
            <c:forEach items="${list}" var="list" varStatus="status">
@@ -69,21 +76,32 @@
 	<script src="/resources/js/common/qna_main.js"></script>
 
 	<script>
-		$(function() {
-			$('.qna__list--question').click(function(e) {
-				const idx = e.target.parentElement.children[0]
-				location.href='/qna/detail/'+idx.textContent
-			})
-		})
+      $(function() {
+         $('.title').click(function(e) {
+            const idx = e.target.parentElement.previousElementSibling.children[0]
+            const lock = e.target.nextElementSibling
+            if(lock.children.length == 2){
+               //비밀번호 입력 값이 다를 경우 접근 불가
+               const passwordCheck = prompt("비밀번호를 입력하세요", "비밀번호 입력");
+               if(passwordCheck != $('.passwordInput').val()){
+                  alert("비밀번호가 일치하지 않습니다.");
+                  return;
+               }
+               else location.href='/qna/detail/'+idx.value;
+            }
+            location.href='/qna/detail/'+idx.value
+         })
+      })
 
 
-		$('#search').click(function(){
-			if($("input[name=keyword]").val() == 'undefined' || $('input[name=keyword]').val() == ''){
-				alert("검색어를 입력하세요");
-				return;
-			}
-			document.keyword_transfer.submit();
-		});
-	</script>
+      $('#search').click(function(){
+         if($("input[name=keyword]").val() == 'undefined' || $('input[name=keyword]').val() == ''){
+            alert("검색어를 입력하세요");
+            return;
+         }
+         const category = document.querySelector('input[name=category]')
+         $('#search_transform').attr('action','/qna/list_'+category.value).submit();
+      });
+   </script>
 </body>
 </html>
