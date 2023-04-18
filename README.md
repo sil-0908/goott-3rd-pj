@@ -9,7 +9,6 @@
     QnA - update / delete 제외 완료
     
 </details>
-
 <details>
 <summary><h3>Ver 1.2 ( 04.17 )</h3></summary>
 
