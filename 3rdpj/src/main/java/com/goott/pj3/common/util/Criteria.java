@@ -50,7 +50,10 @@ public class Criteria {
 
     // 검색기능 구현 - 04.07 김범수
     public String getKeyword() {
-        return keyword;
+        if(keyword != null || keyword !=""){
+            return this.keyword;
+        }
+        return "";
     }
 
     public void setKeyword(String keyword) {

@@ -1,13 +1,13 @@
 package com.goott.pj3.board.qna.controller;
 
-import com.goott.pj3.common.util.Criteria;
-import com.goott.pj3.common.util.PagingDTO;
-import com.goott.pj3.board.qna.dto.QnaDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
+
 import org.springframework.stereotype.Controller;
 
+import com.goott.pj3.board.qna.dto.QnaDTO;
 import com.goott.pj3.board.qna.service.QnaService;
+import com.goott.pj3.common.util.Criteria;
+
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -43,32 +43,14 @@ public class QnaController {
 	public String enroll(QnaDTO qnaDTO, HttpSession session) {
 		String user_id = (String) session.getAttribute("user_id");
 		qnaDTO.setUser_id(user_id);
-		qnaService.enroll(qnaDTO);
-		return "redirect:/qna/list";
+		return qnaService.enroll(qnaDTO);
 	}
 
-	@RequestMapping(value = {"list_n","list_u","list_r","list_e", "list"}, produces="application/text; charset=UTF-8;")
+	@RequestMapping(value = {"list_N","list_U","list_R","list_E"}, produces="application/text; charset=UTF-8;")
 	public ModelAndView list(ModelAndView mv, Criteria cri, HttpServletRequest request) {
 		String requestUrl = request.getRequestURL().toString();
-		PagingDTO paging = new PagingDTO();
-		if(requestUrl.contains("list_n")){
-			cri.setCategory("N");
-			paging.setCri(cri); // page / perpagenum 설정
-
-		} else if(requestUrl.contains("list_u")){
-			cri.setCategory("U");
-			paging.setCri(cri); // page / perpagenum 설정
-
-		} else if(requestUrl.contains("list_r")){
-			cri.setCategory("R");
-			paging.setCri(cri); // page / perpagenum 설정
-
-		} else {
-			cri.setCategory("E");
-			paging.setCri(cri); // page / perpagenum 설정
-		}
-		paging.setTotalCount(qnaService.totalCount(cri)); // 총게시글 갯수 불러오는 것
-		mv.addObject("paging", paging);
+		System.out.println(cri.getKeyword());
+		mv.addObject("paging", qnaService.paging(requestUrl, cri));
 		mv.addObject("list", qnaService.list(cri));
 		mv.setViewName("board/qna/qna_list");
 		return mv;
@@ -81,21 +63,18 @@ public class QnaController {
 		return mv;
 	}
 
-	@RequestMapping(value = "modify", method = RequestMethod.POST, produces="application/text; charset=UTF-8;")
+	@RequestMapping(value = "modify", method = RequestMethod.POST, consumes = "application/json",produces="text/plain; charset=UTF-8;")
 	@ResponseBody
 	public String modify(QnaDTO qnaDTO) {
-		qnaService.modify(qnaDTO);
-		String category = qnaService.get_category(qnaDTO); // 각각의 리스트로 연결하기 위함 - 04.10 김범수
-		System.out.println(category);
-		return "redirect:/qna/list_"+category;
+		String category = qnaService.modify(qnaDTO);
+		return category;
 	}
 
 	//
 	@RequestMapping("delete")
+	@ResponseBody
 	public String delete(QnaDTO qnaDTO) {
-		qnaService.delete(qnaDTO);
-		String category = qnaService.get_category(qnaDTO);
-		System.out.println(category);
-		return "redirect:/qna/list_"+category;
+		String category = qnaService.delete(qnaDTO);
+		return category;
 	}
 }

@@ -47,6 +47,11 @@
   font-weight: 900;
   font-size: 1.3rem;
 }
+.nav__item > a {
+	width: 4rem;
+	height: 1.5rem;
+	position: absolute;
+}
 
 footer {
   background: linear-gradient(92.76deg, #f2bf0a 2.29%, #47afd0 66.41%);
@@ -57,7 +62,6 @@ footer {
   width: 100vw;
   opacity: 0;
   transition: opacity 0.2s ease-in-out;
-  z-index: 0;
 }
 
 footer.show {

@@ -8,17 +8,23 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <html>
 <head>
     <title>리뷰 작성</title>
+    <style>
+        #preview {
+            max-width: 100%;
+            max-height: 400px;
+        }
+    </style>
 </head>
 <body>
 <h1>리뷰 작성</h1>
-<form method="POST">
+<form method="POST" enctype="multipart/form-data" >
     <input type="hidden" name="plan_idx" value="1">
     <p>내용 : <input type="text" name="review_content"></p>
-    <p>사진 : <input id="fileItem" type="file" multiple name="review_img"></p>
+    <p>사진 : <input id="fileItem" name="file" type="file" multiple name="review_img" onchange="previewFile()"></p>
     <p>평점 :
         <input type="radio" name="review_rating" value="1">1
         <input type="radio" name="review_rating" value="2">2
@@ -26,12 +32,30 @@
         <input type="radio" name="review_rating" value="4">4
         <input type="radio" name="review_rating" value="5">5
     </p>
-    <p><input type="submit" value="저장"></p>
+    <p><input id="upload-btn" type="submit" value="저장"></p>
 </form>
+<div id="preview"></div>
 </body>
 </html>
-
 <script>
+    /**
+     * 조원재 23.04.13. follow - uploadForm
+     */
+    function previewFile() {
+        var preview = document.getElementById('preview');
+        var file = document.getElementById('fileItem').files[0];
+        var reader = new FileReader();
+        reader.onloadend = function() {
+            preview.innerHTML = '<img id="preview-img" src="' + reader.result + '">';
+            $('#upload').prop('disabled', false);
+        }
+        if (file) {
+            reader.readAsDataURL(file);
+        } else {
+            preview.innerHTML = '';
+            $('#upload-btn').prop('disabled', true);
+        }
+    }
     /**
      * 조원재 23.04.06 이미지 업로드
      * @type {RegExp}
