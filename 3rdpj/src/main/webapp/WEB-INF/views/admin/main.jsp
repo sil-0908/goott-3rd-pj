@@ -14,6 +14,7 @@
 	<div>
 		<a href="admin/noticelist">공지사항</a>
 		<a href="admin/userlist">회원관리</a>
+		<a href="admin/logout">로그아웃</a>
 	</div>
 <%-- 	</c:if> --%>
 

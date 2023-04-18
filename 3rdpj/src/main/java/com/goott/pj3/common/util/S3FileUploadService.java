@@ -14,6 +14,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
 
+//2023.4.15 길영준
+// S3 이미지 업로드 공통 서비스
 @Service
 public class S3FileUploadService {
     @Autowired
@@ -43,7 +45,7 @@ public class S3FileUploadService {
             // S3 파일 업로드
             uploadOnS3(saveFileName, file);
             // 주소 할당
-            url = defaultUrl +'/'+ saveFileName;
+            url = defaultUrl + '/' + saveFileName;
             // 파일 삭제
             file.delete();
         } catch (StringIndexOutOfBoundsException e) {

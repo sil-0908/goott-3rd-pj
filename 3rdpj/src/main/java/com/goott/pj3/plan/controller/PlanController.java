@@ -1,9 +1,9 @@
 package com.goott.pj3.plan.controller;
 
+import com.goott.pj3.common.util.Auth;
 import com.goott.pj3.common.util.S3FileUploadService;
 import com.goott.pj3.plan.dto.PlanDTO;
 import com.goott.pj3.user.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import com.goott.pj3.plan.service.PlanService;
@@ -28,18 +28,23 @@ public class PlanController {
         this.s3FileUploadService = s3FileUploadService;
     }
 
+    @Auth(role = Auth.Role.PLANNER)
     @GetMapping("create")
     public String planGet() {
         return "plan/plan_create";
     }
 
     @PostMapping("create")
-    public String planPut(PlanDTO planDTO, HttpSession httpSession,@RequestParam("file") MultipartFile multipartFile) {
+    public String planPut(PlanDTO planDTO, HttpSession httpSession, @RequestParam("file") MultipartFile multipartFile) {
         String user = (String) httpSession.getAttribute("user_id");
+
         planDTO.setUser_id(user);
         try {
-           if(multipartFile != null){ planDTO.setPlan_detail_img(s3FileUploadService.upload(multipartFile));}
-           else{System.out.println("파일 어디갔냐아아아");}
+            if (multipartFile != null) {
+                planDTO.setPlan_detail_img(s3FileUploadService.upload(multipartFile));
+            } else {
+                System.out.println("파일 어디갔냐아아아");
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
