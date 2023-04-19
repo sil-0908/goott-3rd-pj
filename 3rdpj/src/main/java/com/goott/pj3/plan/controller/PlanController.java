@@ -1,7 +1,6 @@
 package com.goott.pj3.plan.controller;
 
 import com.goott.pj3.common.util.Auth;
-import com.goott.pj3.common.util.Multiple;
 import com.goott.pj3.common.util.S3FileUploadService;
 import com.goott.pj3.plan.dto.PlanDTO;
 import com.goott.pj3.user.service.UserService;
@@ -22,13 +21,13 @@ public class PlanController {
 
     final PlanService planService;
     final UserService userService;
-//    final S3FileUploadService s3FileUploadService;
-    final Multiple multiple;
+    final S3FileUploadService s3FileUploadService;
 
-    public PlanController(PlanService planService, UserService userService, Multiple multiple) {
+
+    public PlanController(PlanService planService, UserService userService, S3FileUploadService s3FileUploadService) {
         this.planService = planService;
         this.userService = userService;
-        this.multiple = multiple;
+        this.s3FileUploadService = s3FileUploadService;
     }
 
     @Auth(role = Auth.Role.PLANNER)
@@ -43,14 +42,15 @@ public class PlanController {
 
         planDTO.setUser_id(user);
         try {
-            multiple.upload(multipartFile);
+            s3FileUploadService.upload(multipartFile);
+//            multiple.upload(multipartFile);
 //            if (multipartFile != null) {
 //                planDTO.setPlan_detail_img(multiple.upload(multipartFile));
 //            } else {
 //                System.out.println("파일 어디갔냐아아아");
 //            }
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
         planService.planCreate(planDTO);
         return "redirect:/plan/list";

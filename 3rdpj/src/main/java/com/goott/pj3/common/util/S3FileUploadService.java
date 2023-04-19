@@ -12,12 +12,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.UUID;
-
-//2023.4.15 길영준
-// S3 이미지 업로드 공통 서비스
+import java.util.*;
 @Service
 public class S3FileUploadService {
+
     @Autowired
     private final AmazonS3Client amazonS3Client;
     @Value("${aws.s3.bucket}")
@@ -25,33 +23,34 @@ public class S3FileUploadService {
     @Value("${aws.s3.bucket.url}")
     private String defaultUrl;
 
+    List<String> urlList = new ArrayList<>();
+
     public S3FileUploadService(AmazonS3Client amazonS3Client) {
         this.amazonS3Client = amazonS3Client;
     }
 
-    public String upload(MultipartFile uploadFile) throws IOException {
-        String origName = uploadFile.getOriginalFilename();
-        String url;
-        try {
-            // 확장자를 찾기 위한 코드
-            final String ext = origName.substring(origName.lastIndexOf('.'));
-            // 파일이름 암호화
-            final String saveFileName = getUuid() + ext;
-            // 파일 객체 생성
-            // System.getProperty => 시스템 환경에 관한 정보를 얻을 수 있다. (user.dir = 현재 작업 디렉토리를 의미함)
-            File file = new File(System.getProperty("user.dir") + saveFileName);
-            // 파일 변환
-            uploadFile.transferTo(file);
-            // S3 파일 업로드
-            uploadOnS3(saveFileName, file);
-            // 주소 할당
-            url = defaultUrl + '/' + saveFileName;
-            // 파일 삭제
-            file.delete();
-        } catch (StringIndexOutOfBoundsException e) {
-            url = null;
+    public List<String> upload(List<MultipartFile> uploadFile) throws IOException {
+        //파일이름 새로만들어서 리스트에 담기
+        List<Map<String, String>> fileList = new ArrayList<>();
+        for (int i = 0; i < uploadFile.size(); i++) {
+            String origName = uploadFile.get(i).getOriginalFilename();
+            String ext = origName.substring(origName.lastIndexOf('.'));
+            String saveFileName = getUuid() + ext;
+            Map<String, String> map = new HashMap<>();
+            map.put("saveFile", saveFileName);
+            fileList.add(map);
         }
-        return url;
+
+        for (int i = 0; i < uploadFile.size(); i++) {
+            String url = "";
+            File file = new File(System.getProperty("user.dir") + fileList.get(i).get("saveFile"));
+            uploadFile.get(i).transferTo(file);
+            uploadOnS3(fileList.get(i).get("saveFile"), file);
+            url = defaultUrl + '/' + fileList.get(i).get("saveFile");
+            urlList.add(url);
+            file.delete();
+        }
+        return urlList;
     }
 
     private static String getUuid() {
@@ -74,4 +73,3 @@ public class S3FileUploadService {
     }
 
 }
-
