@@ -21,20 +21,16 @@
           <ul class="qna__list">
             <label class="qna__label" for="question">문의사항을 선택하세요.</label>
 	        <li class="qna__create">
-	          <select class="qna__selection" id="question" name="qna_selection">
-	            <option value="criminal">플래너가 범죄자입니다.</option>
-	            <option value="fake">허위 플랜에 당했습니다.</option>
-	            <option value="refund">환불하고싶어요.</option>
-	            <option value="clame">서비스가 불만족스러워요.</option>
+	          <select class="qna__selection" id="question" name="category">
+	            <option value="N">플래너가 범죄자입니다.</option>
+	            <option value="U">허위 플랜에 당했습니다.</option>
+	            <option value="R">환불하고싶어요.</option>
+	            <option value="E">서비스가 불만족스러워요.</option>
 	          </select>
 	        </li>
-            <label class="qna__label" for="tel">전화번호</label>
-            <li class="qna__list--question">
-              <input name="qna_tel" class="qna__typing" type="text" />
-            </li>
             <label class="qna__label" for="email">이메일 주소</label>
             <li class="qna__list--question">
-              <input name="qna_email" class="qna__typing" id="email" type="email" />
+              <input name="email" class="qna__typing" id="email" type="email" />
             </li>
             <label class="qna__label" for="title">제목</label>
             <li class="qna__list--question">
@@ -49,6 +45,10 @@
                 rows="10"
               ></textarea>
             </li>
+            <label class="qna__label" for="pw">비밀번호</label>
+            <li class="qna__list--question">
+                <input name="qna_pw" class="qna__typing" type="text" id="pw" maxlength="4"/>
+            </li>
         	<input class="qna__send qna__btn" type="submit" value="등록" onclick="enroll()">
           </ul>
         </form>
@@ -57,9 +57,15 @@
 <script src="/resources/js/common/layout.js"></script>
 <script>
 function create() {
+    const email = document.querySelector('input[id=email]');
     const title = document.querySelector('input[id=title]');
     const content = document.querySelector('textarea[id=content]');
 
+    if(email.value == "") {
+        alert("제목을 입력하세요");
+        $('#email').focus();
+        return;
+    }
     if(title.value == "") {
         alert("제목을 입력하세요");
         $('#title').focus();
@@ -67,9 +73,10 @@ function create() {
     }
     if(content.value == ""){
         alert("내용을 입력하세요");
-        $('#content').focus();
+        $('#contents').focus();
         return;
     }
+
 	document.enroll.submit();
 }
 

@@ -31,7 +31,6 @@ public class FreeBoardController {
 	public String enroll(FreeBoardDTO freeDto, HttpSession session) {
 		String user_id = (String) session.getAttribute("user_id");
 		freeDto.setUser_id(user_id);
-		System.out.println(freeDto);
 		freeBoardService.enroll(freeDto);
 		return "redirect:/free/list";
 	}
@@ -41,7 +40,8 @@ public class FreeBoardController {
 		PagingDTO paging = new PagingDTO();
 		paging.setCri(cri); // page / perpagenum 설정
 		paging.setTotalCount(freeBoardService.totalCount(cri)); // 총게시글 갯수 불러오는 것
-		System.out.println(paging);
+		System.out.println("1:"+paging);
+		System.out.println("2:"+freeBoardService.list(cri));
 		mv.addObject("paging", paging);
 		mv.addObject("list", freeBoardService.list(cri));
 		mv.setViewName("board/free/free_list");
@@ -58,7 +58,6 @@ public class FreeBoardController {
 	@RequestMapping(value = "modify", method = RequestMethod.POST, produces="application/text; charset=UTF-8;")
 	@ResponseBody
 	public String modify(FreeBoardDTO boardDTO) {
-		System.out.println(boardDTO);
 		freeBoardService.modify(boardDTO);
 		return "수정완료";
 	}

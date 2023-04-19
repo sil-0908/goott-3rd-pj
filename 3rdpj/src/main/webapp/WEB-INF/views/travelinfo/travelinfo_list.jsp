@@ -21,8 +21,18 @@
 </p>
 </c:if>
 <p>
-  <form>
-      <input type="text" placeholder="검색" name="keyword" value="${keyword}">
+  <form name="search">
+  <div>
+	<select id="selectBox" name="option">
+		<option value="">=======</option>
+		<option value="country_a">나라</option>
+		<option value="country_b">시/군/구</option>
+		<option value="country_c">동</option>
+		<option value="country_detail">상세주소</option>
+		<option value="country_script">상세설명</option>
+	</select>
+  </div>
+      <input type="text" placeholder="검색" name="keyword" value="${paging.cri.keyword}">
       <input type="submit" value="검색">
   </form>
 </p>
@@ -45,6 +55,29 @@
   </c:forEach>
   </tbody>
 </table>
-
+	<div class="pagination">
+		<form action="form1">
+			<ul class="btn-group pagination">
+				<c:if test="${paging.prev}">
+					<li>
+						<a href='<c:url value="/travelinfo/list?option=${paging.cri.option}&keyword=${paging.cri.keyword}&page=${paging.startPage-1}"/>'><i class="fa fa-chevron-left"></i></a>
+					</li>
+				</c:if>
+				<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="pageNum">
+					<li>
+						<a href='<c:url value="/travelinfo/list?option=${paging.cri.option}&keyword=${paging.cri.keyword}&page=${pageNum}"/>'><i class="fa">${pageNum}</i></a>
+					</li>
+				</c:forEach>
+				<c:if test="${paging.next && paging.endPage >0 }">
+					<li>
+						<a href='<c:url value="/travelinfo/list?option=${paging.cri.option}&keyword=${paging.cri.keyword}&page=${paging.endPage+1}"/>'><i class="fa fa-chevron-right"></i></a>
+					</li>
+				</c:if>
+			</ul>
+			<input type="hidden" name="page" value="${paging.cri.page}">
+			<input type="hidden" name="keyword" value="${paging.cri.keyword}">
+			<input type="hidden" name="option" value="${paging.cri.option}">
+		</form>
+	</div>
 </body>
 </html>

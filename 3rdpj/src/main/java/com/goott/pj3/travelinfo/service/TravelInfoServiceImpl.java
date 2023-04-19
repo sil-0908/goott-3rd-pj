@@ -1,5 +1,8 @@
 package com.goott.pj3.travelinfo.service;
 
+import com.goott.pj3.common.util.Criteria;
+import com.goott.pj3.common.util.PagingDTO;
+import com.goott.pj3.travelinfo.dto.TravelInfoDTO;
 import com.goott.pj3.travelinfo.repo.TravelInfoDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -66,11 +69,21 @@ public class TravelInfoServiceImpl implements TravelInfoService {
 	 * @return
 	 */
 	@Override
-	public List<Map<String, Object>> list(Map<String, Object> map) {
-		return this.travelInfoDAO.list(map);
+	public List<TravelInfoDTO> list(Criteria cri) {
+		// TODO Auto-generated method stub
+		return travelInfoDAO.list(cri);
 	}
+
 //	@Override
 //	public List<Map<String, Object>> list(Map<String, Object> map) {
 //		return this.travelInfoDAO.list(map);
 //	}
+
+	@Override
+	public PagingDTO paging(Criteria cri) {
+		PagingDTO paging = new PagingDTO();
+		paging.setCri(cri);
+		paging.setTotalCount(travelInfoDAO.totalCount(cri));
+		return paging;
+	}
 }

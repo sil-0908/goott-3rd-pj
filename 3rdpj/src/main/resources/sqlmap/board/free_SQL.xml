@@ -8,21 +8,31 @@
 	</insert>
 
 	<select id="list" resultType="com.goott.pj3.board.free.dto.FreeBoardDTO">
-    <![CDATA[
 		select free_idx, free_title, free_content, user_id, create_date
 		  from free
 		 where f_del_yn = 'n'
+		   and
+			<if test="option == 'user_id'"> user_id like CONCAT('%',#{keyword},'%')</if>
+	        <if test="option == 'title'"> free_title like CONCAT('%',#{keyword},'%')</if>
+	        <if test="option == 'content'"> free_content like CONCAT('%',#{keyword},'%')</if>
+	        <if test="option == 'title,content'"> free_title like CONCAT('%',#{keyword},'%')
+	            or free_content like CONCAT('%',#{keyword},'%')</if>
+	        <if test="option == null or option == ''">1=1</if>
 		 order by free_idx DESC
 		 limit #{pageStart}, #{perPageNum}
-		 ]]>
 	</select>
 
 	<select id="totalCount" resultType="int">
-    <![CDATA[
 		select count(free_idx)
 		  from free
 		 where f_del_yn = 'n'
-		]]>
+		   and
+			<if test="option == 'user_id'"> user_id like CONCAT('%',#{keyword},'%')</if>
+	        <if test="option == 'title'"> free_title like CONCAT('%',#{keyword},'%')</if>
+	        <if test="option == 'content'"> free_content like CONCAT('%',#{keyword},'%')</if>
+	        <if test="option == 'title,content'"> free_title like CONCAT('%',#{keyword},'%')
+	            or free_content like CONCAT('%',#{keyword},'%')</if>
+	        <if test="option == null or option == ''">1=1</if>
 	</select>
 
 	<select id="detail" resultType="com.goott.pj3.board.free.dto.FreeBoardDTO">
