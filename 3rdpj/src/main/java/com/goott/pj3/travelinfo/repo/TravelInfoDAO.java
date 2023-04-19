@@ -4,6 +4,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.goott.pj3.common.util.Criteria;
+import com.goott.pj3.travelinfo.dto.TravelInfoDTO;
+
 import java.util.List;
 import java.util.Map;
 
@@ -51,7 +54,11 @@ public class TravelInfoDAO {
 	 * @param map
 	 * @return
 	 */
-	public List<Map<String, Object>> list(Map<String, Object> map) {
-		return this.ss.selectList("travelinfo.list", map);
+	public List<TravelInfoDTO> list(Criteria cri) {
+		return ss.selectList("travelinfo.list", cri);
+	}
+	
+	public int totalCount(Criteria cri) {
+		return ss.selectOne("travelinfo.totalCount", cri);
 	}
 }

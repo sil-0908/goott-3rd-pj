@@ -18,13 +18,15 @@ public class QnaServiceImpl implements QnaService {
 
 	@Override
 	public String enroll(QnaDTO qnaDTO) {
+		if(qnaDTO.getUser_id() == null){
+			return "redirect:/user/signin";
+		}
 		qnaDAO.enroll(qnaDTO);
-		String category = qnaDAO.get_category(qnaDTO);
-		if(category.equals("N")){
+		if(qnaDTO.getCategory().equals("N")){
 			return "redirect:/qna/list_N";
-		} else if (category.equals("U")) {
+		} else if (qnaDTO.getCategory().equals("U")) {
 			return "redirect:/qna/list_U";
-		} else if (category.equals("R")) {
+		} else if (qnaDTO.getCategory().equals("R")) {
 			return "redirect:/qna/list_R";
 		} else {
 			return "redirect:/qna/list_E";

@@ -1,5 +1,6 @@
 package com.goott.pj3.travelinfo.controller;
 
+import com.goott.pj3.common.util.Criteria;
 import com.goott.pj3.travelinfo.dto.TravelInfoDTO;
 import com.goott.pj3.travelinfo.service.TravelInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -108,14 +109,9 @@ public class TravelInfoController {
 	}
 
 	@RequestMapping("list")
-	public ModelAndView list(@RequestParam Map<String, Object> map){
-		ModelAndView mv = new ModelAndView();
-		List<Map<String, Object>> travelinfoData = this.travelInfoService.list(map);
-		System.out.println(travelinfoData.toString());
-		mv.addObject("data", travelinfoData);
-		if(map.containsKey("keyword")){
-			mv.addObject("keyword", map.get("keyword"));
-		}
+	public ModelAndView list(ModelAndView mv, Criteria cri){
+		mv.addObject("paging", travelInfoService.paging(cri));
+		mv.addObject("data", travelInfoService.list(cri));
 		mv.setViewName("/travelinfo/travelinfo_list");
 		return mv;
 	}

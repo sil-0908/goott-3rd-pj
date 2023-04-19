@@ -26,16 +26,27 @@
           from plan_review
         where review_idx=#{review_idx}
     </delete>
+    
     <!--조원재 23.04.05 리뷰 목록, 검색-->
-    <select id="list" parameterType="hashMap" resultType="hashMap">
+    <select id="list" resultType="com.goott.pj3.board.review.dto.ReviewDTO">
         select review_idx, user_id, plan_idx, review_content, review_img,
                review_rating, create_date, update_date
           from plan_review
-         where 1=1
-        <if test="keyword != null and keyword != ''">
-            and (review_content like CONCAT('%',#{keyword},'%'))
-        </if>
+         where 
+		   	<if test="option == 'user_id'"> user_id like CONCAT('%',#{keyword},'%')</if>
+	        <if test="option == 'content'"> review_content like CONCAT('%',#{keyword},'%')</if>
+	        <if test="option == null or option == ''">1=1</if>
          order by review_idx desc
+         limit #{pageStart}, #{perPageNum}
+    </select>
+
+    <select id="totalCount" resultType="int">
+        select count(review_idx)
+          from plan_review
+         where 
+		   	<if test="option == 'user_id'"> user_id like CONCAT('%',#{keyword},'%')</if>
+	        <if test="option == 'content'"> review_content like CONCAT('%',#{keyword},'%')</if>
+	        <if test="option == null or option == ''">1=1</if>
     </select>
 
 </mapper>

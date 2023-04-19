@@ -17,7 +17,7 @@
 <h1> 리뷰 화면</h1>
 
 <p>번호 : ${data.review_idx}</p>
-<p>리뷰 사진 : <img src="${data.reiew_img} height="200px" width="200px" style="border: 1px solid red;"></p>
+<p>리뷰 사진 : <img src="${data.review_img}" height="200px" width="200px" style="border: 1px solid red;"></p>
 <p>내용 : ${data.review_content}</p>
 <p>작성자 : ${data.user_id}</p>
 <p>작성일 : ${data.create_date}"</p>
@@ -27,6 +27,7 @@
 </p>
 
 <form method="POST" action="/review/delete">
+    <input type="hidden" name="r_del_yn" value="n">
     <input type="hidden" name="review_idx" value="${review_idx}">
     <input type="submit" value="삭제">
 </form>
