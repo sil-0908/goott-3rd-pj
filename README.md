@@ -1,5 +1,5 @@
 <details>
-<summary><h3>Ver 1.0 ( 2023.04.03 ) </h3></summary>
+<summary><h3>( 2023.04.03 ) </h3></summary>
 
     1. 패키지 네이밍
     2. xml 기본설정 ( + security, websocket, json, import.io )
@@ -7,7 +7,7 @@
 
 
 <details>
-<summary><h3>Ver 1.1 ( 2023.04.18 ) </h3></summary>    
+<summary><h3>( 2023.04.18 ) </h3></summary>    
     
     View - 레이아웃, 로고, View 공통 서식 프로토타입
     Login - 프로토타입
@@ -20,7 +20,7 @@
 
 
 <details>
-<summary><h3>Ver 1.2 ( 2023.04.19 ) </h3></summary>    
+<summary><h3>( 2023.04.19 ) </h3></summary>    
     
     게시판 페이징, 검색 완료(관리자페이지 제외)
     리뷰 : 수정, 삭제 권한 부여
