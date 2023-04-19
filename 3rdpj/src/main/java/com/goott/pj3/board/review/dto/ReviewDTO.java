@@ -5,14 +5,17 @@ import java.util.Date;
 
 public class ReviewDTO {
     int review_idx, plan_idx, review_rating;
-    String user_id, review_content;
+    String user_id, review_content, r_del_yn;
     String[] reivew_img;
     Date create_date, update_date;
 
-    /**
-     * 조원재 23.04.05. 리뷰 DTO
-     * @return
-     */
+    public String getR_del_yn() {
+        return r_del_yn;
+    }
+
+    public void setR_del_yn(String r_del_yn) {
+        this.r_del_yn = r_del_yn;
+    }
 
     public int getReview_idx() {
         return review_idx;
@@ -80,14 +83,16 @@ public class ReviewDTO {
 
     @Override
     public String toString() {
-        return "ReviewDTO [review_idx=" + review_idx +
-                ",user_id=" + user_id +
-                ",plan_idx=" + plan_idx +
-                ",review_content=" + review_content +
-                ",review_rating=" + review_rating +
+        return "ReviewDTO{" +
+                "review_idx=" + review_idx +
+                ", plan_idx=" + plan_idx +
+                ", review_rating=" + review_rating +
+                ", user_id='" + user_id + '\'' +
+                ", review_content='" + review_content + '\'' +
+                ", r_del_yn='" + r_del_yn + '\'' +
                 ", reivew_img=" + Arrays.toString(reivew_img) +
-                ",create_date=" + create_date +
-                ",update_date=" + update_date +
-                "]";
+                ", create_date=" + create_date +
+                ", update_date=" + update_date +
+                '}';
     }
 }

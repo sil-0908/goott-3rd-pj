@@ -27,6 +27,7 @@
 </p>
 
 <form method="POST" action="/review/delete">
+    <input type="hidden" name="r_del_yn" value="n">
     <input type="hidden" name="review_idx" value="${review_idx}">
     <input type="submit" value="삭제">
 </form>

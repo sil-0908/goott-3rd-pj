@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
@@ -124,7 +123,7 @@ public class ReviewController {
 		 * @param map
 		 * @return
 		 */
-		@RequestMapping("delete")
+		@RequestMapping(value="delete", method = RequestMethod.POST)
 		public ModelAndView delete(@RequestParam Map<String, Object> map){
 			ModelAndView mv = new ModelAndView();
 			boolean delete = this.reviewService.delete(map);
