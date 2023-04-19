@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/FortAwesome/Font-Awesome@5.14.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../css/style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div data-include-path="layout.html"></div>
+    <script src="../js/layout.js"></script>
+    <main class="admin">
+      <section class="admin__notice">
+        <hgroup class="admin__notice-create--title">
+          <h1>공지사항 관리</h1>
+          <div class="admin__notice-create--btn">
+            <a href="/admin/noticewrite">공지사항 작성</a>
+          </div>
+        </hgroup>
+        <hgroup class="admin__notice-list--title">
+          <h1>공지사항</h1>
+        </hgroup>
+        <article class="admin__notice-list--table">
+          <ul class="admin__notice-list--thead">
+            <li>작성자</li>
+            <li>제목</li>
+            <li>내용</li>
+            <li>삭제여부</li>
+            <li>최초 등록일</li>
+            <li>업데이트 날짜</li>
+          </ul>
+          <ul class="admin__notice-list--tbody">
+            <li>${row.user.id}</li>
+            <li>
+              <a href="/admin/noticedetail?idx=${row.qna_idx}"
+                >${row.qna_title}</a
+              >
+            </li>
+            <li>${row.qna_content}</li>
+            <li>${row.q_del_yn}</li>
+            <li>
+              asdf
+              <fmt:formatDate
+                pattern="yyyy-MM-dd HH:mm:ss"
+                value="${row.create_date}"
+              />
+            </li>
+            <li>
+              asdf
+              <fmt:formatDate
+                pattern="yyyy-MM-dd HH:mm:ss"
+                value="${row.update_date}"
+              />
+            </li>
+          </ul>
+        </article>
+      </section>
+    </main>
+    <script
+      src="https://kit.fontawesome.com/7723a79ab5.js"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
