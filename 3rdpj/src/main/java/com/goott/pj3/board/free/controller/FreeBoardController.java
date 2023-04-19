@@ -37,7 +37,12 @@ public class FreeBoardController {
 
 	@RequestMapping("list")
 	public ModelAndView free(ModelAndView mv, Criteria cri) {
-		mv.addObject("paging", freeBoardService.paging(cri));
+		PagingDTO paging = new PagingDTO();
+		paging.setCri(cri); // page / perpagenum 설정
+		paging.setTotalCount(freeBoardService.totalCount(cri)); // 총게시글 갯수 불러오는 것
+		System.out.println("1:"+paging);
+		System.out.println("2:"+freeBoardService.list(cri));
+		mv.addObject("paging", paging);
 		mv.addObject("list", freeBoardService.list(cri));
 		mv.setViewName("board/free/free_list");
 		return mv;
