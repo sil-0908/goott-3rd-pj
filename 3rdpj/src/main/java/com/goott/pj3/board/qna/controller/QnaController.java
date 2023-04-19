@@ -24,6 +24,7 @@ public class QnaController {
 	@Autowired
 	QnaService qnaService;
 
+	// 처음 qna시작화면
 	@RequestMapping("main")
 	public ModelAndView main(ModelAndView mv){
 		mv.addObject("data_n", qnaService.list_n());
@@ -43,13 +44,13 @@ public class QnaController {
 	public String enroll(QnaDTO qnaDTO, HttpSession session) {
 		String user_id = (String) session.getAttribute("user_id");
 		qnaDTO.setUser_id(user_id);
+		System.out.println(qnaDTO);
 		return qnaService.enroll(qnaDTO);
 	}
 
 	@RequestMapping(value = {"list_N","list_U","list_R","list_E"}, produces="application/text; charset=UTF-8;")
 	public ModelAndView list(ModelAndView mv, Criteria cri, HttpServletRequest request) {
 		String requestUrl = request.getRequestURL().toString();
-		System.out.println(cri.getKeyword());
 		mv.addObject("paging", qnaService.paging(requestUrl, cri));
 		mv.addObject("list", qnaService.list(cri));
 		mv.setViewName("board/qna/qna_list");
@@ -63,7 +64,7 @@ public class QnaController {
 		return mv;
 	}
 
-	@RequestMapping(value = "modify", method = RequestMethod.POST, consumes = "application/json",produces="text/plain; charset=UTF-8;")
+	@RequestMapping(value = "modify", method = RequestMethod.POST, produces="text/plain; charset=UTF-8;")
 	@ResponseBody
 	public String modify(QnaDTO qnaDTO) {
 		String category = qnaService.modify(qnaDTO);

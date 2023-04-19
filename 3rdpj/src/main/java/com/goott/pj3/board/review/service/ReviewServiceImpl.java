@@ -4,7 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
 
+import com.goott.pj3.board.review.dto.ReviewDTO;
 import com.goott.pj3.board.review.repo.ReviewDAO;
+import com.goott.pj3.common.util.Criteria;
+import com.goott.pj3.common.util.PagingDTO;
 
 import java.util.List;
 import java.util.Map;
@@ -62,8 +65,17 @@ public class ReviewServiceImpl implements ReviewService {
 	 * @param map
 	 * @return
 	 */
+
 	@Override
-	public List<Map<String, Object>> list(Map<String, Object> map) {
-		return this.reviewDAO.list(map);
+	public List<ReviewDTO> list(Criteria cri) {
+		return reviewDAO.list(cri);
+	}
+	
+	@Override
+	public PagingDTO paging(Criteria cri) {
+		PagingDTO paging = new PagingDTO();
+		paging.setCri(cri);
+		paging.setTotalCount(reviewDAO.totalCount(cri));
+		return paging;
 	}
 }

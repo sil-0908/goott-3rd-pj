@@ -1,5 +1,6 @@
 package com.goott.pj3.board.review.controller;
 
+import com.goott.pj3.common.util.Criteria;
 import com.goott.pj3.common.util.FileUploadUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -121,15 +122,11 @@ public class ReviewController {
 	 * @param map
 	 * @return
 	 */
+	
 	@RequestMapping("list")
-	public ModelAndView list(@RequestParam Map<String, Object> map){
-		System.out.println("listMap : " + map);
-		ModelAndView mv = new ModelAndView();
-		List<Map<String, Object>> reviewList = this.reviewService.list(map);
-		mv.addObject("data", reviewList);
-		if(map.containsKey("keyword")){
-			mv.addObject("keyword", map.get("keyword"));
-		}
+	public ModelAndView list(ModelAndView mv, Criteria cri){
+		mv.addObject("paging", reviewService.paging(cri));
+		mv.addObject("data", reviewService.list(cri));
 		mv.setViewName("/board/review/review_list");
 		return mv;
 	}

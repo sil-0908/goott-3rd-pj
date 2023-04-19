@@ -29,20 +29,33 @@
           from travel_location
         where travel_location_idx=#{travel_location_idx}
     </delete>
+    
     <!--조원재 23.04.08. 여행지 정보 리스트 & 검색-->
-    <select id="list" parameterType="hashMap" resultType="hashMap">
+    <select id="list" resultType="com.goott.pj3.travelinfo.dto.TravelInfoDTO">
         select travel_location_idx, user_id, country_a, country_b, country_c,
-               country_detail, country_script, country_img, create_date, update_date
+               country_detail, country_script, create_date, update_date
           from travel_location
-         where 1=1
-        <if test="keyword != null and keyword != ''">
-           and (country_a like CONCAT('%',#{keyword},'%')) or
-               (country_b like CONCAT('%',#{keyword},'%')) or
-               (country_c like CONCAT('%',#{keyword},'%')) or
-               (country_detail like CONCAT('%',#{keyword},'%')) or
-               (country_script like CONCAT('%',#{keyword},'%'))
-        </if>
+         where
+         	<if test="option == 'country_a'"> country_a like CONCAT('%',#{keyword},'%')</if>
+	        <if test="option == 'country_b'"> country_b like CONCAT('%',#{keyword},'%')</if>
+			<if test="option == 'country_c'"> country_c like CONCAT('%',#{keyword},'%')</if>
+	        <if test="option == 'country_detail'"> country_detail like CONCAT('%',#{keyword},'%')</if>
+	        <if test="option == 'country_script'"> country_script like CONCAT('%',#{keyword},'%')</if>
+	        <if test="option == null or option == ''">1=1</if>
          order by travel_location_idx desc
+         limit #{pageStart}, #{perPageNum}
+    </select>
+    
+    <select id="totalCount" resultType="int">
+        select count(travel_location_idx)
+          from travel_location
+         where 
+         	<if test="option == 'country_a'"> country_a like CONCAT('%',#{keyword},'%')</if>
+	        <if test="option == 'country_b'"> country_b like CONCAT('%',#{keyword},'%')</if>
+			<if test="option == 'country_c'"> country_c like CONCAT('%',#{keyword},'%')</if>
+	        <if test="option == 'country_detail'"> country_detail like CONCAT('%',#{keyword},'%')</if>
+	        <if test="option == 'country_script'"> country_script like CONCAT('%',#{keyword},'%')</if>
+	        <if test="option == null or option == ''">1=1</if>
     </select>
 
 </mapper>
