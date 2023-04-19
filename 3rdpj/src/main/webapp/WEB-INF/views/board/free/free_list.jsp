@@ -11,6 +11,23 @@
 </head>
 <body>
 	<a href="/free/create">게시판 등록</a>
+	<form name="search">
+	<div>
+		<select id="selectBox" name="option">
+			<option value="">=======</option>
+			<option value="user_id">ID</option>
+			<option value="title">제목</option>
+			<option value="content">내용</option>
+			<option value="title,content">제목+내용</option>
+		</select>
+	</div>
+	<div class="search_wrap">
+		<div class="search_area">
+			<input type="text" name="keyword" value="${paging.cri.keyword }">
+			<button id="search">Search</button>
+		</div>
+	</div>
+    </form>
 	<table>
 		<tr>
 			<th>번호</th>
@@ -27,24 +44,31 @@
 			</tr>
 		</c:forEach>
 	</table>
-	<ul class="btn-group pagination">
-		<c:if test="${paging.prev}">
-			<li>
-				<a href='<c:url value="/free/list?page=${paging.startPage-1}"/>'><i class="fa fa-chevron-left"></i></a>
-			</li>
-		</c:if>
-		<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="pageNum">
-			<li>
-				<a href='<c:url value="/free/list?page=${pageNum}"/>'><i class="fa">${pageNum}</i></a>
-			</li>
-		</c:forEach>
-		<c:if test="${paging.next && paging.endPage >0 }">
-			<li>
-				<a href='<c:url value="/free/list?page=${paging.endPage+1}"/>'><i class="fa fa-chevron-right"></i></a>
-			</li>
-		</c:if>
-	</ul>
-
+	<div class="pagination">
+		<form action="form1">
+			<ul class="btn-group pagination">
+				<c:if test="${paging.prev}">
+					<li>
+						<a href='<c:url value="/free/list?option=${paging.cri.option}&keyword=${paging.cri.keyword}&page=${paging.startPage-1}"/>'><i class="fa fa-chevron-left"></i></a>
+					</li>
+				</c:if>
+				<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="pageNum">
+					<li>
+						<a href='<c:url value="/free/list?option=${paging.cri.option}&keyword=${paging.cri.keyword}&page=${pageNum}"/>'><i class="fa">${pageNum}</i></a>
+					</li>
+				</c:forEach>
+				<c:if test="${paging.next && paging.endPage >0 }">
+					<li>
+						<a href='<c:url value="/free/list?option=${paging.cri.option}&keyword=${paging.cri.keyword}&page=${paging.endPage+1}"/>'><i class="fa fa-chevron-right"></i></a>
+					</li>
+				</c:if>
+			</ul>
+			<input type="hidden" name="category" value="${paging.cri.category}">
+			<input type="hidden" name="page" value="${paging.cri.page}">
+			<input type="hidden" name="keyword" value="${paging.cri.keyword}">
+			<input type="hidden" name="option" value="${paging.cri.option}">
+		</form>
+	</div>
 	<script>
 		$(function() {
 			$('.test2').click(function(e) {

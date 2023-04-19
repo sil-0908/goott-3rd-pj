@@ -1,5 +1,7 @@
 package com.goott.pj3.travelinfo.service;
 
+import com.goott.pj3.common.util.Criteria;
+import com.goott.pj3.common.util.PagingDTO;
 import com.goott.pj3.travelinfo.dto.TravelInfoDTO;
 
 import java.util.List;
@@ -40,6 +42,8 @@ public interface TravelInfoService {
      * @param map
      * @return
      */
-    List<Map<String, Object>> list(Map<String, Object> map);
+    List<TravelInfoDTO> list(Criteria cri);
+
+	PagingDTO paging(Criteria cri);
     
 }

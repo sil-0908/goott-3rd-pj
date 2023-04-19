@@ -1,6 +1,7 @@
 package com.goott.pj3.plan.controller;
 
 import com.goott.pj3.common.util.Auth;
+import com.goott.pj3.common.util.Criteria;
 import com.goott.pj3.common.util.S3FileUploadService;
 import com.goott.pj3.plan.dto.PlanDTO;
 import com.goott.pj3.user.service.UserService;
@@ -57,8 +58,9 @@ public class PlanController {
     }
 
     @GetMapping("list")
-    public ModelAndView mv(ModelAndView modelAndView) {
-        modelAndView.addObject("data", planService.list());
+    public ModelAndView mv(ModelAndView modelAndView, Criteria cri) {
+    	modelAndView.addObject("paging", planService.paging(cri));
+        modelAndView.addObject("data", planService.list(cri));
         modelAndView.setViewName("plan/plan_list");
         return modelAndView;
     }

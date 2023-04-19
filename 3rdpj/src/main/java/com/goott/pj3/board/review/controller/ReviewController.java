@@ -1,5 +1,6 @@
 package com.goott.pj3.board.review.controller;
 
+import com.goott.pj3.common.util.Criteria;
 import com.goott.pj3.common.util.FileUploadUtil;
 import com.goott.pj3.common.util.S3FileUploadService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,6 +87,22 @@ public class ReviewController {
 			mv.setViewName("/board/review/review_detail");
 			return mv;
 		}
+		return mv;
+	}
+  
+	/**
+	 * 조원재 23.04.05 리뷰 리스트 조회 및 검색
+	 * @param map
+	 * @return
+	 */	
+	@RequestMapping("list")
+	public ModelAndView list(ModelAndView mv, Criteria cri){
+		mv.addObject("paging", reviewService.paging(cri));
+		mv.addObject("data", reviewService.list(cri));
+		mv.setViewName("/board/review/review_list");
+		return mv;
+	}
+  
 		/**
 		 * 조원재 23.04.05 리뷰 수정 화면 호출
 		 * @param map
@@ -99,6 +116,7 @@ public class ReviewController {
 			mv.setViewName("board/review/review_update");
 			return mv;
 		}
+    
 		/**
 		 * 조원재 23.04.05 리뷰 수정 기능
 		 * @param map
@@ -116,6 +134,7 @@ public class ReviewController {
 			}
 			return mv;
 		}
+    
 		/**
 		 * 조원재 23.04.05 리뷰 삭제
 		 * @param map
@@ -133,6 +152,7 @@ public class ReviewController {
 			}
 			return mv;
 		}
+    
 		/**
 		 * 조원재 23.04.05 리뷰 리스트 조회 및 검색
 		 * @param map

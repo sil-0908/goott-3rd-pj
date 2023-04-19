@@ -3,6 +3,8 @@ package com.goott.pj3.board.free.service;
 import java.util.List;
 
 import com.goott.pj3.common.util.Criteria;
+import com.goott.pj3.common.util.PagingDTO;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +28,14 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 	}
 
 	@Override
+	public PagingDTO paging(Criteria cri) {
+		PagingDTO paging = new PagingDTO();
+		paging.setCri(cri);
+		paging.setTotalCount(freeBoardDAO.totalCount(cri));
+		return paging;
+	}
+	
+	@Override
 	public int totalCount(Criteria cri) {
 		return freeBoardDAO.totalCount(cri);
 	}
@@ -44,5 +54,7 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 	public void modify(FreeBoardDTO boardDTO) {
 		freeBoardDAO.modify(boardDTO);
 	}
+
+
 	
 }
