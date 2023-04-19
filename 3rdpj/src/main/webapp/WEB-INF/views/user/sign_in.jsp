@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,6 +9,7 @@
 <title>로그인</title>
 </head>
 <body>
+
 	<form name="signin" method="post">
 		<table>
 			<tr>
@@ -25,8 +27,14 @@
 				<td><input type="button" id="main" value="홈으로"></td>
 			</tr>
 		</table>
-	</form>	
+	</form>
+	<p id="signin_msg"></p>
 	
+<script>
+	var msg = "<c:out value='${msg}' />";
+	var testmsg = "<c:out value='${testmsg}' />";
+</script>
+
 <script src="/resources/js/user/sign_in.js"></script>
 </body>
 </html>
