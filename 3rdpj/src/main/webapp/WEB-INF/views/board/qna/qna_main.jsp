@@ -27,10 +27,10 @@
             <c:forEach items="${data_n}" var="list" varStatus="status">
             	<c:if test="${status.count <= 5}">
             		<li><input type="hidden" name="qna_idx" value="${list.qna_idx}"></li>
-            		<li><a href="./qna_notice.html">${list.qna_title}</a></li>
+            		<li><a class="title">${list.qna_title}</a></li>
             	</c:if>
             </c:forEach>
-        		<li><a href="/qna/list_n">더보기</a></li>
+        		<li><a href="/qna/list_N">더보기</a></li>
           </ul>
         </article>
         <article class="qna__card">
@@ -41,10 +41,10 @@
             <c:forEach items="${data_u}" var="list" varStatus="status">
             	<c:if test="${status.count <= 5}">
             		<li><input type="hidden" name="qna_idx" value="${list.qna_idx}"></li>
-            		<li><a href="./qna_notice.html">${list.qna_title}</a></li>
+            		<li><a class="title">${list.qna_title}</a></li>
             	</c:if>
             </c:forEach>
-        		<li><a href="/qna/list_u">더보기</a></li>
+        		<li><a href="/qna/list_U">더보기</a></li>
           </ul>
         </article>
         <article class="qna__card">
@@ -55,10 +55,10 @@
             <c:forEach items="${data_r}" var="list" varStatus="status">
             	<c:if test="${status.count <= 5}">
             		<li><input type="hidden" name="qna_idx" value="${list.qna_idx}"></li>
-            		<li><a href="./qna_notice.html">${list.qna_title}</a></li>
+            		<li><a class="title">${list.qna_title}</a></li>
             	</c:if>
             </c:forEach>
-        		<li><a href="/qna/list_r">더보기</a></li>
+        		<li><a href="/qna/list_R">더보기</a></li>
           </ul>
         </article>
         <article class="qna__card">
@@ -69,10 +69,10 @@
             <c:forEach items="${data_e}" var="list" varStatus="status">
             	<c:if test="${status.count <= 5}">
             		<li><input type="hidden" name="qna_idx" value="${list.qna_idx}"></li>
-            		<li><a href="./qna_notice.html">${list.qna_title}</a></li>
+            		<li><a class="title">${list.qna_title}</a></li>
             	</c:if>
             </c:forEach>
-        		<li><a href="/qna/list_e">더보기</a></li>
+        		<li><a href="/qna/list_E">더보기</a></li>
           </ul>
         </article>
       </section>
@@ -83,8 +83,8 @@
     <script>
         $(function() {
             $('.title').click(function(e) {
-                const idx = e.target.parentElement.children[0].children[0].value
-                location.href='/qna/detail/'+idx
+                const idx = e.target.parentElement.previousElementSibling.children[0]
+                location.href='/qna/detail/'+idx.value
             })
         })
     </script>

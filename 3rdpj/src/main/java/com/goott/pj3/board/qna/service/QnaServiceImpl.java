@@ -1,6 +1,7 @@
 package com.goott.pj3.board.qna.service;
 
 import com.goott.pj3.common.util.Criteria;
+import com.goott.pj3.common.util.PagingDTO;
 import com.goott.pj3.board.qna.dto.QnaDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,8 +17,18 @@ public class QnaServiceImpl implements QnaService {
 	QnaDAO qnaDAO;
 
 	@Override
-	public void enroll(QnaDTO qnaDTO) {
+	public String enroll(QnaDTO qnaDTO) {
 		qnaDAO.enroll(qnaDTO);
+		String category = qnaDAO.get_category(qnaDTO);
+		if(category.equals("N")){
+			return "redirect:/qna/list_N";
+		} else if (category.equals("U")) {
+			return "redirect:/qna/list_U";
+		} else if (category.equals("R")) {
+			return "redirect:/qna/list_R";
+		} else {
+			return "redirect:/qna/list_E";
+		}
 	}
 
 	@Override
@@ -26,8 +37,26 @@ public class QnaServiceImpl implements QnaService {
 	}
 
 	@Override
-	public int totalCount(Criteria cri) {
-		return qnaDAO.totalCount(cri);
+	public PagingDTO paging(String requestUrl, Criteria cri) {
+		PagingDTO paging = new PagingDTO();
+		if(requestUrl.contains("list_N")){
+			cri.setCategory("N");
+			paging.setCri(cri);
+
+		} else if(requestUrl.contains("list_U")){
+			cri.setCategory("U");
+			paging.setCri(cri);
+
+		} else if(requestUrl.contains("list_R")){
+			cri.setCategory("R");
+			paging.setCri(cri);
+
+		} else {
+			cri.setCategory("E");
+			paging.setCri(cri);
+		}
+		paging.setTotalCount(qnaDAO.totalCount(cri));
+		return paging;
 	}
 
 	@Override
@@ -36,13 +65,15 @@ public class QnaServiceImpl implements QnaService {
 	}
 
 	@Override
-	public void modify(QnaDTO qnaDTO) {
+	public String modify(QnaDTO qnaDTO) {
 		qnaDAO.modify(qnaDTO);
+		return qnaDAO.get_category(qnaDTO);
 	}
 
 	@Override
-	public void delete(QnaDTO qnaDTO) {
+	public String delete(QnaDTO qnaDTO) {
 		qnaDAO.delete(qnaDTO);
+		return qnaDAO.get_category(qnaDTO);
 	}
 
 	@Override
@@ -65,10 +96,6 @@ public class QnaServiceImpl implements QnaService {
 		return qnaDAO.list_e();
 	}
 
-	@Override
-	public String get_category(QnaDTO qnaDTO) {
-		return qnaDAO.get_category(qnaDTO);
-	}
 
 
 }

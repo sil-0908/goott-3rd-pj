@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"/>
 	<link rel="stylesheet" href="/resources/css/common/style.css"/>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"/>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
@@ -29,6 +30,7 @@
        			<input class="qna__typing" name="keyword" type="search" value="${paging.cri.keyword}" />
        			<button id="search" class="qna__btn qna__submit" type="submit">검색</button>
 		    </article>
+
         </form>
       <section class="qna__notice">
         <ul class="qna__list">
@@ -36,7 +38,11 @@
 	          <c:if test="${status.count <= 6}">
            		<li><input type="hidden" name="qna_idx" value="${list.qna_idx}"></li>
 	          	<li class="qna__list--question">
-					<c:out value="${list.qna_title}"/>
+					<a class="title"><c:out value="${list.qna_title}"/></a>
+					<c:if test="${list.qna_pw != '' && list.qna_pw != null}">
+						<span><i class="fa-solid fa-lock"></i></span>
+						<input class="passwordInput" type="hidden" value="${list.qna_pw}">
+					</c:if>
 	          	</li>
         		</c:if>
 			</c:forEach>

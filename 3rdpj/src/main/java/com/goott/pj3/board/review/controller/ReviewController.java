@@ -1,5 +1,6 @@
 package com.goott.pj3.board.review.controller;
 
+import com.goott.pj3.common.util.FileUploadUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -10,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -37,8 +40,9 @@ public class ReviewController {
 	 * @param httpSession
 	 * @return
 	 */
+
 	@RequestMapping(value = "create", method = RequestMethod.POST)
-	public ModelAndView createPost(@RequestParam Map<String, Object> map, HttpSession httpSession){
+	public ModelAndView createPost(@RequestParam Map<String, Object> map, HttpSession httpSession) {
 		String user_id = httpSession.getAttribute("user_id").toString();
 		ModelAndView mv = new ModelAndView();
 		map.put("user_id", user_id);
