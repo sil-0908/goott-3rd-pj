@@ -1,0 +1,76 @@
+.admin {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.admin__notice {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.admin__notice-create--title {
+  display: flex;
+  justify-content: space-between;
+  margin: 5rem 0;
+  width: 90%;
+}
+:is(.admin__notice-create--title, .admin__notice-list--title) > h1 {
+  font-size: 2rem;
+  font-weight: 900;
+}
+.admin__notice-create--btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 20px;
+  width: 7rem;
+  height: auto;
+  background: #47afd0;
+  border-radius: 10px;
+  transition: background-color 0.2s;
+  color: white;
+  font-weight: 900;
+}
+.admin__notice-create--btn:hover {
+  background: var(--yellow);
+}
+.admin__notice-create--btn > a {
+  color: white;
+}
+.admin__notice-list {
+  width: 90%;
+  justify-content: center;
+}
+.admin__notice-list--title {
+  width: 100%;
+  margin-bottom: 2rem;
+}
+.admin__notice-list--table {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.admin__notice-list--thead > span {
+  font-weight: 900;
+}
+.admin__notice-list--thead,
+.admin__notice-list--tbody {
+  display: flex;
+  justify-content: space-around;
+  border-bottom: 1px solid black;
+}
+:is(.admin__notice-list--thead, .admin__notice-list--tbody) span {
+  height: 2rem;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+:is(.admin__notice-list--thead, .admin__notice-list--tbody)
+  > span:nth-child(2n) {
+  background-color: var(--blue);
+}
+:is(.admin__notice-list--thead, .admin__notice-list--tbody) > span {
+  width: 16.66%;
+}
