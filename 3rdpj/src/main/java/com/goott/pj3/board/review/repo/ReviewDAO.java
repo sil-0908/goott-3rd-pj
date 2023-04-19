@@ -44,7 +44,7 @@ public class ReviewDAO {
 	 * @return
 	 */
 	public int delete(Map<String, Object> map) {
-		return this.ss.delete("review.delete", map);
+		return this.ss.update("review.delete", map);
 	}
 	/**
 	 * 조원재 23.04.05. 리뷰 목록 호출
