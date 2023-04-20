@@ -9,7 +9,24 @@
         select plan_idx, plan_title, price, user_id
         from plan
         where p_del_yn = 'N'
+        and
+        <if test="option == 'user_id'"> user_id like CONCAT('%',#{keyword},'%')</if>
+        <if test="option == 'title'"> plan_title like CONCAT('%',#{keyword},'%')</if>
+        <if test="option == null or option == ''">1=1</if>
+        order by plan_idx desc
+        limit #{pageStart}, #{perPageNum}
     </select>
+    
+    <select id="totalCount" resultType="int">
+        select count(plan_idx)
+          from plan
+         where p_del_yn = 'N'
+           and
+	        <if test="option == 'user_id'"> user_id like CONCAT('%',#{keyword},'%')</if>
+	        <if test="option == 'title'"> plan_title like CONCAT('%',#{keyword},'%')</if>
+	        <if test="option == null or option == ''">1=1</if>
+    </select>
+    
     <select id="detail" resultType="com.goott.pj3.plan.dto.PlanDTO">
         select plan_title, plan_detail, user_id, start_date, end_date, price, plan_idx
         from plan

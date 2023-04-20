@@ -1,6 +1,7 @@
 package com.goott.pj3.plan.controller;
 
 import com.goott.pj3.common.util.Auth;
+import com.goott.pj3.common.util.Criteria;
 import com.goott.pj3.common.util.S3FileUploadService;
 import com.goott.pj3.plan.dto.PlanDTO;
 import com.goott.pj3.user.service.UserService;
@@ -13,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 
 @Controller
 @RequestMapping("plan/*")
@@ -21,6 +23,7 @@ public class PlanController {
     final PlanService planService;
     final UserService userService;
     final S3FileUploadService s3FileUploadService;
+
 
     public PlanController(PlanService planService, UserService userService, S3FileUploadService s3FileUploadService) {
         this.planService = planService;
@@ -35,26 +38,29 @@ public class PlanController {
     }
 
     @PostMapping("create")
-    public String planPut(PlanDTO planDTO, HttpSession httpSession, @RequestParam("file") MultipartFile multipartFile) {
+    public String planPut(PlanDTO planDTO, HttpSession httpSession, @RequestParam("files[]") List<MultipartFile> multipartFile) {
         String user = (String) httpSession.getAttribute("user_id");
 
         planDTO.setUser_id(user);
         try {
-            if (multipartFile != null) {
-                planDTO.setPlan_detail_img(s3FileUploadService.upload(multipartFile));
-            } else {
-                System.out.println("파일 어디갔냐아아아");
-            }
+            s3FileUploadService.upload(multipartFile);
+//            multiple.upload(multipartFile);
+//            if (multipartFile != null) {
+//                planDTO.setPlan_detail_img(multiple.upload(multipartFile));
+//            } else {
+//                System.out.println("파일 어디갔냐아아아");
+//            }
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
         planService.planCreate(planDTO);
         return "redirect:/plan/list";
     }
 
     @GetMapping("list")
-    public ModelAndView mv(ModelAndView modelAndView) {
-        modelAndView.addObject("data", planService.list());
+    public ModelAndView mv(ModelAndView modelAndView, Criteria cri) {
+    	modelAndView.addObject("paging", planService.paging(cri));
+        modelAndView.addObject("data", planService.list(cri));
         modelAndView.setViewName("plan/plan_list");
         return modelAndView;
     }

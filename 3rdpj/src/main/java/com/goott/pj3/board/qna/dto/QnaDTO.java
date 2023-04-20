@@ -7,7 +7,7 @@ public class QnaDTO {
     private int qna_idx;
 
     private String user_id, category, auth, qna_title, qna_content,
-                qna_answer, answer, q_del_yn, qna_pw;
+                qna_answer, answer, q_del_yn, qna_pw, email;
 
     private Date create_date, update_date;
 
@@ -110,11 +110,18 @@ public class QnaDTO {
         this.update_date = update_date;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     @Override
     public String toString() {
         return "QnaDTO{" +
                 "qna_idx=" + qna_idx +
-                ", qna_pw=" + qna_pw +
                 ", user_id='" + user_id + '\'' +
                 ", category='" + category + '\'' +
                 ", auth='" + auth + '\'' +
@@ -123,6 +130,8 @@ public class QnaDTO {
                 ", qna_answer='" + qna_answer + '\'' +
                 ", answer='" + answer + '\'' +
                 ", q_del_yn='" + q_del_yn + '\'' +
+                ", qna_pw='" + qna_pw + '\'' +
+                ", email='" + email + '\'' +
                 ", create_date=" + create_date +
                 ", update_date=" + update_date +
                 '}';

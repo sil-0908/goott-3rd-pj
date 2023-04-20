@@ -19,7 +19,7 @@
         <h1>공지사항</h1>
       </hgroup>
         <form name="search_notice">
-  			<select class="search__selectBox" id="selectBox" name="category">
+  			<select class="search__selectBox" id="selectBox" name="option">
   				<option selected="" value="">검색조건을 입력하세요.</option>
 	            <option selected="" value="user_id">ID</option>
 	            <option selected="selected" value="title">제목</option>
@@ -39,31 +39,41 @@
            		<li><input type="hidden" name="qna_idx" value="${list.qna_idx}"></li>
 	          	<li class="qna__list--question">
 					<a class="title"><c:out value="${list.qna_title}"/></a>
-					<c:if test="${list.qna_pw != '' && list.qna_pw != null}">
-						<span><i class="fa-solid fa-lock"></i></span>
-						<input class="passwordInput" type="hidden" value="${list.qna_pw}">
-					</c:if>
+					<div>
+						<c:if test="${list.qna_pw != '' && list.qna_pw != null}">
+							<span><i class="fa-solid fa-lock"></i></span>
+							<input class="passwordInput" type="hidden" value="${list.qna_pw}">
+						</c:if>
+					</div>
 	          	</li>
         		</c:if>
 			</c:forEach>
         </ul>
-		<ul class="btn-group pagination">
-			<c:if test="${paging.prev}">
-				<li>
-					<a href='<c:url value="/qna/list?page=${paging.startPage-1}"/>'><i class="fa fa-chevron-left"></i></a>
-				</li>
-			</c:if>
-			<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="pageNum">
-				<li>
-					<a href='<c:url value="/qna/list?page=${pageNum}"/>'><i class="fa">${pageNum}</i></a>
-				</li>
-			</c:forEach>
-			<c:if test="${paging.next && paging.endPage >0 }">
-				<li>
-					<a href='<c:url value="/qna/list?page=${paging.endPage+1}"/>'><i class="fa fa-chevron-right"></i></a>
-				</li>
-			</c:if>
-		</ul>
+        <div class="pagination">
+			<form action="form1">
+				<ul class="btn-group pagination">
+					<c:if test="${paging.prev}">
+						<li>
+							<a href='<c:url value="/qna/list_${paging.cri.category}?option=${paging.cri.option}&keyword=${paging.cri.keyword}&page=${paging.startPage-1}"/>'><i class="fa fa-chevron-left"></i></a>
+						</li>
+					</c:if>
+					<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="pageNum">
+						<li>
+							<a href='<c:url value="/qna/list_${paging.cri.category}?option=${paging.cri.option}&keyword=${paging.cri.keyword}&page=${pageNum}"/>'><i class="fa">${pageNum}</i></a>
+						</li>
+					</c:forEach>
+					<c:if test="${paging.next && paging.endPage >0 }">
+						<li>
+							<a href='<c:url value="/qna/list_${paging.cri.category}?option=${paging.cri.option}&keyword=${paging.cri.keyword}&page=${paging.endPage+1}"/>'><i class="fa fa-chevron-right"></i></a>
+						</li>
+					</c:if>
+				</ul>
+				<input type="hidden" name="category" value="${paging.cri.category}">
+				<input type="hidden" name="page" value="${paging.cri.page}">
+				<input type="hidden" name="keyword" value="${paging.cri.keyword}">
+				<input type="hidden" name="option" value="${paging.cri.option}">
+			</form>
+		</div>
       </section>
       <dialog class="qna__guide">
         <hgroup class="qna__guide--title">
@@ -95,7 +105,7 @@
                }
                else location.href='/qna/detail/'+idx.value;
             }
-            location.href='/qna/detail/'+idx.value
+            location.href='/qna/detail/'+idx.value;
          })
       })
 
@@ -105,8 +115,6 @@
             alert("검색어를 입력하세요");
             return;
          }
-         const category = document.querySelector('input[name=category]')
-         $('#search_transform').attr('action','/qna/list_'+category.value).submit();
       });
    </script>
 </body>

@@ -35,7 +35,7 @@
         </article>
         <article class="qna__card">
           <hgroup class="qna__card--title">
-            <h1>관광지 문의</h1>
+            <h1>자주 찾는 질문</h1>
           </hgroup>
           <ul class="qna__card--list">
             <c:forEach items="${data_u}" var="list" varStatus="status">
