@@ -16,7 +16,7 @@
 	});
 
 // 그냥 로그인 버튼 클릭했을때 로그인 진행하기 - 장민실 23.04.04
-	$("#sign_in").on('click', function(){		
+	$("#sign_in").on('click', function(){
 		var id = $("#user_id").val();
 		var pw = $("#pw").val();
 		
@@ -56,7 +56,41 @@
 		               console.log(error);
 				}	// error end
 			});	// ajax end
-		}	// 모두 입력되었을때 else if end
+		}	// 모두 입력되었을때 else if end		
+	});	// function end
+	
+	
+	// ============================================= test
+	const formOpenBtn = document.querySelector("#form-open"),
+		home = document.querySelector(".home"),
+		formContainer = document.querySelector(".form_container"),
+		formCloseBtn = document.querySelector(".form_close"),
+		signupBtn = document.querySelector("#signup"),
+		loginBtn = document.querySelector("#login"),
+		pwShowHide = document.querySelectorAll(".pw_hide");
 
-		
+	formOpenBtn.addEventListener("click", () => home.classList.add("show"));
+	formCloseBtn.addEventListener("click", () => home.classList.remove("show"));
+
+	pwShowHide.forEach((icon) => {
+		icon.addEventListener("click", () => {
+			let getPwInput = icon.parentElement.querySelector("input");
+			if (getPwInput.type === "password") {
+				getPwInput.type = "text";
+				icon.classList.replace("uil-eye-slash", "uil-eye");
+			}
+			else {
+				getPwInput.type = "password";
+				icon.classList.replace("uil-eye", "uil-eye-slash");
+			}
+		});
+	});
+
+	signupBtn.addEventListener("click", (e) => {
+		e.preventDefault();
+		formContainer.classList.add("active");
+	});
+	loginBtn.addEventListener("click", (e) => {
+		e.preventDefault();
+		formContainer.classList.remove("active");
 	});

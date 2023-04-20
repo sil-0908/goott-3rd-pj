@@ -1,15 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
-<title>회원가입</title>
-</head>
-<body>
+<%@ include file="/WEB-INF/views/common/layout.jsp" %>
 
+<main>
 	<form name="signup" method="post">
 		<table>
 			<tr>
@@ -44,12 +36,12 @@
 				<td id="hp_chk_text">핸드폰 번호를 입력해 주세요</td>
 			</tr>
 			<tr>
-				<td><input type="button" name="sign_up_btn" id="sign_up_btn" value="가입하기"></td>
+				<td><input type="button" name="sign_up_btn" id="sign_up_btn"  value="가입하기"></td>
+				<td id="chk_text"></td>
 			</tr>
-			<!--  disabled="true" -->
 		</table>
 	</form>
+</main>
 	
 <script src="/resources/js/user/sign_up.js"></script>
-</body>
-</html>
+<script src="/resources/js/common/layout.js"></script>

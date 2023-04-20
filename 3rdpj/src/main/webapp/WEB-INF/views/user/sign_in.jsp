@@ -29,11 +29,6 @@
 		</table>
 	</form>
 	<p id="signin_msg"></p>
-	
-<script>
-	var msg = "<c:out value='${msg}' />";
-	var testmsg = "<c:out value='${testmsg}' />";
-</script>
 
 <script src="/resources/js/user/sign_in.js"></script>
 </body>

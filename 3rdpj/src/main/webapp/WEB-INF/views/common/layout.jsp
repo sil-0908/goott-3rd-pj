@@ -1,7 +1,15 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"/>
+	<link rel="stylesheet" href="/resources/css/common/style.css"/>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+	<!-- navbar start -->
 	<header class="header">
       <div class="header__logo">
         <div class="logo">
@@ -15,13 +23,12 @@
           <li class="nav__item">플랜</li>
           <li class="nav__item">플래너</li>
           <li class="nav__item">카테고리</li>
-          <li class="nav__item">
-          	<a href="/user/signin"></a>
-          	로그인
-    	  </li>
+          <li class="nav__item sign_in">로그인</li>
         </ul>
       </nav>
     </header>
+    <!-- navbar end -->
+    <!-- footer start -->
     <footer class="footer">
       <section class="footer__con">
         <div class="footer__icon">
@@ -35,3 +42,11 @@
         </div>
       </section>
     </footer>
+    <!-- footer end -->
+    <!-- signin modal start - 장민실 -->
+    <section> 
+    	
+    </section>
+    <!-- signin modal end -->
+    
+</body>

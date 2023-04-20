@@ -1,33 +1,7 @@
 // =================================== 공통 영역 start ===================================
 
-//	엔터키 입력방지 걸기(키코드 : 13, 108) - 장민실 23.04.04
-	document.addEventListener('keydown', function(e){
-		if(e.keyCode === 13 || e.keyCode === 108) {
-			e.preventDefault();
-			// 이 안에서 회원가입 버튼 상태가 활성화냐 아니냐로 또 조건 나눠야함
-		}
-	});
-
-// 회원가입 (엔터키로 회원가입 진행하기는 가장 마지막에 추가예정, 그전까진 엔터키 이벤트 막아놓음) - 장민실 23.04.04
-	$("#sign_up_btn").on('click', function(e){
-		
-	     id_chk(function(test){
-	         console.log("아이디췍 : " +  test);
-	         e.preventDefault();
-	      });
-		
-//		console.log("아이디췍 : " + id_chk());// undefined > 얘는 왜..?
-		console.log("비밀번호췍 : " + pwd_chk());
-		console.log("확인췍 : " + pwd_match());
-		console.log("이메일췍 : " + email_chk());
-		console.log("생년월일췍 : " + birth_chk());
-		console.log("폰췍 : " + hp_chk());
-//		document.signup.action="/user/signup";
-//		document.signup.submit();
-	});
-
-// 전제 input 입력 제한 start - 장민실 23.04.06
 	$(document).ready(function() {
+// 전제 input 입력 제한 start - 장민실 23.04.06
 		// 아이디, 비밀번호, 비밀번호 확인 - 입력받는 영문자 무조건 소문자로 변환
 		$("#user_id, #pw, #pw_chk").css("text-transform", "lowercase");
 	    $("#user_id, #pw, #pw_chk").on("keyup", function() {
@@ -79,8 +53,43 @@
 	    $("#hp").focusout(function() {
 	    	$(this).val($(this).val().replace(/^([0-9]{3})([0-9]{3,4})([0-9]{4})$/, '$1-$2-$3'));
 	    });
+// 전제 input 입력 제한 end	 
 	});	// function end
-// 전제 input 입력 제한 end
+	
+//	회원가입(엔터키) - 장민실 23.04.20
+	document.addEventListener('keydown', function(e){
+		if(e.keyCode === 13 || e.keyCode === 108) {
+			var id = id_chk(), origin_pwd = pwd_chk(), copy_pwd = pwd_match(), email = email_chk(),
+			birth = birth_chk(), hp = hp_chk();
+			var total = id+origin_pwd+copy_pwd+email+birth+hp;
+			
+			if(total<6) {
+				$("#chk_text").html("회원가입 실패! 입력 항목들을 다시 확인해주세요");
+				$("#chk_text").css("color", "red");
+			}
+			else if(total===6) {
+				document.signup.action="/user/signup";
+				document.signup.submit();
+			}
+		}
+	});
+
+// 회원가입(버튼클릭) - 장민실 23.04.04
+	$("#sign_up_btn").on('click', function(e){
+	    var id = id_chk(), origin_pwd = pwd_chk(), copy_pwd = pwd_match(), email = email_chk(),
+		birth = birth_chk(), hp = hp_chk();
+		var total = id+origin_pwd+copy_pwd+email+birth+hp;
+		
+		if(total<6) {
+			$("#chk_text").html("회원가입 실패! 다시 확인해주세요");
+			$("#chk_text").css("color", "red");
+		}
+		else if(total===6) {
+			document.signup.action="/user/signup";
+			document.signup.submit();
+		}
+	});
+
 	
 // =================================== 공통 영역 end ===================================
 	
@@ -88,14 +97,6 @@
 // 차후 추가 필요 사항
 	// 약관동의 완성되면 추가해서 필수체크 받을거랑 선택사항 선택해서 필수 체크 안하면 못넘어가게 처리	
 	// 차후 비밀번호 text랑 password로 type바뀌는 작업 해야함 > view나오면 할 예정
-	
-//	function valid_test(evt_name) {
-//		if(evt_name==="id_chk") {
-//			// 정규표현식 체크하고 리턴
-//		}
-//	}
-//	
-//	valid_test("id_chk");
 	
 // =================================== 작업중 영역 end ===================================
 	
@@ -123,16 +124,19 @@
 				data : { id : id },
 				url : "/user/id_chk",
 				type : 'POST',
+				async : false,
 				success : function(cnt){
 					if(cnt===0){
 						$('#id_chk_text').html("사용 가능한 아이디 입니다");
 						$('#id_chk_text').css("color", "black");
 						id_cnt = 1;
+						return id_cnt;
 					}	// 아이디 중복 없을경우 if end
 					else if(cnt===1){
 						$('#id_chk_text').html("이미 사용중인 아이디 입니다");
 						$('#id_chk_text').css("color", "red");
 						id_cnt = 0;
+						return id_cnt;
 					}	// 아이디 중복일 경우 else if end
 				}	// success end
 			});	// ajax end
@@ -284,6 +288,6 @@
 		}	// 핸드폰 유효성 검사 통과시 else if end
 		return hp_cnt;
 	}
-// 연락처 유효성 검사 start - 장민실 23.04.07
+// 연락처 유효성 검사 end
 	
 // =================================== 핸드폰 영역 end ===================================

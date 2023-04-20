@@ -117,7 +117,7 @@ public class UserController {
 		return id;
 	}
 	
-//	비밀번호 찾기
+//	비밀번호 찾기 / 저장하기 따로 메소드 생성하기
 //	@PostMapping("find_pw")
 //	@ResponseBody
 //	public String find_pw(@RequestParam("id") String id, @RequestParam("hp") String hp, UserDTO u_dto) {
