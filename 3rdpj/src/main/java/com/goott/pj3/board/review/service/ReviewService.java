@@ -8,17 +8,18 @@ import com.goott.pj3.common.util.Criteria;
 import com.goott.pj3.common.util.PagingDTO;
 
 public interface ReviewService {
+    int create(ReviewDTO reviewDTO);
 
-    public String create(Map<String, Object>map);
+    void createFile(List<String> files);
 
-    public Map<String, Object> detail(Map<String, Object> map);
+    ReviewDTO detail(ReviewDTO reviewDTO);
 
-    boolean update(Map<String, Object> map);
+    boolean update(ReviewDTO reviewDTO);
 
-    boolean delete(Map<String, Object> map);
+    boolean delete(ReviewDTO reviewDTO);
 
-	public List<ReviewDTO> list(Criteria cri);
+    List<ReviewDTO> list(Criteria cri);
 
-	public PagingDTO paging(Criteria cri);
+    PagingDTO paging(Criteria cri);
 
 }

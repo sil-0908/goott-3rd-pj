@@ -22,9 +22,9 @@
 <body>
 <h1>리뷰 작성</h1>
 <form method="POST" enctype="multipart/form-data" >
-    <input type="hidden" name="plan_idx" value="1">
+    <input type="hidden" name="review_idx" value="1">
     <p>내용 : <input type="text" name="review_content"></p>
-    <p>사진 : <input id="fileItem" name="file" type="file" multiple name="review_img" onchange="previewFile()"></p>
+    <p>사진 : <input id="fileItem" name="file[]" type="file" multiple name="review_img" onchange="previewFile()"></p>
     <p>평점 :
         <input type="radio" name="review_rating" value="1">1
         <input type="radio" name="review_rating" value="2">2
@@ -81,8 +81,6 @@
             return false;
         }
     }
-
-
 
 
 </script>
