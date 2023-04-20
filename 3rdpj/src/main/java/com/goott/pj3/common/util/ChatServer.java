@@ -1,15 +1,16 @@
 package com.goott.pj3.common.util;
 
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 
+import javax.servlet.http.HttpSession;
 import javax.websocket.*;
+import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-@ServerEndpoint("/chat")
+@ServerEndpoint(value = "/chat/{user_Id}")
 public class ChatServer {
     private static List<Session> list = new ArrayList<Session>();
 
@@ -18,7 +19,8 @@ public class ChatServer {
     }
 
     @OnOpen
-    public void handleOpen(Session session) {
+    public void handleOpen(Session session, @PathParam("user_Id") String user_id) {
+
         print("클라이언트 연결");
         list.add(session);
     }
