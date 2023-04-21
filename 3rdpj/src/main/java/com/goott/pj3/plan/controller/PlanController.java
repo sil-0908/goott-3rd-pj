@@ -77,14 +77,7 @@ public class PlanController {
             if (!img.get(9).isEmpty()) {
                 imgDTO.setImg10(img.get(9));
             }
-
-
-
-            imgDTO.setImg2(img.get(1));
             planService.uploadImg(imgDTO);
-//            planService.planCreate(planDTO);
-//            planService.uploadImg(imgDTO, planDTO);
-
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
