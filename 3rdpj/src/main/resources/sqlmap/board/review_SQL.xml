@@ -3,29 +3,70 @@
 <mapper namespace="review">
 
     <!--조원재 23.04.05 리뷰 생성-->
-    <insert id="insert" parameterType="hashMap" useGeneratedKeys="true" keyProperty="review_idx">
-        insert into plan_review(user_id, plan_idx, review_content, review_img, review_rating)
-             values (#{user_id}, #{plan_idx}, #{review_content}, #{review_img}, #{review_rating})
+    <insert id="insert" parameterType="com.goott.pj3.board.review.dto.ReviewDTO" >
+        insert into plan_review(user_id, plan_idx, review_content, review_rating)
+        values (#{user_id}, #{plan_idx}, #{review_content}, #{review_rating})
+        <selectKey keyProperty="review_idx" order="AFTER" resultType="com.goott.pj3.board.review.dto.ReviewDTO">
+            SELECT LAST_INSERT_ID() AS review_idx
+        </selectKey>
     </insert>
 
+    <insert id="file" parameterType="com.goott.pj3.board.review.dto.ReviewDTO">
+        <selectKey keyProperty="review_idx" order="BEFORE" resultType="com.goott.pj3.board.review.dto.ReviewDTO">
+            SELECT LAST_INSERT_ID() AS review_idx
+        </selectKey>
+            <foreach collection="img" item="item" separator=",">
+            insert into review_img(review_idx, img)
+            values (#{review_idx}, #{item})
+            </foreach>
+    </insert>
+
+<!--    <insert id="insert" parameterType="com.goott.pj3.board.review.dto.ReviewDTO" useGeneratedKeys="true" keyProperty="review_idx">-->
+<!--        insert into plan_review(user_id, plan_idx, review_content, review_rating)-->
+<!--             values (#{user_id}, #{plan_idx}, #{review_content}, #{review_rating})-->
+<!--                SET @review_idx = LAST_INSERT_ID() AS review_idx-->
+<!--    </insert>-->
+
+<!--    <insert id="file" parameterType="List">-->
+<!--        insert into plan_img(review_idx, img)-->
+<!--        (-->
+<!--            select review_idx-->
+<!--              from plan_review-->
+<!--             where review_idx=@review_idx-->
+
+<!--        )-->
+<!--             values <foreach collection="list" item="item" separator=",">-->
+<!--                        (#{item.img})-->
+<!--                    </foreach>-->
+<!--    </insert>-->
+
+<!--    <insert id="file" parameterType="List">-->
+<!--        insert into plan_img(review_idx, img)-->
+<!--             values <foreach collection="list" item="item" separator=",">-->
+<!--                     (#{review_idx}, #{item.img})-->
+<!--                    </foreach>-->
+<!--    </insert>-->
+
     <!--조원재 23.04.05 디테일 페이지-->
-    <select id="detail" parameterType="hashMap" resultType="hashMap">
-        select review_idx, user_id, plan_idx, review_content, review_img, review_rating, create_date
-          from plan_review
-         where review_idx = #{review_idx}
+    <select id="detail" resultType="com.goott.pj3.board.review.dto.ReviewDTO">
+        select p.review_idx, p.user_id, p.plan_idx, p.review_content , p.review_rating, p.create_date, i.img
+          from plan_review p inner join review_img i
+            on p.review_idx = i.review_idx
+         where p.review_idx = #{review_idx}
+
     </select>
     <!--조원재 23.04.05 리뷰 수정-->
-    <update id="update" parameterType="hashMap">
+    <update id="update">
         update plan_review
-           set review_content=#{review_content}, review_img=#{review_img}
+           set review_content=#{review_content}
          where review_idx = #{review_idx}
     </update>
     <!--조원재 23.04.05 리뷰 삭제-->
-    <delete id="delete" parameterType="hashMap">
-        delete
-          from plan_review
+    <update id="delete" parameterType="hashMap">
+        update plan_review
+          set r_del_yn = 'n'
         where review_idx=#{review_idx}
-    </delete>
+    </update>
     
     <!--조원재 23.04.05 리뷰 목록, 검색-->
     <select id="list" resultType="com.goott.pj3.board.review.dto.ReviewDTO">
@@ -36,6 +77,7 @@
 		   	<if test="option == 'user_id'"> user_id like CONCAT('%',#{keyword},'%')</if>
 	        <if test="option == 'content'"> review_content like CONCAT('%',#{keyword},'%')</if>
 	        <if test="option == null or option == ''">1=1</if>
+           and r_del_yn = 'y'
          order by review_idx desc
          limit #{pageStart}, #{perPageNum}
     </select>
@@ -47,6 +89,7 @@
 		   	<if test="option == 'user_id'"> user_id like CONCAT('%',#{keyword},'%')</if>
 	        <if test="option == 'content'"> review_content like CONCAT('%',#{keyword},'%')</if>
 	        <if test="option == null or option == ''">1=1</if>
+          and r_del_yn = 'y'
     </select>
 
 </mapper>
