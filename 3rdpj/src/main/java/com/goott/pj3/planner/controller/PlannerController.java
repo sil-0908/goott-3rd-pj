@@ -32,9 +32,9 @@ public class PlannerController {
         return mv;
     }
 
-    @RequestMapping("update")
-    public ModelAndView plannerUpdate(@RequestParam()){
-
-    }
+//    @RequestMapping("update")
+//    public ModelAndView plannerUpdate(@RequestParam()){
+//
+//    }
 
 }
