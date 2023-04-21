@@ -1,7 +1,6 @@
 package com.goott.pj3.common.util;
 
 
-import javax.servlet.http.HttpSession;
 import javax.websocket.*;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
