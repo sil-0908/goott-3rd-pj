@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/FortAwesome/Font-Awesome@5.14.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../css/style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div data-include-path="layout.html"></div>
+    <script src="../js/layout.js"></script>
+    <main class="admin">
+      <section class="form__notice-create">
+        <hgroup class="form__title">
+          <h1>공지사항 작성</h1>
+        </hgroup>
+        <article class="form__container">
+          <form class="form__sheet" action="">
+            <label for="writer">작성자</label>
+            <input
+              id="writer"
+              class="form__input--short"
+              type="text"
+              value="admin"
+            />
+            <label for="title">제목</label>
+            <input
+              id="title"
+              class="form__input--long"
+              type="text"
+              placeholder="제목을 입력하세요."
+            />
+            <label for="auth">Auth</label>
+            <input
+              id="auth"
+              class="form__input--short"
+              type="text"
+              value="auth_a"
+            />
+            <label for="change">이건 뭘까</label>
+            <input
+              id="change"
+              class="form__input--short"
+              type="text"
+              value="N"
+            />
+            <label for="detail">공지 내용</label>
+            <textarea
+              class="form__input--textarea"
+              name=""
+              id="detail"
+              cols="30"
+              rows="10"
+              placeholder="내용을 입력하세요."
+            ></textarea>
+          </form>
+          <button type="submit" class="form__btn--submit">등록하기</button>
+        </article>
+      </section>
+    </main>
+    <script
+      src="https://kit.fontawesome.com/7723a79ab5.js"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
