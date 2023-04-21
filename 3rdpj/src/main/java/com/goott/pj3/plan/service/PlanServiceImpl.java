@@ -1,5 +1,7 @@
 package com.goott.pj3.plan.service;
 
+import com.goott.pj3.common.util.Criteria;
+import com.goott.pj3.common.util.PagingDTO;
 import com.goott.pj3.plan.dto.PlanDTO;
 
 import org.springframework.stereotype.Service;
@@ -24,9 +26,18 @@ public class PlanServiceImpl implements PlanService {
     }
 
     @Override
-    public List<PlanDTO> list() {
-        return planDAO.list();
+    public List<PlanDTO> list(Criteria cri) {
+        return planDAO.list(cri);
     }
+    
+    // paging처리 - 04.18 김범수
+	@Override
+	public PagingDTO paging(Criteria cri) {
+		PagingDTO paging = new PagingDTO();
+		paging.setCri(cri);
+		paging.setTotalCount(planDAO.totalConut(cri));
+		return paging;
+	}
 
     @Override
     public PlanDTO detail(int plan_idx) {
@@ -42,6 +53,8 @@ public class PlanServiceImpl implements PlanService {
     public void planDelete(int planIdx) {
         planDAO.delete(planIdx);
     }
+
+
 
 
 }

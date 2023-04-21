@@ -43,6 +43,7 @@
 			const qna_title = document.querySelector('input[name=qna_title]').value;
 			const qna_content = document.querySelector('textarea[name=qna_content]').value;
 			const qna_idx = document.querySelector('#qna_id').value;
+			alert("test");
 			$.ajax({
 				url : '/qna/modify',
 				data : {"qna_idx" : qna_idx, "qna_title" : qna_title, "qna_content" : qna_content},
