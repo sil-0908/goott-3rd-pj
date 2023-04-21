@@ -1,10 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="plan">
-    <insert id="create">
+    <insert id="create" parameterType="com.goott.pj3.plan.dto.PlanDTO">
     INSERT into plan(user_id, start_date, end_date, price, plan_title, plan_detail, plan_detail_img)
     values (#{user_id},#{start_date}, #{end_date}, #{price}, #{plan_title}, #{plan_detail}, #{plan_detail_img})
     </insert>
+
+    <select id="find_idx">
+        select plan_idx
+          from plan
+         where plan_title = #{plan_title} and user_id= #{user_id}
+
+    </select>
+
+    <insert id="insert">
+        INSERT into plan_img(plan_idx, img1, img2, img3, img4, img5, img6, img7, img8, img9, img10)
+        values (#{plan_idx},#{img1},#{img2},#{img3},#{img4},#{img5},#{img6},#{img7},#{img8},#{img9},#{img10})
+    </insert>
+
     <select id="list" resultType="com.goott.pj3.plan.dto.PlanDTO">
         select plan_idx, plan_title, price, user_id
         from plan

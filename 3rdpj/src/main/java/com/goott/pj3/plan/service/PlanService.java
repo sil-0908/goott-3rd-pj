@@ -2,6 +2,7 @@ package com.goott.pj3.plan.service;
 
 import com.goott.pj3.common.util.Criteria;
 import com.goott.pj3.common.util.PagingDTO;
+import com.goott.pj3.plan.dto.ImgDTO;
 import com.goott.pj3.plan.dto.PlanDTO;
 
 import java.util.List;
@@ -19,4 +20,6 @@ public interface PlanService {
     void planDelete(int plan_idx);
 
 	PagingDTO paging(Criteria cri);
+
+    void uploadImg(ImgDTO imgDTO, PlanDTO planDTO);
 }
