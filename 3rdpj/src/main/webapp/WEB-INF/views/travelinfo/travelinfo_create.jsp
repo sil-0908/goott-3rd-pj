@@ -16,7 +16,7 @@
 </head>
 <body>
 <h1>여행지 정보 작성</h1>
-<form method="POST" onsubmit="travelAdress();">
+<form method="POST" onsubmit="travelAdress();" enctype="multipart/form-data">
     <p>여행지 이름 : <input type="text" name="country_c"></p>
     <p>국가 : <input type="text" name="country_a"></p>
     <p>지역 : <input type="text" name="country_b"></p>
@@ -33,9 +33,10 @@
         <input type="text" id="travel_extraAddress" class="address_item" placeholder="참고항목">
         </p>
     </div>
-    <p>이미지 : <input type="file" multiple name="country_img"></p> </p>
+    <p>이미지 : <input id="fileItem" type="file" name="file[]" onchange="previewFile()" multiple></p> </p>
     <input type="submit" value="저장">
 </form>
+<div id="preview"></div>
 </body>
 </html>
 
@@ -52,6 +53,50 @@
             total_adress += item.value+" ";
         }
     }
+    /**
+     * 조원재 23.04.13. follow - uploadForm
+     */
+    function previewFile() {
+        var preview = document.getElementById('preview');
+        var file = document.getElementById('fileItem').files[0];
+        var reader = new FileReader();
+        reader.onloadend = function() {
+            preview.innerHTML = '<img id="preview-img" src="' + reader.result + '">';
+        }
+        if (file) {
+            reader.readAsDataURL(file);
+        } else {
+            preview.innerHTML = '';
+        }
+    }
+    /**
+     * 조원재 23.04.06 이미지 업로드
+     * @type {RegExp}
+     */
+    let regex = new RegExp("(.*?)\.(jpg|png)$");         // jpg,png 파일만 허용
+    let maxSize = 41943040;                              // file 제한 용량 40MB
+
+    $("input[type='file']").on("change", function(e){
+        let fileInput = document.querySelector("#fileItem");
+        let fileList = fileInput.files;
+        let fileObj = fileList[0];
+
+        if(!fileCheck(fileObj.name, fileObj.size)) return false;
+        alert("통과")
+    });
+
+    // 이미지 체크 로직
+    function fileCheck(fileName, fileSize){
+        if(fileSize >= maxSize){
+            alert("파일 사이즈 초과 : 최대 40MB");
+            return false;
+        }
+        if(!regex.test(fileName)){
+            alert("해당 종류의 파일은 업로드할 수 없습니다. 업로드 가능한 file : jpg, png");
+            return false;
+        }
+    }
+
     /**
      * 조원재 23.04.07.카카오 우편 번호 API
      */

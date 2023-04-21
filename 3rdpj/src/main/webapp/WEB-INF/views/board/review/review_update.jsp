@@ -13,9 +13,9 @@
 <body>
 
 <h1>리뷰 수정</h1>
-<p>이전 사진 뷰 : <img src="${date.review_img}" height="200px" width="200px" style="border: 1px solid red;"></p>
+<p>이전 사진 뷰 : <img src="" height="200px" width="200px" style="border: 1px solid red;"></p>
 
-<form method="POST">
+<form method="POST" action="/review/update/${data.review_idx}">
     <p>리뷰 내용 : <input type="text" name="review_content" value="${data.review_content}"></p>
     <p>리뷰 사진 : <input type="file" multiple name="review_img" value="${data.review_img}"></p>
     <input type="submit" value="저장">
