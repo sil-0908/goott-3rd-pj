@@ -1,0 +1,37 @@
+@charset "UTF-8";
+
+@import "./common/reset.css";
+@import "./common/layout.css";
+@import "./common/main.css";
+@import "./common/planner.css";
+@import "./common/plannermodal.css";
+@import "./common/talkmodal.css";
+@import "./common/payment.css";
+
+@import "./board/qna/qna.css";
+@import "./board/qna/qna_create.css";
+
+@import "./admin/admin_noticelist.css";
+@import "./admin/admin_noticewrite.css";
+@import "./admin/admin_userlist.css";
+
+
+:root {
+  --black: #181823;
+  --blue: #47afd0;
+  --sky: #c0eef2;
+  --white: #e9f8f9;
+  --yellow: #f2bf0a;
+  scroll-behavior: auto;
+}
+
+body {
+  min-height: 100vh;
+}
+
+main {
+  height: 100%;
+  min-height: 100%;
+  margin: 7vh 0 25vh 0;
+  /* border: 2px solid green; */
+}
