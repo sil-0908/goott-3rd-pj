@@ -1,21 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="plan">
-    <insert id="create" parameterType="com.goott.pj3.plan.dto.PlanDTO">
-    INSERT into plan(user_id, start_date, end_date, price, plan_title, plan_detail, plan_detail_img)
-    values (#{user_id},#{start_date}, #{end_date}, #{price}, #{plan_title}, #{plan_detail}, #{plan_detail_img})
+    <insert id="create" parameterType="com.goott.pj3.plan.dto.PlanDTO" useGeneratedKeys="true" keyProperty="plan_idx">
+        INSERT into plan(user_id, start_date, end_date, price, plan_title, plan_detail)
+        values (#{user_id}, #{start_date}, #{end_date}, #{price}, #{plan_title}, #{plan_detail})
     </insert>
 
-    <select id="find_idx">
-        select plan_idx
-          from plan
-         where plan_title = #{plan_title} and user_id= #{user_id}
-
-    </select>
-
-    <insert id="insert">
+    <insert id="upload">
         INSERT into plan_img(plan_idx, img1, img2, img3, img4, img5, img6, img7, img8, img9, img10)
-        values (#{plan_idx},#{img1},#{img2},#{img3},#{img4},#{img5},#{img6},#{img7},#{img8},#{img9},#{img10})
+        values (#{plan_idx}, #{img1}, #{img2}, #{img3}, #{img4}, #{img5}, #{img6}, #{img7}, #{img8}, #{img9}, #{img10})
     </insert>
 
     <select id="list" resultType="com.goott.pj3.plan.dto.PlanDTO">
@@ -23,23 +16,23 @@
         from plan
         where p_del_yn = 'N'
         and
-        <if test="option == 'user_id'"> user_id like CONCAT('%',#{keyword},'%')</if>
-        <if test="option == 'title'"> plan_title like CONCAT('%',#{keyword},'%')</if>
+        <if test="option == 'user_id'">user_id like CONCAT('%',#{keyword},'%')</if>
+        <if test="option == 'title'">plan_title like CONCAT('%',#{keyword},'%')</if>
         <if test="option == null or option == ''">1=1</if>
         order by plan_idx desc
         limit #{pageStart}, #{perPageNum}
     </select>
-    
+
     <select id="totalCount" resultType="int">
         select count(plan_idx)
-          from plan
-         where p_del_yn = 'N'
-           and
-	        <if test="option == 'user_id'"> user_id like CONCAT('%',#{keyword},'%')</if>
-	        <if test="option == 'title'"> plan_title like CONCAT('%',#{keyword},'%')</if>
-	        <if test="option == null or option == ''">1=1</if>
+        from plan
+        where p_del_yn = 'N'
+        and
+        <if test="option == 'user_id'">user_id like CONCAT('%',#{keyword},'%')</if>
+        <if test="option == 'title'">plan_title like CONCAT('%',#{keyword},'%')</if>
+        <if test="option == null or option == ''">1=1</if>
     </select>
-    
+
     <select id="detail" resultType="com.goott.pj3.plan.dto.PlanDTO">
         select plan_title, plan_detail, user_id, start_date, end_date, price, plan_idx
         from plan
@@ -57,6 +50,6 @@
     <update id="delete">
         update plan
         set p_del_yn = 'Y'
-        where plan_idx=#{plan_idx}
+        where plan_idx = #{plan_idx}
     </update>
 </mapper>

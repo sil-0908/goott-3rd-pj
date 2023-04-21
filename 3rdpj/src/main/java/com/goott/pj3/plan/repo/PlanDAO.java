@@ -47,7 +47,4 @@ public class PlanDAO {
         ss.insert("plan.upload", imgDTO);
     }
 
-    public String find_idx(PlanDTO planDTO) {
-        return ss.selectOne("plan.find_idx", planDTO);
-    }
 }
