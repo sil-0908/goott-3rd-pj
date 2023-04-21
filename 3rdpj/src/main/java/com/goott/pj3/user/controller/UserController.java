@@ -3,16 +3,13 @@ package com.goott.pj3.user.controller;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -75,10 +72,9 @@ public class UserController {
 	public ModelAndView sign_in(@RequestParam("id") String id, @RequestParam("pw") String pw, UserDTO u_dto, HttpSession session, ModelAndView mav) {
 		u_dto.setUser_id(id);
 		u_dto.setPw(pw);
-		UserDTO ur_dto = userService.sign_in(u_dto);		
+		UserDTO ur_dto = userService.sign_in(u_dto);
         Map<String, String> responseData = new HashMap<>();	
 		if(ur_dto != null) {
-			System.out.println("if문 1번");
 			// 사용자 탈퇴여부 확인 추가 - 장민실 23.04.07
 			String user_del_yn = ur_dto.getU_del_yn();	// 사용자 탈퇴 여부 : n=미탈퇴, y=탈퇴			
 			if(user_del_yn.equals("n")) {
@@ -100,7 +96,7 @@ public class UserController {
 	}
 	
 //	로그아웃 - 장민실 23.04.04
-	@RequestMapping("signout")
+	@RequestMapping("sign_out")
 	public String sign_out(HttpSession session) {
 		session.invalidate();
 		return "redirect:/user/mypage";

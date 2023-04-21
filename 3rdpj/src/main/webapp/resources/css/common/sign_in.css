@@ -1,12 +1,5 @@
-a {
-  text-decoration: none;
-}
-
-.button {
-  color: #fff;
-}
-
-.button {
+/* signin_btn */
+.signin_btn {
   padding: 6px 24px;
   border: 2px solid #fff;
   background: transparent;
@@ -14,21 +7,42 @@ a {
   cursor: pointer;
 }
 
-.button:active {
-  transform: scale(0.98);
+.signin_btn:hover {
+  background-color: var(--yellow);
 }
 
-/* Home */
-.home {
+.login_form .signin_btn {
+  color: var(--white);
+  background-color: var(--blue);
+  margin-top: 30px;
+  width: 100%;
+  padding: 10px 0;
+  border-radius: 10px;
+  transition: background-color 0.2s;  
+}
+
+/* 정보찾기, 회원가입 커서 설정 */
+.forgot_info, .sign_up {
+	cursor: pointer;
+}
+
+/* 제목 */
+.login_form h2 {
+  font-size: 22px;
+  color: #0b0217;
+  text-align: center;
+}
+
+/* signin_section */
+.signin_section {
   position: relative;
   height: 100vh;
   width: 100%;
-  background-image: url("/resources/img/signin_bg.jpg");
   background-size: cover;
   background-position: center;
 }
 
-.home::before {
+.signin_section::before {
   content: "";
   position: absolute;
   height: 100%;
@@ -40,15 +54,15 @@ a {
   transition: all 0.5s ease-out;
 }
 
-.home.show::before {
+.signin_section.show::before {
   opacity: 1;
   pointer-events: auto;
 }
 
 /* Form */
-.form_container {
+.login_form {
   position: fixed;
-  max-width: 320px;
+  max-width: 20rem;
   width: 100%;
   top: 50%;
   left: 50%;
@@ -63,25 +77,21 @@ a {
   transition: all 0.4s ease-out;
 }
 
-.home.show .form_container {
+.signin_section.show .login_form {
   opacity: 1;
   pointer-events: auto;
-  transform: translate(-50%, -50%) scale(1);
+  /* transform: translate(-50%, -50%) scale(1); */
 }
 
-.signup_form {
-  display: none;
-}
-
-.form_container.active .signup_form {
+.login_form.active {
   display: block;
 }
 
-.form_container.active .login_form {
+.login_form.active {
   display: none;
 }
 
-.form_close {
+.close_icon {
   position: absolute;
   top: 10px;
   right: 20px;
@@ -91,11 +101,7 @@ a {
   cursor: pointer;
 }
 
-.form_container h2 {
-  font-size: 22px;
-  color: #0b0217;
-  text-align: center;
-}
+
 
 .input_box {
   position: relative;
@@ -106,7 +112,7 @@ a {
 
 .input_box input {
   height: 100%;
-  width: 100%;
+  width: 80%;
   border: none;
   outline: none;
   padding: 0 30px;
@@ -114,6 +120,8 @@ a {
   transition: all 0.2s ease;
   border-bottom: 1.5px solid #aaaaaa;
 }
+
+
 
 .input_box input:focus {
   border-color: #7d2ae8;
@@ -127,13 +135,13 @@ a {
   color: #707070;
 }
 
-.input_box i.email,
-.input_box i.password {
+.input_box i.id_icon,
+.input_box i.pw_icon {
   left: 0;
 }
 
-.input_box input:focus ~ i.email,
-.input_box input:focus ~ i.password {
+.input_box input:focus ~ i.id_icon,
+.input_box input:focus ~ i.pw_icon {
   color: #7d2ae8;
 }
 
@@ -143,48 +151,16 @@ a {
   cursor: pointer;
 }
 
-.option_field {
-  margin-top: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.form_container a {
+.login_form a {
   color: #7d2ae8;
   font-size: 12px;
 }
 
-.form_container a:hover {
+.login_form a:hover {
   text-decoration: underline;
 }
 
-.checkbox {
-  display: flex;
-  column-gap: 8px;
-  white-space: nowrap;
-}
-
-.checkbox input {
-  accent-color: #7d2ae8;
-}
-
-.checkbox label {
-  font-size: 12px;
-  cursor: pointer;
-  user-select: none;
-  color: #0b0217;
-}
-
-.form_container .button {
-  background: #7d2ae8;
-  margin-top: 30px;
-  width: 100%;
-  padding: 10px 0;
-  border-radius: 10px;
-}
-
-.login_signup {
+.signup_text {
   font-size: 12px;
   text-align: center;
   margin-top: 15px;

@@ -23,6 +23,7 @@
 		select user_id, auth, u_del_yn
 		  from user
 		 where user_id = #{user_id}
+		 and pw = #{pw}
 		]]>
 	</select>
 	  
