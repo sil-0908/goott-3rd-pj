@@ -10,7 +10,7 @@ import com.goott.pj3.common.util.PagingDTO;
 public interface ReviewService {
     int create(ReviewDTO reviewDTO);
 
-    void createFile(List<String> files);
+    void createFile(ReviewDTO reviewDTO);
 
     ReviewDTO detail(ReviewDTO reviewDTO);
 
@@ -21,5 +21,7 @@ public interface ReviewService {
     List<ReviewDTO> list(Criteria cri);
 
     PagingDTO paging(Criteria cri);
+
+
 
 }

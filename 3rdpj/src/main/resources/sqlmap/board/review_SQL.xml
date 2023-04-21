@@ -3,19 +3,50 @@
 <mapper namespace="review">
 
     <!--조원재 23.04.05 리뷰 생성-->
-    <insert id="insert" parameterType="com.goott.pj3.board.review.dto.ReviewDTO" useGeneratedKeys="true" keyProperty="review_idx">
+    <insert id="insert" parameterType="com.goott.pj3.board.review.dto.ReviewDTO" >
         insert into plan_review(user_id, plan_idx, review_content, review_rating)
-             values (#{user_id}, #{plan_idx}, #{review_content}, #{review_rating})
-                SET @review_idx = LAST_INSERT_ID()
+        values (#{user_id}, #{plan_idx}, #{review_content}, #{review_rating})
+        <selectKey keyProperty="review_idx" order="AFTER" resultType="com.goott.pj3.board.review.dto.ReviewDTO">
+            SELECT LAST_INSERT_ID() AS review_idx
+        </selectKey>
     </insert>
 
-    <insert id="file" parameterType="List">
-        insert into plan_img(review_idx, img)
-             values <foreach collection="list" item="item" separator=",">
-                     (#{review_idx}, #{item.img})
-                    </foreach>
+    <insert id="file" parameterType="com.goott.pj3.board.review.dto.ReviewDTO">
+        <selectKey keyProperty="review_idx" order="BEFORE" resultType="com.goott.pj3.board.review.dto.ReviewDTO">
+            SELECT LAST_INSERT_ID() AS review_idx
+        </selectKey>
+            <foreach collection="img" item="item" separator=",">
+            insert into review_img(review_idx, img)
+            values (#{review_idx}, #{item})
+            </foreach>
     </insert>
-    
+
+<!--    <insert id="insert" parameterType="com.goott.pj3.board.review.dto.ReviewDTO" useGeneratedKeys="true" keyProperty="review_idx">-->
+<!--        insert into plan_review(user_id, plan_idx, review_content, review_rating)-->
+<!--             values (#{user_id}, #{plan_idx}, #{review_content}, #{review_rating})-->
+<!--                SET @review_idx = LAST_INSERT_ID() AS review_idx-->
+<!--    </insert>-->
+
+<!--    <insert id="file" parameterType="List">-->
+<!--        insert into plan_img(review_idx, img)-->
+<!--        (-->
+<!--            select review_idx-->
+<!--              from plan_review-->
+<!--             where review_idx=@review_idx-->
+
+<!--        )-->
+<!--             values <foreach collection="list" item="item" separator=",">-->
+<!--                        (#{item.img})-->
+<!--                    </foreach>-->
+<!--    </insert>-->
+
+<!--    <insert id="file" parameterType="List">-->
+<!--        insert into plan_img(review_idx, img)-->
+<!--             values <foreach collection="list" item="item" separator=",">-->
+<!--                     (#{review_idx}, #{item.img})-->
+<!--                    </foreach>-->
+<!--    </insert>-->
+
     <!--조원재 23.04.05 디테일 페이지-->
     <select id="detail" resultType="com.goott.pj3.board.review.dto.ReviewDTO">
         select p.review_idx, p.user_id, p.plan_idx, p.review_content , p.review_rating, p.create_date, i.img

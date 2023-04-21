@@ -1,5 +1,6 @@
 package com.goott.pj3.board.review.repo;
 
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -20,11 +21,11 @@ public class ReviewDAO {
 	public int create(ReviewDTO reviewDTO) {
 		return this.ss.insert("review.insert", reviewDTO);
 	}
-	public void createFile(List<String> files) {
-		this.ss.insert("review.file", files);
+	public void createFile(ReviewDTO reviewDTO) {
+		this.ss.insert("review.file", reviewDTO);
 	}
 	public ReviewDTO detail(ReviewDTO reviewDTO) {
-		return this.ss.selectOne("review_detail", reviewDTO);
+		return this.ss.selectOne("review.detail", reviewDTO);
 	}
 	public int update(ReviewDTO reviewDTO) {
 		return this.ss.update("review.update", reviewDTO);
@@ -38,5 +39,6 @@ public class ReviewDAO {
 	public int totalCount(Criteria cri) {
 		return ss.selectOne("review.totalCount",cri);
 	}
+
 
 }

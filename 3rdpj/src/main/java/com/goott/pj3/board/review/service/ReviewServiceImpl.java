@@ -18,17 +18,20 @@ public class ReviewServiceImpl implements ReviewService {
 	@Autowired
 	ReviewDAO reviewDAO;
 
+
 	@Override
 	public int create(ReviewDTO reviewDTO) {
 		int affectRowCnt =  this.reviewDAO.create(reviewDTO);
 		if(affectRowCnt==1){
-			return reviewDTO.getPlan_idx();
+			System.out.println("review_idx : " + reviewDTO.getReview_idx());
+			return reviewDTO.getReview_idx();
 		}
 		return 0;
 	}
+
 	@Override
-	public void createFile(List<String> files) {
-		this.reviewDAO.createFile(files);
+	public void createFile(ReviewDTO reviewDTO) {
+		this.reviewDAO.createFile(reviewDTO);
 	}
 
 	@Override

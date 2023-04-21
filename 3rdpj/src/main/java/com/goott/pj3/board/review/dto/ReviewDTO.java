@@ -2,11 +2,21 @@ package com.goott.pj3.board.review.dto;
 
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 public class ReviewDTO {
-    int review_idx, plan_idx, review_rating;
-    String user_id, review_content, r_del_yn;
-    Date create_date, update_date;
+    private int review_idx, plan_idx, review_rating;
+    private String user_id, review_content, r_del_yn;
+    private Date create_date, update_date;
+    private List<String> img;
+
+    public List<String> getImg() {
+        return img;
+    }
+
+    public void setImg(List<String> img) {
+        this.img = img;
+    }
 
     public int getReview_idx() {
         return review_idx;
@@ -83,6 +93,7 @@ public class ReviewDTO {
                 ", r_del_yn='" + r_del_yn + '\'' +
                 ", create_date=" + create_date +
                 ", update_date=" + update_date +
+                ", img=" + img +
                 '}';
     }
 }
