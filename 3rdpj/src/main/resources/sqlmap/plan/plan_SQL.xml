@@ -5,12 +5,6 @@
         INSERT into plan(user_id, start_date, end_date, price, plan_title, plan_detail)
         values (#{user_id}, #{start_date}, #{end_date}, #{price}, #{plan_title}, #{plan_detail})
     </insert>
-
-    <insert id="upload">
-        INSERT into plan_img(plan_idx, img1, img2, img3, img4, img5, img6, img7, img8, img9, img10)
-        values (#{plan_idx}, #{img1}, #{img2}, #{img3}, #{img4}, #{img5}, #{img6}, #{img7}, #{img8}, #{img9}, #{img10})
-    </insert>
-
     <select id="list" resultType="com.goott.pj3.plan.dto.PlanDTO">
         select plan_idx, plan_title, price, user_id
         from plan
