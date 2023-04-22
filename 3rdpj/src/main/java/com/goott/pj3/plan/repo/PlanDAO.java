@@ -7,7 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
+//2023.04.05 길영준
 @Repository
 public class PlanDAO {
 
