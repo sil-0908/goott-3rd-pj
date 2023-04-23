@@ -46,4 +46,8 @@
         set p_del_yn = 'Y'
         where plan_idx = #{plan_idx}
     </update>
+    <insert id="pay" parameterType="com.goott.pj3.plan.dto.PayDTO">
+        INSERT INTO pay(user_id, plan_idx, imp_uid, merchant_id)
+        values (#{buyer_id},#{plan_idx},#{imp_uid},#{merchant_uid})
+    </insert>
 </mapper>
