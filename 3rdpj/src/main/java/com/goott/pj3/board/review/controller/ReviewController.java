@@ -90,11 +90,10 @@ public class ReviewController {
 		List<ReviewDTO> detail = this.reviewService.detail(reviewDTO);
 		System.out.println("detail : " + detail.toString());
 		mv.addObject("data", detail);
-		mv.addObject("idxData", review_idx);
+		mv.addObject("review_idx", review_idx);
 		mv.setViewName("/board/review/review_detail");
 		return mv;
 	}
-
 	/**
 	 * 조원재 23.04.05 리뷰 수정 화면 호출
 	 * @param
@@ -103,7 +102,9 @@ public class ReviewController {
 	@GetMapping("update/{review_idx}")
 	public ModelAndView update(@PathVariable int review_idx, ReviewDTO reviewDTO, ModelAndView mv) {
 		reviewDTO.setReview_idx(review_idx);
+
 		List<ReviewDTO> detail = this.reviewService.detail(reviewDTO);
+		System.out.println("detail : " + detail.toString());
 		mv.addObject("data", detail);
 		mv.setViewName("board/review/review_update");
 		return mv;
@@ -115,10 +116,21 @@ public class ReviewController {
 	 * @return
 	 */
 	@PostMapping("update/{review_idx}")
-	public ModelAndView updatePost(@PathVariable int review_idx,  ReviewDTO reviewDTO, ModelAndView mv){
+	public ModelAndView updatePost(@PathVariable int review_idx,  ReviewDTO reviewDTO, ModelAndView mv,
+								   @RequestParam("file[]") List<MultipartFile> multipartFile){
 		reviewDTO.setReview_idx(review_idx);
-		boolean succeess = this.reviewService.update(reviewDTO);
-		if(succeess){
+		int succeessIdx = this.reviewService.update(reviewDTO);
+		try {
+			if(multipartFile !=null) {
+				List<String> imgList = s3FileUploadService.upload(multipartFile);
+				reviewDTO.setR_img(imgList);
+				reviewDTO.setReview_idx(succeessIdx);
+				this.reviewService.updateFile(reviewDTO);
+			}
+		} catch (IOException e){
+			throw new RuntimeException(e);
+		}
+		if(succeessIdx!=0){
 			mv.setViewName("redirect:/review/detail/"+review_idx);
 		}
 		return mv;

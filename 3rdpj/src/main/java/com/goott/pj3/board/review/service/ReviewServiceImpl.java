@@ -41,10 +41,18 @@ public class ReviewServiceImpl implements ReviewService {
 		return this.reviewDAO.detail(reviewDTO);
 	}
 	@Override
-	public boolean update(ReviewDTO reviewDTO) {
+	public int update(ReviewDTO reviewDTO) {
 		int cnt = this.reviewDAO.update(reviewDTO);
-		return cnt==1;
+		if(cnt==1){
+			return reviewDTO.getReview_idx();
+		}
+		return 0;
 	}
+	@Override
+	public void updateFile(ReviewDTO reviewDTO) {
+		this.reviewDAO.updateFile(reviewDTO);
+	}
+
 	@Override
 	public boolean delete(ReviewDTO reviewDTO) {
 		int cnt = this.reviewDAO.delete(reviewDTO);
@@ -61,4 +69,6 @@ public class ReviewServiceImpl implements ReviewService {
 		paging.setTotalCount(reviewDAO.totalCount(cri));
 		return paging;
 	}
+
+
 }

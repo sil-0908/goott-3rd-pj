@@ -10,7 +10,7 @@
     <!--조원재 23.04.21 리뷰 이미지 파일 생성-->
     <insert id="file" parameterType="com.goott.pj3.board.review.dto.ReviewDTO">
             insert into review_img(review_idx, r_img) values
-            <foreach collection="img" item="item" separator=",">
+            <foreach collection="r_img" item="item" separator=",">
                  (#{review_idx}, #{item})
             </foreach>
     </insert>
@@ -37,18 +37,23 @@
         </collection>
     </resultMap>
 
-<!--    <select id="detail" resultType="com.goott.pj3.board.review.dto.ReviewDTO">-->
-<!--        select r.review_idx, r.user_id, r.plan_idx, r.review_content, r.review_rating, r.create_date, i.r_img_idx, i.r_img-->
-<!--          from plan_review r, review_img i-->
-<!--         where r.review_idx = #{review_idx}-->
-<!--          and r.review_idx=i.review_idx-->
-<!--    </select>-->
+
     <!--조원재 23.04.05 리뷰 수정-->
-    <update id="update">
+    <update id="update" parameterType="com.goott.pj3.board.review.dto.ReviewDTO" useGeneratedKeys="true" keyProperty="review_idx">
         update plan_review
            set review_content=#{review_content}
          where review_idx = #{review_idx}
     </update>
+
+    <update id="updatefile" parameterType="com.goott.pj3.board.review.dto.ReviewDTO">
+        update review_img
+           SET
+                <foreach collection="r_img" item="item" separator=",">
+                    r_img=#{item}
+                </foreach>
+         where review_idx=#{review_idx}
+    </update>
+
     <!--조원재 23.04.05 리뷰 삭제-->
     <update id="delete" parameterType="hashMap">
         update plan_review

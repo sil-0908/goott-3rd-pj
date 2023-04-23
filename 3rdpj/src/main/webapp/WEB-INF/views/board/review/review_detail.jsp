@@ -24,14 +24,15 @@
 <p>작성자 : ${row.user_id}</p>
 <p>작성일 : ${row.create_date}"</p>
 </c:forEach>
+
 <%--<c:if test="${data.user_id == sessionScope.user_id}">--%>
 <p>
-<%--    <a href="/review/update/${review_idx.review_idx}">수정</a>--%>
+    <a href="/review/update/${review_idx}">수정</a>
 </p>
 
-<%--<form method="POST" action="/review/delete/${review_idx.review_idx}">--%>
-<%--    <input type="submit" value="삭제">--%>
-<%--</form>--%>
+<form method="POST" action="/review/delete/${review_idx}">
+    <input type="submit" value="삭제">
+</form>
 <%--</c:if>--%>
 <p>
     <a href="/review/list">목록</a>

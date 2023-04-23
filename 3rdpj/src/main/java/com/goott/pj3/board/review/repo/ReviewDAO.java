@@ -35,6 +35,10 @@ public class ReviewDAO {
 		return this.ss.update("review.update", reviewDTO);
 	}
 
+	public void updateFile(ReviewDTO reviewDTO) {
+		this.ss.update("review.updatefile", reviewDTO);
+	}
+
 	public int delete(ReviewDTO reviewDTO) {
 		return this.ss.update("review.delete", reviewDTO);
 	}

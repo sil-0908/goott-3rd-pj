@@ -14,7 +14,7 @@ public interface ReviewService {
 
     List<ReviewDTO> detail(ReviewDTO reviewDTO);
 
-    boolean update(ReviewDTO reviewDTO);
+    int update(ReviewDTO reviewDTO);
 
     boolean delete(ReviewDTO reviewDTO);
 
@@ -23,5 +23,5 @@ public interface ReviewService {
     PagingDTO paging(Criteria cri);
 
 
-
+    void updateFile(ReviewDTO reviewDTO);
 }
