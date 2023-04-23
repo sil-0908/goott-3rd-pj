@@ -6,7 +6,6 @@ import com.siot.IamportRestClient.IamportClient;
 import com.siot.IamportRestClient.exception.IamportResponseException;
 import com.siot.IamportRestClient.response.IamportResponse;
 import com.siot.IamportRestClient.response.Payment;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -15,33 +14,28 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Locale;
 
-// 2023.04.22 길영준 결제
+// 2023.04.22 길영준 결제 서버검증, DB입력
 @Controller
 public class PaymentController {
     private final IamportClient iamportClient;
-
-    private String ai = "1003071753880806";
-
-    private String sec = "US46uhT0JGWE7fGoxqtb3tVOEF1UCelTe5xD210RuLLOaUxWBtWmUHmdM1VcTM6lMgpaBr08R4wRBdLH";
-
     private final PaymentService paymentService;
 
     public PaymentController(IamportClient iamportClient, PaymentService paymentService) {
-        this.iamportClient = new IamportClient(ai,sec);
+        this.iamportClient = iamportClient;
         this.paymentService = paymentService;
     }
-
-    @PostMapping("/verifyiamport/{imp_uid}")
+// 결제 서버검증(실제 결제한 가격이 고지된 가격과 동일한지 검증)
     @ResponseBody
-    public IamportResponse<Payment> paymentByUid(Model model, Locale locale, HttpSession httpSession,
-                                                 @PathVariable(value = "imp_uid") String imp_uid) throws IamportResponseException, IOException {
+    @PostMapping("/verifyIamport/{imp_uid}")
+    public IamportResponse<Payment> paymentByUid(@PathVariable(value = "imp_uid") String imp_uid) throws IamportResponseException, IOException {
         return iamportClient.paymentByImpUid(imp_uid);
     }
 
-    @PostMapping("/payment/confirm")
     @ResponseBody
+    @PostMapping("/payment/confirm")
     public String paymentConfirm(@RequestBody PayDTO payDTO){
         paymentService.pay(payDTO);
+        System.out.println(payDTO.toString());
         return "success";
     }
 

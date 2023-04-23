@@ -44,6 +44,7 @@
 <button type="button" onclick="kakao()">결제</button>
 
 <script>
+    // 삭제기능 버튼
     $('#delete').click(function (e) {
         let number = e.target.dataset.id;
         $.ajax({
@@ -58,45 +59,66 @@
         });
     });
 
+    // 2023.04.23 길영준
+    // 카카오페이 결제
+    const price = $('#price').val(); // 가격
+    const name = $('#title').val(); //플랜명
+    const buyer = $('.session').val(); //구매자아이디
+    const planner = $('#planner').val(); // 플래너아이디
+    const plan_idx = $('.plan_idx').val();
+    console.log(price)
+    console.log(name)
+    console.log(buyer)
+    console.log(planner)
+    console.log(plan_idx)
+
     function kakao() {
         let IMP = window.IMP;
         IMP.init('imp67107132');
         IMP.request_pay({
-            pg: 'kakaopay.{TC0ONETIME}',
-            pay_method: 'card',  //생략가
-            merchant_uid: 'sun' + new Date().getTime(), //상점에서 생성한 고유 주문번호
-            name: $('#title').val(),
-            amount: $('#price').val(),
-            buyer_name: $('.session').val()
-        }, function (rsp) { // callback 로직
-            // if (rsp.success) {
-            confirmPayment(rsp.imp_uid, rsp.merchant_uid, rsp.buyer_name, $('.plan_idx').val)
-            // } else {
-                let msg = rsp.error_msg;
-                alert("결제실패 : " + msg);
-            // }
+            pg: 'kakaopay.TC0ONETIME',
+            merchant_uid: 'suntour_' + new Date().getTime(), //상점에서 생성한 고유 주문번호
+            name: name, // 상품명
+            amount: price, // 가격
+            buyer_name: buyer // 구매자
+        }, function (rsp) { // 검증 로직
+            $.ajax({
+                type: 'POST',
+                url: '/verifyIamport/' + rsp.imp_uid
+            }).done(function (result) {
+                if (rsp.paid_amount === result.response.amount) {
+                    alert("결제완료");
+                    let info = {
+                        imp_uid: rsp.imp_uid,
+                        merchant_uid: rsp.merchant_uid,
+                        buyer_id: buyer,
+                        planner_id: planner,
+                        plan_idx: plan_idx
+                    }
+                    $.ajax({
+                        type: 'POST',
+                        data: JSON.stringify(info),
+                        url: '/payment/confirm',
+                        dataType:"json",
+                        contentType: 'application/json'
+                    }).done(function (result) {
+                        alert("디비전송성공")
+                        window.location.reload();
+                    }).fail(function (data, textStatus, errorThrown) {
+
+                        alert("디비전송실패");
+                        console.log(textStatus);
+                        console.log(errorThrown);
+
+                    })
+                } else {
+                    alert("결제실패" + "에러 : " + rsp.error_code + "에러내용: " + rsp.error_msg);
+                }
+            })
+
         });
     }
 
-    function confirmPayment(imp_uid, merchant_uid, buyer_name, plan_idx) {
-        $.ajax({
-            url: '/payment/confirm',
-            type: 'POST',
-            async: true,
-            dataType: "Json",
-            data: {
-                imp_uid: imp_uid,            // 결제 고유번호
-                merchant_uid: merchant_uid,// 주문번호
-                user_id: buyer_name,
-                plan_idx: plan_idx
-            }
-        }).done(function () {
-            alert("결제성공");
-        }).fail(function (error) {
-            console.log(error);
-        })
-
-    }
 
 </script>
 </body>

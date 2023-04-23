@@ -1,7 +1,7 @@
 package com.goott.pj3.plan.dto;
 //2023.04.22 길영준
 public class PayDTO {
-    private String imp_uid, merchant_uid, user_id, plan_idx;
+    private String imp_uid, merchant_uid, buyer_id, planner_id, plan_idx;
 
     public String getImp_uid() {
         return imp_uid;
@@ -19,12 +19,20 @@ public class PayDTO {
         this.merchant_uid = merchant_uid;
     }
 
-    public String getUser_id() {
-        return user_id;
+    public String getBuyer_id() {
+        return buyer_id;
     }
 
-    public void setUser_id(String user_id) {
-        this.user_id = user_id;
+    public void setBuyer_id(String buyer_id) {
+        this.buyer_id = buyer_id;
+    }
+
+    public String getPlanner_id() {
+        return planner_id;
+    }
+
+    public void setPlanner_id(String planner_id) {
+        this.planner_id = planner_id;
     }
 
     public String getPlan_idx() {
@@ -40,7 +48,8 @@ public class PayDTO {
         return "PayDTO{" +
                 "imp_uid='" + imp_uid + '\'' +
                 ", merchant_uid='" + merchant_uid + '\'' +
-                ", user_id='" + user_id + '\'' +
+                ", buyer_id='" + buyer_id + '\'' +
+                ", planner_id='" + planner_id + '\'' +
                 ", plan_idx='" + plan_idx + '\'' +
                 '}';
     }
