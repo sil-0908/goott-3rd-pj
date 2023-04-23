@@ -13,6 +13,8 @@
 <head>
 
     <title></title>
+    <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+    <script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 </head>
 <body>
 <input class="session" type="hidden" value="${sessionScope.user_id}">
@@ -40,8 +42,7 @@
     <button data-id="${data.plan_idx}" id="delete">삭제</button>
 </c:if>
 <button type="button" onclick="kakao()">결제</button>
-<script src="https://code.jquery.com/jquery-3.6.3.js"></script>
-<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+
 <script>
     $('#delete').click(function (e) {
         let number = e.target.dataset.id;
@@ -58,33 +59,22 @@
     });
 
     function kakao() {
-        const IMP = window.IMP;
-        IMP.init("imp67107132");
+        let IMP = window.IMP;
+        IMP.init('imp67107132');
         IMP.request_pay({
             pg: 'kakaopay.{TC0ONETIME}',
             pay_method: 'card',  //생략가
             merchant_uid: 'sun' + new Date().getTime(), //상점에서 생성한 고유 주문번호
             name: $('#title').val(),
             amount: $('#price').val(),
-            buyer_name: $('.session').val(),
+            buyer_name: $('.session').val()
         }, function (rsp) { // callback 로직
-            if (rsp.success) {
-                $.ajax({
-                    method: "POST",
-                    url: "/payment/verify/" + rsp.imp_uid, //결제 고유번호
-                }).done(function (data) {
-                    if (data.error_msg) {
-                        alert(data.error_msg);
-                    } else {
-                        confirmPayment(rsp.imp_uid, rsp.merchant_uid, rsp.buyer_name, $('.plan_idx').val)
-                    }
-                }).fail(function (xhr, textStatus, errorThrown) {
-                    console.log(xhr, textStatus, errorThrown);
-                });
-            } else {
+            // if (rsp.success) {
+            confirmPayment(rsp.imp_uid, rsp.merchant_uid, rsp.buyer_name, $('.plan_idx').val)
+            // } else {
                 let msg = rsp.error_msg;
                 alert("결제실패 : " + msg);
-            }
+            // }
         });
     }
 
@@ -99,12 +89,13 @@
                 merchant_uid: merchant_uid,// 주문번호
                 user_id: buyer_name,
                 plan_idx: plan_idx
-            }.done(function () {
-                alert("결제성공");
-            }).fail(function (error) {
-                console.log(error);
-            })
-        });
+            }
+        }).done(function () {
+            alert("결제성공");
+        }).fail(function (error) {
+            console.log(error);
+        })
+
     }
 
 </script>
