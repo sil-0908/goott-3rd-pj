@@ -102,31 +102,34 @@ public class UserController {
 		return "redirect:/user/mypage";
 	}
 	
-//	아이디 찾기 - 장민실 23.04.13
-	@PostMapping("find_id")
+//	아이디 찾기 - 장민실 23.04.13 > 현재 DB에 중복정보 다량으로 기능구현 완료 후 주석처리
+//	@PostMapping("find_id")
+//	@ResponseBody
+//	public String find_id(@RequestParam("email") String email, @RequestParam("hp") String hp, UserDTO u_dto) {
+////		휴대폰 인증기능 완료되면 휴대폰인증 추가하기
+//		u_dto.setEmail(email);
+//		u_dto.setHp(hp);
+//		String id = userService.find_id(u_dto);
+//		return id;
+//	}
+	
+//	비밀번호 찾기 - 장민실 23.04.23
+	@PostMapping("find_get_pw")
 	@ResponseBody
-	public String find_id(@RequestParam("email") String email, @RequestParam("hp") String hp, UserDTO u_dto) {
-//		휴대폰 인증기능 완료되면 휴대폰인증 추가하기
-		u_dto.setEmail(email);
+	public int find_get_pw(@RequestParam("id") String id, @RequestParam("hp") String hp, UserDTO u_dto) {
+		u_dto.setUser_id(id);
 		u_dto.setHp(hp);
-		String id = userService.find_id(u_dto);
-		return id;
+		int pw_cnt = userService.find_get_pw(u_dto);	// 입력정보 일치하는 비밀번호 존재여부 : 0=존재X, 1=존재O
+		return pw_cnt;
 	}
 	
-//	비밀번호 찾기 / 저장하기 따로 메소드 생성하기
-//	@PostMapping("find_pw")
+//	새로운 비밀번호 저장 - 장민실 23.04.23
+//	@PostMapping("find_set_pw")
 //	@ResponseBody
-//	public String find_pw(@RequestParam("id") String id, @RequestParam("hp") String hp, UserDTO u_dto) {
-////		Bcrypt라서 복호화 불가하니, 비밀번호 찾기는 비밀번호 변경으로 처리		
-////		1. 사용자가 id, hp 입력
-////		2. 입력받은 정보를 컨트롤러에서 dto에 셋팅
-////		3. dto로 db에서 id, hp가 일치하는 pw가 있는지 int로 반환
-////			> 1이면 있는거니까 비밀번호 변경하도록 창 띄우고, 변경 비밀번호 암호화 해서 db저장 - 서비스에서 작업
-////			> 0이면 없는거니까 id랑 hp 다시 확인하라고 문구출력 - 서비스에서 작업
-//		
+//	public String find_set_pw(@RequestParam("id") String id, @RequestParam("hp") String hp, @RequestParam("pw") String pw, UserDTO u_dto) {
 //		u_dto.setUser_id(id);
 //		u_dto.setHp(hp);
-//		userService.find_pw(u_dto);
+//		u_dto.setPw(pw);
 //		return "redirect:/user/sign_in";
 //	}
 	

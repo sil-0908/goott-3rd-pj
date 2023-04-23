@@ -41,5 +41,9 @@ public class UserDAO {
 	public String del_yn(UserDTO u_dto) {
 		return ss.selectOne("user.del_yn", u_dto);
 	}
+
+	public int find_get_pw(UserDTO u_dto) {
+		return ss.selectOne("user.find_get_pw", u_dto);
+	}
 	
 }
