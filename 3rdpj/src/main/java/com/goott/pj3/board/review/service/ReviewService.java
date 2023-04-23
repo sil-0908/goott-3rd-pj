@@ -12,7 +12,7 @@ public interface ReviewService {
 
     void createFile(ReviewDTO reviewDTO);
 
-    ReviewDTO detail(ReviewDTO reviewDTO);
+    List<ReviewDTO> detail(ReviewDTO reviewDTO);
 
     boolean update(ReviewDTO reviewDTO);
 
