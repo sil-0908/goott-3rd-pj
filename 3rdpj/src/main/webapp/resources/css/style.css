@@ -15,6 +15,9 @@
 @import "./admin/admin_noticewrite.css";
 @import "./admin/admin_userlist.css";
 
+@import "./user/sign_in.css";
+@import "./user/sign_up.css";
+
 
 :root {
   --black: #181823;
