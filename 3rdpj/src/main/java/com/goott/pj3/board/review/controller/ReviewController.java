@@ -51,7 +51,7 @@ public class ReviewController {
 								   @RequestParam("file[]") List<MultipartFile> multipartFile){
 		String user_id = (String) httpSession.getAttribute("user_id"); // 로그인한 유저 아이디 세션
 		reviewDTO.setUser_id(user_id); // DTO에 유저 아이디 할당
-		reviewDTO.setPlan_idx(1); // 임시 plan_idx값
+		reviewDTO.setPlan_idx(1); // 임시 plan_idx값    g
 		int review_idx = this.reviewService.create(reviewDTO); // 생성된 게시글 idx
 		ImgFileUpload(reviewDTO, multipartFile, review_idx); // 이미지 파일 업로드 API
 		if(review_idx!=0){
