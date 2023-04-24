@@ -92,5 +92,28 @@
           and r_del_yn = 'y'
     </select>
 
+<!--	<insert id="replywrite">-->
+<!--		insert into reply(review_idx, r_writer, r_content)-->
+<!--		values (#{review_idx}, #{r_writer}, #{r_content})-->
+<!--	</insert>-->
+<!--	-->
+<!--	<select id="getList" resultType="com.goott.pj3.common.util.ReplyDTO">-->
+<!--		select reply_idx, r_writer, r_content-->
+<!--		  from reply-->
+<!--		 where review_idx = #{review_idx}-->
+<!--		   and r_del_yn = 'n'-->
+<!--	</select>-->
+<!--	-->
+<!--	<update id="replyupdate">-->
+<!--		update reply-->
+<!--		   set r_content = #{r_content}-->
+<!--		 where reply_idx = #{reply_idx}-->
+<!--	</update>-->
+<!--	-->
+<!--	<update id="replydelete">-->
+<!--		update reply-->
+<!--		   set r_del_yn = 'y'-->
+<!--		 where reply_idx = #{reply_idx}-->
+<!--	</update>-->
 </mapper>
 
