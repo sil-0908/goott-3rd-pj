@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/FortAwesome/Font-Awesome@5.14.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../css/style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div data-include-path="layout.html"></div>
+    <script src="../js/layout.js"></script>
+    <main class="admin">
+      <section class="admin__notice">
+        <hgroup class="admin__notice-create--title">
+          <h1>공지사항 관리</h1>
+          <div class="admin__notice-create--btn">
+            <a href="/admin/noticewrite">공지사항 작성</a>
+          </div>
+        </hgroup>
+        <article class="admin__notice-list">
+          <hgroup class="admin__notice-list--title">
+            <h1>공지사항 목록</h1>
+          </hgroup>
+          <ul class="admin__notice-list--table">
+            <li class="admin__notice-list--thead">
+              <span>작성자</span>
+              <span>제목</span>
+              <span>내용</span>
+              <span>삭제여부</span>
+              <span>최초 등록일</span>
+              <span>업데이트 날짜</span>
+            </li>
+            <li class="admin__notice-list--tbody">
+              <span>${row.user.id}</span>
+              <span>
+                <a href="/admin/noticedetail?idx=${row.qna_idx}">
+                  ${row.qna_title}
+                </a>
+              </span>
+              <span>${row.qna_content}</span>
+              <span>${row.q_del_yn}</span>
+              <span>
+                asdf
+                <fmt:formatDate
+                  pattern="yyyy-MM-dd HH:mm:ss"
+                  value="${row.create_date}"
+                />
+              </span>
+              <span>
+                asdf
+                <fmt:formatDate
+                  pattern="yyyy-MM-dd HH:mm:ss"
+                  value="${row.update_date}"
+                />
+              </span>
+            </li>
+          </ul>
+        </article>
+      </section>
+    </main>
+    <script
+      src="https://kit.fontawesome.com/7723a79ab5.js"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

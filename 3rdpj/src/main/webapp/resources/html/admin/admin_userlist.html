@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/FortAwesome/Font-Awesome@5.14.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../css/style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div data-include-path="layout.html"></div>
+    <script src="../js/layout.js"></script>
+    <main class="admin">
+      <section class="admin__user">
+        <hgroup class="admin__user-create--title">
+          <h1>회원 관리</h1>
+          <!-- <div class="admin__user-create--btn">
+            <a href="/admin/noticewrite">관리자 등록</a>
+          </div> -->
+        </hgroup>
+        <article class="admin__user-list">
+          <hgroup class="admin__user-list--title">
+            <h1>회원 목록</h1>
+          </hgroup>
+          <ul class="admin__user-list--table">
+            <li class="admin__user-list--thead">
+              <span>회원 아이디</span>
+              <span>패스워드</span>
+              <span>연락처</span>
+              <span>이메일</span>
+              <span>권한</span>
+              <span>탈퇴 여부</span>
+              <span>결제 포인트</span>
+              <span>회원 가입일</span>
+              <span>회원 수정일</span>
+            </li>
+            <li class="admin__user-list--tbody">
+              <span>
+                <a href="/admin/userdetail?user_id=${row.user_id}"
+                  >${row.user_id}</a
+                >
+              </span>
+              <span>${row.pw}</span>
+              <span>${row.hp}</span>
+              <span>${row.email}</span>
+              <span>${row.auth}</span>
+              <span>${row.u_del_yn}</span>
+              <span>${row.u_point}</span>
+              <span>
+                <fmt:formatDate
+                  pattern="yyyy-MM-dd HH:mm:ss"
+                  value="${row.create_date}"
+                />
+              </span>
+              <span>
+                <fmt:formatDate
+                  pattern="yyyy-MM-dd HH:mm:ss"
+                  value="${row.update_date}"
+                />
+              </span>
+            </li>
+          </ul>
+        </article>
+      </section>
+    </main>
+    <script
+      src="https://kit.fontawesome.com/7723a79ab5.js"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

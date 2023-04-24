@@ -54,7 +54,6 @@ public class FreeBoardController {
 		mv.setViewName("board/free/free_detail");
 		return mv;
 	}
-
 	@RequestMapping(value = "modify", method = RequestMethod.POST, produces="application/text; charset=UTF-8;")
 	@ResponseBody
 	public String modify(FreeBoardDTO boardDTO) {
