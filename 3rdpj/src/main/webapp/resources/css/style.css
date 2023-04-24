@@ -38,6 +38,7 @@ body {
 main {
   height: 100%;
   min-height: 100%;
-  margin: 7vh 0 25vh 0;
+  margin-top: 7vh;
+  margin-bottom: 25vh;
   /* border: 2px solid green; */
 }

@@ -40,6 +40,7 @@ $(document).ready(function() {
 
 <body>
 <%@ include file="/WEB-INF/views/common/layout.jsp" %>
+<!-- 김규동 23.04.24 admin_detail -->
 	<main class="admin">
       <section class="admin__notice-detail">
         <hgroup class="admin__notice-detail--title">
@@ -51,11 +52,19 @@ $(document).ready(function() {
         <article class="admin__notice-detail--sheet">
           <form class="admin__notice-detail--form">
             <ul class="admin__noitce-detail--list">
-              <li class="admin__notice-detail--component">
+              <li class="admin__notice-component">
                 <span>작성자: </span>
                 <span>${dto.user_id}</span>
               </li>
-              <li class="admin__notice-detail--component">
+              <li class="admin__notice-component">
+                <span>권한: </span>
+                <span>${dto.auth}</span>
+              </li>
+              <li class="admin__notice-component">
+                <span>카테고리: </span>
+                <span>${dto.category}</span>
+              </li>
+              <li class="admin__notice-component">
                 <label for="qna_title">제목: </label>
                 <input
                   name="qna_title"
@@ -64,22 +73,9 @@ $(document).ready(function() {
                   value="${dto.qna_title}"
                 />
               </li>
-              <li class="admin__notice-detail--component">
-                <span>권한: </span>
-                <span>${dto.auth}</span>
-              </li>
-              <li class="admin__notice-detail--component">
-                <span>카테고리: </span>
-                <span>${dto.category}</span>
-              </li>
-              <li class="admin__notice-detail--component">
+              <li class="admin__notice-component">
                 <label for="qna_content">내용: </label>
-                <input
-                  name="qna_content"
-                  id="qna_content"
-                  type="text"
-                  value="${dto.qna_content}"
-                />
+                <textarea rows="5" cols="64" id="qna_content" name="qna_content">${dto.qna_content}</textarea>
               </li>
               <li class="admin__notice-detail--btns">
                 <input type="hidden" name="qna_idx" value="${dto.qna_idx}" />

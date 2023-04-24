@@ -66,6 +66,7 @@ footer {
 
 footer.show {
   opacity: 1;
+  z-index: 999;
 }
 .footer__con {
   display: flex;
