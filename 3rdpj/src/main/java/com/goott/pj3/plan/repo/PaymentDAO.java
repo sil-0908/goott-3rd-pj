@@ -13,7 +13,7 @@ public class PaymentDAO {
         this.session = session;
     }
 
-    public void pay(PayDTO payDTO) {
-        session.insert("payment.insert", payDTO);
+    public int pay(PayDTO payDTO) {
+       return session.insert("plan.pay", payDTO);
     }
 }

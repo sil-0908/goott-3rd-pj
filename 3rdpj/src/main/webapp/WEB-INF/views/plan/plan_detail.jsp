@@ -88,6 +88,11 @@
             }).done(function (result) {
                 if (rsp.paid_amount === result.response.amount) {
                     alert("결제완료");
+                    console.log("uid : " + rsp.imp_uid)
+                    console.log("uid : " + rsp.merchant_uid)
+                    console.log(buyer)
+                    console.log(planner)
+                    console.log(plan_idx)
                     let info = {
                         imp_uid: rsp.imp_uid,
                         merchant_uid: rsp.merchant_uid,
@@ -99,18 +104,29 @@
                         type: 'POST',
                         data: JSON.stringify(info),
                         url: '/payment/confirm',
-                        dataType:"json",
-                        contentType: 'application/json'
-                    }).done(function (result) {
-                        alert("디비전송성공")
-                        window.location.reload();
-                    }).fail(function (data, textStatus, errorThrown) {
-
-                        alert("디비전송실패");
-                        console.log(textStatus);
-                        console.log(errorThrown);
-
+                        dataType: "json",
+                        contentType: 'application/json; charset=utf-8',
+                        success: function (result) {
+                            alert(result.msg)
+                            window.location.reload();
+                        },
+                        error: function (xhr, status, error) {
+                            alert()
+                            console.log(xhr)
+                            console.log(status)
+                            console.log(error)
+                        }
                     })
+                    //     .done(function (result) {
+                    //     alert("디비전송성공")
+                    //     window.location.reload();
+                    // }).fail(function (data, textStatus, errorThrown) {
+                    //
+                    //     alert("디비전송실패");
+                    //     console.log(textStatus);
+                    //     console.log(errorThrown);
+                    //
+                    // })
                 } else {
                     alert("결제실패" + "에러 : " + rsp.error_code + "에러내용: " + rsp.error_msg);
                 }

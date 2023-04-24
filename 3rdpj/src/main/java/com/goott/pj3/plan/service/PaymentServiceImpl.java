@@ -15,7 +15,8 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Override
-    public void pay(PayDTO payDTO) {
-        paymentDAO.pay(payDTO);
+    public boolean pay(PayDTO payDTO) {
+        int cnt = paymentDAO.pay(payDTO);
+        return cnt==1;
     }
 }
