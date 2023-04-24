@@ -2,11 +2,12 @@ package com.goott.pj3.travelinfo.dto;
 
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 public class TravelInfoDTO {
    int travel_location_idx;
    String user_id, country_a, country_b, country_c, country_detail, country_script;
-   String[] country_img;
+   List<String> country_img;
    Date create_date, update_date;
 
     public int getTravel_location_idx() {
@@ -65,14 +66,6 @@ public class TravelInfoDTO {
         this.country_script = country_script;
     }
 
-    public String[] getCountry_img() {
-        return country_img;
-    }
-
-    public void setCountry_img(String[] country_img) {
-        this.country_img = country_img;
-    }
-
     public Date getCreate_date() {
         return create_date;
     }
@@ -89,12 +82,27 @@ public class TravelInfoDTO {
         this.update_date = update_date;
     }
 
+    public List<String> getCountry_img() {
+        return country_img;
+    }
+
+    public void setCountry_img(List<String> country_img) {
+        this.country_img = country_img;
+    }
+
     @Override
     public String toString() {
-        return "TravelInfoDTO [travel_location_idx=" + travel_location_idx + ",user_id=" + user_id +
-                ",country_a=" + country_a + ",country_b=" + country_b + ",country_c=" + country_c +
-                ",country_detail=" + country_detail + ",country_script=" + country_script +
-                ", country_img=" + Arrays.toString(country_img) +
-                ",create_date=" + create_date + ",upate_date=" + update_date + "]";
+        return "TravelInfoDTO{" +
+                "travel_location_idx=" + travel_location_idx +
+                ", user_id='" + user_id + '\'' +
+                ", country_a='" + country_a + '\'' +
+                ", country_b='" + country_b + '\'' +
+                ", country_c='" + country_c + '\'' +
+                ", country_detail='" + country_detail + '\'' +
+                ", country_script='" + country_script + '\'' +
+                ", country_img=" + country_img +
+                ", create_date=" + create_date +
+                ", update_date=" + update_date +
+                '}';
     }
 }

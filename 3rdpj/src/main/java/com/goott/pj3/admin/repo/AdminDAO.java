@@ -11,13 +11,14 @@ import com.goott.pj3.admin.dto.AdminUserDTO;
 @Repository
 public class AdminDAO {
 
-	@Autowired
-	SqlSession ss;
+    @Autowired
+    SqlSession ss;
 
-	public AdminUserDTO login_check(AdminUserDTO dto) {
-		// TODO Auto-generated method stub
-		return ss.selectOne("admin.login_check",dto);
-	}
+    public AdminUserDTO login_check(AdminUserDTO dto) {
+        // TODO Auto-generated method stub
+        return ss.selectOne("admin.login_check", dto);
+    }
 
-	
+
+
 }

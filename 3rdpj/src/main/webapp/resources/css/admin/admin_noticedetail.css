@@ -1,0 +1,49 @@
+.admin__notice-detail {
+  width: 90%;
+  height: 100%;
+}
+.admin__notice-detail--title {
+  margin: 5rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.admin__notice-detail--title > h1 {
+  font-size: 1.5rem;
+}
+.admin__notice-detail--sheet {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.admin__notice-detail--form {
+}
+.admin__notice-detail--list {
+}
+.admin__notice-detail--component {
+  margin-bottom: 1.5rem;
+}
+.admin__notice-detail--component > span,
+label,
+input {
+  display: inline-block;
+  font-size: 1rem;
+  line-height: 2rem;
+  border-style: none;
+  height: 2rem;
+}
+.admin__notice-detail--component > :is(span, label, input):nth-child(1) {
+  width: 4.5rem;
+}
+.admin__notice-detail--component > :is(span, label, input):nth-child(2) {
+  border: 1px solid var(--black);
+  width: 30rem;
+  border-radius: 3px;
+}
+.admin__notice-detail--btns {
+  display: flex;
+  justify-content: flex-end;
+}
+.btn__normal--admin-noticedetail {
+  margin-left: 1rem;
+}

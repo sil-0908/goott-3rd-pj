@@ -22,9 +22,8 @@
 <body>
 <h1>리뷰 작성</h1>
 <form method="POST" enctype="multipart/form-data" >
-    <input type="hidden" name="plan_idx" value="1">
     <p>내용 : <input type="text" name="review_content"></p>
-    <p>사진 : <input id="fileItem" name="file" type="file" multiple name="review_img" onchange="previewFile()"></p>
+    <p>사진 : <input id="fileItem" name="file[]" type="file" onchange="previewFile()" multiple ></p>
     <p>평점 :
         <input type="radio" name="review_rating" value="1">1
         <input type="radio" name="review_rating" value="2">2
@@ -32,7 +31,7 @@
         <input type="radio" name="review_rating" value="4">4
         <input type="radio" name="review_rating" value="5">5
     </p>
-    <p><input id="upload-btn" type="submit" value="저장"></p>
+    <p> <input id="upload-btn" type="submit" value="저장"></p>
 </form>
 <div id="preview"></div>
 </body>
@@ -47,13 +46,11 @@
         var reader = new FileReader();
         reader.onloadend = function() {
             preview.innerHTML = '<img id="preview-img" src="' + reader.result + '">';
-            $('#upload').prop('disabled', false);
         }
         if (file) {
             reader.readAsDataURL(file);
         } else {
             preview.innerHTML = '';
-            $('#upload-btn').prop('disabled', true);
         }
     }
     /**
@@ -83,8 +80,6 @@
             return false;
         }
     }
-
-
 
 
 </script>

@@ -1,24 +1,21 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
-<title>회원가입</title>
-</head>
-<body>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/views/common/layout.jsp" %>
+
+<main>
+	<!-- 
 	<c:if test="${sessionScope.user_id == null}">
 		<input type="button" id="sign_in" value="로그인">
 		<input type="button" id="sign_up" value="회원가입">
+		<input type="button" id="find_user" value="아이디/비밀번호 찾기">
 	</c:if>
-	<c:if test="${sessionScope.user_id != null}">
-		<input type="button" id="sign_out" value="로그아웃">
+	
+	 -->
+	 <h1>mypage</h1>
+	 <c:if test="${sessionScope.user_id != null}">
 		<input type="text" value="${sessionScope.user_id}">
 		<input type="text" value="${sessionScope.auth}">
 	</c:if>
+</main>
 
 <script src="/resources/js/user/my_page.js"></script>
-</body>
-</html>
+<script src="/resources/js/common/layout.js"></script>

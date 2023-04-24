@@ -3,15 +3,25 @@ package com.goott.pj3.board.review.service;
 import java.util.List;
 import java.util.Map;
 
+import com.goott.pj3.board.review.dto.ReviewDTO;
+import com.goott.pj3.common.util.Criteria;
+import com.goott.pj3.common.util.PagingDTO;
+
 public interface ReviewService {
+    int create(ReviewDTO reviewDTO);
 
-    public String create(Map<String, Object>map);
+    void createFile(ReviewDTO reviewDTO);
 
-    public Map<String, Object> detail(Map<String, Object> map);
+    ReviewDTO detail(ReviewDTO reviewDTO);
 
-    boolean update(Map<String, Object> map);
+    boolean update(ReviewDTO reviewDTO);
 
-    boolean delete(Map<String, Object> map);
+    boolean delete(ReviewDTO reviewDTO);
 
-    List<Map<String, Object>> list(Map<String, Object> map);
+    List<ReviewDTO> list(Criteria cri);
+
+    PagingDTO paging(Criteria cri);
+
+
+
 }

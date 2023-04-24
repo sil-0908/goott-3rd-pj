@@ -2,17 +2,21 @@ package com.goott.pj3.board.review.dto;
 
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 public class ReviewDTO {
-    int review_idx, plan_idx, review_rating;
-    String user_id, review_content;
-    String[] reivew_img;
-    Date create_date, update_date;
+    private int review_idx, plan_idx, review_rating;
+    private String user_id, review_content, r_del_yn;
+    private Date create_date, update_date;
+    private List<String> img;
 
-    /**
-     * 조원재 23.04.05. 리뷰 DTO
-     * @return
-     */
+    public List<String> getImg() {
+        return img;
+    }
+
+    public void setImg(List<String> img) {
+        this.img = img;
+    }
 
     public int getReview_idx() {
         return review_idx;
@@ -20,14 +24,6 @@ public class ReviewDTO {
 
     public void setReview_idx(int review_idx) {
         this.review_idx = review_idx;
-    }
-
-    public String getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(String user_id) {
-        this.user_id = user_id;
     }
 
     public int getPlan_idx() {
@@ -38,6 +34,22 @@ public class ReviewDTO {
         this.plan_idx = plan_idx;
     }
 
+    public int getReview_rating() {
+        return review_rating;
+    }
+
+    public void setReview_rating(int review_rating) {
+        this.review_rating = review_rating;
+    }
+
+    public String getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(String user_id) {
+        this.user_id = user_id;
+    }
+
     public String getReview_content() {
         return review_content;
     }
@@ -46,20 +58,12 @@ public class ReviewDTO {
         this.review_content = review_content;
     }
 
-    public String[] getReivew_img() {
-        return reivew_img;
+    public String getR_del_yn() {
+        return r_del_yn;
     }
 
-    public void setReivew_img(String[] reivew_img) {
-        this.reivew_img = reivew_img;
-    }
-
-    public int getReview_rating() {
-        return review_rating;
-    }
-
-    public void setReview_rating(int review_rating) {
-        this.review_rating = review_rating;
+    public void setR_del_yn(String r_del_yn) {
+        this.r_del_yn = r_del_yn;
     }
 
     public Date getCreate_date() {
@@ -70,24 +74,26 @@ public class ReviewDTO {
         this.create_date = create_date;
     }
 
-    public Date getUpate_date() {
+    public Date getUpdate_date() {
         return update_date;
     }
 
-    public void setUpate_date(Date upate_date) {
-        this.update_date = upate_date;
+    public void setUpdate_date(Date update_date) {
+        this.update_date = update_date;
     }
 
     @Override
     public String toString() {
-        return "ReviewDTO [review_idx=" + review_idx +
-                ",user_id=" + user_id +
-                ",plan_idx=" + plan_idx +
-                ",review_content=" + review_content +
-                ",review_rating=" + review_rating +
-                ", reivew_img=" + Arrays.toString(reivew_img) +
-                ",create_date=" + create_date +
-                ",update_date=" + update_date +
-                "]";
+        return "ReviewDTO{" +
+                "review_idx=" + review_idx +
+                ", plan_idx=" + plan_idx +
+                ", review_rating=" + review_rating +
+                ", user_id='" + user_id + '\'' +
+                ", review_content='" + review_content + '\'' +
+                ", r_del_yn='" + r_del_yn + '\'' +
+                ", create_date=" + create_date +
+                ", update_date=" + update_date +
+                ", img=" + img +
+                '}';
     }
 }
