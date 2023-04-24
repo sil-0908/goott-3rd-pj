@@ -45,12 +45,13 @@ public class ReviewDAO {
 	}
 
 	public List<ReviewDTO> list(Criteria cri) {
-		return ss.selectList("review.list", cri);
+		return this.ss.selectList("review.list", cri);
 	}
 
 	public int totalCount(Criteria cri) {
-		return ss.selectOne("review.totalCount",cri);
+		return this.ss.selectOne("review.totalCount",cri);
 	}
+
 
 
 }

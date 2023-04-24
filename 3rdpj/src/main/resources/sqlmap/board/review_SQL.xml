@@ -18,11 +18,12 @@
     <!--조원재 23.04.05 디테일 페이지-->
     <select id="detail" resultMap="reviewResultMap">
         select r.review_idx, r.user_id, r.plan_idx, r.review_content, r.review_rating, r.create_date,
-               group_concat(i.r_img separator ',') as r_imgs
-        from plan_review r left join review_img i
-          on r.review_idx = i.review_idx
-       where r.review_idx = #{review_idx}
-       group by r.review_idx
+               group_concat(i.r_img separator ',') as r_imgs,
+               group_concat(i.r_img_idx separator ',') as r_img_idxs
+         from plan_review r left join review_img i
+           on r.review_idx = i.review_idx
+        where r.review_idx = #{review_idx}
+        group by r.review_idx
     </select>
 
     <resultMap id="reviewResultMap" type="com.goott.pj3.board.review.dto.ReviewDTO">
@@ -34,6 +35,9 @@
         <result property="create_date" column="create_date"/>
         <collection property="r_img" column="r_imgs" javaType="java.util.List" ofType="java.lang.String" >
             <result column="r_imgs"/>
+        </collection>
+        <collection property="r_img_idx" column="r_img_idxs" javaType="java.util.List" ofType="java.lang.String" >
+            <result column="r_img_idxs"/>
         </collection>
     </resultMap>
 

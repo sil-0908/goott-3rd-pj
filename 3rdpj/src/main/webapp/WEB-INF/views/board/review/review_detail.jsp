@@ -17,7 +17,7 @@
 <h1> 리뷰 화면</h1>
 
 <p>번호 : ${data.review_idx}</p>
-<c:forEach var="image" items="${imglist}" >
+<c:forEach var="image" items="${imglist.r_img}" >
     <p>리뷰 사진 : <img src="${image}" height="200px" width="200px" style="border: 1px solid red;"></p>
 </c:forEach>
 <p>내용 : ${data.review_content}</p>

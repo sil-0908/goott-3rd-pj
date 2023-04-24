@@ -14,7 +14,9 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/review/**")
@@ -90,13 +92,13 @@ public class ReviewController {
 	public ModelAndView detail(@PathVariable int review_idx, ReviewDTO reviewDTO, ModelAndView mv){
 		reviewDTO.setReview_idx(review_idx);
 		ReviewDTO detail = this.reviewService.detail(reviewDTO);
-		System.out.println("detalData : " + detail.toString());
+		System.out.println("detail : " + detail.toString());
 		List<String> imgList = new ArrayList<>();
 		for(String row : detail.getR_img().get(0).split(",")){
 			imgList.add(row);
 		}
-		mv.addObject("imglist", imgList);
 		mv.addObject("data", detail);
+		mv.addObject("imglist", imgList);
 		mv.setViewName("/board/review/review_detail");
 		return mv;
 	}
@@ -109,13 +111,13 @@ public class ReviewController {
 	@GetMapping("update/{review_idx}")
 	public ModelAndView update(@PathVariable int review_idx, ReviewDTO reviewDTO, ModelAndView mv) {
 		reviewDTO.setReview_idx(review_idx);
-		ReviewDTO detail = this.reviewService.detail(reviewDTO);
-		System.out.println("detail : " + detail.toString());
-		List<String> imgList = new ArrayList<>();
-		for(String row : detail.getR_img().get(0).split(",")){
-			imgList.add(row);
-		}
-		mv.addObject("imglist", imgList);
+		List<ReviewDTO> detail = (List<ReviewDTO>) this.reviewService.detail(reviewDTO);
+
+//		List<String> imgList = new ArrayList<>();
+//		for(String row : detail.ggetR_img().get(0).split(",")){
+//			imgList.add(row);
+//		}
+//		mv.addObject("imglist", imgList);
 		mv.addObject("data", detail);
 		mv.setViewName("board/review/review_update");
 		return mv;

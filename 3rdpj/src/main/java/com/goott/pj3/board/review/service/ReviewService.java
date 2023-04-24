@@ -24,6 +24,4 @@ public interface ReviewService {
 
     PagingDTO paging(Criteria cri);
 
-
-
 }

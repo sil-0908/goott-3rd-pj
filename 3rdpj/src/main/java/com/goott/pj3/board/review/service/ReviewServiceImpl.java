@@ -36,9 +36,9 @@ public class ReviewServiceImpl implements ReviewService {
 	public void createFile(ReviewDTO reviewDTO) {
 		this.reviewDAO.createFile(reviewDTO);
 	}
+
 	@Override
 	public ReviewDTO detail(ReviewDTO reviewDTO) {
-
 		return this.reviewDAO.detail(reviewDTO);
 	}
 	@Override
@@ -71,6 +71,8 @@ public class ReviewServiceImpl implements ReviewService {
 		paging.setTotalCount(reviewDAO.totalCount(cri));
 		return paging;
 	}
+
+
 
 
 }
