@@ -17,11 +17,15 @@
 <h1> 리뷰 화면</h1>
 
 <p>번호 : ${data.review_idx}</p>
-<p>리뷰 사진 : <img src="" height="200px" width="200px" style="border: 1px solid red;"></p>
+<c:forEach var="image" items="${imglist}" >
+    <p>리뷰 사진 : <img src="${image}" height="200px" width="200px" style="border: 1px solid red;"></p>
+</c:forEach>
 <p>내용 : ${data.review_content}</p>
 <p>작성자 : ${data.user_id}</p>
 <p>작성일 : ${data.create_date}"</p>
-<c:if test="${data.user_id == sessionScope.user_id}">
+
+
+<%--<c:if test="${data.user_id == sessionScope.user_id}">--%>
 <p>
     <a href="/review/update/${data.review_idx}">수정</a>
 </p>
@@ -29,7 +33,7 @@
 <form method="POST" action="/review/delete/${data.review_idx}">
     <input type="submit" value="삭제">
 </form>
-</c:if>
+<%--</c:if>--%>
 <p>
     <a href="/review/list">목록</a>
 </p>

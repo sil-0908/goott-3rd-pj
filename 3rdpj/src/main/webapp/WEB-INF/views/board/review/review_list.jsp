@@ -43,7 +43,7 @@
     <tr>
       <td>
         <a href="/review/detail?review_idx=${row.review_idx}">
-          <img src="${row.review_img}" height="200px" width="200px" style="border: 1px solid red";>
+          <img src="" height="200px" width="200px" style="border: 1px solid red";>
         </a>
       </td>
     </tr>

@@ -3,64 +3,55 @@
 <mapper namespace="review">
 
     <!--조원재 23.04.05 리뷰 생성-->
-    <insert id="insert" parameterType="com.goott.pj3.board.review.dto.ReviewDTO" >
+    <insert id="insert" parameterType="com.goott.pj3.board.review.dto.ReviewDTO" useGeneratedKeys="true" keyProperty="review_idx">
         insert into plan_review(user_id, plan_idx, review_content, review_rating)
         values (#{user_id}, #{plan_idx}, #{review_content}, #{review_rating})
-        <selectKey keyProperty="review_idx" order="AFTER" resultType="com.goott.pj3.board.review.dto.ReviewDTO">
-            SELECT LAST_INSERT_ID() AS review_idx
-        </selectKey>
     </insert>
-
+    <!--조원재 23.04.21 리뷰 이미지 파일 생성-->
     <insert id="file" parameterType="com.goott.pj3.board.review.dto.ReviewDTO">
-        <selectKey keyProperty="review_idx" order="BEFORE" resultType="com.goott.pj3.board.review.dto.ReviewDTO">
-            SELECT LAST_INSERT_ID() AS review_idx
-        </selectKey>
-            <foreach collection="img" item="item" separator=",">
-            insert into review_img(review_idx, img)
-            values (#{review_idx}, #{item})
+            insert into review_img(review_idx, r_img) values
+            <foreach collection="r_img" item="item" separator=",">
+                 (#{review_idx}, #{item})
             </foreach>
     </insert>
 
-<!--    <insert id="insert" parameterType="com.goott.pj3.board.review.dto.ReviewDTO" useGeneratedKeys="true" keyProperty="review_idx">-->
-<!--        insert into plan_review(user_id, plan_idx, review_content, review_rating)-->
-<!--             values (#{user_id}, #{plan_idx}, #{review_content}, #{review_rating})-->
-<!--                SET @review_idx = LAST_INSERT_ID() AS review_idx-->
-<!--    </insert>-->
-
-<!--    <insert id="file" parameterType="List">-->
-<!--        insert into plan_img(review_idx, img)-->
-<!--        (-->
-<!--            select review_idx-->
-<!--              from plan_review-->
-<!--             where review_idx=@review_idx-->
-
-<!--        )-->
-<!--             values <foreach collection="list" item="item" separator=",">-->
-<!--                        (#{item.img})-->
-<!--                    </foreach>-->
-<!--    </insert>-->
-
-<!--    <insert id="file" parameterType="List">-->
-<!--        insert into plan_img(review_idx, img)-->
-<!--             values <foreach collection="list" item="item" separator=",">-->
-<!--                     (#{review_idx}, #{item.img})-->
-<!--                    </foreach>-->
-<!--    </insert>-->
-
     <!--조원재 23.04.05 디테일 페이지-->
-    <select id="detail" resultType="com.goott.pj3.board.review.dto.ReviewDTO">
-        select p.review_idx, p.user_id, p.plan_idx, p.review_content , p.review_rating, p.create_date, i.img
-          from plan_review p inner join review_img i
-            on p.review_idx = i.review_idx
-         where p.review_idx = #{review_idx}
-
+    <select id="detail" resultMap="reviewResultMap">
+        select r.review_idx, r.user_id, r.plan_idx, r.review_content, r.review_rating, r.create_date,
+               group_concat(i.r_img separator ',') as r_imgs
+        from plan_review r left join review_img i
+          on r.review_idx = i.review_idx
+       where r.review_idx = #{review_idx}
+       group by r.review_idx
     </select>
+
+    <resultMap id="reviewResultMap" type="com.goott.pj3.board.review.dto.ReviewDTO">
+        <id property="review_idx" column="review_idx"/>
+        <result property="user_id" column="user_id"/>
+        <result property="plan_idx" column="plan_idx"/>
+        <result property="review_content" column="review_content"/>
+        <result property="review_rating" column="review_rating"/>
+        <result property="create_date" column="create_date"/>
+        <collection property="r_img" column="r_imgs" javaType="java.util.List" ofType="java.lang.String" >
+            <result column="r_imgs"/>
+        </collection>
+    </resultMap>
+
     <!--조원재 23.04.05 리뷰 수정-->
-    <update id="update">
+    <update id="update" parameterType="com.goott.pj3.board.review.dto.ReviewDTO" useGeneratedKeys="true" keyProperty="review_idx">
         update plan_review
            set review_content=#{review_content}
          where review_idx = #{review_idx}
     </update>
+
+    <update id="updatefile" parameterType="com.goott.pj3.board.review.dto.ReviewDTO">
+        <foreach collection="r_img" item="item" separator=",">
+        update review_img
+           SET r_img=#{item}
+         where review_idx=#{review_idx}
+        </foreach>
+    </update>
+
     <!--조원재 23.04.05 리뷰 삭제-->
     <update id="delete" parameterType="hashMap">
         update plan_review
@@ -70,7 +61,7 @@
     
     <!--조원재 23.04.05 리뷰 목록, 검색-->
     <select id="list" resultType="com.goott.pj3.board.review.dto.ReviewDTO">
-        select review_idx, user_id, plan_idx, review_content, review_img,
+        select review_idx, user_id, plan_idx, review_content,
                review_rating, create_date, update_date
           from plan_review
          where 

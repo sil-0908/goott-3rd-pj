@@ -21,21 +21,33 @@ public class ReviewDAO {
 	public int create(ReviewDTO reviewDTO) {
 		return this.ss.insert("review.insert", reviewDTO);
 	}
+
 	public void createFile(ReviewDTO reviewDTO) {
+		System.out.println("files : " + reviewDTO);
 		this.ss.insert("review.file", reviewDTO);
 	}
+
 	public ReviewDTO detail(ReviewDTO reviewDTO) {
 		return this.ss.selectOne("review.detail", reviewDTO);
 	}
+
 	public int update(ReviewDTO reviewDTO) {
 		return this.ss.update("review.update", reviewDTO);
 	}
+
+	public void updateFile(ReviewDTO reviewDTO) {
+		System.out.println("updateFile : " + reviewDTO);
+		this.ss.update("review.updatefile", reviewDTO);
+	}
+
 	public int delete(ReviewDTO reviewDTO) {
 		return this.ss.update("review.delete", reviewDTO);
 	}
+
 	public List<ReviewDTO> list(Criteria cri) {
 		return ss.selectList("review.list", cri);
 	}
+
 	public int totalCount(Criteria cri) {
 		return ss.selectOne("review.totalCount",cri);
 	}
