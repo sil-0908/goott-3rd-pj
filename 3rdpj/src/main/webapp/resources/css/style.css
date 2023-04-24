@@ -10,6 +10,7 @@
 
 @import "./board/qna/qna.css";
 @import "./board/qna/qna_create.css";
+@import "./board/qna/qna_detail.css";
 
 @import "./admin/admin_noticelist.css";
 @import "./admin/admin_noticewrite.css";
