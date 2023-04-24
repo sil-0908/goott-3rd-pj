@@ -6,6 +6,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import com.goott.pj3.common.util.Auth;
+import com.goott.pj3.common.util.Criteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,67 +18,107 @@ import com.goott.pj3.admin.dto.NoticeDTO;
 import com.goott.pj3.admin.service.NoticeService;
 
 
-
 @Controller
 @RequestMapping("/admin/**")
 public class NoticeController {
-	
-	@Autowired
-	NoticeService noticeService;
-	
-// 공지사항 등록 리스트
-	@RequestMapping("noticelist")
-	public ModelAndView noticeList(@RequestParam(defaultValue = "all") String search_option, 
-			@RequestParam(defaultValue ="") String keyword,ModelAndView mv, HttpSession session ) {
-//		if(session.getAttribute("user_id") == null) { 
-//			return new ModelAndView("redirect:/user/signin"); 
-//		}
-		List<NoticeDTO> noticelist = noticeService.noticeList(search_option, keyword);
-		Map<String, Object> map = new HashMap<>();
-		mv.setViewName("admin/noticelist");
-		map.put("search_option", search_option);
-		map.put("keyword",keyword);
-		mv.addObject("noticelist",noticelist);
-		return mv;
-	}
-//	공지사항 작성
-	@RequestMapping("noticewrite")
-	public String noticeWrite() {
-		return "admin/noticewrite";
-	}
-// 공지사항 상세 작성
-	@RequestMapping("noticeinsert")
-	public String insert(NoticeDTO dto, HttpSession session) {
-		String user_id = (String)session.getAttribute("user_id");
-		dto.setUser_id(user_id);
-		noticeService.noticeinsert(dto);
-		return "redirect:/admin/noticelist";
-	}
-// 공지사항 상세정보
-	@RequestMapping("noticedetail")
-	public ModelAndView noticedetail(int idx) {
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("admin/noticedetail");
-		mv.addObject("dto", noticeService.noticedetail(idx));
-		return mv;
-	}
-// 공지사항 수정	
-	@RequestMapping("noticeupdate")
-	public String noticeupdate(NoticeDTO dto) {
-		noticeService.noticeupdate(dto);
-		return "redirect:/admin/noticelist";
-	}
-// 공지사항 삭제	
-	@RequestMapping("noticedelete")
-	public String noticedelete(NoticeDTO dto) {
-		noticeService.noticedelete(dto);
-		return "redirect:/admin/noticelist";
-	}
-// 공지사항 삭제	
-	@RequestMapping("noticedeletere")
-	public String noticedeletere(NoticeDTO dto) {
-		noticeService.noticedeletere(dto);
-		return "redirect:/admin/noticelist";
-	}
+
+    @Autowired
+    NoticeService noticeService;
+
+    /**
+     * 신진영 23.04.04 공지사항 리스트
+     * @param mv
+     * @param cri
+     * @param session
+     * @return
+     */
+    @Auth(role = Auth.Role.ADMIN)
+    @RequestMapping(value = "noticelist", produces="application/text; charset=UTF-8;")
+    public ModelAndView noticeList(ModelAndView mv, Criteria cri, HttpSession session) {
+        mv.addObject("paging", noticeService.paging(cri));
+        mv.addObject("noticelist", noticeService.noticeList(cri));
+        mv.setViewName("admin/notice/noticelist");
+        return mv;
+    }
+
+    /**
+     * 신진영 23.04.04 공지사항 작성
+     * @return
+     */
+    @Auth(role = Auth.Role.ADMIN)
+    @RequestMapping("noticewrite")
+    public String noticeWrite() {
+        return "admin/notice/noticewrite";
+    }
+
+
+    /**
+     * 신진영 23.04.04 공지사항 입력
+     * @param dto
+     * @param session
+     * @return
+     */
+    @Auth(role = Auth.Role.ADMIN)
+    @RequestMapping("noticeinsert")
+    public String noticeInsert(NoticeDTO dto, HttpSession session) {
+        String user_id = (String) session.getAttribute("user_id");
+        dto.setUser_id(user_id);
+        noticeService.noticeInsert(dto);
+        return "redirect:/admin/notice/noticelist";
+    }
+
+
+    /**
+     * 신진영 23.04.04 공지사항 상세페이지
+     * @param idx
+     * @return
+     */
+    @Auth(role = Auth.Role.ADMIN)
+    @RequestMapping("noticedetail")
+    public ModelAndView noticeDetail(int idx) {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("admin/notice/noticedetail");
+        mv.addObject("dto", noticeService.noticeDetail(idx));
+        return mv;
+    }
+
+
+    /**
+     * 신진영 23.04.04 공지사항 수정
+     * @param dto
+     * @return
+     */
+    @Auth(role = Auth.Role.ADMIN)
+    @RequestMapping("noticeupdate")
+    public String noticeUpdate(NoticeDTO dto) {
+        noticeService.noticeUpdate(dto);
+        return "redirect:/admin/notice/noticelist";
+    }
+
+
+    /**
+     * 신진영 23.04.04 공지사항 삭제
+     * @param dto
+     * @return
+     */
+    @Auth(role = Auth.Role.ADMIN)
+    @RequestMapping("noticedelete")
+    public String noticeDelete(NoticeDTO dto) {
+        noticeService.noticeDelete(dto);
+        return "redirect:/admin/notice/noticelist";
+    }
+
+
+    /**
+     * 신진영 23.04.04 공지사항 복원
+     * @param dto
+     * @return
+     */
+    @Auth(role = Auth.Role.ADMIN)
+    @RequestMapping("noticedeletere")
+    public String noticeDeleteReturn(NoticeDTO dto) {
+        noticeService.noticeDeleteReturn(dto);
+        return "redirect:/admin/notice/noticelist";
+    }
 
 }

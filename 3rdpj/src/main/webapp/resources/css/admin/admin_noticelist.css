@@ -1,8 +1,3 @@
-.admin {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 .admin__notice {
   width: 80%;
   display: flex;
