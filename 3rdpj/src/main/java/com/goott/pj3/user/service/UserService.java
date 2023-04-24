@@ -13,7 +13,10 @@ public interface UserService {
 //	로그인 - 장민실 23.04.04
 	UserDTO sign_in(UserDTO u_dto);
 
-//	아이디찾기 - 장민실 23.04.13
+//	아이디 찾기 - 장민실 23.04.13
 	String find_id(UserDTO u_dto);
+
+//	비밀번호 찾기 - 장민실 23.04.23
+	int find_get_pw(UserDTO u_dto);
 
 }

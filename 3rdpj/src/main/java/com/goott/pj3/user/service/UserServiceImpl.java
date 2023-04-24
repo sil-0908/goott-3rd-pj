@@ -44,10 +44,16 @@ public class UserServiceImpl implements UserService {
 //		else return null;
 	}
 
-//	아이디찾기 - 장민실 23.04.13
+//	아이디 찾기 - 장민실 23.04.13
 	@Override
 	public String find_id(UserDTO u_dto) {
 		return userDAO.find_id(u_dto);
+	}
+
+//	비밀번호 찾기 - 장민실 23.04.23
+	@Override
+	public int find_get_pw(UserDTO u_dto) {
+		return userDAO.find_get_pw(u_dto);
 	}
 	
 }

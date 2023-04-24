@@ -20,6 +20,11 @@
 		location.href = "/user/sign_out";
 	});
 	
+// 아이디/비밀번호 찾기 - 장민실 23.04.23
+	$(".forgot_info").on('click', function() {
+		location.href = "/user/find_user";
+	})
+	
 // input 입력 제한 - 장민실 23.04.21
 	$(document).ready(function() {
 		// 아이디, 비밀번호 - 입력받는 영문자 무조건 소문자로 변환
@@ -58,6 +63,11 @@
 	// 모달창 닫기
 	$(".close_icon").on("click", function() {
 		$(".signin_section").removeClass("show");
+		$(".id").val("");
+		$(".pw").val("");
+		$(".id_chk_text").empty();
+		$(".pw_chk_text").empty();
+		$(".signin_msg").empty();
 	});
 	
 	// pw input type text/password 전환
@@ -93,8 +103,6 @@
 				type : "POST",
 				dataType : "json",
 				success : function(data) {
-//					console.log(data.signin_msg.msg);
-//					var msg_area = $(".signin_msg");
 					if(data.signin_msg.msg==="success") {
 						location.href = "/user/mypage";
 					}
