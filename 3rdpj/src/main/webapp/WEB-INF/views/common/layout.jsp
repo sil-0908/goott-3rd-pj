@@ -47,19 +47,19 @@
         </div>
       </section>
     </footer>
-
-    <!-- signin modal - 장민실 -->    
+    
+    <!-- signin modal - 장민실 -->
     <section class="signin_section">
-		<div class="form login_form">
+		<div class="form login_div">
 			<i class="fa-solid fa-xmark close_icon"></i>
 			<form name="signin" method="post">
-				<h2>로그인</h2>
-				<div class="input_box id_area">
+				<h2 class="login_text">로그인</h2>
+				<div class="signin_input_box id_area">
 					<input type="text" placeholder="아이디" maxlength='20' class="id" required />
 					<i class="fa-solid fa-user id_icon"></i>
 					<p class="user_text id_chk_text"></p>
 				</div>
-				<div class="input_box pw_area">
+				<div class="signin_input_box pw_area">
 					<input type="password" placeholder="비밀번호" maxlength='20' class="pw" required />
 					<i class="fa-solid fa-lock pw_icon"></i>
 					<i class="fa-solid fa-eye-slash pw_hide"></i>
@@ -71,11 +71,7 @@
 				<div class="user_text signup_div">아직 회원이 아니신가요?<span class="sign_up">회원가입</span></div>
 			</form>
 		</div>
-   	</section>    
-    
-    <!-- 
-    <main class="signin_modal"></main>
-     -->
-    <script src="/resources/js/user/sign_in.js"></script>
-    
+   	</section> 
+
+    <script src="/resources/js/user/sign_in.js"></script>    
 </body>

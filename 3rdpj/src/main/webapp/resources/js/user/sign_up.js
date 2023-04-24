@@ -63,8 +63,8 @@
 			var total = id+origin_pwd+copy_pwd+email+birth+hp;
 			
 			if(total<6) {
-				$(".chk_text").html("회원가입 실패! 입력 항목들을 다시 확인해주세요");
-				$(".chk_text").css("color", "red");
+				$(".signup_chk_text").html("회원가입 실패! 입력 항목들을 다시 확인해주세요");
+				$(".signup_chk_text").css("color", "red");
 			}
 			else if(total===6) {
 				document.signup_form.action="/user/signup";
@@ -80,8 +80,8 @@
 		var total = id+origin_pwd+copy_pwd+email+birth+hp;
 		
 		if(total<6) {
-			$(".chk_text").html("회원가입 실패! 다시 확인해주세요");
-			$(".chk_text").css("color", "red");
+			$(".signup_chk_text").html("회원가입 실패! 다시 확인해주세요");
+			$(".signup_chk_text").css("color", "red");
 		}
 		else if(total===6) {
 			document.signup_form.action="/user/signup";
