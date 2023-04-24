@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <link rel="stylesheet" href="/resources/css/style.css"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
@@ -23,6 +23,10 @@
 	<div class="input_wrap">
 		<label>게시판 내용</label>
 		<textarea name="qna_content">${data.qna_content}</textarea>
+	</div>
+	<div class="input_wrap">
+		<label>게시판 작성자</label>
+		${data.user_id}
 	</div>
 	<div class="input_wrap">
 		<label>게시판 등록일</label>
@@ -54,9 +58,9 @@
 						alert("게시글이 수정되었습니다.")
 						location.href = "/qna/list_N"
 					}
-					else if(data == "U"){
+					else if(data == "Q"){
 						alert("게시글이 수정되었습니다.")
-						location.href = "/qna/list_U"
+						location.href = "/qna/list_Q"
 					}
 					else if(data == "R"){
 						alert("게시글이 수정되었습니다.")
@@ -64,7 +68,7 @@
 					}
 					else{
 						alert("게시글이 수정되었습니다.")
-						location.href = "/qna/list_E"
+						location.href = "/qna/list_U"
 					}
 				}
 			})
@@ -83,9 +87,9 @@
 						alert("게시글이 삭제되었습니다.")
 						location.href = "/qna/list_N"
 					}
-					else if(data == "U"){
+					else if(data == "Q"){
 						alert("게시글이 삭제되었습니다.")
-						location.href = "/qna/list_U"
+						location.href = "/qna/list_Q"
 					}
 					else if(data == "R"){
 						alert("게시글이 삭제되었습니다.")
@@ -93,7 +97,7 @@
 					}
 					else{
 						alert("게시글이 삭제되었습니다.")
-						location.href = "/qna/list_E"
+						location.href = "/qna/list_U"
 					}
 				}
 			})
