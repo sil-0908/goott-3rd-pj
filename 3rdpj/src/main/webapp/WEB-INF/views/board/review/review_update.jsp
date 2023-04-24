@@ -14,19 +14,16 @@
 <body>
 
 <h1>리뷰 수정</h1>
-<c:forEach var="row" items="${data}">
-<c:forEach var="img" items="${row.r_img}">
+<c:forEach var="img" items="${imglist}">
 <p>이전 사진 뷰 : <img src="${img}" height="200px" width="200px" style="border: 1px solid red;"></p>
 </c:forEach>
-</c:forEach>
 
-<c:forEach var="row" items="${data}">
-<form method="POST" enctype="multipart/form-data" action="/review/update/${row.review_idx}">
-    <p>리뷰 내용 : <input type="text" name="review_content" value="${row.review_content}"></p>
-    <p>리뷰 사진 : <input id="fileItem" type="file" name="file[]" onchange="previewFile()" multiple value="${row.r_img}"></p>
+
+<form method="POST" enctype="multipart/form-data" action="/review/update/${data.review_idx}">
+    <p>리뷰 내용 : <input type="text" name="review_content" value="${data.review_content}"></p>
+    <p>리뷰 사진 : <input id="fileItem" type="file" name="file[]" onchange="previewFile()" multiple value="${imglist }"></p>
     <input type="submit" value="저장">
 </form>
-</c:forEach>
 <h1>사진 미리보기</h1>
 <div id="preview"></div>
 

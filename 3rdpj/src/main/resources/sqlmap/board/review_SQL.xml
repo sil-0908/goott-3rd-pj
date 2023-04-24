@@ -37,7 +37,6 @@
         </collection>
     </resultMap>
 
-
     <!--조원재 23.04.05 리뷰 수정-->
     <update id="update" parameterType="com.goott.pj3.board.review.dto.ReviewDTO" useGeneratedKeys="true" keyProperty="review_idx">
         update plan_review
@@ -46,12 +45,11 @@
     </update>
 
     <update id="updatefile" parameterType="com.goott.pj3.board.review.dto.ReviewDTO">
+        <foreach collection="r_img" item="item" separator=",">
         update review_img
-           SET
-                <foreach collection="r_img" item="item" separator=",">
-                    r_img=#{item}
-                </foreach>
+           SET r_img=#{item}
          where review_idx=#{review_idx}
+        </foreach>
     </update>
 
     <!--조원재 23.04.05 리뷰 삭제-->
@@ -63,7 +61,7 @@
     
     <!--조원재 23.04.05 리뷰 목록, 검색-->
     <select id="list" resultType="com.goott.pj3.board.review.dto.ReviewDTO">
-        select review_idx, user_id, plan_idx, review_content, review_img,
+        select review_idx, user_id, plan_idx, review_content,
                review_rating, create_date, update_date
           from plan_review
          where 

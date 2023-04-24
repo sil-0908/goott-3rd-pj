@@ -37,7 +37,8 @@ public class ReviewServiceImpl implements ReviewService {
 		this.reviewDAO.createFile(reviewDTO);
 	}
 	@Override
-	public List<ReviewDTO> detail(ReviewDTO reviewDTO) {
+	public ReviewDTO detail(ReviewDTO reviewDTO) {
+
 		return this.reviewDAO.detail(reviewDTO);
 	}
 	@Override
@@ -50,6 +51,7 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 	@Override
 	public void updateFile(ReviewDTO reviewDTO) {
+
 		this.reviewDAO.updateFile(reviewDTO);
 	}
 

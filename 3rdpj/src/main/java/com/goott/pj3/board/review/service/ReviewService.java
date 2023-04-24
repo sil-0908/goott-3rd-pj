@@ -12,9 +12,11 @@ public interface ReviewService {
 
     void createFile(ReviewDTO reviewDTO);
 
-    List<ReviewDTO> detail(ReviewDTO reviewDTO);
+    ReviewDTO detail(ReviewDTO reviewDTO);
 
     int update(ReviewDTO reviewDTO);
+
+    void updateFile(ReviewDTO reviewDTO);
 
     boolean delete(ReviewDTO reviewDTO);
 
@@ -23,5 +25,5 @@ public interface ReviewService {
     PagingDTO paging(Criteria cri);
 
 
-    void updateFile(ReviewDTO reviewDTO);
+
 }

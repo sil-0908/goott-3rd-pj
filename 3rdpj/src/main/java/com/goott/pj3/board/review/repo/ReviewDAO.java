@@ -27,8 +27,8 @@ public class ReviewDAO {
 		this.ss.insert("review.file", reviewDTO);
 	}
 
-	public List<ReviewDTO> detail(ReviewDTO reviewDTO) {
-		return this.ss.selectList("review.detail", reviewDTO);
+	public ReviewDTO detail(ReviewDTO reviewDTO) {
+		return this.ss.selectOne("review.detail", reviewDTO);
 	}
 
 	public int update(ReviewDTO reviewDTO) {
@@ -36,6 +36,7 @@ public class ReviewDAO {
 	}
 
 	public void updateFile(ReviewDTO reviewDTO) {
+		System.out.println("updateFile : " + reviewDTO);
 		this.ss.update("review.updatefile", reviewDTO);
 	}
 

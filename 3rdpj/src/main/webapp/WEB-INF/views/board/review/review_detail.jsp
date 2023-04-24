@@ -15,22 +15,22 @@
 </head>
 <body>
 <h1> 리뷰 화면</h1>
-<c:forEach var="row" items="${data}">
-<p>번호 : ${row.review_idx}</p>
-    <c:forEach var="image" items="${row.r_img}">
+
+<p>번호 : ${data.review_idx}</p>
+<c:forEach var="image" items="${imglist}" >
     <p>리뷰 사진 : <img src="${image}" height="200px" width="200px" style="border: 1px solid red;"></p>
-    </c:forEach>
-<p>내용 : ${row.review_content}</p>
-<p>작성자 : ${row.user_id}</p>
-<p>작성일 : ${row.create_date}"</p>
 </c:forEach>
+<p>내용 : ${data.review_content}</p>
+<p>작성자 : ${data.user_id}</p>
+<p>작성일 : ${data.create_date}"</p>
+
 
 <%--<c:if test="${data.user_id == sessionScope.user_id}">--%>
 <p>
-    <a href="/review/update/${review_idx}">수정</a>
+    <a href="/review/update/${data.review_idx}">수정</a>
 </p>
 
-<form method="POST" action="/review/delete/${review_idx}">
+<form method="POST" action="/review/delete/${data.review_idx}">
     <input type="submit" value="삭제">
 </form>
 <%--</c:if>--%>

@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -79,6 +80,7 @@ public class ReviewController {
 			throw new RuntimeException(e);
 		}
 	}
+
 	/**
 	 * 조원재 23.04.05 리뷰 디테일 페이지 호출
 	 * @param
@@ -87,13 +89,18 @@ public class ReviewController {
 	@GetMapping("detail/{review_idx}")
 	public ModelAndView detail(@PathVariable int review_idx, ReviewDTO reviewDTO, ModelAndView mv){
 		reviewDTO.setReview_idx(review_idx);
-		List<ReviewDTO> detail = this.reviewService.detail(reviewDTO);
-		System.out.println("detail : " + detail.toString());
+		ReviewDTO detail = this.reviewService.detail(reviewDTO);
+		System.out.println("detalData : " + detail.toString());
+		List<String> imgList = new ArrayList<>();
+		for(String row : detail.getR_img().get(0).split(",")){
+			imgList.add(row);
+		}
+		mv.addObject("imglist", imgList);
 		mv.addObject("data", detail);
-		mv.addObject("review_idx", review_idx);
 		mv.setViewName("/board/review/review_detail");
 		return mv;
 	}
+
 	/**
 	 * 조원재 23.04.05 리뷰 수정 화면 호출
 	 * @param
@@ -102,9 +109,13 @@ public class ReviewController {
 	@GetMapping("update/{review_idx}")
 	public ModelAndView update(@PathVariable int review_idx, ReviewDTO reviewDTO, ModelAndView mv) {
 		reviewDTO.setReview_idx(review_idx);
-
-		List<ReviewDTO> detail = this.reviewService.detail(reviewDTO);
+		ReviewDTO detail = this.reviewService.detail(reviewDTO);
 		System.out.println("detail : " + detail.toString());
+		List<String> imgList = new ArrayList<>();
+		for(String row : detail.getR_img().get(0).split(",")){
+			imgList.add(row);
+		}
+		mv.addObject("imglist", imgList);
 		mv.addObject("data", detail);
 		mv.setViewName("board/review/review_update");
 		return mv;
