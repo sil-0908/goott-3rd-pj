@@ -8,6 +8,7 @@
     <meta charset="UTF-8">
     <title>회원관리</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"/>
     <link rel="stylesheet" href="/resources/css/style.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -20,13 +21,30 @@
 <%@ include file="/WEB-INF/views/common/layout.jsp" %>
     <div class="page-wrapper">
         <div class="container-fluid">
-            <div class="col-lg-8"><!--게시판 넓이 -->
+            <div class="col-lg-10"><!--게시판 넓이 -->
                 <div class="col-lg-12">
                     <h1 class="page-header">회원관리</h1>
                 </div>
                 <div class="panel panel-default">
                     <div class="panel-heading">회원목록 </div>
                     <div class="panel-body">
+                        <form name="search">
+                            <div>
+                                <select id="selectBox" name="option">
+                                    <option value="">=======</option>
+                                    <option value="user_id">ID</option>
+                                    <option value="auth">유저 종류</option>
+                                    <option value="email">이메일</option>
+                                    <option value="del">탈퇴여부</option>
+                                </select>
+                            </div>
+                            <div class="search_wrap">
+                                <div class="search_area">
+                                    <input type="text" name="keyword" value="${paging.cri.keyword }">
+                                    <button id="search">Search</button>
+                                </div>
+                            </div>
+                        </form>
                         <table class="table table-hover" border="1" width="700px">
                             <thead>
                                 <tr>
@@ -57,6 +75,30 @@
                                 </c:forEach>
                             </tbody>
                         </table>
+                    </div>
+                    <div class="pagination" style="display: flex; justify-content: center">
+                        <form action="form1">
+                            <ul class="btn-group pagination">
+                                <c:if test="${paging.prev}">
+                                    <li>
+                                        <a href='<c:url value="/admin/userlist?option=${paging.cri.option}&keyword=${paging.cri.keyword}&page=${paging.startPage-1}"/>'><i class="fa fa-chevron-left"></i></a>
+                                    </li>
+                                </c:if>
+                                <c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="pageNum">
+                                    <li>
+                                        <a href='<c:url value="/admin/userlist?option=${paging.cri.option}&keyword=${paging.cri.keyword}&page=${pageNum}"/>'><i class="fa">${pageNum}</i></a>
+                                    </li>
+                                </c:forEach>
+                                <c:if test="${paging.next && paging.endPage >0 }">
+                                    <li>
+                                        <a href='<c:url value="/admin/userlist?option=${paging.cri.option}&keyword=${paging.cri.keyword}&page=${paging.endPage+1}"/>'><i class="fa fa-chevron-right"></i></a>
+                                    </li>
+                                </c:if>
+                            </ul>
+                            <input type="hidden" name="page" value="${paging.cri.page}">
+                            <input type="hidden" name="keyword" value="${paging.cri.keyword}">
+                            <input type="hidden" name="option" value="${paging.cri.option}">
+                        </form>
                     </div>
                 </div>
             </div>

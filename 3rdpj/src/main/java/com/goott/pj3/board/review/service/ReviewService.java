@@ -14,7 +14,9 @@ public interface ReviewService {
 
     ReviewDTO detail(ReviewDTO reviewDTO);
 
-    boolean update(ReviewDTO reviewDTO);
+    int update(ReviewDTO reviewDTO);
+
+    void updateFile(ReviewDTO reviewDTO);
 
     boolean delete(ReviewDTO reviewDTO);
 

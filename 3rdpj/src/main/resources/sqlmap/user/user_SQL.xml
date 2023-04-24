@@ -36,7 +36,7 @@
 		]]>
 	</select>
 	
-	<!-- 아이디찾기 - 장민실 23.04.13 -->
+	<!-- 아이디 찾기 - 장민실 23.04.13 -->
 	<select id="find_id" parameterType="com.goott.pj3.user.dto.UserDTO" resultType="String">
 		<![CDATA[
 		select user_id
@@ -45,5 +45,12 @@
 		   and hp = #{hp}
 		]]>
 	</select>
-   
+	
+	<!-- 비밀번호 찾기 - 장민실 23.04.23 -->
+   	<select id="find_get_pw" parameterType="com.goott.pj3.user.dto.UserDTO" resultType="int">
+   		select count(pw)
+   		  from user
+   		 where user_id = #{user_id}
+   		   and hp = #{hp}
+   	</select>
 </mapper>

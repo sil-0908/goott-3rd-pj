@@ -7,13 +7,22 @@
 @import "./common/plannermodal.css";
 @import "./common/talkmodal.css";
 @import "./common/payment.css";
+@import "./common/component.css";
 
 @import "./board/qna/qna.css";
 @import "./board/qna/qna_create.css";
+@import "./board/qna/qna_detail.css";
 
 @import "./admin/admin_noticelist.css";
 @import "./admin/admin_noticewrite.css";
 @import "./admin/admin_userlist.css";
+@import "./admin/admin_noticedetail.css";
+
+@import "./user/sign_in.css";
+@import "./user/sign_up.css";
+
+@import "./user/sign_in.css";
+@import "./user/sign_up.css";
 
 
 :root {
@@ -26,7 +35,7 @@
 }
 
 body {
-  min-height: 100vh;
+  min-height: 101vh;
 }
 
 main {

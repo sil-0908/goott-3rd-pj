@@ -39,34 +39,46 @@ public class ReviewController {
 
 	/**
 	 * 조원재 23.04.05 리뷰 생성
-	 * 		 23.04.17 파일 업로드 기능 추가
-	 * @param
+	 * 		 23.04.21 파일 업로드 기능 추가
+	 * @param reviewDTO
+	 * @param mv
 	 * @param httpSession
+	 * @param multipartFile
 	 * @return
 	 */
 	@PostMapping("create")
 	public ModelAndView CreatePost(ReviewDTO reviewDTO, ModelAndView mv, HttpSession httpSession,
 								   @RequestParam("file[]") List<MultipartFile> multipartFile){
-		//유저 세션
-		String user_id = (String) httpSession.getAttribute("user_id");
-		reviewDTO.setUser_id(user_id);
-		reviewDTO.setPlan_idx(1);
-		try {
-			if(multipartFile!=null) {
-				List<String> imgList = s3FileUploadService.upload(multipartFile);
-				reviewDTO.setImg(imgList);
-				this.reviewService.createFile(reviewDTO);
-			}
-		} catch (IOException e){
-			throw new RuntimeException(e);
-		}
-		int review_idx = this.reviewService.create(reviewDTO);
+		String user_id = (String) httpSession.getAttribute("user_id"); // 로그인한 유저 아이디 세션
+		reviewDTO.setUser_id(user_id); // DTO에 유저 아이디 할당
+		reviewDTO.setPlan_idx(1); // 임시 plan_idx값    g
+		int review_idx = this.reviewService.create(reviewDTO); // 생성된 게시글 idx
+		ImgFileUpload(reviewDTO, multipartFile, review_idx); // 이미지 파일 업로드 API
 		if(review_idx!=0){
 			mv.setViewName("redirect:/review/detail/"+review_idx);
 		} else {
 			mv.setViewName("review/review_create");
 		}
 		return mv;
+	}
+
+	/**
+	 * 조원재 23.04.21 이미지 파일 업로드 API
+	 * @param reviewDTO
+	 * @param multipartFile
+	 * @param review_idx
+	 */
+	private void ImgFileUpload(ReviewDTO reviewDTO, List<MultipartFile> multipartFile, int review_idx) {
+		try {
+			if(multipartFile !=null) {
+				List<String> imgList = s3FileUploadService.upload(multipartFile);
+				reviewDTO.setR_img(imgList);
+				reviewDTO.setReview_idx(review_idx);
+				this.reviewService.createFile(reviewDTO);
+			}
+		} catch (IOException e){
+			throw new RuntimeException(e);
+		}
 	}
 
 	/**
@@ -78,6 +90,12 @@ public class ReviewController {
 	public ModelAndView detail(@PathVariable int review_idx, ReviewDTO reviewDTO, ModelAndView mv){
 		reviewDTO.setReview_idx(review_idx);
 		ReviewDTO detail = this.reviewService.detail(reviewDTO);
+		System.out.println("detalData : " + detail.toString());
+		List<String> imgList = new ArrayList<>();
+		for(String row : detail.getR_img().get(0).split(",")){
+			imgList.add(row);
+		}
+		mv.addObject("imglist", imgList);
 		mv.addObject("data", detail);
 		mv.setViewName("/board/review/review_detail");
 		return mv;
@@ -92,6 +110,12 @@ public class ReviewController {
 	public ModelAndView update(@PathVariable int review_idx, ReviewDTO reviewDTO, ModelAndView mv) {
 		reviewDTO.setReview_idx(review_idx);
 		ReviewDTO detail = this.reviewService.detail(reviewDTO);
+		System.out.println("detail : " + detail.toString());
+		List<String> imgList = new ArrayList<>();
+		for(String row : detail.getR_img().get(0).split(",")){
+			imgList.add(row);
+		}
+		mv.addObject("imglist", imgList);
 		mv.addObject("data", detail);
 		mv.setViewName("board/review/review_update");
 		return mv;
@@ -103,10 +127,21 @@ public class ReviewController {
 	 * @return
 	 */
 	@PostMapping("update/{review_idx}")
-	public ModelAndView updatePost(@PathVariable int review_idx,  ReviewDTO reviewDTO, ModelAndView mv){
+	public ModelAndView updatePost(@PathVariable int review_idx,  ReviewDTO reviewDTO, ModelAndView mv,
+								   @RequestParam("file[]") List<MultipartFile> multipartFile){
 		reviewDTO.setReview_idx(review_idx);
-		boolean succeess = this.reviewService.update(reviewDTO);
-		if(succeess){
+		int succeessIdx = this.reviewService.update(reviewDTO);
+		try {
+			if(multipartFile !=null) {
+				List<String> imgList = s3FileUploadService.upload(multipartFile);
+				reviewDTO.setR_img(imgList);
+				reviewDTO.setReview_idx(succeessIdx);
+				this.reviewService.updateFile(reviewDTO);
+			}
+		} catch (IOException e){
+			throw new RuntimeException(e);
+		}
+		if(succeessIdx!=0){
 			mv.setViewName("redirect:/review/detail/"+review_idx);
 		}
 		return mv;
