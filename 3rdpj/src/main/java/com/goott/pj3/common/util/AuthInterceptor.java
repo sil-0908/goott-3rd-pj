@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 //2023.04.18 긿영준 authInterceptor
+// 2023. 04.22 길영준 admin이 planner 권한도 패스할수 있게 수정 
 public class AuthInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -40,6 +41,9 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
             }
         }
         if ("PLANNER".equals(role)) {
+            if("auth_a".equals(authUser)){
+                return true;
+            }
             if (!"auth_b".equals(authUser)) {
                 response.sendRedirect(request.getContextPath() + "/user/signin");
                 return false;
