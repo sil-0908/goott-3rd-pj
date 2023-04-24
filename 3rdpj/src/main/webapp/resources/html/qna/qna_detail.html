@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/FortAwesome/Font-Awesome@5.14.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../css/style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div data-include-path="layout.html"></div>
+    <script src="../js/layout.js"></script>
+    <main class="detail">
+      <section class="detail__document">
+        <hgroup class="detail__title">
+          <ul class="title__box">
+            <li class="title__component">
+              <span>글번호: </span>
+              <span>${글번호}</span>
+            </li>
+            <li class="title__component">
+              <span>제목: </span>
+              <span>${제목}</span>
+            </li>
+            <li class="title__component">
+              <span>등록일: </span>
+              <span>${등록일}</span>
+            </li>
+          </ul>
+        </hgroup>
+        <article class="detail__content">
+          <p class="content__txt">
+            안녕하세요 이번에 맥북을 교체하려하는데 사양 관련해서 잘 아시는분들
+            계시면 조언을 구하고자 올립니다. 제가 주로 사용하는 개발툴은 Vs
+            code, 인텔리제이 두개를 사용하고 추가적으로 도커랑 VM을 같이
+            사용하고있습니다. 현재 사용하는 맥북은 2019년형 맥북 프로 8, 512
+            인데 아마 도커때문인거같은데 버벅임이 좀 크더라고요.. 그래서
+            버전업을 생각중인데 램을 몇정도로 맞추는게 좋을거같은가요?
+          </p>
+        </article>
+      </section>
+      <section class="detail__document--review">
+        <article class="review__write">
+          <hgroup class="review__write--title">
+            <h1>댓글 작성</h1>
+          </hgroup>
+          <div class="write__box">
+            <form class="write__form" action="">
+              <input
+                placeholder="댓글을 작성하려면 로그인이 필요합니다."
+                type="text"
+              />
+              <button class="btn btn__normal">등록하기</button>
+            </form>
+          </div>
+        </article>
+        <article class="review__list">
+          <hgroup class="list__title">
+            <h1>댓글 목록</h1>
+          </hgroup>
+          <ul class="list__box">
+            <li class="list__component">
+              <hgroup class="review__info">
+                <span>글번호</span>
+                <span>등록일</span>
+              </hgroup>
+              <div class="review__txt">
+                <p>내용</p>
+              </div>
+            </li>
+          </ul>
+        </article>
+      </section>
+    </main>
+    <script
+      src="https://kit.fontawesome.com/7723a79ab5.js"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

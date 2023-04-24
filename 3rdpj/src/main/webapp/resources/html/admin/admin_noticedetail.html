@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/FortAwesome/Font-Awesome@5.14.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../css/style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div data-include-path="layout.html"></div>
+    <script src="../js/layout.js"></script>
+    <main class="admin">
+      <section class="admin__notice-detail">
+        <hgroup class="admin__notice-detail--title">
+          <h1>공지사항 상세</h1>
+          <!-- <div class="admin__notice-create--btn">
+            <a href="/admin/noticewrite">관리자 등록</a>
+          </div> -->
+        </hgroup>
+        <article class="admin__notice-detail--sheet">
+          <form class="admin__notice-detail--form">
+            <ul class="admin__noitce-detail--list">
+              <li class="admin__notice-detail--component">
+                <span>작성자: </span>
+                <span>${dto.user_id}</span>
+              </li>
+              <li class="admin__notice-detail--component">
+                <label for="qna_title">제목: </label>
+                <input
+                  name="qna_title"
+                  id="qna_title"
+                  type="text"
+                  value="${dto.qna_title}"
+                />
+              </li>
+              <li class="admin__notice-detail--component">
+                <span>권한: </span>
+                <span>${dto.auth}</span>
+              </li>
+              <li class="admin__notice-detail--component">
+                <span>카테고리: </span>
+                <span>${dto.category}</span>
+              </li>
+              <li class="admin__notice-detail--component">
+                <label for="qna_content">내용: </label>
+                <input
+                  name="qna_content"
+                  id="qna_content"
+                  type="text"
+                  value="${dto.qna_content}"
+                />
+              </li>
+              <li class="admin__notice-detail--btns">
+                <input type="hidden" name="qna_idx" value="${dto.qna_idx}" />
+                <button
+                  class="btn btn__normal btn__normal--admin-noticedetail"
+                  id="btnUpdate"
+                >
+                  수정
+                </button>
+                <button
+                  class="btn btn__normal btn__normal--admin-noticedetail"
+                  id="btnDelete"
+                >
+                  삭제
+                </button>
+                <button
+                  class="btn btn__normal btn__normal--admin-noticedetail"
+                  id="btnDeleteRe"
+                >
+                  복원
+                </button>
+              </li>
+            </ul>
+          </form>
+        </article>
+      </section>
+    </main>
+    <script
+      src="https://kit.fontawesome.com/7723a79ab5.js"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
