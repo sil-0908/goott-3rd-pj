@@ -32,7 +32,7 @@
 .signin_section::before {
 	content: "";
 	position: absolute;
-	margin-top: -120px;
+	margin-top: -160px;
 	height: 120%;
 	width: 100%;
 	background-color: rgba(0, 0, 0, 0.6);
@@ -71,7 +71,7 @@
 }
 
 /* icon */
-.close_icon {
+.login_div .close_icon {
 	position: absolute;
 	top: 10px;
 	right: 20px;
@@ -81,7 +81,9 @@
 	cursor: pointer;
 }
 
-.id_icon, .pw_icon, .pw_hide {
+.login_div .id_icon,
+.login_div .pw_icon,
+.login_div .pw_hide {
 	position: absolute;
 	top: 50%;
 	transform: translateY(-50%);
@@ -111,7 +113,7 @@
 	text-align: center;
 }
 
-.user_text {
+.signin_text {
 	font-size: 12px;
 }
 
@@ -119,7 +121,8 @@
 	text-align: center;
 }
 
-.id_chk_text, .pw_chk_text {
+.signin_input_box .id_alert_text,
+.signin_input_box .pw_alert_text {
 	margin-top: 10px;
 	margin-left: 30px;
 }
@@ -132,11 +135,11 @@
 	margin-top: 35px;
 }
 
-.forgot_info, .sign_up, .sign_in, .sign_out {
+.forgot_info, .sign_up_span, .sign_in, .sign_out {
 	cursor: pointer;
 }
 
-.forgot_info:hover, .sign_up:hover {
+.forgot_info:hover, .sign_up_span:hover {
 	color: var(--blue);
 }
 
@@ -148,7 +151,7 @@
 	width: 100%;
 	padding: 10px 0;
 	border-radius: 10px;
-	transition: background-color 0.2s;  
+	transition: background-color 0.2s;
 }
 
 .signin_btn {

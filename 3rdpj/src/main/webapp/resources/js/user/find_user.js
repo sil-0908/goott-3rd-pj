@@ -1,4 +1,6 @@
-// input 입력 제한 - 장민실 23.04.23
+/* 전체 코드 작업자 : 장민실 */
+
+// input 입력 제한
 	$(document).ready(function() {
 		// 이메일 - 영문 대,소문자 / 숫자 / 특수문자 @ . 만 허용
 	    $(".id_email").on("keydown", function() {
@@ -40,7 +42,7 @@
 		    }); 
 	});	// function end
 
-// 아이디 찾기 - 장민실 23.04.19 > 현재 DB에 중복정보 다량으로 기능구현 완료 후 주석처리
+// 아이디 찾기 > 현재 DB에 중복정보 다량으로 기능구현 완료 후 주석처리
 //$(".find_id").on('click', function() {
 //	var email = $(".id_email").val();
 //	var hp = $(".id_hp").val();
@@ -66,33 +68,67 @@
 //	}	// 둘다 입력 else if end
 //});	// function end
 
-// 비밀번호 찾기 - 장민실 23.04.19
+// 비밀번호 찾기
 $(".find_pw").on('click', function() {
-	var id = $(".pw_id").val();
-	var hp = $(".pw_hp").val();
-	
-	if(id==="") {
-		$(".pw_text").html("아이디를 입력해 주세요");
-		$(".pw_text").css("color", "red");
-	}	// id 공란 if end
-	else if(hp==="") {
-		$(".pw_text").html("핸드폰번호를 입력해 주세요");
-		$(".pw_text").css("color", "red");
-	}	// hp 공란 else if end
-	else if(id!=""||hp!="") {
-		$.ajax({
-			data : { id : id, hp : hp },
-			url : "/user/find_id",
-			type : "POST",
-			success : function(pw_cnt) {
-				if(pw_cnt===0) {
-					$(".pw_text").html("정보를 다시 확인해주세요");
-					$(".pw_text").css("color", "red");
-				}	// id, hp 일치하는 정보의 pw가 DB에 없을경우 if end
-				else if(pw_cnt===1) {
-					
-				}	// id, hp 일치하는 정보의 pw가 DB에 있을경우 else if end
-			}	// success end
-		});	// ajax end
-	}	// 둘다 입력 else if end
+//	var id = $(".pw_id").val();
+//	var hp = $(".pw_hp").val();
+//	var change_pw = $(".change_pw").val();
+//	
+//	if(id==="") {
+//		$(".pw_text").html("아이디를 입력해 주세요");
+//		$(".pw_text").css("color", "red");
+//	}	// id 공란 if end
+//	else if(hp==="") {
+//		$(".pw_text").html("핸드폰번호를 입력해 주세요");
+//		$(".pw_text").css("color", "red");
+//	}	// hp 공란 else if end
+//	else if(id!=""||hp!="") {
+//		$.ajax({
+//			data : { id : id, hp : hp },
+//			url : "/user/find_get_pw",
+//			type : "POST",
+//			success : function(before_pw) {
+//				if(before_pw===null) {
+//					$(".pw_text").html("정보를 다시 확인해주세요");
+//					$(".pw_text").css("color", "red");
+//				}	// id, hp 일치하는 정보의 pw가 DB에 없을경우 if end
+//				else if(before_pw!=null) {
+					$(".change_pw_section").addClass("show");
+//				}	// id, hp 일치하는 정보의 pw가 DB에 있을경우 else if end
+//			}	// success end
+//		});	// ajax end
+//	}	// 둘다 입력 else if end
 });	// function end
+
+// 비밀번호 변경 모달창 닫기
+$(".close_icon").on("click", function() {
+	$(".change_pw_section").removeClass("show");
+	$(".change_pw_origin").val("");
+	$(".change_pw_copy").val("");
+	$(".origin_alert_text").empty();
+	$(".copy_alert_text").empty();
+	$(".change_pw_msg").empty();
+});
+	
+// 비밀번호 변경 input type text/password 전환
+$(".origin_pw_hide").on("click", function() {
+	if($(".change_pw_origin").attr("type")==="password"){
+		$(".change_pw_origin").prop("type", "text");
+		$(".origin_pw_hide").removeClass("fa-eye-slash").addClass("fa-eye");
+	}
+	else {
+		$(".change_pw_origin").prop("type", "password");
+		$(".origin_pw_hide").removeClass("fa-eye").addClass("fa-eye-slash");
+	}		
+});
+
+$(".copy_pw_hide").on("click", function() {
+	if($(".change_pw_copy").attr("type")==="password"){
+		$(".change_pw_copy").prop("type", "text");
+		$(".copy_pw_hide").removeClass("fa-eye-slash").addClass("fa-eye");
+	}
+	else {
+		$(".change_pw_copy").prop("type", "password");
+		$(".copy_pw_hide").removeClass("fa-eye").addClass("fa-eye-slash");
+	}		
+});

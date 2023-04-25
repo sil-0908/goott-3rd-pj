@@ -47,8 +47,8 @@
 	</select>
 	
 	<!-- 비밀번호 찾기 - 장민실 23.04.23 -->
-   	<select id="find_get_pw" parameterType="com.goott.pj3.user.dto.UserDTO" resultType="int">
-   		select count(pw)
+   	<select id="find_get_pw" parameterType="com.goott.pj3.user.dto.UserDTO" resultType="String">
+   		select pw
    		  from user
    		 where user_id = #{user_id}
    		   and hp = #{hp}

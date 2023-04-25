@@ -52,7 +52,7 @@ public class UserServiceImpl implements UserService {
 
 //	비밀번호 찾기 - 장민실 23.04.23
 	@Override
-	public int find_get_pw(UserDTO u_dto) {
+	public String find_get_pw(UserDTO u_dto) {
 		return userDAO.find_get_pw(u_dto);
 	}
 	

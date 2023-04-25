@@ -20,9 +20,7 @@
 
 @import "./user/sign_in.css";
 @import "./user/sign_up.css";
-
-@import "./user/sign_in.css";
-@import "./user/sign_up.css";
+@import "./user/find_user.css";
 
 
 :root {

@@ -1,0 +1,164 @@
+/* form */
+.finduser_main {
+	min-height: 100vh;
+	background-image: url("/resources/img/page_bg.jpg");
+	background-size: cover;
+	display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.finduser_div {
+	display: flex;	
+	position: relative;
+	justify-content: space-evenly;
+	line-height: 2rem;
+}
+
+.find_id_div, .find_pw_div {
+	display: flex;
+	flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    position: relative;
+    width: 20%;
+    padding: 1.5rem 0;
+    border-radius: 0.8rem;
+    line-height: 3.5rem;
+}
+
+.login_div {
+	position: fixed;
+	max-width: 20rem;
+	width: 100%;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%) scale(1.2);
+	z-index: 101;
+	background: #fff;
+	padding: 25px;
+	border-radius: 12px;
+	display: none;
+	transition: all 0.4s ease-out;
+	pointer-events: none;
+}
+
+.signin_section.show .login_div {
+	display: block;
+	pointer-events: auto;
+}
+
+/* find_user */
+.finduser_input {
+    border: none;
+    outline: none;
+    padding-left: 2rem;
+    padding-bottom: 0.5rem;
+    color: #333;
+    transition: all 0.2s ease;
+    border-bottom: 1.5px solid #aaaaaa;    
+}
+
+.finduser_input:focus {
+	border-bottom : 1.5px solid var(--blue);
+}
+
+/* change_pw */
+.change_pw_div {
+	position: fixed;
+	max-width: 20rem;
+	width: 100%;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%) scale(1.2);
+	z-index: 101;
+	background: #fff;
+	padding: 25px;
+	border-radius: 12px;
+	display: none;
+	transition: all 0.4s ease-out;
+	pointer-events: none;
+}
+
+.change_pw_section.show .change_pw_div {
+	display: block;
+	pointer-events: auto;
+}
+
+.change_pw_section {
+	position: absolute;
+	height: 100vh;  
+	width: 100%;
+	background-size: cover;
+	background-position: center;
+}
+
+.change_pw_section::before {
+	content: "";
+	position: absolute;
+	margin-top: -160px;
+	height: 120%;
+	width: 100%;
+	background-color: rgba(0, 0, 0, 0.6);
+	z-index: 100;
+	opacity: 0;
+	pointer-events: none;
+	transition: all 0.5s ease-out;
+}
+
+.change_pw_section.show::before {
+	opacity: 1;
+	pointer-events: auto;
+}
+
+/* text */
+.finduser_text {
+	font-size: 22px;
+	color: #0b0217;
+	text-align: center;
+}
+
+.finduser_p {
+	margin-bottom: -1.5rem;
+    margin-left: 0.5rem;
+}
+
+.alert_text {
+	height: 3.5rem;
+}
+
+/* icon */
+.finduser_div .icon {
+	font-size: 20px;
+	color: #707070;
+	margin-left: 6rem;
+    margin-top: 1.9rem;
+    position: absolute;
+    left: 0;
+    transform: translateY(-50%);
+}
+
+.finduser_input:focus ~ .icon {
+	color: var(--blue);
+}
+
+/* button */
+.finduser_div .finduser_btn {
+	color: var(--white);
+	background-color: var(--blue);
+	width: 50%;
+	padding: 0.65rem 0;
+	border-radius: 10px;
+	transition: background-color 0.2s;
+}
+
+.finduser_btn {
+	margin: 1rem 0;
+	border: 2px solid #fff;
+	background: transparent;
+	cursor: pointer;
+}
+
+.finduser_btn:hover {
+	background-color: var(--yellow);
+}

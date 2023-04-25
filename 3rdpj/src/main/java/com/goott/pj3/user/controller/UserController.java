@@ -116,22 +116,22 @@ public class UserController {
 //	비밀번호 찾기 - 장민실 23.04.23
 	@PostMapping("find_get_pw")
 	@ResponseBody
-	public int find_get_pw(@RequestParam("id") String id, @RequestParam("hp") String hp, UserDTO u_dto) {
+	public String find_get_pw(@RequestParam("id") String id, @RequestParam("hp") String hp, UserDTO u_dto) {
 		u_dto.setUser_id(id);
 		u_dto.setHp(hp);
-		int pw_cnt = userService.find_get_pw(u_dto);	// 입력정보 일치하는 비밀번호 존재여부 : 0=존재X, 1=존재O
-		return pw_cnt;
+		String before_pw = userService.find_get_pw(u_dto);	// 입력정보와 일치하는 비밀번호 담아오기
+		return before_pw;
 	}
 	
-//	새로운 비밀번호 저장 - 장민실 23.04.23
-//	@PostMapping("find_set_pw")
-//	@ResponseBody
-//	public String find_set_pw(@RequestParam("id") String id, @RequestParam("hp") String hp, @RequestParam("pw") String pw, UserDTO u_dto) {
-//		u_dto.setUser_id(id);
-//		u_dto.setHp(hp);
-//		u_dto.setPw(pw);
-//		return "redirect:/user/sign_in";
-//	}
+//	비밀번호 찾기 후 새로운 비밀번호 저장 - 장민실 23.04.25
+	@PostMapping("find_set_pw")
+	@ResponseBody
+	public String find_set_pw(@RequestParam("id") String id, @RequestParam("hp") String hp, @RequestParam("pw") String pw, UserDTO u_dto) {
+		u_dto.setUser_id(id);
+		u_dto.setHp(hp);
+		u_dto.setPw(pw);
+		return "redirect:/user/sign_in";
+	}
 	
 //	마이페이지
 //	@PostMapping("mypage")
