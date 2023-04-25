@@ -4,9 +4,9 @@
 
 	$(document).ready(function() {
 // 전제 input 입력 제한
-		// 아이디, 비밀번호, 비밀번호 확인 - 입력받는 영문자 무조건 소문자로 변환
+	// 아이디, 비밀번호, 비밀번호 확인 - 입력받는 영문자 무조건 소문자로 변환
 		$(".user_id, .pw, .pw_chk").css("text-transform", "lowercase");
-	    $(".user_id, .pw, .pw_chk").on("keyup", function() {
+		$(".user_id, .pw, .pw_chk").on("keyup", function() {
 	        $(this).val($(this).val().toLowerCase());
 	    });
 	    

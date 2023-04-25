@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,6 +25,8 @@ public class UserController {
 
 	@Autowired
 	UserService userService;
+	@Autowired
+	BCryptPasswordEncoder bcrypt;
 	
 	// 추가필요 : 카카오, 네이버, 구글 로그인 API / 회원가입할때 핸드폰 인증 / 비밀번호 찾기
 	
@@ -119,18 +122,34 @@ public class UserController {
 	public String find_get_pw(@RequestParam("id") String id, @RequestParam("hp") String hp, UserDTO u_dto) {
 		u_dto.setUser_id(id);
 		u_dto.setHp(hp);
-		String before_pw = userService.find_get_pw(u_dto);	// 입력정보와 일치하는 비밀번호 담아오기
-		return before_pw;
+		String origin_pw = userService.find_get_pw(u_dto);	// 입력정보와 일치하는 비밀번호 담아오기
+		System.out.println("이전비번 : " + origin_pw);
+		return origin_pw;
 	}
 	
 //	비밀번호 찾기 후 새로운 비밀번호 저장 - 장민실 23.04.25
 	@PostMapping("find_set_pw")
 	@ResponseBody
-	public String find_set_pw(@RequestParam("id") String id, @RequestParam("hp") String hp, @RequestParam("pw") String pw, UserDTO u_dto) {
+	public ModelAndView find_set_pw(@RequestParam("id") String id, @RequestParam("hp") String hp, @RequestParam("pw") String pw, UserDTO u_dto, ModelAndView mav) {
 		u_dto.setUser_id(id);
 		u_dto.setHp(hp);
 		u_dto.setPw(pw);
-		return "redirect:/user/sign_in";
+		System.out.println("pw plus after : " + u_dto);
+		
+		String origin_pw = userService.find_get_pw(u_dto);		
+
+		boolean pw_match = bcrypt.matches(u_dto.getPw(), origin_pw);	// DB의 비밀번호와 입력받은 비밀번호 일치 여부
+		Map<String, String> responseData = new HashMap<>();
+		if(pw_match==true) {
+			responseData.put("msg", "same_pw");
+		}
+		else if(pw_match==false) {
+//			userService.set_new_pw(u_dto);
+			responseData.put("msg", "different_pw");
+		}
+		mav.setView(new MappingJackson2JsonView());
+        mav.addObject("setpw_msg", responseData);
+		return mav;
 	}
 	
 //	마이페이지

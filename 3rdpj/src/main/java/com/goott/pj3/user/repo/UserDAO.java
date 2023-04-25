@@ -46,5 +46,9 @@ public class UserDAO {
 	public String find_get_pw(UserDTO u_dto) {
 		return ss.selectOne("user.find_get_pw", u_dto);
 	}
+
+	public Object set_new_pw(UserDTO u_dto) {
+		return null;
+	}
 	
 }

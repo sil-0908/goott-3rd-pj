@@ -55,5 +55,11 @@ public class UserServiceImpl implements UserService {
 	public String find_get_pw(UserDTO u_dto) {
 		return userDAO.find_get_pw(u_dto);
 	}
+
+//	@Transactional
+//	@Override
+//	public void set_new_pw(UserDTO u_dto) {
+//		return userDAO.set_new_pw(u_dto);
+//	}
 	
 }

@@ -38,31 +38,30 @@
 			</div>		
 		</div>	
 	</form>
+	<!-- 비밀번호 변경 모달 -->
+	<section class="change_pw_section">
+		<div class="form change_pw_div">
+			<i class="fa-solid fa-xmark close_icon"></i>
+			<form name="change_pw_form" method="post">
+				<h2 class="change_pw_text">비밀번호 변경</h2>
+				<div class="change_input_box origin_pw_area">
+					<input type="password" maxlength='20' placeholder="새로운 비밀번호" class="change_pw_origin" oninput="pwd_chk()" />
+					<i class="fa-solid fa-lock origin_pw_icon"></i>
+					<i class="fa-solid fa-eye-slash origin_pw_hide"></i>
+					<p class="change_pw_p origin_alert_text">8자리~20자리 영문,숫자,특수문자를 포함해 주세요<br>허용가능 특수문자 : ?!@#$%^&*</p>
+				</div>
+				<div class="change_input_box copy_pw_area">
+					<input type="password" maxlength='20' placeholder="새로운 비밀번호 확인" class="change_pw_copy" oninput="pwd_match()" />
+					<i class="fa-solid fa-lock copy_pw_icon"></i>
+					<i class="fa-solid fa-eye-slash copy_pw_hide"></i>
+					<p class="change_pw_p copy_alert_text"></p>
+				</div>
+				<p class="change_pw_p change_pw_msg"></p>
+				<input type="button" class="change_pw_btn" value="비밀번호 변경하기" />
+			</form>
+		</div>
+	</section>
 </main>
-
-<!-- 비밀번호 변경 모달 -->
-<section class="change_pw_section">
-	<div class="form change_pw_div">
-		<i class="fa-solid fa-xmark close_icon"></i>
-		<form name="change_pw_form" method="post">
-			<h2 class="change_pw_text">비밀번호 변경</h2>
-			<div class="change_input_box origin_pw_area">
-				<input type="password" maxlength='20' placeholder="새로운 비밀번호" class="change_pw_origin" />
-				<i class="fa-solid fa-lock origin_pw_icon"></i>
-				<i class="fa-solid fa-eye-slash origin_pw_hide"></i>
-				<p class="change_pw_text origin_alert_text"></p>
-			</div>
-			<div class="change_input_box copy_pw_area">
-				<input type="password" maxlength='20' placeholder="새로운 비밀번호 확인" class="change_pw_copy" />
-				<i class="fa-solid fa-lock copy_pw_icon"></i>
-				<i class="fa-solid fa-eye-slash copy_pw_hide"></i>
-				<p class="change_pw_text copy_alert_text"></p>
-			</div>
-			<input type="button" class="signin_btn" value="비밀번호 변경" />
-			<p class="change_pw_text change_pw_msg"></p>
-		</form>
-	</div>
-</section> 
 	
 <script src="/resources/js/common/layout.js"></script>
 <script src="/resources/js/user/find_user.js"></script>
