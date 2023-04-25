@@ -6,13 +6,10 @@ import com.siot.IamportRestClient.IamportClient;
 import com.siot.IamportRestClient.exception.IamportResponseException;
 import com.siot.IamportRestClient.response.IamportResponse;
 import com.siot.IamportRestClient.response.Payment;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 
@@ -32,17 +29,19 @@ public class PaymentController {
     public IamportResponse<Payment> paymentByUid(@PathVariable(value = "imp_uid") String imp_uid) throws IamportResponseException, IOException {
         return iamportClient.paymentByImpUid(imp_uid);
     }
-
+    // 결제정보 DB입력
     @PostMapping(value = "/payment/confirm", consumes = "application/json")
-    public String paymentConfirm(@RequestBody PayDTO payDTO) {
+    public Map<String, Object> paymentConfirm(@RequestBody PayDTO payDTO) {
         System.out.println(payDTO.toString());
-        boolean check = paymentService.pay(payDTO);
-
-        return check ? "{msg : 성공이다 }"
-                :"{msg : 실패했}";
-
-
-
+        boolean checkPayment = paymentService.pay(payDTO);
+        paymentService.saleCount(payDTO);
+        Map<String, Object> map = new HashMap<String, Object>();
+        if (checkPayment) {
+            map.put("msg", "결제성공");
+        } else {
+            map.put("msg", "결제실패");
+        }
+        return map;
     }
 
 

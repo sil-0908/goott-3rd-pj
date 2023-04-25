@@ -22,4 +22,8 @@ public interface PlanService {
 	PagingDTO paging(Criteria cri);
 
     void uploadImg(ImgDTO imgDTO);
+
+    void addCart(PlanDTO planDTO);
+
+    List<PlanDTO> getCart(PlanDTO planDTO);
 }
