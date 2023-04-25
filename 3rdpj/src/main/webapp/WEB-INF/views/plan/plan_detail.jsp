@@ -41,6 +41,7 @@
     <button type="button" onclick="location.href='edit/${data.plan_idx}'">수정</button>
     <button data-id="${data.plan_idx}" id="delete">삭제</button>
 </c:if>
+<button id="cart" type="button" onclick="addCart()">카트담기</button>
 <button type="button" onclick="kakao()">결제</button>
 
 <script>
@@ -65,13 +66,8 @@
     const name = $('#title').val(); //플랜명
     const buyer = $('.session').val(); //구매자아이디
     const planner = $('#planner').val(); // 플래너아이디
-    const plan_idx = $('.plan_idx').val();
-    console.log(price)
-    console.log(name)
-    console.log(buyer)
-    console.log(planner)
-    console.log(plan_idx)
-
+    const plan_idx = $('.plan_idx').val(); //플랜 pk
+    // 아임포트 결제 함수
     function kakao() {
         let IMP = window.IMP;
         IMP.init('imp67107132');
@@ -87,12 +83,6 @@
                 url: '/verifyIamport/' + rsp.imp_uid
             }).done(function (result) {
                 if (rsp.paid_amount === result.response.amount) {
-                    alert("결제완료");
-                    console.log("uid : " + rsp.imp_uid)
-                    console.log("uid : " + rsp.merchant_uid)
-                    console.log(buyer)
-                    console.log(planner)
-                    console.log(plan_idx)
                     let info = {
                         imp_uid: rsp.imp_uid,
                         merchant_uid: rsp.merchant_uid,
@@ -100,7 +90,7 @@
                         planner_id: planner,
                         plan_idx: plan_idx
                     }
-                    $.ajax({
+                    $.ajax({//결제 검증 ajax
                         type: 'POST',
                         data: JSON.stringify(info),
                         url: '/payment/confirm',
@@ -117,16 +107,6 @@
                             console.log(error)
                         }
                     })
-                    //     .done(function (result) {
-                    //     alert("디비전송성공")
-                    //     window.location.reload();
-                    // }).fail(function (data, textStatus, errorThrown) {
-                    //
-                    //     alert("디비전송실패");
-                    //     console.log(textStatus);
-                    //     console.log(errorThrown);
-                    //
-                    // })
                 } else {
                     alert("결제실패" + "에러 : " + rsp.error_code + "에러내용: " + rsp.error_msg);
                 }
@@ -134,6 +114,30 @@
 
         });
     }
+
+    function addCart() {
+        let cart =  {
+            plan_idx: plan_idx,
+            user_id: buyer
+        };
+        $.ajax({
+            type: 'Post',
+            url: '/plan/list/addcart',
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify(cart)
+        }).done(function (rsp) {
+            if (rsp.cart === '카트담기') {
+                alert('카트담기성공')
+            } else {
+                alert('카트담기실패');
+            }
+
+        }).fail(function (error) {
+            alert('에이쟉스 실패')
+        })
+    }
+
 
 
 </script>

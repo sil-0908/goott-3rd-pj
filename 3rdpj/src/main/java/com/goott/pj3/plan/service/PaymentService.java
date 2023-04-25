@@ -5,4 +5,6 @@ import com.goott.pj3.plan.dto.PayDTO;
 public interface PaymentService {
 
     boolean pay(PayDTO payDTO);
+
+    void saleCount(PayDTO payDTO);
 }

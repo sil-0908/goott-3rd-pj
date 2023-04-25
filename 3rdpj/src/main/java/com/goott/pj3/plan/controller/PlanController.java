@@ -11,9 +11,13 @@ import com.goott.pj3.plan.service.PlanService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 //2023.04.05 길영준
 @Controller
 @RequestMapping("plan/*")
@@ -29,12 +33,14 @@ public class PlanController {
         this.s3FileUploadService = s3FileUploadService;
     }
 
+    // 작성 get
     @Auth(role = Auth.Role.PLANNER)
     @GetMapping("create")
     public String planGet() {
         return "plan/plan_create";
     }
 
+    // 작성 post
     @PostMapping("create")
     public String planPut(PlanDTO planDTO, ImgDTO imgDTO, HttpSession httpSession, @RequestParam("files[]") List<MultipartFile> multipartFile) {
         String user = (String) httpSession.getAttribute("user_id");
@@ -81,6 +87,7 @@ public class PlanController {
         return "redirect:/plan/list";
     }
 
+    // 리스트 겟
     @GetMapping("list")
     public ModelAndView mv(ModelAndView modelAndView, Criteria cri) {
         modelAndView.addObject("paging", planService.paging(cri));
@@ -89,6 +96,7 @@ public class PlanController {
         return modelAndView;
     }
 
+    // 디테일
     @GetMapping("list/{plan_idx}")
     public ModelAndView planDetail(ModelAndView modelAndView, @PathVariable("plan_idx") int plan_idx) {
         modelAndView.addObject("data", planService.detail(plan_idx));
@@ -96,6 +104,7 @@ public class PlanController {
         return modelAndView;
     }
 
+    // 수정 겟
     @GetMapping("list/edit/{plan_idx}")
     public ModelAndView planEdit(ModelAndView modelAndView, @PathVariable("plan_idx") int plan_idx) {
         modelAndView.addObject("data", planService.detail(plan_idx));
@@ -103,7 +112,7 @@ public class PlanController {
         return modelAndView;
     }
 
-
+    // 수정 포스트
     @PutMapping("list/edit/{plan_idx}")
     public String planEditPut(PlanDTO planDTO, @PathVariable("plan_idx") int plan_idx) {
         planDTO.setPlan_idx(plan_idx);
@@ -111,6 +120,7 @@ public class PlanController {
         return "redirect:/plan/list";
     }
 
+    // 삭제
     @PostMapping("list/delete")
     public String planDelete(int plan_idx) {
         System.out.println(plan_idx);
@@ -118,5 +128,29 @@ public class PlanController {
         return "redirect:/plan/list";
     }
 
+    // 카트추가
+    @PostMapping(value = "list/addcart", consumes = "application/json")
+    @ResponseBody
+    public Map<String, Object> planCart(@RequestBody PlanDTO planDTO) {
+        planService.addCart(planDTO);
+        Map<String, Object> map = new HashMap<>();
+        map.put("cart", "카트담기");
+        return map;
+    }
+    //카트 보여주기 데모
+    @GetMapping("cart")
+    public ModelAndView cart(ModelAndView mv, PlanDTO planDTO, HttpSession httpSession){
+        String user = (String)httpSession.getAttribute("user_id");
+        planDTO.setUser_id(user);
+        mv.addObject("cart", planService.getCart(planDTO));
+        mv.setViewName("plan/cart_demo");
+        return mv;
+    }
+
+    @DeleteMapping("cart/delete")
+    public String delete(@RequestParam("delList") List<Integer> list) {
+//        for(Integer plan_idx : list) PlanService.deleteCart(plan_idx);
+        return "redirect:/plan/cart";
+    }
 
 }
