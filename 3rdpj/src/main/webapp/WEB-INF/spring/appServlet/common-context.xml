@@ -6,16 +6,16 @@
         <!--2023.04.22 길영준 S3, iamport 용-->
         <constructor-arg>
             <bean class="com.amazonaws.auth.BasicAWSCredentials">
-                <constructor-arg value="${aws.accessKey}" />
-                <constructor-arg value="${aws.secretKey}" />
+                <constructor-arg value="${aws.accessKey}"/>
+                <constructor-arg value="${aws.secretKey}"/>
             </bean>
         </constructor-arg>
     </bean>
     <bean id="awsProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
-        <property name="location" value="classpath:common.properties" />
+        <property name="location" value="classpath:common.properties"/>
     </bean>
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="properties" ref="awsProperties" />
+        <property name="properties" ref="awsProperties"/>
     </bean>
     <bean id="iamport" class="com.siot.IamportRestClient.IamportClient">
         <constructor-arg index="0" value="${iamport.api}"/>

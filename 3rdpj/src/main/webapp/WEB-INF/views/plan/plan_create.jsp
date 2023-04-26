@@ -1,6 +1,6 @@
 <%--
   Created by IntelliJ IDEA.
-  User: goott4
+  User: 길영준
   Date: 2023-04-05
   Time: 오전 10:47
   To change this template use File | Settings | File Templates.
@@ -26,8 +26,8 @@
     <br>
     <label for="plan_detail">내용</label>
     <textarea id="plan_detail" name="plan_detail"></textarea>
-    <input type="file" name="files[]" id="file-input"  multiple/>
-    <button type="submit" id="upload-btn" >Upload</button>
+    <input type="file" name="files[]" id="file-input" multiple/>
+    <button type="submit" id="upload-btn">Upload</button>
 </form>
 <div id="preview"></div>
 <script>

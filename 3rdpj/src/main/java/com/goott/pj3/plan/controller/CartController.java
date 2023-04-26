@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 // 2023.04.24 길영준
 @Controller
 public class CartController {
@@ -29,15 +30,17 @@ public class CartController {
         map.put("cart", "카트담기");
         return map;
     }
+
     //카트 보여주기 데모
     @GetMapping("cart")
-    public ModelAndView cart(ModelAndView mv, PlanDTO planDTO, HttpSession httpSession){
-        String user = (String)httpSession.getAttribute("user_id");
+    public ModelAndView cart(ModelAndView mv, PlanDTO planDTO, HttpSession httpSession) {
+        String user = (String) httpSession.getAttribute("user_id");
         planDTO.setUser_id(user);
         mv.addObject("cart", cartService.getCart(planDTO));
         mv.setViewName("cart/cart_demo");
         return mv;
     }
+
     //카트 삭제
     @DeleteMapping("cart/delete")
     public String delete(@RequestParam("delList") List<Integer> list) {
