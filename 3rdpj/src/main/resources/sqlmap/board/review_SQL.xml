@@ -18,11 +18,11 @@
     <!--조원재 23.04.05 디테일 페이지-->
     <select id="detail" resultMap="reviewResultMap">
         select r.review_idx, r.user_id, r.plan_idx, r.review_content, r.review_rating, r.create_date,
-               group_concat(i.r_img separator ',') as r_imgs
-        from plan_review r left join review_img i
-          on r.review_idx = i.review_idx
-       where r.review_idx = #{review_idx}
-       group by r.review_idx
+               i.r_img, i.r_img_idx
+         from plan_review r left join review_img i
+           on r.review_idx = i.review_idx
+        where r.review_idx = #{review_idx}
+          and r.r_del_yn='y'
     </select>
 
     <resultMap id="reviewResultMap" type="com.goott.pj3.board.review.dto.ReviewDTO">
@@ -32,25 +32,35 @@
         <result property="review_content" column="review_content"/>
         <result property="review_rating" column="review_rating"/>
         <result property="create_date" column="create_date"/>
-        <collection property="r_img" column="r_imgs" javaType="java.util.List" ofType="java.lang.String" >
-            <result column="r_imgs"/>
+        <collection property="r_img" column="r_img" javaType="java.util.List" ofType="String" >
+            <result column="r_img"/>
+        </collection>
+        <collection property="r_img_idx" column="r_img_idx" javaType="List" ofType="String">
+            <result column="r_img_idx" />
         </collection>
     </resultMap>
 
-    <!--조원재 23.04.05 리뷰 수정-->
+    <!--조원재 23.04.05 리뷰 수정 시작-->
+    <!--본문 내용 수정-->
     <update id="update" parameterType="com.goott.pj3.board.review.dto.ReviewDTO" useGeneratedKeys="true" keyProperty="review_idx">
         update plan_review
            set review_content=#{review_content}
          where review_idx = #{review_idx}
     </update>
-
-    <update id="updatefile" parameterType="com.goott.pj3.board.review.dto.ReviewDTO">
-        <foreach collection="r_img" item="item" separator=",">
-        update review_img
-           SET r_img=#{item}
+    <!--기존 이미지 파일 삭제-->
+    <delete id="deleteimg" parameterType="com.goott.pj3.board.review.dto.ReviewDTO">
+        delete
+          from review_img
          where review_idx=#{review_idx}
+    </delete>
+    <!--새 이미지 파일 생성-->
+    <insert id="updateImg" parameterType="com.goott.pj3.board.review.dto.ReviewDTO">
+        insert into review_img(review_idx, r_img) values
+        <foreach collection="r_img" item="item" separator=",">
+            (#{review_idx}, #{item})
         </foreach>
-    </update>
+    </insert>
+    <!--리뷰 수정 끝 -->
 
     <!--조원재 23.04.05 리뷰 삭제-->
     <update id="delete" parameterType="hashMap">
@@ -58,7 +68,7 @@
           set r_del_yn = 'n'
         where review_idx=#{review_idx}
     </update>
-    
+
     <!--조원재 23.04.05 리뷰 목록, 검색-->
     <select id="list" resultType="com.goott.pj3.board.review.dto.ReviewDTO">
         select review_idx, user_id, plan_idx, review_content,
@@ -73,6 +83,20 @@
          limit #{pageStart}, #{perPageNum}
     </select>
 
+    <select id="imglist" resultMap="reviewlistResultMap">
+        select i.review_idx, i.r_img
+          from review_img i left join plan_review r
+            on i.review_idx = r.review_idx
+         where r.r_del_yn='y'
+    </select>
+
+    <resultMap id="reviewlistResultMap" type="com.goott.pj3.board.review.dto.ReviewDTO">
+        <id property="review_idx" column="review_idx"/>
+        <collection property="r_img" column="r_img" javaType="List" ofType="String">
+            <result column="r_img"/>
+        </collection>
+    </resultMap>
+
     <select id="totalCount" resultType="int">
         select count(review_idx)
           from plan_review
@@ -83,5 +107,28 @@
           and r_del_yn = 'y'
     </select>
 
+<!--	<insert id="replywrite">-->
+<!--		insert into reply(review_idx, r_writer, r_content)-->
+<!--		values (#{review_idx}, #{r_writer}, #{r_content})-->
+<!--	</insert>-->
+<!--	-->
+<!--	<select id="getList" resultType="com.goott.pj3.common.util.ReplyDTO">-->
+<!--		select reply_idx, r_writer, r_content-->
+<!--		  from reply-->
+<!--		 where review_idx = #{review_idx}-->
+<!--		   and r_del_yn = 'n'-->
+<!--	</select>-->
+<!--	-->
+<!--	<update id="replyupdate">-->
+<!--		update reply-->
+<!--		   set r_content = #{r_content}-->
+<!--		 where reply_idx = #{reply_idx}-->
+<!--	</update>-->
+<!--	-->
+<!--	<update id="replydelete">-->
+<!--		update reply-->
+<!--		   set r_del_yn = 'y'-->
+<!--		 where reply_idx = #{reply_idx}-->
+<!--	</update>-->
 </mapper>
 

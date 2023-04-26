@@ -1,0 +1,61 @@
+/* form */
+.signup_main {
+		
+}
+
+.signup_box {
+	
+}
+
+.signup_accept {
+	height: 100%;
+	width: 30%;
+	background-color: black;
+}
+
+/* input */
+.sign_input {
+	height: 100%;
+    width: 30%;
+    border: none;
+    outline: none;
+    padding: 0 30px;
+    color: #333;
+    transition: all 0.2s ease;
+    border-bottom: 1.5px solid #aaaaaa;
+    
+}
+
+.sign_input:focus {
+	border-bottom : 1.5px solid var(--blue);
+}
+
+.input_box {
+	position: relative;
+	line-height: 25px;
+}
+
+/* text */
+.signup_text {
+	font-size: 22px;
+	color: #0b0217;
+	margin-top: 120px;
+	margin-bottom: 100px;
+}
+
+.chk_text {
+	font-size: 12px;
+}
+
+/* icon */
+.icon {
+	position: absolute;
+	transform: translateY(-50%);
+	font-size: 20px;
+	color: #707070;
+	left: 0;
+}
+
+.sign_input:focus ~ .icon {
+	color: var(--blue);
+}

@@ -10,9 +10,9 @@ public interface QnaService {
 
     String enroll(QnaDTO qnaDTO);
 
-    List<QnaDTO> list(Criteria cri);
+    List<QnaDTO> list(String requestUrl, Criteria cri, String auth);
 
-    PagingDTO paging(String requestUrl, Criteria cri);
+    PagingDTO paging(String requestUrl, Criteria cri, String auth);
 
     QnaDTO detail(int qna_idx);
 
@@ -22,9 +22,6 @@ public interface QnaService {
 
     List<QnaDTO> list_n();
 
-    List<QnaDTO> list_u();
+    List<QnaDTO> list_q();
 
-    List<QnaDTO> list_r();
-
-    List<QnaDTO> list_e();
 }

@@ -31,7 +31,7 @@
         <input type="radio" name="review_rating" value="4">4
         <input type="radio" name="review_rating" value="5">5
     </p>
-    <p> <input id="upload-btn" type="submit" value="저장"></p>
+    <p> <input id="upload-btn" type="submit" value="저장" disabled="true"><span>사진 올려야 작성 가능</span></p>
 </form>
 <div id="preview"></div>
 </body>
@@ -44,6 +44,7 @@
     async function previewFile() {
         var preview = document.getElementById("preview"); // 미리보기 띄울 div
         var files = document.getElementById('fileItem').files; // img 파일들
+        var cnt = 0; // 이미지 갯수
         preview.innerHTML = ''; // 미리보기 초기화
 
         for (const file of files) {  // 반복문 한번 반복 때마다 이미지 1개씩 view
@@ -55,12 +56,19 @@
                     img.onload = () => { // 이미지 로드가 완료되면 이 함수가 호출
                         preview.appendChild(img); // preview 요소의 자식 노드로 img 추가
                         resolve(); // 결과 호출
+                        cnt++ // 이미지 갯수 더하기
+                        if(cnt == files.length){
+                            $('#upload-btn').prop('disabled', false); // 이미지 파일 올리면 저장버튼 활성화
+                        }
+                        else if(cnt != file.length){
+                            $('#upload-btn').prop('disabled', true); // 이미지 파일 취소 할 경우 다시 비활성화
+                        }
                     }
                 };
                 reader.onerror = function() {
                     reject(new Error('파일 로드 실패'));
                 };
-                reader.readAsDataURL(file); // 파일을
+                reader.readAsDataURL(file);
             });
         }
     }
