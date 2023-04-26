@@ -1,3 +1,4 @@
+package com.goott.pj3.common.util.chat;
 //package com.goott.pj3.common.util;
 //
 //import org.springframework.stereotype.Controller;

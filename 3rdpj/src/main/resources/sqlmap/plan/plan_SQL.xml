@@ -50,4 +50,14 @@
         INSERT INTO pay(user_id, plan_idx, imp_uid, merchant_id)
         values (#{buyer_id},#{plan_idx},#{imp_uid},#{merchant_uid})
     </insert>
+    <update id="count">
+        update plan
+        set sale_count = (sale_count+1)
+        where plan_idx=#{plan_idx}
+    </update>
+    <update id="success">
+        UPDATE user
+        SET success_count =(success_count+1)
+        WHERE user_id = #{planner_id}
+    </update>
 </mapper>

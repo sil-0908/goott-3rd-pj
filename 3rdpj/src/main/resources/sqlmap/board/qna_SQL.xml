@@ -146,4 +146,28 @@
         from qna
         where qna_idx = #{qna_idx}
     </select>
+    
+    <insert id="replywrite">
+		insert into reply(qna_idx, r_writer, r_content)
+		values (#{qna_idx}, #{r_writer}, #{r_content})
+	</insert>
+	
+	<select id="getList" resultType="com.goott.pj3.common.util.reply.ReplyDTO">
+		select reply_idx, r_writer, r_content
+		  from reply
+		 where qna_idx = #{qna_idx}
+		   and r_del_yn = 'n'
+	</select>
+	
+	<update id="replyupdate">
+		update reply
+		   set r_content = #{r_content}
+		 where reply_idx = #{reply_idx}
+	</update>
+	
+	<update id="replydelete">
+		update reply
+		   set r_del_yn = 'y'
+		 where reply_idx = #{reply_idx}
+	</update>
 </mapper>

@@ -7,7 +7,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
-import com.goott.pj3.common.util.ReplyDTO;
+import com.goott.pj3.common.util.reply.ReplyDTO;
 
 @Repository
 public class ReviewReplyDAO {

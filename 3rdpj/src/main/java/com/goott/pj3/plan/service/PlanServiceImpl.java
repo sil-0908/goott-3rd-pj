@@ -1,7 +1,7 @@
 package com.goott.pj3.plan.service;
 
-import com.goott.pj3.common.util.Criteria;
-import com.goott.pj3.common.util.PagingDTO;
+import com.goott.pj3.common.util.paging.Criteria;
+import com.goott.pj3.common.util.paging.PagingDTO;
 import com.goott.pj3.plan.dto.ImgDTO;
 import com.goott.pj3.plan.dto.PlanDTO;
 
@@ -46,6 +46,7 @@ public class PlanServiceImpl implements PlanService {
     }
 
 
+
     @Override
     public PlanDTO detail(int plan_idx) {
         return planDAO.detail(plan_idx);
@@ -60,6 +61,5 @@ public class PlanServiceImpl implements PlanService {
     public void planDelete(int planIdx) {
         planDAO.delete(planIdx);
     }
-
 
 }

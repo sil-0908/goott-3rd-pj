@@ -19,4 +19,9 @@ public class PaymentServiceImpl implements PaymentService {
         int cnt = paymentDAO.pay(payDTO);
         return cnt==1;
     }
+
+    @Override
+    public void saleCount(PayDTO payDTO) {
+        paymentDAO.saleCount(payDTO);
+    }
 }

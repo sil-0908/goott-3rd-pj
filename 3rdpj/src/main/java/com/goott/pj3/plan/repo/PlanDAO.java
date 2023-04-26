@@ -1,6 +1,6 @@
 package com.goott.pj3.plan.repo;
 
-import com.goott.pj3.common.util.Criteria;
+import com.goott.pj3.common.util.paging.Criteria;
 import com.goott.pj3.plan.dto.ImgDTO;
 import com.goott.pj3.plan.dto.PlanDTO;
 import org.apache.ibatis.session.SqlSession;
@@ -46,5 +46,6 @@ public class PlanDAO {
     public void uploadImg(ImgDTO imgDTO) {
         ss.insert("plan.upload", imgDTO);
     }
+
 
 }

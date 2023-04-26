@@ -1,4 +1,4 @@
-package com.goott.pj3.common.util;
+package com.goott.pj3.common.util.auth;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;

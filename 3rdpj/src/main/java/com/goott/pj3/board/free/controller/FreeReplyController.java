@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.goott.pj3.board.free.service.FreeReplyService;
-import com.goott.pj3.common.util.ReplyDTO;
+import com.goott.pj3.common.util.reply.ReplyDTO;
 
 @Controller
 @RequestMapping("freeReply/**")

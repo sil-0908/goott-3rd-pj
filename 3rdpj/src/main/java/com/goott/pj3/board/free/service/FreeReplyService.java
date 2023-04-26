@@ -2,7 +2,7 @@ package com.goott.pj3.board.free.service;
 
 import java.util.List;
 
-import com.goott.pj3.common.util.ReplyDTO;
+import com.goott.pj3.common.util.reply.ReplyDTO;
 
 public interface FreeReplyService {
 

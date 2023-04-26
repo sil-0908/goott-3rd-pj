@@ -58,7 +58,7 @@
 		values (#{free_idx}, #{r_writer}, #{r_content})
 	</insert>
 	
-	<select id="getList" resultType="com.goott.pj3.common.util.ReplyDTO">
+	<select id="getList" resultType="com.goott.pj3.common.util.reply.ReplyDTO">
 		select reply_idx, r_writer, r_content
 		  from reply
 		 where free_idx = #{free_idx}
