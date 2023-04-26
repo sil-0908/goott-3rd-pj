@@ -48,7 +48,7 @@
       </section>
     </footer>
     
-    <!-- signin modal - 장민실 -->
+    <!-- signin modal - 장민실-->
     <section class="signin_section">
 		<div class="form login_div">
 			<i class="fa-solid fa-xmark close_icon"></i>
@@ -57,18 +57,18 @@
 				<div class="signin_input_box id_area">
 					<input type="text" placeholder="아이디" maxlength='20' class="id" required />
 					<i class="fa-solid fa-user id_icon"></i>
-					<p class="user_text id_chk_text"></p>
+					<p class="signin_text id_alert_text"></p>
 				</div>
 				<div class="signin_input_box pw_area">
 					<input type="password" placeholder="비밀번호" maxlength='20' class="pw" required />
 					<i class="fa-solid fa-lock pw_icon"></i>
 					<i class="fa-solid fa-eye-slash pw_hide"></i>
-					<p class="user_text pw_chk_text"></p>
+					<p class="signin_text pw_alert_text"></p>
 				</div>
-				<p class="user_text signin_msg"></p>
+				<p class="signin_text signin_msg"></p>
 				<input type="button" class="signin_btn" value="로그인">
-				<div class="user_text forgot_info_div"><span class="forgot_info">아이디/비밀번호 찾기</span></div>
-				<div class="user_text signup_div">아직 회원이 아니신가요?<span class="sign_up">회원가입</span></div>
+				<div class="signin_text forgot_info_div"><span class="forgot_info">아이디/비밀번호 찾기</span></div>
+				<div class="signin_text signup_div">아직 회원이 아니신가요?<span class="sign_up_span">회원가입</span></div>
 			</form>
 		</div>
    	</section> 

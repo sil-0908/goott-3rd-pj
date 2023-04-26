@@ -23,9 +23,7 @@
 .admin__notice-detail--component {
   margin-bottom: 1.5rem;
 }
-.admin__notice-detail--component > span,
-label,
-input {
+.admin__notice-component > :is(span, label, input) {
   display: inline-block;
   font-size: 1rem;
   line-height: 2rem;

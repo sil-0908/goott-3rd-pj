@@ -1,31 +1,16 @@
-//	엔터키 입력방지 걸기(키코드 : 13, 108) - 장민실 23.04.04
-//	document.addEventListener('keydown', function(e){
-//		if(e.keyCode === 13 || e.keyCode === 108) {
-//			e.preventDefault();
-//		}
-//	});
+/* 전체 코드 작업자 : 장민실 */
 
-// 메인으로 페이지 이동 - 장민실 23.04.04
-//	$("#main").click(function() {
-//		location.href = "/user/mypage";
-//	})
-
-// 회원가입 페이지 이동 - 장민실 23.04.04
-	$(".sign_up").on('click', function(){
+// 회원가입 페이지 이동
+	$(".sign_up_span").on('click', function(){
 		location.href = "/user/signup";
 	});
 	
-//	로그아웃 - 장민실 23.04.21
-	$(".sign_out").on('click', function(){
-		location.href = "/user/sign_out";
-	});
-	
-// 아이디/비밀번호 찾기 - 장민실 23.04.23
+// 아이디/비밀번호 찾기
 	$(".forgot_info").on('click', function() {
 		location.href = "/user/find_user";
 	})
 	
-// input 입력 제한 - 장민실 23.04.21
+// input 입력 제한
 	$(document).ready(function() {
 		// 아이디, 비밀번호 - 입력받는 영문자 무조건 소문자로 변환
 		$(".id, .pw").css("text-transform", "lowercase");
@@ -54,7 +39,7 @@
 	    });
 	});	// function end
 	
-// 로그인 모달 - 장민실 23.04.21	
+// 로그인 모달
 	// 모달창 열기
 	$(".sign_in").on("click", function(){		
 		$(".signin_section").addClass("show");
@@ -65,8 +50,8 @@
 		$(".signin_section").removeClass("show");
 		$(".id").val("");
 		$(".pw").val("");
-		$(".id_chk_text").empty();
-		$(".pw_chk_text").empty();
+		$(".id_alert_text").empty();
+		$(".pw_alert_text").empty();
 		$(".signin_msg").empty();
 	});
 	
@@ -82,18 +67,18 @@
 		}		
 	});
 
-// 로그인 - 장민실 23.04.04 (로그인창 모달로 바뀌어 엔터키 따로 X)
+// 로그인
 	$(".signin_btn").on('click', function(){
 		var id = $(".id").val();
 		var pw = $(".pw").val();
 		
 		if(id==="") {
-			$(".id_chk_text").html("아이디를 입력해 주세요");
-			$(".id_chk_text").css("color", "red");
+			$(".id_alert_text").html("아이디를 입력해 주세요");
+			$(".id_alert_text").css("color", "red");
 		}	// 아이디 공란일 경우 if end
 		else if(pw==="") {
-			$(".pw_chk_text").html("비밀번호를 입력해 주세요");
-			$(".pw_chk_text").css("color", "red");
+			$(".pw_alert_text").html("비밀번호를 입력해 주세요");
+			$(".pw_alert_text").css("color", "red");
 		}	// 비밀번호 공란일 경우 else if end
 		
 		else if(id!=""||pw!="") {
