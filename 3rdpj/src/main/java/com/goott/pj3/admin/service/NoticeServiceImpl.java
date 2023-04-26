@@ -4,12 +4,12 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import com.goott.pj3.common.util.Criteria;
-import com.goott.pj3.common.util.PagingDTO;
 import org.springframework.stereotype.Service;
 
 import com.goott.pj3.admin.dto.NoticeDTO;
 import com.goott.pj3.admin.repo.NoticeDAO;
+import com.goott.pj3.common.util.paging.Criteria;
+import com.goott.pj3.common.util.paging.PagingDTO;
 
 @Service
 public class NoticeServiceImpl implements NoticeService {

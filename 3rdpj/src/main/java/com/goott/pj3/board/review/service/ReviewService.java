@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.goott.pj3.board.review.dto.ReviewDTO;
-import com.goott.pj3.common.util.Criteria;
-import com.goott.pj3.common.util.PagingDTO;
+import com.goott.pj3.common.util.paging.Criteria;
+import com.goott.pj3.common.util.paging.PagingDTO;
 
 public interface ReviewService {
     int create(ReviewDTO reviewDTO);

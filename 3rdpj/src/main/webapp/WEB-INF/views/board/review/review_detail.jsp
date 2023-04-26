@@ -101,7 +101,7 @@
 		// 		url : '/reviewReply/update',
 		// 		data : {"review_idx" : review_idx, 'reply_idx' : reply_idx, 'r_content' : r_content},
 		// 		type : 'post',
-		// 		success : function (result){
+		// 		success : function (){
 		// 			alert('댓글이 수정되었습니다')
 		// 			location.href = "/review/detail/"+review_idx;
 		// 		}
@@ -116,7 +116,7 @@
 		// 		url : '/reviewReply/delete',
 		// 		data : {"review_idx" : review_idx, 'reply_idx' : reply_idx},
 		// 		type : 'post',
-		// 		success : function (result){
+		// 		success : function (){
 		// 			alert('댓글이 삭제되었습니다')
 		// 			location.href = "/review/detail/"+review_idx;
 		// 		}

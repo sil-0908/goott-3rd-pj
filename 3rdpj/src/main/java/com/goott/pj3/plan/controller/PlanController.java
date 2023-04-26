@@ -1,8 +1,8 @@
 package com.goott.pj3.plan.controller;
 
-import com.goott.pj3.common.util.Auth;
-import com.goott.pj3.common.util.Criteria;
-import com.goott.pj3.common.util.S3FileUploadService;
+import com.goott.pj3.common.util.auth.Auth;
+import com.goott.pj3.common.util.aws.S3FileUploadService;
+import com.goott.pj3.common.util.paging.Criteria;
 import com.goott.pj3.plan.dto.ImgDTO;
 import com.goott.pj3.plan.dto.PlanDTO;
 import com.goott.pj3.user.service.UserService;
