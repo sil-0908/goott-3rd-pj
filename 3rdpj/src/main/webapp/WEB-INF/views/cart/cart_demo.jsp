@@ -20,7 +20,7 @@
         <tr>
             <c:forEach var="item" items="${cart}">
                 <c:if test="${item.p_del_yn eq 'N'}">
-                    <td><a href="list/${item.plan_idx}">${item.plan_title}</a></td>
+                    <td><a href="plan/list/${item.plan_idx}">${item.plan_title}</a></td>
                     <td>${item.plan_idx}</td>
                     <input name="delList" type="checkbox" value="${item.plan_idx}"/>
                     <br>

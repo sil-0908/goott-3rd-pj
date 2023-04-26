@@ -47,11 +47,5 @@ public class PlanDAO {
         ss.insert("plan.upload", imgDTO);
     }
 
-    public void addCart(PlanDTO planDTO) {
-        ss.insert("plan.addCart", planDTO);
-    }
 
-    public List<PlanDTO> getCart(PlanDTO planDTO) {
-        return ss.selectList("plan.getCart", planDTO);
-    }
 }

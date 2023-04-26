@@ -105,19 +105,32 @@ public class PlanController {
     }
 
     // 수정 겟
-    @GetMapping("list/edit/{plan_idx}")
-    public ModelAndView planEdit(ModelAndView modelAndView, @PathVariable("plan_idx") int plan_idx) {
-        modelAndView.addObject("data", planService.detail(plan_idx));
-        modelAndView.setViewName("plan/plan_edit");
+    @GetMapping("list/edit")
+    public ModelAndView planEdit(ModelAndView modelAndView, HttpSession httpSession,
+                                 @RequestParam("idx") int plan_idx, @RequestParam("auth") String user_id) {
+        String user = (String) httpSession.getAttribute("user_id");
+        if (user.equals(user_id)) {
+            modelAndView.addObject("data", planService.detail(plan_idx));
+            modelAndView.setViewName("plan/plan_edit");
+        } else {
+            modelAndView.setViewName("/plan/plan_list");
+        }
         return modelAndView;
     }
 
     // 수정 포스트
-    @PutMapping("list/edit/{plan_idx}")
-    public String planEditPut(PlanDTO planDTO, @PathVariable("plan_idx") int plan_idx) {
-        planDTO.setPlan_idx(plan_idx);
-        planService.planEdit(planDTO);
-        return "redirect:/plan/list";
+    @PutMapping("list/edit")
+    public String planEditPut(PlanDTO planDTO, HttpSession httpSession,
+                              @RequestParam("idx") int plan_idx, @RequestParam("auth") String user_id) {
+        String user = (String) httpSession.getAttribute("user_id");
+        if (user.equals(user_id)) {
+            planDTO.setPlan_idx(plan_idx);
+            planService.planEdit(planDTO);
+            return "redirect:/plan/list";
+        } else {
+            return "redirect:/plan/list";
+        }
+
     }
 
     // 삭제
@@ -127,30 +140,4 @@ public class PlanController {
         planService.planDelete(plan_idx);
         return "redirect:/plan/list";
     }
-
-    // 카트추가
-    @PostMapping(value = "list/addcart", consumes = "application/json")
-    @ResponseBody
-    public Map<String, Object> planCart(@RequestBody PlanDTO planDTO) {
-        planService.addCart(planDTO);
-        Map<String, Object> map = new HashMap<>();
-        map.put("cart", "카트담기");
-        return map;
-    }
-    //카트 보여주기 데모
-    @GetMapping("cart")
-    public ModelAndView cart(ModelAndView mv, PlanDTO planDTO, HttpSession httpSession){
-        String user = (String)httpSession.getAttribute("user_id");
-        planDTO.setUser_id(user);
-        mv.addObject("cart", planService.getCart(planDTO));
-        mv.setViewName("plan/cart_demo");
-        return mv;
-    }
-
-    @DeleteMapping("cart/delete")
-    public String delete(@RequestParam("delList") List<Integer> list) {
-//        for(Integer plan_idx : list) PlanService.deleteCart(plan_idx);
-        return "redirect:/plan/cart";
-    }
-
 }

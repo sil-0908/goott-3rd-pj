@@ -18,6 +18,7 @@ public class PaymentDAO {
     }
 
     public void saleCount(PayDTO payDTO) {
-        session.insert("plan.count", payDTO);
+        session.update("plan.count", payDTO);
+        session.update("plan.success", payDTO);
     }
 }

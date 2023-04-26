@@ -50,17 +50,14 @@
         INSERT INTO pay(user_id, plan_idx, imp_uid, merchant_id)
         values (#{buyer_id},#{plan_idx},#{imp_uid},#{merchant_uid})
     </insert>
-    <insert id="addCart" parameterType="com.goott.pj3.plan.dto.PayDTO">
-        INSERT INTO plan_cart(user_id, plan_idx)
-        SELECT #{user_id}, #{plan_idx}
-        FROM dual
-        where not exists(select * from plan_cart where user_id = #{user_id} And plan_idx = #{plan_idx})
-    </insert>
-    <select id="getCart" resultType="com.goott.pj3.plan.dto.PlanDTO">
-        select plan_title, plan_idx, p_del_yn
-        from plan
-        where plan_idx in (select plan_idx
-                           from plan_cart
-                           where user_id = #{user_id} )
-    </select>
+    <update id="count">
+        update plan
+        set sale_count = (sale_count+1)
+        where plan_idx=#{plan_idx}
+    </update>
+    <update id="success">
+        UPDATE user
+        SET success_count =(success_count+1)
+        WHERE user_id = #{planner_id}
+    </update>
 </mapper>

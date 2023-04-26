@@ -34,9 +34,9 @@ public class PaymentController {
     public Map<String, Object> paymentConfirm(@RequestBody PayDTO payDTO) {
         System.out.println(payDTO.toString());
         boolean checkPayment = paymentService.pay(payDTO);
-        paymentService.saleCount(payDTO);
         Map<String, Object> map = new HashMap<String, Object>();
         if (checkPayment) {
+            paymentService.saleCount(payDTO);
             map.put("msg", "결제성공");
         } else {
             map.put("msg", "결제실패");

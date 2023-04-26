@@ -38,7 +38,7 @@
 <input id="planner" type="text" value="${data.user_id}">
 
 <c:if test="${data.user_id == sessionScope.user_id}">
-    <button type="button" onclick="location.href='edit/${data.plan_idx}'">수정</button>
+    <button type="button" onclick="location.href='edit?idx=${data.plan_idx}&auth=${data.user_id}'">수정</button>
     <button data-id="${data.plan_idx}" id="delete">삭제</button>
 </c:if>
 <button id="cart" type="button" onclick="addCart()">카트담기</button>
@@ -114,7 +114,7 @@
 
         });
     }
-
+    // 카트담기
     function addCart() {
         let cart =  {
             plan_idx: plan_idx,
@@ -122,7 +122,7 @@
         };
         $.ajax({
             type: 'Post',
-            url: '/plan/list/addcart',
+            url: '/addcart',
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             data: JSON.stringify(cart)

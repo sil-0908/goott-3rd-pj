@@ -61,15 +61,5 @@ public class PlanServiceImpl implements PlanService {
     public void planDelete(int planIdx) {
         planDAO.delete(planIdx);
     }
-    @Override
-    public void addCart(PlanDTO planDTO) {
-        planDAO.addCart(planDTO);
-    }
-
-    @Override
-    public List<PlanDTO> getCart(PlanDTO planDTO) {
-        return planDAO.getCart(planDTO);
-    }
-
 
 }

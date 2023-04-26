@@ -9,6 +9,7 @@ import java.util.List;
 //2023.04.05 길영준
 public interface PlanService {
 
+
     void planCreate(PlanDTO planDTO);
 
     List<PlanDTO> list(Criteria cri);
@@ -23,7 +24,5 @@ public interface PlanService {
 
     void uploadImg(ImgDTO imgDTO);
 
-    void addCart(PlanDTO planDTO);
 
-    List<PlanDTO> getCart(PlanDTO planDTO);
 }
