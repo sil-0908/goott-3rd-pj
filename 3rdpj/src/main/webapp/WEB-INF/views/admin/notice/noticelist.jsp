@@ -7,6 +7,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Insert title here</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"/>
+
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
     <link rel="stylesheet" href="/resources/css/style.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -15,10 +19,18 @@
 <script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 $(function(){
+	$("#btnWrite").click(function(){
+		location.href ="/admin/noticewrite";
+
 	$(".btn__notice-create").click(function(){
 		location.href ="admin/noticewrite";
+
 	});
-});
+
+    
+	    });
+    });
+
 </script>
 <body>
 <%@ include file="/WEB-INF/views/common/layout.jsp" %>
@@ -27,6 +39,23 @@ $(function(){
         <h1>공지사항 관리</h1>
         <button type="button" class="btn__notice-create">공지사항 작성</button>
       </hgroup>
+        <form name="search">
+            <div>
+                <select id="selectBox" name="option">
+                    <option value="">=======</option>
+                    <option value="user_id">ID</option>
+                    <option value="title">제목</option>
+                    <option value="content">내용</option>
+                    <option value="title,content">제목+내용</option>
+                </select>
+            </div>
+            <div class="search_wrap">
+                <div class="search_area">
+                    <input type="text" name="keyword" value="${paging.cri.keyword }">
+                    <button id="search">Search</button>
+                </div>
+            </div>
+        </form>
       <hgroup>
         <h1>공지사항</h1>
       </hgroup>
@@ -106,9 +135,34 @@ $(function(){
                             </tbody>
                         </table> --%>
                     </div>
+                    <div class="pagination" style="display: flex; justify-content: center">
+                        <form action="form1">
+                            <ul class="btn-group pagination">
+                                <c:if test="${paging.prev}">
+                                    <li>
+                                        <a href='<c:url value="/admin/noticelist?option=${paging.cri.option}&keyword=${paging.cri.keyword}&page=${paging.startPage-1}"/>'><i class="fa fa-chevron-left"></i></a>
+                                    </li>
+                                </c:if>
+                                <c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="pageNum">
+                                    <li>
+                                        <a href='<c:url value="/admin/noticelist?option=${paging.cri.option}&keyword=${paging.cri.keyword}&page=${pageNum}"/>'><i class="fa">${pageNum}</i></a>
+                                    </li>
+                                </c:forEach>
+                                <c:if test="${paging.next && paging.endPage >0 }">
+                                    <li>
+                                        <a href='<c:url value="/admin/noticelist?option=${paging.cri.option}&keyword=${paging.cri.keyword}&page=${paging.endPage+1}"/>'><i class="fa fa-chevron-right"></i></a>
+                                    </li>
+                                </c:if>
+                            </ul>
+                            <input type="hidden" name="page" value="${paging.cri.page}">
+                            <input type="hidden" name="keyword" value="${paging.cri.keyword}">
+                            <input type="hidden" name="option" value="${paging.cri.option}">
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
+
     </div>
 <script src="/resources/js/common/layout.js"></script>
 </body>

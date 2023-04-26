@@ -24,7 +24,7 @@
 				/WEB-INF/spring/appServlet/servlet-context.xml
 				/WEB-INF/spring/appServlet/security-context.xml
 				/WEB-INF/spring/appServlet/websocket-context.xml
-				/WEB-INF/spring/appServlet/aws-context.xml
+				/WEB-INF/spring/appServlet/common-context.xml
 			</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
@@ -64,7 +64,7 @@
 	</filter-mapping>
 	<!-- PUT, DELETE 메소드 사용가능 필터 2023.04.06 길영준  END -->
 
-	<!-- 에러페이지 처리 -->
+	<!-- 에러페이지 처리 임시 블락-->
 	<!--<error-page>
 		<error-code>500</error-code>
 		<location>/WEB-INF/views/error/500.jsp</location>

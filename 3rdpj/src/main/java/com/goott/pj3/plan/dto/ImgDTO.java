@@ -1,13 +1,24 @@
 package com.goott.pj3.plan.dto;
 
 public class ImgDTO {
-    private String img1, img2, img3, img4, img5, img6, img7, img8, img9, img10, plan_idx;
+    private String img1 = "";
+    private String img2 = "";
+    private String img3 = "";
+    private String img4 = "";
+    private String img5 = "";
+    private String img6 = "";
+    private String img7 = "";
+    private String img8 = "";
+    private String img9 = "";
+    private String img10 = "";
 
-    public String getPlan_idx() {
+    private int plan_idx;
+
+    public int getPlan_idx() {
         return plan_idx;
     }
 
-    public void setPlan_idx(String plan_idx) {
+    public void setPlan_idx(int plan_idx) {
         this.plan_idx = plan_idx;
     }
 

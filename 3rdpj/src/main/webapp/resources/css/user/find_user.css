@@ -1,0 +1,266 @@
+/* find_user area */
+/* form */
+.finduser_main {
+	min-height: 100vh;
+	background-image: url("/resources/img/user_page_bg.jpg");
+	background-size: cover;
+	display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.finduser_div {
+	display: flex;	
+	position: relative;
+	justify-content: space-evenly;
+	line-height: 2rem;
+}
+
+.find_id_div, .find_pw_div {
+	display: flex;
+	flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    position: relative;
+    width: 20%;
+    padding: 1.5rem 0;
+    border-radius: 0.8rem;
+    line-height: 3.5rem;
+}
+
+/* input */
+.finduser_input {
+    border: none;
+    outline: none;
+    padding-left: 2rem;
+    padding-bottom: 0.5rem;
+    color: #333;
+    transition: all 0.2s ease;
+    border-bottom: 1.5px solid #aaaaaa;    
+}
+
+.finduser_input:focus {
+	border-bottom : 1.5px solid var(--blue);
+}
+
+/* text */
+.finduser_text {
+	font-size: 22px;
+	color: #0b0217;
+	text-align: center;
+}
+
+.finduser_p {
+	margin-bottom: -1.5rem;
+    margin-left: 0.5rem;
+}
+
+.alert_text {
+	height: 3.5rem;
+}
+
+/* icon */
+.finduser_div .icon {
+	font-size: 20px;
+	color: #707070;
+	margin-left: 6rem;
+    margin-top: 1.9rem;
+    position: absolute;
+    left: 0;
+    transform: translateY(-50%);
+}
+
+.finduser_input:focus ~ .icon {
+	color: var(--blue);
+}
+
+/* button */
+.finduser_div .finduser_btn {
+	color: var(--white);
+	background-color: var(--blue);
+	width: 50%;
+	padding: 0.65rem 0;
+	border-radius: 10px;
+	transition: background-color 0.2s;
+}
+
+.finduser_btn {
+	margin: 1rem 0;
+	border: 2px solid #fff;
+	background: transparent;	
+	cursor: pointer;
+}
+
+.finduser_btn:hover {
+	background-color: var(--yellow);
+}
+
+/* change pw area */
+/* form */
+.change_pw_div {
+	position: fixed;
+	max-width: 20rem;
+	width: 100%;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%) scale(1.2);
+	z-index: 101;
+	background: #fff;
+	padding: 25px;
+	border-radius: 12px;
+	display: none;
+	transition: all 0.4s ease-out;
+	pointer-events: none;
+}
+
+.change_pw_section {
+	position: absolute;
+	height: 100vh;
+	width: 100%;
+	display: none;
+	background-size: cover;
+	background-position: center;
+}
+
+.change_pw_section.show .change_pw_div {
+	display: block;
+	pointer-events: auto;
+}
+
+.change_pw_section.show {
+	display: block;
+	pointer-events: auto;
+}
+
+.change_pw_section::before {
+	content: "";
+	position: absolute;
+	margin-top: -160px;
+	height: 120%;
+	width: 100%;
+	background-color: rgba(0, 0, 0, 0.6);
+	z-index: 100;
+	opacity: 0;
+	pointer-events: none;
+	transition: all 0.5s ease-out;
+}
+
+.change_pw_section.show::before {
+	opacity: 1;
+	pointer-events: auto;
+}
+
+/* input */
+.change_input_box {
+	position: relative;
+	margin-top: 3rem;
+	width: 100%;
+	height: 40px;
+}
+
+.change_pw_origin, .change_pw_copy {
+	height: 100%;
+	width: 80%;
+	border: none;
+	outline: none;
+	padding: 0 30px;
+	color: #333;
+	transition: all 0.2s ease;
+	border-bottom: 1.5px solid #aaaaaa;
+}
+
+.change_pw_origin:focus, .change_pw_copy:focus {
+	border-color: var(--blue);
+}
+
+/* icon */
+.change_pw_div .close_icon {
+	position: absolute;
+	top: 10px;
+	right: 20px;
+	color: #0b0217;
+	font-size: 22px;
+	opacity: 0.7;
+	cursor: pointer;
+}
+
+.change_pw_div .origin_pw_icon,
+.change_pw_div .copy_pw_icon,
+.change_pw_div .origin_pw_hide,
+.change_pw_div .copy_pw_hide {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	font-size: 20px;
+	color: #707070;
+}
+
+.origin_pw_icon, .copy_pw_icon {
+	left: 0;
+}
+
+.origin_pw_hide, .copy_pw_hide {
+	right: 0;
+	font-size: 18px;
+	cursor: pointer;
+}
+
+.change_pw_origin:focus ~ .origin_pw_icon,
+.change_pw_copy:focus ~ .copy_pw_icon {
+	color: var(--blue);
+}
+
+/* text */
+.change_pw_text {
+	font-size: 22px;
+	color: #0b0217;
+	text-align: center;
+}
+
+.change_pw_p {
+	font-size: 12px;
+}
+
+.signup_div, .signin_msg, .forgot_info_div {
+	text-align: center;
+}
+
+.change_input_box .origin_alert_text,
+.change_input_box .copy_alert_text {
+	margin-top: 10px;
+	margin-left: 30px;
+	line-height: 1rem;
+}
+
+.signup_div, .forgot_info_div {
+	margin-top: 15px;
+}
+
+.change_pw_msg {
+	text-align: center;
+	margin-top: 2.2rem;
+	height: 1rem;
+}
+
+
+/* button */
+.change_pw_section .change_pw_btn {
+	color: var(--white);
+	background-color: var(--blue);
+	width: 100%;
+	margin-top: 1rem;
+	padding: 0.65rem 0;
+	border-radius: 10px;
+	transition: background-color 0.2s;
+}
+
+.change_pw_btn {
+	margin: 1rem 0;
+	border: 2px solid #fff;
+	background: transparent;	
+	cursor: pointer;
+}
+
+.change_pw_btn:hover {
+	background-color: var(--yellow);
+}

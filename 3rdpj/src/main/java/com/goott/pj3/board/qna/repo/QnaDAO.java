@@ -42,19 +42,20 @@ public class QnaDAO {
         return ss.selectList("qna.list_n");
     }
 
-    public List<QnaDTO> list_u() {
-        return ss.selectList("qna.list_u");
-    }
-
-    public List<QnaDTO> list_r() {
-        return ss.selectList("qna.list_r");
-    }
-
-    public List<QnaDTO> list_e() {
-        return ss.selectList("qna.list_e");
+    public List<QnaDTO> list_q() {
+        return ss.selectList("qna.list_q");
     }
 
     public String get_category(QnaDTO qnaDTO) {
         return ss.selectOne("qna.get_category",qnaDTO);
     }
+
+	public List<QnaDTO> UR_list(Criteria cri) {
+		return ss.selectList("qna.UR_list", cri);
+	}
+
+	public int UR_totalCount(Criteria cri) {
+		return ss.selectOne("qna.UR_totalCount", cri);
+	}
+
 }

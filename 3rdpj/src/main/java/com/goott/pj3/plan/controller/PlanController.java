@@ -7,16 +7,14 @@ import com.goott.pj3.plan.dto.ImgDTO;
 import com.goott.pj3.plan.dto.PlanDTO;
 import com.goott.pj3.user.service.UserService;
 import org.springframework.stereotype.Controller;
-
 import com.goott.pj3.plan.service.PlanService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
-
+//2023.04.05 길영준
 @Controller
 @RequestMapping("plan/*")
 public class PlanController {
@@ -24,7 +22,6 @@ public class PlanController {
     final PlanService planService;
     final UserService userService;
     final S3FileUploadService s3FileUploadService;
-
 
     public PlanController(PlanService planService, UserService userService, S3FileUploadService s3FileUploadService) {
         this.planService = planService;
@@ -41,25 +38,52 @@ public class PlanController {
     @PostMapping("create")
     public String planPut(PlanDTO planDTO, ImgDTO imgDTO, HttpSession httpSession, @RequestParam("files[]") List<MultipartFile> multipartFile) {
         String user = (String) httpSession.getAttribute("user_id");
-
         planDTO.setUser_id(user);
+        planService.planCreate(planDTO);
+        int idx = planDTO.getPlan_idx();
+        imgDTO.setPlan_idx(idx);
         try {
             List<String> img = s3FileUploadService.upload(multipartFile);
-
-//
-//            planService.planCreate(planDTO);
-//            planService.uploadImg(imgDTO, planDTO);
-
+            if (!img.get(0).isEmpty()) {
+                imgDTO.setImg1(img.get(0));
+            }
+            if (!img.get(1).isEmpty()) {
+                imgDTO.setImg2(img.get(1));
+            }
+            if (!img.get(2).isEmpty()) {
+                imgDTO.setImg3(img.get(2));
+            }
+            if (!img.get(3).isEmpty()) {
+                imgDTO.setImg4(img.get(3));
+            }
+            if (!img.get(4).isEmpty()) {
+                imgDTO.setImg5(img.get(4));
+            }
+            if (!img.get(5).isEmpty()) {
+                imgDTO.setImg6(img.get(5));
+            }
+            if (!img.get(6).isEmpty()) {
+                imgDTO.setImg7(img.get(6));
+            }
+            if (!img.get(7).isEmpty()) {
+                imgDTO.setImg8(img.get(7));
+            }
+            if (!img.get(8).isEmpty()) {
+                imgDTO.setImg9(img.get(8));
+            }
+            if (!img.get(9).isEmpty()) {
+                imgDTO.setImg10(img.get(9));
+            }
+            planService.uploadImg(imgDTO);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        planService.planCreate(planDTO);
         return "redirect:/plan/list";
     }
 
     @GetMapping("list")
     public ModelAndView mv(ModelAndView modelAndView, Criteria cri) {
-    	modelAndView.addObject("paging", planService.paging(cri));
+        modelAndView.addObject("paging", planService.paging(cri));
         modelAndView.addObject("data", planService.list(cri));
         modelAndView.setViewName("plan/plan_list");
         return modelAndView;

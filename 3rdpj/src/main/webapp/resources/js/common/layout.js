@@ -17,3 +17,8 @@ window.addEventListener("scroll", function () {
   var header = document.querySelector(".header");
   header.classList.toggle("visible", window.scrollY > 0);
 });
+
+//로그아웃 - 장민실 23.04.21
+$(".sign_out").on('click', function(){
+	location.href = "/user/sign_out";
+});

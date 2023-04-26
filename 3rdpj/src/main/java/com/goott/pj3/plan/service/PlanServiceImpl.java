@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import com.goott.pj3.plan.repo.PlanDAO;
 
 import java.util.List;
-
+//2023.04.05 길영준
 @Service
 public class PlanServiceImpl implements PlanService {
 
@@ -41,9 +41,7 @@ public class PlanServiceImpl implements PlanService {
     }
 
     @Override
-    public void uploadImg(ImgDTO imgDTO, PlanDTO planDTO) {
-        String plan_idx = planDAO.find_idx(planDTO);
-        imgDTO.setPlan_idx(plan_idx);
+    public void uploadImg(ImgDTO imgDTO) {
         planDAO.uploadImg(imgDTO);
     }
 

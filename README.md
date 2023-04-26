@@ -28,3 +28,14 @@
     S3 멀티파일 업로드
     
 </details>
+
+<details>
+<summary><h3>( 2023.04.21 ) </h3></summary>    
+    
+    View -  admin 스타일 지정, html 폴더 및 파일
+    back
+    로그인 안정화 작업 완료
+    아이디 찾기 작업 완료
+    모든 게시판 페이징, 검색 기능 구현 완료
+   
+</details>

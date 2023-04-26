@@ -1,10 +1,12 @@
+/* 전체 코드 작업자 : 장민실 */
+
 // =================================== 공통 영역 start ===================================
 
 	$(document).ready(function() {
-// 전제 input 입력 제한 - 장민실 23.04.06
-		// 아이디, 비밀번호, 비밀번호 확인 - 입력받는 영문자 무조건 소문자로 변환
+// 전제 input 입력 제한
+	// 아이디, 비밀번호, 비밀번호 확인 - 입력받는 영문자 무조건 소문자로 변환
 		$(".user_id, .pw, .pw_chk").css("text-transform", "lowercase");
-	    $(".user_id, .pw, .pw_chk").on("keyup", function() {
+		$(".user_id, .pw, .pw_chk").on("keyup", function() {
 	        $(this).val($(this).val().toLowerCase());
 	    });
 	    
@@ -55,7 +57,7 @@
 	    }); 
 	});	// function end
 	
-//	회원가입(엔터키) - 장민실 23.04.20
+//	회원가입(엔터키)
 	document.addEventListener('keydown', function(e){
 		if(e.keyCode === 13 || e.keyCode === 108) {
 			var id = id_chk(), origin_pwd = pwd_chk(), copy_pwd = pwd_match(), email = email_chk(),
@@ -73,20 +75,43 @@
 		}
 	});
 
-// 회원가입(버튼클릭) - 장민실 23.04.04
+// 회원가입(버튼클릭)
 	$(".sign_up_btn").on('click', function(e){
 	    var id = id_chk(), origin_pwd = pwd_chk(), copy_pwd = pwd_match(), email = email_chk(),
 		birth = birth_chk(), hp = hp_chk();
 		var total = id+origin_pwd+copy_pwd+email+birth+hp;
 		
 		if(total<6) {
-			$(".signup_chk_text").html("회원가입 실패! 다시 확인해주세요");
+			$(".signup_chk_text").html("회원가입 실패! 입력 항목들을 다시 확인해주세요");
 			$(".signup_chk_text").css("color", "red");
 		}
 		else if(total===6) {
 			document.signup_form.action="/user/signup";
 			document.signup_form.submit();
 		}
+	});
+	
+// pw input type text/password 전환
+	$(".origin_pw_hide").on("click", function() {
+		if($(".pw").attr("type")==="password"){
+			$(".pw").prop("type", "text");
+			$(".origin_pw_hide").removeClass("fa-eye-slash").addClass("fa-eye");
+		}
+		else {
+			$(".pw").prop("type", "password");
+			$(".origin_pw_hide").removeClass("fa-eye").addClass("fa-eye-slash");
+		}		
+	});
+	
+	$(".copy_pw_hide").on("click", function() {
+		if($(".pw_chk").attr("type")==="password"){
+			$(".pw_chk").prop("type", "text");
+			$(".copy_pw_hide").removeClass("fa-eye-slash").addClass("fa-eye");
+		}
+		else {
+			$(".pw_chk").prop("type", "password");
+			$(".copy_pw_hide").removeClass("fa-eye").addClass("fa-eye-slash");
+		}		
 	});
 
 	
@@ -101,7 +126,7 @@
 	
 // =================================== 아이디 영역 start ===================================
 	
-// 아이디 유효성 검사, 중복검사 - 장민실 23.04.07
+// 아이디 유효성 검사, 중복검사
 	function id_chk() {
 		var id = $('.user_id').val();
 		// 영문자 소문자,숫자만 입력 / 6~20자 / 공백X
@@ -147,7 +172,7 @@
 	
 // =================================== 비밀번호 영역 start ===================================
 	
-// 비밀번호 유효성 검사 - 장민실 23.04.06
+// 비밀번호 유효성 검사
 	function pwd_chk() {
 		var pwd = $('.pw').val();
 		// 영문 소문자,숫자,특수문자 최소 1개 이상 입력 / 8~20자 / 공백X
@@ -172,7 +197,7 @@
 		return origin_pw_cnt;
 	}	// function end
 	
-// 비밀번호, 비밀번호 확인 값 일치여부 체크 - 장민실 23.04.04
+// 비밀번호, 비밀번호 확인 값 일치여부 체크
 	function pwd_match(){
 		var origin_pwd = $('.pw').val();
 		var copy_pwd = $('.pw_chk').val();
@@ -199,7 +224,7 @@
 	
 // =================================== 이메일 영역 start ===================================
 	
-// 이메일 유효성 검사 - 장민실 23.04.07
+// 이메일 유효성 검사
 	function email_chk() {
 		var email = $(".email").val();
 		// 영문자 대,소문자랑 숫자만 입력 / 특문은 @랑 .만 / 공백X
@@ -228,7 +253,7 @@
 	
 // =================================== 생년월일 영역 start ===================================
 
-// 생년월일 유효성 검사 - 장민실 23.04.07
+// 생년월일 유효성 검사
 	function birth_chk() {
 		var birth = $('.birth').val();
 		// 숫자만 입력 / 무조건 8자리 / - 자동입력 / 공백X
@@ -257,7 +282,7 @@
 	
 // =================================== 핸드폰 영역 start ===================================
 	
-// 연락처 유효성 검사 - 장민실 23.04.07
+// 연락처 유효성 검사
 	function hp_chk() {
 		var hp = $(".hp").val();
 		// 숫자만입력 / 공백X / - 자동 입력 / 차후 연락처로 인증 시도예정(변경가능성O) / 10~11자릿수 고정(3/3~4/4)
