@@ -21,7 +21,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void sign_up(UserDTO u_dto) {
 //		비밀번호 암호화 추가 - 장민실 23.04.11
-		u_dto.setPw(bcrypt.encode(u_dto.getPw()));		
+		u_dto.setPw(bcrypt.encode(u_dto.getPw()));
 		userDAO.sign_up(u_dto);
 	}
 
@@ -55,11 +55,29 @@ public class UserServiceImpl implements UserService {
 	public String find_get_pw(UserDTO u_dto) {
 		return userDAO.find_get_pw(u_dto);
 	}
-
+	
+//	pw 값 존재여부 - 장민실 23.04.26
 //	@Transactional
 //	@Override
-//	public void set_new_pw(UserDTO u_dto) {
-//		return userDAO.set_new_pw(u_dto);
+//	public int pw_cnt(UserDTO u_dto) {
+//		String hashed_pw = userDAO.get_hashed_pw(u_dto);
+//		boolean pw_match = bcrypt.matches(u_dto.getPw(), hashed_pw);	// 일치여부 확인 : true=일치, false=불일치
+//		System.out.println("비밀번호 일치 여부(서비스) : " + pw_match);
+//		if(pw_match == true) {
+//			System.out.println("서비스에서 true탔음 1 리턴");
+//			return 1;
+//		}
+//		else System.out.println("서비스에서 false탔음 0 리턴"); return 0;
 //	}
+
+//  비밀번호 변경 - 장민실 23.04.25
+	@Transactional
+	@Override
+	public void set_new_pw(UserDTO u_dto) {
+		u_dto.setPw(bcrypt.encode(u_dto.getPw()));
+		userDAO.set_new_pw(u_dto);
+	}
+
+
 	
 }

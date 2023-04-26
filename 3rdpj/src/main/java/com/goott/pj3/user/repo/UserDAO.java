@@ -47,8 +47,9 @@ public class UserDAO {
 		return ss.selectOne("user.find_get_pw", u_dto);
 	}
 
-	public Object set_new_pw(UserDTO u_dto) {
-		return null;
+//  비밀번호 변경 - 장민실 23.04.25
+	public void set_new_pw(UserDTO u_dto) {
+		ss.update("user.find_set_pw", u_dto);
 	}
 	
 }

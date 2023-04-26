@@ -43,15 +43,21 @@ public class UserController {
 	}
 	
 //	로그인 페이지 이동 - 장민실 23.04.04
-	@GetMapping("signin")
-	public String go_sign_in() {
-		return "user/sign_in";
-	}
+//	@GetMapping("signin")
+//	public String go_sign_in() {
+//		return "user/sign_in";
+//	}
 	
 //	아이디 비밀번호 찾기 페이지 이동 - 장민실 23.04.19
 	@GetMapping("find_user")
 	public String go_find_user() {
 		return "user/find_user";
+	}
+	
+//	사용자 마이페이지 이동 - 장민실 23.04.26
+	@GetMapping("userpage")
+	public String go_user_page() {
+		return "user/user_page";
 	}
 	
 //	회원가입 - 장민실 23.04.04
@@ -123,11 +129,10 @@ public class UserController {
 		u_dto.setUser_id(id);
 		u_dto.setHp(hp);
 		String origin_pw = userService.find_get_pw(u_dto);	// 입력정보와 일치하는 비밀번호 담아오기
-		System.out.println("이전비번 : " + origin_pw);
 		return origin_pw;
 	}
 	
-//	비밀번호 찾기 후 새로운 비밀번호 저장 - 장민실 23.04.25
+//	비밀번호 찾기 후 새로운 비밀번호 저장 - 장민실 23.04.25	// DB에 암호화값 새로 저장까지 진행되고 있으나 JSON 넘어가지 않아 마무리작업중
 	@PostMapping("find_set_pw")
 	@ResponseBody
 	public ModelAndView find_set_pw(@RequestParam("id") String id, @RequestParam("hp") String hp, @RequestParam("pw") String pw, UserDTO u_dto, ModelAndView mav) {
@@ -135,20 +140,25 @@ public class UserController {
 		u_dto.setHp(hp);
 		u_dto.setPw(pw);
 		System.out.println("pw plus after : " + u_dto);
-		
-		String origin_pw = userService.find_get_pw(u_dto);		
-
-		boolean pw_match = bcrypt.matches(u_dto.getPw(), origin_pw);	// DB의 비밀번호와 입력받은 비밀번호 일치 여부
+//		int pw_cnt = userService.pw_cnt(u_dto);	// 비밀번호값 존재 여부 : 1=입력한 비밀번호와 동일, 0=동일하지 않음
 		Map<String, String> responseData = new HashMap<>();
-		if(pw_match==true) {
-			responseData.put("msg", "same_pw");
-		}
-		else if(pw_match==false) {
-//			userService.set_new_pw(u_dto);
+//		System.out.println("컨트롤러 pw_cnt임ㅇㅇㅇ : " + pw_cnt);
+//		if(pw_cnt==1) {
+//			System.out.println("컨트롤러에서 1탔음");
+//			responseData.put("msg", "same_pw");
+//		}
+//		else if(pw_cnt==0) {
+//			System.out.println("컨트롤러에서 0탔음");
+			userService.set_new_pw(u_dto);
 			responseData.put("msg", "different_pw");
-		}
+//		}
 		mav.setView(new MappingJackson2JsonView());
         mav.addObject("setpw_msg", responseData);
+        
+//        System.out.println("dddddddd : " + mav.toString());        
+//       System.out.println("타입확인1111 : " + responseData.getClass().getSimpleName());
+//       System.out.println("타입확인2222 : " + mav.getClass().getSimpleName());
+        
 		return mav;
 	}
 	

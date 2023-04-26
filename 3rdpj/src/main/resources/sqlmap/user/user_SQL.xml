@@ -53,4 +53,12 @@
    		 where user_id = #{user_id}
    		   and hp = #{hp}
    	</select>
+   	
+   	<!-- 비밀번호 변경 - 장민실 23.04.26 -->
+   	<update id="find_set_pw" parameterType="com.goott.pj3.user.dto.UserDTO">
+   		update user
+   		   set pw = #{pw}
+   		 where user_id = #{user_id}
+   		   and hp = #{hp}
+   	</update>
 </mapper>
