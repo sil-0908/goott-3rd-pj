@@ -46,6 +46,7 @@ public class PlanServiceImpl implements PlanService {
     }
 
 
+
     @Override
     public PlanDTO detail(int plan_idx) {
         return planDAO.detail(plan_idx);
@@ -60,6 +61,5 @@ public class PlanServiceImpl implements PlanService {
     public void planDelete(int planIdx) {
         planDAO.delete(planIdx);
     }
-
 
 }

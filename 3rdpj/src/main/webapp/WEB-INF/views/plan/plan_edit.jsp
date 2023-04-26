@@ -6,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <html>
 <head>
     <title>Title</title>
@@ -28,10 +30,11 @@
     <br>
     <label for="plan_detail">내용</label>
     <textarea id="plan_detail" name="plan_detail" placeholder="${data.plan_detail}"></textarea>
-    <button type="submit">등록</button>
+    <c:if test="${data.user_id == sessionScope.user_id}">
+        <button type="submit">수정</button>
+        <button class="button" id="delete" type="button">삭제</button>
+    </c:if>
 </form>
-
-<button class="button" id="delete" type="button">삭제</button>
 
 
 </body>

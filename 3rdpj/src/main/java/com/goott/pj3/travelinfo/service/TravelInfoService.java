@@ -2,6 +2,9 @@ package com.goott.pj3.travelinfo.service;
 
 import com.goott.pj3.common.util.paging.Criteria;
 import com.goott.pj3.common.util.paging.PagingDTO;
+import com.goott.pj3.board.review.dto.ReviewDTO;
+import com.goott.pj3.common.util.Criteria;
+import com.goott.pj3.common.util.PagingDTO;
 import com.goott.pj3.travelinfo.dto.TravelInfoDTO;
 
 import java.util.List;
@@ -22,5 +25,9 @@ public interface TravelInfoService {
 
     int create(TravelInfoDTO travelInfoDTO);
 
+    void createImg(ReviewDTO reviewDTO);
+
     TravelInfoDTO detail(TravelInfoDTO travelInfoDTO);
+
+
 }
