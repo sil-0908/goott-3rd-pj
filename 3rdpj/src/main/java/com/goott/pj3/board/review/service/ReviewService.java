@@ -8,15 +8,26 @@ import com.goott.pj3.common.util.Criteria;
 import com.goott.pj3.common.util.PagingDTO;
 
 public interface ReviewService {
+    /**
+     * 리뷰 내용 생성
+     * @param reviewDTO
+     * @return
+     */
     int create(ReviewDTO reviewDTO);
 
-    void createFile(ReviewDTO reviewDTO);
+    /**
+     * 리뷰 이미지 파일 생성
+     * @param reviewDTO
+     */
+    void createImg(ReviewDTO reviewDTO);
 
     ReviewDTO detail(ReviewDTO reviewDTO);
 
     int update(ReviewDTO reviewDTO);
 
-    void updateFile(ReviewDTO reviewDTO);
+    void deleteImg(ReviewDTO reviewDTO);
+
+    void updateImg(ReviewDTO reviewDTO);
 
     boolean delete(ReviewDTO reviewDTO);
 
@@ -24,4 +35,5 @@ public interface ReviewService {
 
     PagingDTO paging(Criteria cri);
 
+    List<ReviewDTO> imglist(ReviewDTO reviewDTO);
 }

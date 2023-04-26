@@ -22,7 +22,7 @@ public class ReviewDAO {
 		return this.ss.insert("review.insert", reviewDTO);
 	}
 
-	public void createFile(ReviewDTO reviewDTO) {
+	public void createImg(ReviewDTO reviewDTO) {
 		System.out.println("files : " + reviewDTO);
 		this.ss.insert("review.file", reviewDTO);
 	}
@@ -35,9 +35,13 @@ public class ReviewDAO {
 		return this.ss.update("review.update", reviewDTO);
 	}
 
-	public void updateFile(ReviewDTO reviewDTO) {
-		System.out.println("updateFile : " + reviewDTO);
-		this.ss.update("review.updatefile", reviewDTO);
+	public void deleteImg(ReviewDTO reviewDTO) {
+		this.ss.delete("review.deleteimg", reviewDTO);
+	}
+
+	public void updateImg(ReviewDTO reviewDTO) {
+		System.out.println("updateImg : " + reviewDTO);
+		this.ss.update("review.updateImg", reviewDTO);
 	}
 
 	public int delete(ReviewDTO reviewDTO) {
@@ -53,5 +57,7 @@ public class ReviewDAO {
 	}
 
 
-
+	public List<ReviewDTO> imgList(ReviewDTO reviewDTO) {
+		return this.ss.selectList("review.imglist", reviewDTO);
+	}
 }
