@@ -6,8 +6,8 @@ import org.springframework.stereotype.Service;
 
 import com.goott.pj3.board.review.dto.ReviewDTO;
 import com.goott.pj3.board.review.repo.ReviewDAO;
-import com.goott.pj3.common.util.Criteria;
-import com.goott.pj3.common.util.PagingDTO;
+import com.goott.pj3.common.util.paging.Criteria;
+import com.goott.pj3.common.util.paging.PagingDTO;
 
 import java.util.List;
 import java.util.Map;

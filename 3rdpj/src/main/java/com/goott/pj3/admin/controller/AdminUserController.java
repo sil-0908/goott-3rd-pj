@@ -2,9 +2,9 @@ package com.goott.pj3.admin.controller;
 
 import java.util.List;
 
+import com.goott.pj3.common.util.auth.Auth;
+import com.goott.pj3.common.util.paging.Criteria;
 
-import com.goott.pj3.common.util.Auth;
-import com.goott.pj3.common.util.Criteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

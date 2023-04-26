@@ -1,4 +1,4 @@
-package com.goott.pj3.common.util;
+package com.goott.pj3.common.util.paging;
 
 public class PagingDTO { // - 04.02 김범수
     private Criteria cri; // Criteria 인스턴스 형성 -> 게시글 시작 번호 등을 구하기 위함

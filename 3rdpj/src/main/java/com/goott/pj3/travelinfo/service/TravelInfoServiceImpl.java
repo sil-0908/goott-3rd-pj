@@ -1,7 +1,7 @@
 package com.goott.pj3.travelinfo.service;
 
-import com.goott.pj3.common.util.Criteria;
-import com.goott.pj3.common.util.PagingDTO;
+import com.goott.pj3.common.util.paging.Criteria;
+import com.goott.pj3.common.util.paging.PagingDTO;
 import com.goott.pj3.travelinfo.dto.TravelInfoDTO;
 import com.goott.pj3.travelinfo.repo.TravelInfoDAO;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,5 +1,7 @@
 package com.goott.pj3.travelinfo.controller;
 
+
+import com.goott.pj3.common.util.paging.Criteria;
 import com.goott.pj3.board.review.dto.ReviewDTO;
 import com.goott.pj3.common.util.Criteria;
 import com.goott.pj3.common.util.S3FileUploadService;

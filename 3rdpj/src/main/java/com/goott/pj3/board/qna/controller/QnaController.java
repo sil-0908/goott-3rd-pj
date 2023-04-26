@@ -6,7 +6,7 @@ import org.springframework.stereotype.Controller;
 
 import com.goott.pj3.board.qna.dto.QnaDTO;
 import com.goott.pj3.board.qna.service.QnaService;
-import com.goott.pj3.common.util.Criteria;
+import com.goott.pj3.common.util.paging.Criteria;
 
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;

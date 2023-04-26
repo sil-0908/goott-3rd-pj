@@ -2,13 +2,13 @@ package com.goott.pj3.admin.service;
 
 import java.util.List;
 
-import com.goott.pj3.common.util.Criteria;
-import com.goott.pj3.common.util.PagingDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.goott.pj3.admin.dto.AdminUserDTO;
 import com.goott.pj3.admin.repo.AdminUserDAO;
+import com.goott.pj3.common.util.paging.Criteria;
+import com.goott.pj3.common.util.paging.PagingDTO;
 
 
 @Service
