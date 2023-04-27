@@ -8,6 +8,7 @@
 @import "./common/talkmodal.css";
 @import "./common/payment.css";
 @import "./common/component.css";
+@import "./common/modal_right.css";
 
 @import "./board/qna/qna.css";
 @import "./board/qna/qna_create.css";

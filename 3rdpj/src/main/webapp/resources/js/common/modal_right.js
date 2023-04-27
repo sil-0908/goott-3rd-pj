@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 const qnaGuideModal = document.querySelector(".guide");
 const closeBtnQnaGuide = document.querySelector(".guide__btn-close");
 

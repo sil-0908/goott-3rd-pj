@@ -1,41 +1,72 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<link rel="stylesheet" href="/resources/css/style.css"/>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-</head>
-<body>
 <%@ include file="/WEB-INF/views/common/layout.jsp" %>
-	<h1>조회 페이지</h1>
-	<div class="input_wrap">
-		<label>게시판 번호</label>
-		<input type="text" value="${data.qna_idx}" id="qna_id" readonly>
-	</div>
-	<div class="input_wrap">
-		<label>게시판 제목</label>
-		<input type="text" name="qna_title" value="${data.qna_title}" >
-	</div>
-	<div class="input_wrap">
-		<label>게시판 내용</label>
-		<textarea name="qna_content">${data.qna_content}</textarea>
-	</div>
-	<div class="input_wrap">
-		<label>게시판 작성자</label>
-		${data.user_id}
-	</div>
-	<div class="input_wrap">
-		<label>게시판 등록일</label>
-		<p><fmt:formatDate pattern="yyyy/MM/dd" value="${data.create_date}"/></p>
-	</div>
-	<button onclick="list()">게시글 목록</button>
-	<button id="modify">게시글 수정</button>
-	<button id="delete">게시글 삭제</button>
-
+<main class="detail">
+      <section class="detail__document">
+      	<div class="btns__box">
+      		<button class="btn btn__normal" onclick="list()">게시글 목록</button>
+			<button class="btn btn__normal" id="modify">게시글 수정</button>
+			<button class="btn btn__normal" id="delete">게시글 삭제</button>
+      	</div>
+        <hgroup class="detail__title">
+          <ul class="title__box">
+            <li class="title__component">
+              <span>글번호: </span>
+              <span id="qna_id">${data.qna_idx}</span>
+            </li>
+            <li class="title__component">
+              <span>제목: </span>
+              <span id="qna_title">${data.qna_title}</span>
+            </li>
+            <li class="title__component">
+              <span>작성자: </span>
+              <span>${data.user_id}</span>
+            </li>
+            <li class="title__component">
+              <span>등록일: </span>
+              <span><fmt:formatDate pattern="yyyy/MM/dd" value="${data.create_date}"/></span>
+            </li>
+          </ul>
+        </hgroup>
+        <article class="detail__content">
+          <p class="content__txt">
+          	${data.qna_content}
+          </p>
+        </article>
+      </section>
+      <section class="detail__document--review">
+        <article class="review__write">
+          <hgroup class="review__write--title">
+            <h1>댓글 작성</h1>
+          </hgroup>
+          <div class="write__box">
+            <form class="write__form" action="">
+              <input
+                placeholder="댓글을 작성하려면 로그인이 필요합니다."
+                type="text"
+              />
+              <button class="btn btn__normal">등록하기</button>
+            </form>
+          </div>
+        </article>
+        <article class="review__list">
+          <hgroup class="list__title">
+            <h1>댓글 목록</h1>
+          </hgroup>
+          <ul class="list__box">
+            <li class="list__component">
+              <hgroup class="review__info">
+                <span>글번호</span>
+                <span>등록일</span>
+              </hgroup>
+              <div class="review__txt">
+                <p>내용</p>
+              </div>
+            </li>
+          </ul>
+        </article>
+      </section>
+    </main>
 
 	<script src="/resources/js/common/layout.js"></script>
 
@@ -122,5 +153,3 @@
 
 	}
 </script>
-</body>
-</html>
