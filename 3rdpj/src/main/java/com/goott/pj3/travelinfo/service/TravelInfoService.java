@@ -10,11 +10,6 @@ import java.util.Map;
 
 public interface TravelInfoService {
 
-
-    List<TravelInfoDTO> list(Criteria cri);
-
-	PagingDTO paging(Criteria cri);
-
     int create(TravelInfoDTO travelInfoDTO);
 
     void createImg(TravelInfoDTO travelInfoDTO);
@@ -30,4 +25,8 @@ public interface TravelInfoService {
     boolean delete(TravelInfoDTO travelInfoDTO);
 
     List<TravelInfoDTO> imglist(TravelInfoDTO travelInfoDTO);
+
+    List<TravelInfoDTO> list(Criteria cri);
+
+    PagingDTO paging(Criteria cri);
 }

@@ -7,26 +7,26 @@
             useGeneratedKeys="true" keyProperty="travel_location_idx">
         insert into travel_location(user_id, country_a, country_b, country_c,
                                     country_detail, country_script)
-             values (#{user_id}, #{country_a}, #{country_b},
+             values ("test1234", #{country_a}, #{country_b},
                      #{country_c}, #{country_detail}, #{country_script})
     </insert>
 
     <insert id="insertfile" parameterType="com.goott.pj3.travelinfo.dto.TravelInfoDTO">
         insert into travel_img(travel_location_idx, t_img) values
-        <foreach collection="t_img" item="item" separator=",">
-            (#{travel_location_idx}, #{item})
+        <foreach collection="t_img" item="img" separator=",">
+            (#{travel_location_idx}, #{img})
         </foreach>
     </insert>
 
     <!--조원재 23.04.08. 여행지 정보 디테일 페이지 데이터 조회-->
     <select id="detail" resultMap="travelInfoResultMap">
-        select t.ravel_location_idx, t.user_id, t.country_a, t.country_b, t.country_c,
+        select t.travel_location_idx, t.user_id, t.country_a, t.country_b, t.country_c,
                t.country_detail, t.country_script, t.create_date, t.update_date,
                i.t_img_idx, i.t_img
           from travel_location t left join travel_img i
             on t.travel_location_idx = i.travel_location_idx
-         where travel_location_idx = #{travel_location_idx}
-           and t.t_del_yn='y'
+         where t.travel_location_idx = #{travel_location_idx}
+           and t.t_del_yn='n'
     </select>
 
     <resultMap id="travelInfoResultMap" type="com.goott.pj3.travelinfo.dto.TravelInfoDTO">
@@ -58,20 +58,26 @@
          where travel_location_idx=#{travel_location_idx}
     </update>
     <!--기존 이미지 파일 삭제-->
-    <delete id="deleteImg" parameterType="com.goott.pj3.travelinfo.dto.TravelInfoDTO">
+    <delete id="deleteImg">
         delete
           from travel_img
-          where travel_location_idx=#{travel_location_idx}
+         where travel_location_idx=#{travel_location_idx}
     </delete>
     <!--새 이미지 파일 생성-->
-    <insert id="updateimg" parameterType="com.goott.pj3.travelinfo.dto.TravelInfoDTO">
+    <insert id="updateImg" parameterType="com.goott.pj3.travelinfo.dto.TravelInfoDTO">
         insert into travel_img(travel_location_idx, t_img)
              values
-                    <foreach collection="t_img" item="img">
+                    <foreach collection="t_img" item="img" separator=",">
                         (#{travel_location_idx}, #{img})
                     </foreach>
 
     </insert>
+    
+    <select id="findAddress" resultType="com.goott.pj3.travelinfo.dto.TravelInfoDTO">
+        select country_script
+          from travel_location
+         where travel_locaion_idx = #{travel_location_idx}
+    </select>
     <!--여행지 정보 업데이트 끝-->
 
     <!--조원재 23.04.08. 여행지 정보 삭제-->
@@ -82,7 +88,7 @@
     </update>
 
     <!--조원재 23.04.26 여행 정보 이미지 목록-->
-    <select id="imgList" resultMap="travelinfoListResultMap">
+    <select id="imgList" resultMap="travelInfoListResultMap">
         select i.travel_location_idx, i.t_img
           from travel_img i left join travel_location t
             on i.travel_location_idx = t.travel_location_idx
@@ -90,7 +96,7 @@
 
     </select>
 
-    <resultMap id="travelinfoListResultMap" type="com.goott.pj3.travelinfo.dto.TravelInfoDTO">
+    <resultMap id="travelInfoListResultMap" type="com.goott.pj3.travelinfo.dto.TravelInfoDTO">
         <id property="travel_location_idx" column="travel_location_idx"/>
         <collection property="t_img" column="t_img" javaType="List" ofType="String">
             <result column="t_img"/>

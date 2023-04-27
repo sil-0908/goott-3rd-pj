@@ -21,19 +21,14 @@ public class TravelInfoDAO {
      * @param
      * @return
      */
-    public List<TravelInfoDTO> list(Criteria cri) {
-        return ss.selectList("travelinfo.list", cri);
-    }
-
-    public int totalCount(Criteria cri) {
-        return ss.selectOne("travelinfo.totalCount", cri);
-    }
 
     public int create(TravelInfoDTO travelInfoDTO) {
-        return this.ss.insert("travelinfo.insert");
+        System.out.println("DAO : " + travelInfoDTO);
+        return this.ss.insert("travelinfo.insert", travelInfoDTO);
     }
 
     public void createImg(TravelInfoDTO travelInfoDTO) {
+        System.out.println("DAOImg : " + travelInfoDTO.toString());
         this.ss.insert("travelinfo.insertfile", travelInfoDTO);
     }
 
@@ -46,6 +41,7 @@ public class TravelInfoDAO {
     }
 
     public void deleteImg(TravelInfoDTO travelInfoDTO) {
+        System.out.println("deleteImgDTO: " + travelInfoDTO);
         this.ss.delete("travelinfo.deleteImg", travelInfoDTO);
     }
 
@@ -57,7 +53,18 @@ public class TravelInfoDAO {
         return this.ss.update("travelinfo.delete", travelInfoDTO);
     }
 
-    public List<TravelInfoDTO> imgList(TravelInfoDAO travelInfoDAO) {
-        return this.ss.selectList("travelinfo.imgList", travelInfoDAO);
+    public List<TravelInfoDTO> imgList(TravelInfoDTO travelInfoDTO) {
+        return this.ss.selectList("travelinfo.imgList", travelInfoDTO);
+    }
+    public List<TravelInfoDTO> list(Criteria cri) {
+        return ss.selectList("travelinfo.list", cri);
+    }
+
+    public int totalCount(Criteria cri) {
+        return ss.selectOne("travelinfo.totalCount", cri);
+    }
+
+    public String findAdress(TravelInfoDTO travelInfoDTO) {
+        return this.ss.selectOne("travelinfo.findAdress", travelInfoDTO);
     }
 }

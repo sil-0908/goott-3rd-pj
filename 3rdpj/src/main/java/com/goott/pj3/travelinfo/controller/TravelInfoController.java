@@ -1,7 +1,6 @@
 package com.goott.pj3.travelinfo.controller;
 
 
-import com.goott.pj3.board.review.dto.ReviewDTO;
 import com.goott.pj3.common.util.aws.S3FileUploadService;
 import com.goott.pj3.common.util.paging.Criteria;
 import com.goott.pj3.travelinfo.dto.TravelInfoDTO;
@@ -17,7 +16,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequestMapping("/travelinfo/**")
@@ -40,17 +38,21 @@ public class TravelInfoController {
 		mv.setViewName("/travelinfo/travelinfo_create");
 		return mv;
 	}
+
 	/**
-	 * 조원재 23.04.7 여행지 정보 생성
-	 * @param httpSession
+	 * 조원재 23.04.07 여행지 정보 생성
+	 *       23.04.26 이미지 파일 업로드 기능 추가
 	 * @param travelInfoDTO
 	 * @param mv
+	 * @param httpSession
+	 * @param multipartFile
 	 * @return
 	 */
 	@PostMapping("create")
 	public ModelAndView CreatePost(TravelInfoDTO travelInfoDTO, ModelAndView mv, HttpSession httpSession,
 								   @RequestParam("file[]") List<MultipartFile> multipartFile){
 		String user_id = (String) httpSession.getAttribute("user_id"); // 로그인한 유저 아이디 세션
+		System.out.println("user_id : " + user_id);
 		travelInfoDTO.setUser_id(user_id); // DTO에 유저 아이디 할당
 		int travel_location_idx = this.travelInfoService.create(travelInfoDTO); // 생성된 게시글 idx
 		ImgFileUpload(travelInfoDTO, multipartFile, travel_location_idx); // 이미지 파일 업로드 API
@@ -61,8 +63,9 @@ public class TravelInfoController {
 		}
 		return mv;
 	}
+
 	/**
-	 * 조원재 23.04.21 이미지 파일 업로드 API
+	 * 조원재 23.04.26 이미지 파일 업로드 API
 	 * @param travelInfoDTO
 	 * @param multipartFile
 	 * @param travel_location_idx
@@ -71,7 +74,7 @@ public class TravelInfoController {
 		try {
 			if(multipartFile !=null && !multipartFile.isEmpty()) { // 이미지 파일이 존재하는 경우
 				List<String> imgList = s3FileUploadService.upload(multipartFile);
-				travelInfoDTO.setCountry_img(imgList);
+				travelInfoDTO.setT_img(imgList);
 				travelInfoDTO.setTravel_location_idx(travel_location_idx);
 				this.travelInfoService.createImg(travelInfoDTO);
 			} else { // 이미지 파일이 없는 경우
@@ -86,7 +89,7 @@ public class TravelInfoController {
 	/**
 	 * 조원재 23.04.08 여행지 정보 디테일 페이지 호출
 	 */
-	@GetMapping("detail/{travel_location_idx")
+	@GetMapping("detail/{travel_location_idx}")
 	public ModelAndView detail(@PathVariable int travel_location_idx,
 							   TravelInfoDTO travelInfoDTO, ModelAndView mv){
 		travelInfoDTO.setTravel_location_idx(travel_location_idx);
@@ -114,6 +117,7 @@ public class TravelInfoController {
 		int succeessIdx = this.travelInfoService.update(travelInfoDTO); // 본문 내용 업데이트
 		this.travelInfoService.deleteImg(travelInfoDTO); // 기존 img 삭제
 		ImgFileUpdate(travel_location_idx, travelInfoDTO, mv, multipartFile, succeessIdx); // 이미지 파일 업데이트 API
+		mv.setViewName("redirect:/travelinfo/detail/"+travel_location_idx);
 		return mv;
 	}
 
@@ -122,7 +126,7 @@ public class TravelInfoController {
 		try {
 			if(multipartFile !=null) {
 				List<String> imgList = s3FileUploadService.upload(multipartFile);
-				travelInfoDTO.setCountry_img(imgList);
+				travelInfoDTO.setT_img(imgList);
 				travelInfoDTO.setTravel_location_idx(succeessIdx);
 				this.travelInfoService.updateImg(travelInfoDTO);
 			}
@@ -156,12 +160,12 @@ public class TravelInfoController {
 		List<TravelInfoDTO> originalList = travelInfoService.imglist(travelInfoDTO);
 		List<TravelInfoDTO> newList = new ArrayList<>(); // 인덱스와 첫번째 이미지만 담을 List 생생
 		for (TravelInfoDTO dto : originalList) {
-			List<String> rImgList = dto.getCountry_img(); // 이미지만 List에 담기
+			List<String> rImgList = dto.getT_img(); // 이미지만 List에 담기
 			if (rImgList != null && !rImgList.isEmpty()) { // 이미지가 있는 경우
 				String firstImg = rImgList.get(0); // 첫번째 이미지 변수에 담기
 				TravelInfoDTO newDto = new TravelInfoDTO(); //
 				newDto.setTravel_location_idx(dto.getTravel_location_idx());
-				newDto.setCountry_img(Collections.singletonList(firstImg));
+				newDto.setT_img(Collections.singletonList(firstImg));
 				newList.add(newDto);
 			}
 		}
