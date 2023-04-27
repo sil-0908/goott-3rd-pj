@@ -31,7 +31,7 @@ out
 gen
 
 ### ??
-s3.properties
+*.properties
 README.md
 
 # End of https://www.toptal.com/developers/gitignore/api/eclipse,java

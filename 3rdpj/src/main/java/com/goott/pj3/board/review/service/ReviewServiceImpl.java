@@ -6,8 +6,8 @@ import org.springframework.stereotype.Service;
 
 import com.goott.pj3.board.review.dto.ReviewDTO;
 import com.goott.pj3.board.review.repo.ReviewDAO;
-import com.goott.pj3.common.util.Criteria;
-import com.goott.pj3.common.util.PagingDTO;
+import com.goott.pj3.common.util.paging.Criteria;
+import com.goott.pj3.common.util.paging.PagingDTO;
 
 import java.util.List;
 import java.util.Map;
@@ -19,58 +19,59 @@ public class ReviewServiceImpl implements ReviewService {
 	ReviewDAO reviewDAO;
 
 	/**
-	 * 조원재 23.04.05. 리뷰 생성 
-	 * @param map
+	 * 23.04.22 리뷰 생성
+	 * @param reviewDTO
 	 * @return
 	 */
 	@Override
-	public String create(Map<String, Object> map) {
-		int affectRowCnt = this.reviewDAO.insert(map); // 데이터 생성 성공 시 반환되는 값 : 1 (생성한 데이터 수 반환)
+	public int create(ReviewDTO reviewDTO) {
+		int affectRowCnt =  this.reviewDAO.create(reviewDTO); // 게시글 생성된 갯수 반환
 		if(affectRowCnt==1){
-			return map.get("review_idx").toString();
+			System.out.println("review_idx : " + reviewDTO.getReview_idx());
+			return reviewDTO.getReview_idx();
 		}
-		return null;
+		return 0;
 	}
-	/**
-	 * 조원재 23.04.05. 리뷰 데이터 호출
-	 * @param map
-	 * @return
-	 */
+
 	@Override
-	public Map<String, Object> detail(Map<String, Object> map) {
-		return this.reviewDAO.detail(map);
+	public void createImg(ReviewDTO reviewDTO) {
+		this.reviewDAO.createImg(reviewDTO);
 	}
-	/**
-	 * 조원재 23.04.05. 리뷰 수정
-	 * @param map
-	 * @return
-	 */
+
 	@Override
-	public boolean update(Map<String, Object> map) {
-		int affectRowCnt = this.reviewDAO.update(map); // 데이터 생성 성공 시 반환되는 값 : 1 (생성한 데이터 수 반환)
-		return affectRowCnt == 1;
+	public ReviewDTO detail(ReviewDTO reviewDTO) {
+		return this.reviewDAO.detail(reviewDTO);
 	}
-	/**
-	 * 조원재 23.04.05. 리뷰 삭제
-	 * @param map
-	 * @return
-	 */
+
 	@Override
-	public boolean delete(Map<String, Object> map) {
-		int affectRowCnt = this.reviewDAO.delete(map); // 데이터 생성 성공 시 반환되는 값 : 1 (생성한 데이터 수 반환)
-		return affectRowCnt==1;
+	public int update(ReviewDTO reviewDTO) {
+		int cnt = this.reviewDAO.update(reviewDTO);
+		if(cnt==1){
+			return reviewDTO.getReview_idx();
+		}
+		return 0;
 	}
-	/**
-	 * 조원재 23.04.05. 리뷰 목록 호출
-	 * @param map
-	 * @return
-	 */
+	@Override
+	public void updateImg(ReviewDTO reviewDTO) {
+		this.reviewDAO.updateImg(reviewDTO);
+	}
+
+	@Override
+	public boolean delete(ReviewDTO reviewDTO) {
+		int cnt = this.reviewDAO.delete(reviewDTO);
+		return cnt==1;
+	}
+
+	@Override
+	public void deleteImg(ReviewDTO reviewDTO) {
+		this.reviewDAO.deleteImg(reviewDTO);
+	}
 
 	@Override
 	public List<ReviewDTO> list(Criteria cri) {
 		return reviewDAO.list(cri);
 	}
-	
+
 	@Override
 	public PagingDTO paging(Criteria cri) {
 		PagingDTO paging = new PagingDTO();
@@ -78,4 +79,11 @@ public class ReviewServiceImpl implements ReviewService {
 		paging.setTotalCount(reviewDAO.totalCount(cri));
 		return paging;
 	}
+
+	@Override
+	public List<ReviewDTO> imglist(ReviewDTO reviewDTO) {
+		return this.reviewDAO.imgList(reviewDTO);
+	}
+
+
 }

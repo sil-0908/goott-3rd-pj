@@ -1,12 +1,13 @@
 package com.goott.pj3.plan.repo;
 
-import com.goott.pj3.common.util.Criteria;
+import com.goott.pj3.common.util.paging.Criteria;
+import com.goott.pj3.plan.dto.ImgDTO;
 import com.goott.pj3.plan.dto.PlanDTO;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
+//2023.04.05 길영준
 @Repository
 public class PlanDAO {
 
@@ -25,12 +26,12 @@ public class PlanDAO {
         return ss.selectList("plan.list", cri);
     }
 
-	public int totalConut(Criteria cri) {
-		return ss.selectOne("plan.totalCount",cri);
-	}
-    
+    public int totalConut(Criteria cri) {
+        return ss.selectOne("plan.totalCount", cri);
+    }
+
     public PlanDTO detail(int plan_idx) {
-        return  ss.selectOne("plan.detail", plan_idx);
+        return ss.selectOne("plan.detail", plan_idx);
     }
 
     public void edit(PlanDTO planDTO) {
@@ -40,5 +41,11 @@ public class PlanDAO {
     public void delete(int plan_idx) {
         ss.delete("plan.delete", plan_idx);
     }
+
+
+    public void uploadImg(ImgDTO imgDTO) {
+        ss.insert("plan.upload", imgDTO);
+    }
+
 
 }

@@ -7,7 +7,7 @@
 <head>
 	<meta charset="UTF-8">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"/>
-    <link rel="stylesheet" href="/resources/css/common/style.css"/>
+    <link rel="stylesheet" href="/resources/css/style.css"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <title>Insert title here</title>
 </head>
@@ -38,44 +38,18 @@
             <h1>자주 찾는 질문</h1>
           </hgroup>
           <ul class="qna__card--list">
-            <c:forEach items="${data_u}" var="list" varStatus="status">
+            <c:forEach items="${data_q}" var="list" varStatus="status">
             	<c:if test="${status.count <= 5}">
             		<li><input type="hidden" name="qna_idx" value="${list.qna_idx}"></li>
             		<li><a class="title">${list.qna_title}</a></li>
             	</c:if>
             </c:forEach>
-        		<li><a href="/qna/list_U">더보기</a></li>
-          </ul>
-        </article>
-        <article class="qna__card">
-          <hgroup class="qna__card--title">
-            <h1>여행 문의</h1>
-          </hgroup>
-          <ul class="qna__card--list">
-            <c:forEach items="${data_r}" var="list" varStatus="status">
-            	<c:if test="${status.count <= 5}">
-            		<li><input type="hidden" name="qna_idx" value="${list.qna_idx}"></li>
-            		<li><a class="title">${list.qna_title}</a></li>
-            	</c:if>
-            </c:forEach>
-        		<li><a href="/qna/list_R">더보기</a></li>
-          </ul>
-        </article>
-        <article class="qna__card">
-          <hgroup class="qna__card--title">
-            <h1>플래너 문의</h1>
-          </hgroup>
-          <ul class="qna__card--list">
-            <c:forEach items="${data_e}" var="list" varStatus="status">
-            	<c:if test="${status.count <= 5}">
-            		<li><input type="hidden" name="qna_idx" value="${list.qna_idx}"></li>
-            		<li><a class="title">${list.qna_title}</a></li>
-            	</c:if>
-            </c:forEach>
-        		<li><a href="/qna/list_E">더보기</a></li>
+        		<li><a href="/qna/list_Q">더보기</a></li>
           </ul>
         </article>
       </section>
+      <button onclick="location.href='/qna/list_R'">신고게시판</button>
+      <button onclick="location.href='/qna/list_U'">이용게시판</button>
     </main>
     
 	<script src="/resources/js/common/layout.js"></script>

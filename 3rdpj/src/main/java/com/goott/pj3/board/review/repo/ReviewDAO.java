@@ -1,11 +1,12 @@
 package com.goott.pj3.board.review.repo;
 
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.goott.pj3.board.review.dto.ReviewDTO;
-import com.goott.pj3.common.util.Criteria;
+import com.goott.pj3.common.util.paging.Criteria;
 
 import java.util.List;
 import java.util.Map;
@@ -17,48 +18,46 @@ public class ReviewDAO {
 	@Autowired
 	SqlSession ss;
 
-	/**
-	 * 조원재 23.04.05. 리뷰 생성
-	 * @param map
-	 * @return
-	 */
-	public int insert(Map<String, Object> map){
-		return this.ss.insert("review.insert", map);
+	public int create(ReviewDTO reviewDTO) {
+		return this.ss.insert("review.insert", reviewDTO);
 	}
-	/**
-	 * 조원재 23.04.05. 리뷰 데이터 호출
-	 * @param map
-	 * @return
-	 */
-	public Map<String, Object> detail(Map<String, Object> map){
-		return this.ss.selectOne("review.detail", map);
+
+	public void createImg(ReviewDTO reviewDTO) {
+		System.out.println("files : " + reviewDTO);
+		this.ss.insert("review.file", reviewDTO);
 	}
-	/**
-	 * 조원재 23.04.05. 리뷰 수정 
-	 * @param map
-	 * @return
-	 */
-    public int update(Map<String, Object> map) {
-		return this.ss.update("review.update", map);
-    }
-	/**
-	 * 조원재 23.04.05. 리뷰 삭제
-	 * @param map
-	 * @return
-	 */
-	public int delete(Map<String, Object> map) {
-		return this.ss.update("review.delete", map);
+
+	public ReviewDTO detail(ReviewDTO reviewDTO) {
+		return this.ss.selectOne("review.detail", reviewDTO);
 	}
-	/**
-	 * 조원재 23.04.05. 리뷰 목록 호출
-	 * @param cri
-	 * @return
-	 */
+
+	public int update(ReviewDTO reviewDTO) {
+		return this.ss.update("review.update", reviewDTO);
+	}
+
+	public void deleteImg(ReviewDTO reviewDTO) {
+		this.ss.delete("review.deleteimg", reviewDTO);
+	}
+
+	public void updateImg(ReviewDTO reviewDTO) {
+		System.out.println("updateImg : " + reviewDTO);
+		this.ss.update("review.updateImg", reviewDTO);
+	}
+
+	public int delete(ReviewDTO reviewDTO) {
+		return this.ss.update("review.delete", reviewDTO);
+	}
+
 	public List<ReviewDTO> list(Criteria cri) {
-		return ss.selectList("review.list", cri);
+		return this.ss.selectList("review.list", cri);
 	}
-	
+
 	public int totalCount(Criteria cri) {
-		return ss.selectOne("review.totalCount",cri);
+		return this.ss.selectOne("review.totalCount",cri);
+	}
+
+
+	public List<ReviewDTO> imgList(ReviewDTO reviewDTO) {
+		return this.ss.selectList("review.imglist", reviewDTO);
 	}
 }

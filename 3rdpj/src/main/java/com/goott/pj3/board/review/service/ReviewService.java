@@ -4,21 +4,36 @@ import java.util.List;
 import java.util.Map;
 
 import com.goott.pj3.board.review.dto.ReviewDTO;
-import com.goott.pj3.common.util.Criteria;
-import com.goott.pj3.common.util.PagingDTO;
+import com.goott.pj3.common.util.paging.Criteria;
+import com.goott.pj3.common.util.paging.PagingDTO;
 
 public interface ReviewService {
+    /**
+     * 리뷰 내용 생성
+     * @param reviewDTO
+     * @return
+     */
+    int create(ReviewDTO reviewDTO);
 
-    public String create(Map<String, Object>map);
+    /**
+     * 리뷰 이미지 파일 생성
+     * @param reviewDTO
+     */
+    void createImg(ReviewDTO reviewDTO);
 
-    public Map<String, Object> detail(Map<String, Object> map);
+    ReviewDTO detail(ReviewDTO reviewDTO);
 
-    boolean update(Map<String, Object> map);
+    int update(ReviewDTO reviewDTO);
 
-    boolean delete(Map<String, Object> map);
+    void deleteImg(ReviewDTO reviewDTO);
 
-	public List<ReviewDTO> list(Criteria cri);
+    void updateImg(ReviewDTO reviewDTO);
 
-	public PagingDTO paging(Criteria cri);
+    boolean delete(ReviewDTO reviewDTO);
 
+    List<ReviewDTO> list(Criteria cri);
+
+    PagingDTO paging(Criteria cri);
+
+    List<ReviewDTO> imglist(ReviewDTO reviewDTO);
 }

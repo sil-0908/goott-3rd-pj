@@ -17,23 +17,110 @@
 <h1> 리뷰 화면</h1>
 
 <p>번호 : ${data.review_idx}</p>
-<p>리뷰 사진 : <img src="${data.review_img}" height="200px" width="200px" style="border: 1px solid red;"></p>
+<c:forEach var="img" items="${data.r_img}" >
+    <p>리뷰 사진 : <img src="${img}" height="200px" width="200px" style="border: 1px solid red;"></p>
+</c:forEach>
 <p>내용 : ${data.review_content}</p>
 <p>작성자 : ${data.user_id}</p>
 <p>작성일 : ${data.create_date}"</p>
-<c:if test="${data.user_id == sessionScope.user_id}">
+
+<%--<c:if test="${data.user_id == sessionScope.user_id}">--%>
 <p>
-    <a href="/review/update?review_idx=${review_idx}">수정</a>
+    <a href="/review/update/${data.review_idx}">수정</a>
 </p>
 
-<form method="POST" action="/review/delete">
-    <input type="hidden" name="r_del_yn" value="n">
-    <input type="hidden" name="review_idx" value="${review_idx}">
+<form method="POST" action="/review/delete/${data.review_idx}">
     <input type="submit" value="삭제">
 </form>
-</c:if>
+<%--</c:if>--%>
 <p>
     <a href="/review/list">목록</a>
 </p>
+<%--	<div>--%>
+<%--		<form method="post" action="/reviewReply/write">--%>
+<%--			<p>--%>
+<%--				<label>댓글 작성자</label>--%>
+<%--				<input type="text" name="r_writer" value="${sessionScope.user_id}">--%>
+<%--			</p>--%>
+<%--			<p>--%>
+<%--				<textarea rows="5" cols="50" name="r_content"></textarea>--%>
+<%--			</p>--%>
+<%--			<p>--%>
+<%--				<input type="hidden" name="review_idx" value="${data.review_idx}">--%>
+<%--				<button type="submit">댓글 작성</button>--%>
+<%--			</p>--%>
+<%--		</form>--%>
+<%--	</div>--%>
+<%--	<hr>--%>
+<%--	<div id="reply">--%>
+<%--		--%>
+<%--	</div>--%>
+	<script>
+		// $(document).ready(function() {
+		// 	getList();
+		// })
+		//
+		// function getList() {
+		// 	var free_idx = $('input[name=review_idx]').val();
+		// 	var user_id = $('input[name=r_writer]').val();
+		// 	$.ajax({
+		// 		type : 'GET',
+		// 		url : '/reviewReply/getList',
+		// 		data : {'review_idx' : review_idx},
+		// 		success : function(result) {
+		// 			for(var i = 0; i < result.length; i++){
+		// 				var str = "<div class='replyarea'>"
+		// 				str += result[i].r_writer + "&nbsp;:&nbsp;"
+		// 				if(user_id == (result[i].r_writer)){
+		// 					str += "<input type='text' name='r_content' value=" + result[i].r_content + " >"
+		// 				}
+		// 				else{
+		// 					str += 	"<input type='text' name='r_content' value="+result[i].r_content+" readonly>"
+		// 				}
+		// 				str	+= "&nbsp;&nbsp;"
+		// 				str += "<button onclick = 'r_edit()'>수정</button>"
+		// 				str += "&nbsp;<button onclick = 'r_delete()'>삭제</button>"
+		// 				str += "<input type='hidden' name='reply_idx' value="+result[i].reply_idx+">"
+		// 				str += "</div><hr>"
+		// 				$("#reply").append(str);
+		// 			}
+		// 		},
+		// 		error : function() {
+		// 			alert("에러")
+		// 		}
+		// 	})
+		// }
+		//
+		// function r_edit() {
+		// 	var free_idx = $('input[name=review_idx]').val();
+		// 	var reply_idx = document.querySelector('.replyarea').children.reply_idx.value
+		// 	var r_content = document.querySelector('.replyarea').children[0].value
+		//
+		// 	$.ajax({
+		// 		url : '/reviewReply/update',
+		// 		data : {"review_idx" : review_idx, 'reply_idx' : reply_idx, 'r_content' : r_content},
+		// 		type : 'post',
+		// 		success : function (){
+		// 			alert('댓글이 수정되었습니다')
+		// 			location.href = "/review/detail/"+review_idx;
+		// 		}
+		// 	})
+		// }
+		//
+		// function r_delete() {
+		// 	var free_idx = $('input[name=review_idx]').val();
+		// 	var reply_idx = document.querySelector('.replyarea').children.reply_idx.value
+		//
+		// 	$.ajax({
+		// 		url : '/reviewReply/delete',
+		// 		data : {"review_idx" : review_idx, 'reply_idx' : reply_idx},
+		// 		type : 'post',
+		// 		success : function (){
+		// 			alert('댓글이 삭제되었습니다')
+		// 			location.href = "/review/detail/"+review_idx;
+		// 		}
+		// 	})
+		// }
+	</script>
 </body>
 </html>

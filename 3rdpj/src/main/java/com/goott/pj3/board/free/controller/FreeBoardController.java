@@ -2,8 +2,6 @@ package com.goott.pj3.board.free.controller;
 
 import javax.servlet.http.HttpSession;
 
-import com.goott.pj3.common.util.Criteria;
-import com.goott.pj3.common.util.PagingDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +12,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.goott.pj3.board.free.dto.FreeBoardDTO;
 import com.goott.pj3.board.free.service.FreeBoardService;
+import com.goott.pj3.common.util.paging.Criteria;
+import com.goott.pj3.common.util.paging.PagingDTO;
 
 @Controller
 @RequestMapping("free/**")
@@ -37,12 +37,7 @@ public class FreeBoardController {
 
 	@RequestMapping("list")
 	public ModelAndView free(ModelAndView mv, Criteria cri) {
-		PagingDTO paging = new PagingDTO();
-		paging.setCri(cri); // page / perpagenum 설정
-		paging.setTotalCount(freeBoardService.totalCount(cri)); // 총게시글 갯수 불러오는 것
-		System.out.println("1:"+paging);
-		System.out.println("2:"+freeBoardService.list(cri));
-		mv.addObject("paging", paging);
+		mv.addObject("paging", freeBoardService.paging(cri));
 		mv.addObject("list", freeBoardService.list(cri));
 		mv.setViewName("board/free/free_list");
 		return mv;
@@ -54,7 +49,6 @@ public class FreeBoardController {
 		mv.setViewName("board/free/free_detail");
 		return mv;
 	}
-
 	@RequestMapping(value = "modify", method = RequestMethod.POST, produces="application/text; charset=UTF-8;")
 	@ResponseBody
 	public String modify(FreeBoardDTO boardDTO) {
@@ -62,9 +56,9 @@ public class FreeBoardController {
 		return "수정완료";
 	}
 //	
-@RequestMapping("delete")
-public String delete(int free_idx) {
-	freeBoardService.delete(free_idx);
-	return "redirect:/free/list";
-}
+	@RequestMapping("delete")
+	public String delete(int free_idx) {
+		freeBoardService.delete(free_idx);
+		return "redirect:/free/list";
+	}
 }

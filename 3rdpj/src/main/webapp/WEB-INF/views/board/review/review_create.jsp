@@ -22,9 +22,8 @@
 <body>
 <h1>리뷰 작성</h1>
 <form method="POST" enctype="multipart/form-data" >
-    <input type="hidden" name="plan_idx" value="1">
     <p>내용 : <input type="text" name="review_content"></p>
-    <p>사진 : <input id="fileItem" name="file" type="file" multiple name="review_img" onchange="previewFile()"></p>
+    <p>사진 : <input id="fileItem" type="file" name="file[]" onchange="previewFile()" multiple ></p>
     <p>평점 :
         <input type="radio" name="review_rating" value="1">1
         <input type="radio" name="review_rating" value="2">2
@@ -32,30 +31,49 @@
         <input type="radio" name="review_rating" value="4">4
         <input type="radio" name="review_rating" value="5">5
     </p>
-    <p><input id="upload-btn" type="submit" value="저장"></p>
+    <p> <input id="upload-btn" type="submit" value="저장" disabled="true"><span>사진 올려야 작성 가능</span></p>
 </form>
 <div id="preview"></div>
 </body>
 </html>
 <script>
     /**
-     * 조원재 23.04.13. follow - uploadForm
+     * 조원재 23.04.22 이미지 미리보기
+     * @returns {Promise<void>}
      */
-    function previewFile() {
-        var preview = document.getElementById('preview');
-        var file = document.getElementById('fileItem').files[0];
-        var reader = new FileReader();
-        reader.onloadend = function() {
-            preview.innerHTML = '<img id="preview-img" src="' + reader.result + '">';
-        }
-        if (file) {
-            reader.readAsDataURL(file);
-        } else {
-            preview.innerHTML = '';
+    async function previewFile() {
+        var preview = document.getElementById("preview"); // 미리보기 띄울 div
+        var files = document.getElementById('fileItem').files; // img 파일들
+        var cnt = 0; // 이미지 갯수
+        preview.innerHTML = ''; // 미리보기 초기화
+
+        for (const file of files) {  // 반복문 한번 반복 때마다 이미지 1개씩 view
+            await new Promise((resolve, reject) => {
+                var reader = new FileReader(); // FileReader 객체를 생성
+                reader.onload = function() { // 파일 로드가 성공시 호출 될 함수
+                    var img = document.createElement("img"); // img 생성
+                    img.src = reader.result; // 로드된 파일을 img 요소의 src에 할당
+                    img.onload = () => { // 이미지 로드가 완료되면 이 함수가 호출
+                        preview.appendChild(img); // preview 요소의 자식 노드로 img 추가
+                        resolve(); // 결과 호출
+                        cnt++ // 이미지 갯수 더하기
+                        if(cnt == files.length){
+                            $('#upload-btn').prop('disabled', false); // 이미지 파일 올리면 저장버튼 활성화
+                        }
+                        else if(cnt != file.length){
+                            $('#upload-btn').prop('disabled', true); // 이미지 파일 취소 할 경우 다시 비활성화
+                        }
+                    }
+                };
+                reader.onerror = function() {
+                    reject(new Error('파일 로드 실패'));
+                };
+                reader.readAsDataURL(file);
+            });
         }
     }
     /**
-     * 조원재 23.04.06 이미지 업로드
+     * 조원재 23.04.06 이미지 업로드 조건
      * @type {RegExp}
      */
     let regex = new RegExp("(.*?)\.(jpg|png)$");         // jpg,png 파일만 허용
@@ -81,8 +99,4 @@
             return false;
         }
     }
-
-
-
-
 </script>

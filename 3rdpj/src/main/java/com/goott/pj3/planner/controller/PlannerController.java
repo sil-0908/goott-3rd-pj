@@ -1,6 +1,6 @@
 package com.goott.pj3.planner.controller;
 
-import com.goott.pj3.common.util.Auth;
+import com.goott.pj3.common.util.auth.Auth;
 import com.goott.pj3.plan.dto.PlanDTO;
 import com.goott.pj3.planner.service.PlannerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,9 +32,9 @@ public class PlannerController {
         return mv;
     }
 
-    @RequestMapping("update")
-    public ModelAndView plannerUpdate(@RequestParam()){
-
-    }
+//    @RequestMapping("update")
+//    public ModelAndView plannerUpdate(@RequestParam()){
+//
+//    }
 
 }
