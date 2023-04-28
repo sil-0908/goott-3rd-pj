@@ -70,7 +70,6 @@
                     <foreach collection="t_img" item="img" separator=",">
                         (#{travel_location_idx}, #{img})
                     </foreach>
-
     </insert>
     
     <select id="findAddress" resultType="com.goott.pj3.travelinfo.dto.TravelInfoDTO">
@@ -92,7 +91,7 @@
         select i.travel_location_idx, i.t_img
           from travel_img i left join travel_location t
             on i.travel_location_idx = t.travel_location_idx
-          where t.t_del_yn='y'
+          where t.t_del_yn='n'
 
     </select>
 

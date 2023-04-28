@@ -22,8 +22,18 @@ public class PlanServiceImpl implements PlanService {
     }
 
     @Override
-    public void planCreate(PlanDTO planDTO) {
-        planDAO.create(planDTO);
+    public int planCreate(PlanDTO planDTO) {
+        int affectRowCnt = this.planDAO.create(planDTO);
+        if(affectRowCnt!=0){
+            return planDTO.getPlan_idx();
+        }
+        return 0;
+    }
+
+    @Override
+    public boolean planImgCreate(PlanDTO planDTO) {
+        int affectRowCnt = this.planDAO.planImgCreate(planDTO);
+        return affectRowCnt==1;
     }
 
     @Override

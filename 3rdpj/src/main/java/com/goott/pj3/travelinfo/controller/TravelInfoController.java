@@ -1,6 +1,7 @@
 package com.goott.pj3.travelinfo.controller;
 
 
+import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.goott.pj3.common.util.aws.S3FileUploadService;
 import com.goott.pj3.common.util.paging.Criteria;
 import com.goott.pj3.travelinfo.dto.TravelInfoDTO;
@@ -113,10 +114,15 @@ public class TravelInfoController {
 	public ModelAndView updatePost(@PathVariable int travel_location_idx,  TravelInfoDTO travelInfoDTO,
 								   ModelAndView mv,
 								   @RequestParam("file[]") List<MultipartFile> multipartFile){
+		System.out.println("multipartFile : " + multipartFile.toString());
 		travelInfoDTO.setTravel_location_idx(travel_location_idx);
 		int succeessIdx = this.travelInfoService.update(travelInfoDTO); // 본문 내용 업데이트
-		this.travelInfoService.deleteImg(travelInfoDTO); // 기존 img 삭제
-		ImgFileUpdate(travel_location_idx, travelInfoDTO, mv, multipartFile, succeessIdx); // 이미지 파일 업데이트 API
+		if(multipartFile!=null || !multipartFile.isEmpty()){
+			boolean success = this.travelInfoService.deleteImg(travelInfoDTO); // 기존 img 삭제
+			if (success){
+				ImgFileUpdate(travel_location_idx, travelInfoDTO, mv, multipartFile, succeessIdx); // 이미지 파일 업데이트 API
+			}
+		}
 		mv.setViewName("redirect:/travelinfo/detail/"+travel_location_idx);
 		return mv;
 	}
@@ -125,16 +131,22 @@ public class TravelInfoController {
 							   ModelAndView mv, List<MultipartFile> multipartFile, int succeessIdx) {
 		try {
 			if(multipartFile !=null) {
+				System.out.println("메소드 안 이미지파일 : " + multipartFile);
+				TravelInfoDTO test = new TravelInfoDTO();
 				List<String> imgList = s3FileUploadService.upload(multipartFile);
-				travelInfoDTO.setT_img(imgList);
-				travelInfoDTO.setTravel_location_idx(succeessIdx);
-				this.travelInfoService.updateImg(travelInfoDTO);
+				System.out.println("imgList : " + imgList);
+				test.setT_img(imgList);
+				test.setTravel_location_idx(succeessIdx);
+				System.out.println("test : " + test);
+				this.travelInfoService.updateImg(test);
+			} else {
+				TravelInfoDTO test = new TravelInfoDTO();
+				test.setTravel_location_idx(succeessIdx);
+				this.travelInfoService.update(test);
 			}
+
 		} catch (IOException e){
 			throw new RuntimeException(e);
-		}
-		if(succeessIdx !=0){
-			mv.setViewName("redirect:/travelinfo/detail/"+ travel_location_idx);
 		}
 	}
 
@@ -157,18 +169,20 @@ public class TravelInfoController {
 
 	@RequestMapping("list")
 	public ModelAndView list(ModelAndView mv, Criteria cri, TravelInfoDTO travelInfoDTO){
-		List<TravelInfoDTO> originalList = travelInfoService.imglist(travelInfoDTO);
+		List<TravelInfoDTO> originalList = travelInfoService.imgList(travelInfoDTO);
+		System.out.println("originalList : " + originalList);
 		List<TravelInfoDTO> newList = new ArrayList<>(); // 인덱스와 첫번째 이미지만 담을 List 생생
 		for (TravelInfoDTO dto : originalList) {
-			List<String> rImgList = dto.getT_img(); // 이미지만 List에 담기
-			if (rImgList != null && !rImgList.isEmpty()) { // 이미지가 있는 경우
-				String firstImg = rImgList.get(0); // 첫번째 이미지 변수에 담기
+			List<String> tImgList = dto.getT_img(); // 이미지만 List에 담기
+			if (tImgList != null && !tImgList.isEmpty()) { // 이미지가 있는 경우
+				String firstImg = tImgList.get(0); // 첫번째 이미지 변수에 담기
 				TravelInfoDTO newDto = new TravelInfoDTO(); //
 				newDto.setTravel_location_idx(dto.getTravel_location_idx());
 				newDto.setT_img(Collections.singletonList(firstImg));
 				newList.add(newDto);
 			}
 		}
+		System.out.println("newList"+ newList);
 		mv.addObject("imgList", newList);
 		mv.addObject("paging", travelInfoService.paging(cri));
 		mv.addObject("data", travelInfoService.list(cri));

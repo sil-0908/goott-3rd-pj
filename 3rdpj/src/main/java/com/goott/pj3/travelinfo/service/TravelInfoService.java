@@ -18,13 +18,13 @@ public interface TravelInfoService {
 
     int update(TravelInfoDTO travelInfoDTO);
 
-    void deleteImg(TravelInfoDTO travelInfoDTO);
+    boolean deleteImg(TravelInfoDTO travelInfoDTO);
 
     void updateImg(TravelInfoDTO travelInfoDTO);
 
     boolean delete(TravelInfoDTO travelInfoDTO);
 
-    List<TravelInfoDTO> imglist(TravelInfoDTO travelInfoDTO);
+    List<TravelInfoDTO> imgList(TravelInfoDTO travelInfoDTO);
 
     List<TravelInfoDTO> list(Criteria cri);
 

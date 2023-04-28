@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 <html>
 <head>
     <title>리뷰 화면</title>
@@ -23,7 +23,8 @@
 <p>내용 : ${data.review_content}</p>
 <p>작성자 : ${data.user_id}</p>
 <p>작성일 : ${data.create_date}"</p>
-
+<p>좋아요<button data-id="${data.user_id}" class="like">좋아요</button> : </p>
+<p>싫어요<button class="unlike">싫어요</button> : </p>
 <%--<c:if test="${data.user_id == sessionScope.user_id}">--%>
 <p>
     <a href="/review/update/${data.review_idx}">수정</a>
@@ -55,7 +56,7 @@
 <%--	<div id="reply">--%>
 <%--		--%>
 <%--	</div>--%>
-	<script>
+    })
 		// $(document).ready(function() {
 		// 	getList();
 		// })

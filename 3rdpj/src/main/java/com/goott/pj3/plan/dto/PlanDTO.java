@@ -1,12 +1,16 @@
 package com.goott.pj3.plan.dto;
 
 import java.util.Date;
+import java.util.List;
+
 //2023.04.05 길영준
 public class PlanDTO {
     private int plan_idx,  price, sale_count;
-    private String start_date, end_date, plan_detail, plan_detail_img, plan_title, user_id;
+    private String start_date, end_date, plan_detail, plan_title, user_id;
     private boolean p_del_yn;
     private Date create_date, update_date;
+    private List<String> p_img;
+    private List<Integer> p_img_idx;
 
     public int getPlan_idx() {
         return plan_idx;
@@ -14,22 +18,6 @@ public class PlanDTO {
 
     public void setPlan_idx(int plan_idx) {
         this.plan_idx = plan_idx;
-    }
-
-    public String getStart_date() {
-        return start_date;
-    }
-
-    public void setStart_date(String start_date) {
-        this.start_date = start_date;
-    }
-
-    public String getEnd_date() {
-        return end_date;
-    }
-
-    public void setEnd_date(String end_date) {
-        this.end_date = end_date;
     }
 
     public int getPrice() {
@@ -48,20 +36,28 @@ public class PlanDTO {
         this.sale_count = sale_count;
     }
 
+    public String getStart_date() {
+        return start_date;
+    }
+
+    public void setStart_date(String start_date) {
+        this.start_date = start_date;
+    }
+
+    public String getEnd_date() {
+        return end_date;
+    }
+
+    public void setEnd_date(String end_date) {
+        this.end_date = end_date;
+    }
+
     public String getPlan_detail() {
         return plan_detail;
     }
 
     public void setPlan_detail(String plan_detail) {
         this.plan_detail = plan_detail;
-    }
-
-    public String getPlan_detail_img() {
-        return plan_detail_img;
-    }
-
-    public void setPlan_detail_img(String plan_detail_img) {
-        this.plan_detail_img = plan_detail_img;
     }
 
     public String getPlan_title() {
@@ -104,21 +100,38 @@ public class PlanDTO {
         this.update_date = update_date;
     }
 
+    public List<String> getP_img() {
+        return p_img;
+    }
+
+    public void setP_img(List<String> p_img) {
+        this.p_img = p_img;
+    }
+
+    public List<Integer> getP_img_idx() {
+        return p_img_idx;
+    }
+
+    public void setP_img_idx(List<Integer> p_img_idx) {
+        this.p_img_idx = p_img_idx;
+    }
+
     @Override
     public String toString() {
         return "PlanDTO{" +
                 "plan_idx=" + plan_idx +
-                ", start_date=" + start_date +
-                ", end_date=" + end_date +
                 ", price=" + price +
                 ", sale_count=" + sale_count +
+                ", start_date='" + start_date + '\'' +
+                ", end_date='" + end_date + '\'' +
                 ", plan_detail='" + plan_detail + '\'' +
-                ", plan_detail_img='" + plan_detail_img + '\'' +
                 ", plan_title='" + plan_title + '\'' +
                 ", user_id='" + user_id + '\'' +
                 ", p_del_yn=" + p_del_yn +
                 ", create_date=" + create_date +
                 ", update_date=" + update_date +
+                ", p_img=" + p_img +
+                ", p_img_idx=" + p_img_idx +
                 '}';
     }
 }

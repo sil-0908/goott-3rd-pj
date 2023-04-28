@@ -40,12 +40,13 @@ public class TravelInfoDAO {
         return this.ss.update("travelinfo.update", travelInfoDTO);
     }
 
-    public void deleteImg(TravelInfoDTO travelInfoDTO) {
-        System.out.println("deleteImgDTO: " + travelInfoDTO);
-        this.ss.delete("travelinfo.deleteImg", travelInfoDTO);
+    public int deleteImg(TravelInfoDTO travelInfoDTO) {
+        System.out.println("deleteImgDAO: " + travelInfoDTO);
+        return this.ss.delete("travelinfo.deleteImg", travelInfoDTO);
     }
 
     public void updateImg(TravelInfoDTO travelInfoDTO) {
+        System.out.println("udateImg DAO : " + travelInfoDTO);
         this.ss.insert("travelinfo.updateImg", travelInfoDTO);
     }
 
@@ -64,7 +65,5 @@ public class TravelInfoDAO {
         return ss.selectOne("travelinfo.totalCount", cri);
     }
 
-    public String findAdress(TravelInfoDTO travelInfoDTO) {
-        return this.ss.selectOne("travelinfo.findAdress", travelInfoDTO);
-    }
+
 }

@@ -38,12 +38,6 @@ public class TravelInfoServiceImpl implements TravelInfoService {
 
     @Override
     public int update(TravelInfoDTO travelInfoDTO) {
-        System.out.println("update : " + travelInfoDTO);
-        if (travelInfoDTO.getCountry_script() == null || travelInfoDTO.getCountry_script().isEmpty()){
-            String ogirinAdress = travelInfoDAO.findAdress(travelInfoDTO);
-            System.out.println("ogirinAdress : " + ogirinAdress);
-            travelInfoDTO.setCountry_script(ogirinAdress);
-        }
         int cnt = this.travelInfoDAO.update(travelInfoDTO);
         if(cnt==1){
             return travelInfoDTO.getTravel_location_idx();
@@ -51,13 +45,18 @@ public class TravelInfoServiceImpl implements TravelInfoService {
         return 0;
     }
     @Override
-    public void deleteImg(TravelInfoDTO travelInfoDTO) {
+    public boolean deleteImg(TravelInfoDTO travelInfoDTO) {
         System.out.println("delImgImpl : " + travelInfoDTO );
-        this.travelInfoDAO.deleteImg(travelInfoDTO);
+        int affectRowCnt = this.travelInfoDAO.deleteImg(travelInfoDTO);
+        if(affectRowCnt!=0){
+            return true;
+        }
+        return false;
     }
 
     @Override
     public void updateImg(TravelInfoDTO travelInfoDTO) {
+        System.out.println("updateImg serviceimpl : " + travelInfoDTO);
         this.travelInfoDAO.updateImg(travelInfoDTO);
     }
 
@@ -68,7 +67,7 @@ public class TravelInfoServiceImpl implements TravelInfoService {
     }
 
     @Override
-    public List<TravelInfoDTO> imglist(TravelInfoDTO travelInfoDTO) {
+    public List<TravelInfoDTO> imgList(TravelInfoDTO travelInfoDTO) {
         return this.travelInfoDAO.imgList(travelInfoDTO);
     }
 

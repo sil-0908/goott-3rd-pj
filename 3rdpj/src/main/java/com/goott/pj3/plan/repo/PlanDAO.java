@@ -18,8 +18,11 @@ public class PlanDAO {
         this.ss = ss;
     }
 
-    public void create(PlanDTO planDTO) {
-        ss.insert("plan.create", planDTO);
+    public int create(PlanDTO planDTO) {
+       return ss.insert("plan.create", planDTO);
+    }
+    public int planImgCreate(PlanDTO planDTO) {
+        return this.ss.insert("plan.createImg", planDTO);
     }
 
     public List<PlanDTO> list(Criteria cri) {
@@ -46,6 +49,7 @@ public class PlanDAO {
     public void uploadImg(ImgDTO imgDTO) {
         ss.insert("plan.upload", imgDTO);
     }
+
 
 
 }
