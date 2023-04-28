@@ -31,7 +31,8 @@ public class ChatRoomRepository {
     public ChatRoomDTO createChatRoomDTO(String name) {
         ChatRoomDTO room = ChatRoomDTO.create(name);
         chatRoomDTOMap.put(room.getRoomId(), room);
-
+            // 채팅방이름 uuid부여후 가져오기
+            // 채팅방id : 방이름
         return room;
     }
 }
