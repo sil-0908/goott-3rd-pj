@@ -34,20 +34,19 @@
     <div class="col-6"></div>
 </div>
 
-
+<script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous">
 </script>
-</body>
 <script>
     $(document).ready(function () {
 
-        let roomName = ${room.name};
-        let roomId = ${room.roomId};
-        let username = ${sessionScope.user_id}
+        let roomName = '${room.name}';
+        let roomId = '${room.roomId}';
+        let username = '${sessionScope.user_id}';
 
             console.log(roomName + ", " + roomId + ", " + username);
 
@@ -69,18 +68,18 @@
                 if (writer === username) {
                     str = "<div class='col-6'>";
                     str += "<div class='alert alert-secondary'>";
-                    str += "<b>" + writer + " : " + message + "</b>";
+                    str += "<b>" + writer + " : " + content.message + "</b>";
                     str += "</div></div>";
                     $("#msgArea").append(str);
                 } else {
                     str = "<div class='col-6'>";
                     str += "<div class='alert alert-warning'>";
-                    str += "<b>" + writer + " : " + message + "</b>";
+                    str += "<b>" + writer + " : " + content.message + "</b>";
                     str += "</div></div>";
                     $("#msgArea").append(str);
                 }
 
-                $("#msgArea").append(str);
+                // $("#msgArea").append(str);
             });
 
             //3. send(path, header, message)로 메세지를 보낼 수 있음
@@ -96,6 +95,6 @@
         });
     });
 </script>
-
+</body>
 
 </html>

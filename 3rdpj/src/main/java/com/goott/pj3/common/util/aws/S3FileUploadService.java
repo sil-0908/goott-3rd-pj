@@ -82,9 +82,9 @@ public class S3FileUploadService {
     }
 
     private void deleteFromS3(final String findName) {
-
+        String realFileName = findName.substring(53);
         // 삭제할 객체 생성
-        final DeleteObjectRequest deleteRequest = new DeleteObjectRequest(bucket, findName);
+        final DeleteObjectRequest deleteRequest = new DeleteObjectRequest(bucket, realFileName);
         // 삭제
         amazonS3Client.deleteObject(deleteRequest);
     }
