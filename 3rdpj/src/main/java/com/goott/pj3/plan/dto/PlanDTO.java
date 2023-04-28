@@ -105,21 +105,21 @@ public class PlanDTO {
         this.update_date = update_date;
     }
 
-    public List<String> getP_img() {
-        return p_img;
-    }
-
-    public void setP_img(List<String> p_img) {
-        this.p_img = p_img;
-    }
-
-    public List<Integer> getP_img_idx() {
-        return p_img_idx;
-    }
-
-    public void setP_img_idx(List<Integer> p_img_idx) {
-        this.p_img_idx = p_img_idx;
-    }
+//    public List<String> getP_img() {
+//        return p_img;
+//    }
+//
+//    public void setP_img(List<String> p_img) {
+//        this.p_img = p_img;
+//    }
+//
+//    public List<Integer> getP_img_idx() {
+//        return p_img_idx;
+//    }
+//
+//    public void setP_img_idx(List<Integer> p_img_idx) {
+//        this.p_img_idx = p_img_idx;
+//    }
 
     @Override
     public String toString() {
@@ -135,8 +135,6 @@ public class PlanDTO {
                 ", p_del_yn=" + p_del_yn +
                 ", create_date=" + create_date +
                 ", update_date=" + update_date +
-                ", p_img=" + p_img +
-                ", p_img_idx=" + p_img_idx +
                 '}';
     }
 }
