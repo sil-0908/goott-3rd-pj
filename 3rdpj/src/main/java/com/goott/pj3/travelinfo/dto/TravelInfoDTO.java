@@ -1,13 +1,13 @@
 package com.goott.pj3.travelinfo.dto;
 
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
 public class TravelInfoDTO {
    int travel_location_idx;
    String user_id, country_a, country_b, country_c, country_detail, country_script;
-   List<String> country_img;
+   List<String> t_img;
+   List<Integer> t_img_idx;
    Date create_date, update_date;
 
     public int getTravel_location_idx() {
@@ -66,6 +66,22 @@ public class TravelInfoDTO {
         this.country_script = country_script;
     }
 
+    public List<String> getT_img() {
+        return t_img;
+    }
+
+    public void setT_img(List<String> t_img) {
+        this.t_img = t_img;
+    }
+
+    public List<Integer> getT_img_idx() {
+        return t_img_idx;
+    }
+
+    public void setT_img_idx(List<Integer> t_img_idx) {
+        this.t_img_idx = t_img_idx;
+    }
+
     public Date getCreate_date() {
         return create_date;
     }
@@ -81,15 +97,6 @@ public class TravelInfoDTO {
     public void setUpdate_date(Date update_date) {
         this.update_date = update_date;
     }
-
-    public List<String> getCountry_img() {
-        return country_img;
-    }
-
-    public void setCountry_img(List<String> country_img) {
-        this.country_img = country_img;
-    }
-
     @Override
     public String toString() {
         return "TravelInfoDTO{" +
@@ -100,7 +107,8 @@ public class TravelInfoDTO {
                 ", country_c='" + country_c + '\'' +
                 ", country_detail='" + country_detail + '\'' +
                 ", country_script='" + country_script + '\'' +
-                ", country_img=" + country_img +
+                ", t_img=" + t_img +
+                ", t_img_idx=" + t_img_idx +
                 ", create_date=" + create_date +
                 ", update_date=" + update_date +
                 '}';

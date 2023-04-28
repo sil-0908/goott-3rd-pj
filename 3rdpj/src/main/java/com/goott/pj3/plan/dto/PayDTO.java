@@ -1,8 +1,10 @@
 package com.goott.pj3.plan.dto;
 //2023.04.22 길영준
+//2023.04.26 길영준 주석추가
 public class PayDTO {
     private String imp_uid, merchant_uid, buyer_id, planner_id;
-    private int plan_idx;
+                //결제고유번호 //상점결제번호 // 구매자 // 판매자
+    private int plan_idx; //플랜넘버
 
     public String getImp_uid() {
         return imp_uid;

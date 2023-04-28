@@ -1,7 +1,7 @@
 <%--@elvariable id="data" type="com.goott.pj3.plan.dto.PlanDTO"--%>
 <%--
   Created by IntelliJ IDEA.
-  User: goott4
+  User: 길영준
   Date: 2023-04-05
   Time: 오후 7:03
   To change this template use File | Settings | File Templates.
@@ -19,6 +19,7 @@
 <body>
 <input class="session" type="hidden" value="${sessionScope.user_id}">
 <input class="plan_idx" type="hidden" value="${data.plan_idx}">
+
 <label for="title">제목</label>
 <input id="title" type="text" value="${data.plan_title}">
 
@@ -28,9 +29,14 @@
 <label for="detail">설명</label>
 <input id="detail" type="text" value="${data.plan_detail}">
 
+<p> 이미지: </p>
+<c:forEach var="img" items="${data.p_img}">
+    <img src="${img}" width="200" height="200" style="border: 1px solid blue;">
+</c:forEach>
 
 <%--<c:set var = "date_count" value = "${data.end_date - data.start_date}"/>--%>
 <%--<c:out value="${date_count}"/>--%>
+
 <p>기간 : </p>
 <p>시작날짜 : ${data.start_date}</p>
 <p>종료날짜 : ${data.end_date}</p>
@@ -101,7 +107,7 @@
                             window.location.reload();
                         },
                         error: function (xhr, status, error) {
-                            alert()
+                            alert(result.msg)
                             console.log(xhr)
                             console.log(status)
                             console.log(error)
@@ -114,9 +120,10 @@
 
         });
     }
-    // 카트담기
+
+    //2023.04.25 카트담기
     function addCart() {
-        let cart =  {
+        let cart = {
             plan_idx: plan_idx,
             user_id: buyer
         };
@@ -137,7 +144,6 @@
             alert('에이쟉스 실패')
         })
     }
-
 
 
 </script>

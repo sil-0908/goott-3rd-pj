@@ -29,6 +29,7 @@ public class PaymentController {
     public IamportResponse<Payment> paymentByUid(@PathVariable(value = "imp_uid") String imp_uid) throws IamportResponseException, IOException {
         return iamportClient.paymentByImpUid(imp_uid);
     }
+
     // 결제정보 DB입력
     @PostMapping(value = "/payment/confirm", consumes = "application/json")
     public Map<String, Object> paymentConfirm(@RequestBody PayDTO payDTO) {
