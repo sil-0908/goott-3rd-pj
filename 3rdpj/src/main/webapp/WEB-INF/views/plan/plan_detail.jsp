@@ -1,7 +1,7 @@
 <%--@elvariable id="data" type="com.goott.pj3.plan.dto.PlanDTO"--%>
 <%--
   Created by IntelliJ IDEA.
-  User: goott4
+  User: 길영준
   Date: 2023-04-05
   Time: 오후 7:03
   To change this template use File | Settings | File Templates.
@@ -101,7 +101,7 @@
                             window.location.reload();
                         },
                         error: function (xhr, status, error) {
-                            alert()
+                            alert(result.msg)
                             console.log(xhr)
                             console.log(status)
                             console.log(error)
@@ -114,9 +114,10 @@
 
         });
     }
-    // 카트담기
+
+    //2023.04.25 카트담기
     function addCart() {
-        let cart =  {
+        let cart = {
             plan_idx: plan_idx,
             user_id: buyer
         };
@@ -137,7 +138,6 @@
             alert('에이쟉스 실패')
         })
     }
-
 
 
 </script>

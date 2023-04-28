@@ -14,9 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 //2023.04.05 길영준
 @Controller
@@ -27,6 +25,7 @@ public class PlanController {
     final UserService userService;
     final S3FileUploadService s3FileUploadService;
 
+    //생성자 의존성 주입
     public PlanController(PlanService planService, UserService userService, S3FileUploadService s3FileUploadService) {
         this.planService = planService;
         this.userService = userService;

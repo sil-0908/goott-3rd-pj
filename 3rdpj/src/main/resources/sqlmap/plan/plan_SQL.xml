@@ -1,62 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="plan">
-
+    <!--플랜만들기-->
     <insert id="create" parameterType="com.goott.pj3.plan.dto.PlanDTO" useGeneratedKeys="true" keyProperty="plan_idx">
-        INSERT into plan(user_id, start_date, end_date, price, plan_title, plan_detail)
-        values (#{user_id}, #{start_date}, #{end_date}, #{price}, #{plan_title}, #{plan_detail})
+        INSERT INTO plan(user_id, start_date, end_date, price, plan_title, plan_detail)
+        VALUES (#{user_id}, #{start_date}, #{end_date}, #{price}, #{plan_title}, #{plan_detail})
     </insert>
-
+    <!--플랜리스트-->
     <select id="list" resultType="com.goott.pj3.plan.dto.PlanDTO">
-        select plan_idx, plan_title, price, user_id
-        from plan
-        where p_del_yn = 'N'
-        and
+        SELECT plan_idx, plan_title, price, user_id
+        FROM plan
+        WHERE p_del_yn = 'N'
+        AND
         <if test="option == 'user_id'">user_id like CONCAT('%',#{keyword},'%')</if>
         <if test="option == 'title'">plan_title like CONCAT('%',#{keyword},'%')</if>
         <if test="option == null or option == ''">1=1</if>
-        order by plan_idx desc
-        limit #{pageStart}, #{perPageNum}
+        ORDER BY plan_idx DESC
+        LIMIT #{pageStart}, #{perPageNum}
     </select>
-
+    <!--페이징을 위한 카운트-->
     <select id="totalCount" resultType="int">
-        select count(plan_idx)
-        from plan
-        where p_del_yn = 'N'
-        and
+        SELECT count(plan_idx)
+        FROM plan
+        WHERE p_del_yn = 'N'
+        AND
         <if test="option == 'user_id'">user_id like CONCAT('%',#{keyword},'%')</if>
         <if test="option == 'title'">plan_title like CONCAT('%',#{keyword},'%')</if>
         <if test="option == null or option == ''">1=1</if>
     </select>
-
+    <!--플랜상세-->
     <select id="detail" resultType="com.goott.pj3.plan.dto.PlanDTO">
-        select plan_title, plan_detail, user_id, start_date, end_date, price, plan_idx
-        from plan
-        where plan_idx = #{plan_idx}
+        SELECT plan_title, plan_detail, user_id, start_date, end_date, price, plan_idx
+        FROM plan
+        WHERE plan_idx = #{plan_idx}
     </select>
+    <!--플랜수정-->
     <update id="edit">
-        update plan
-        set plan_title = #{plan_title},
+        UPDATE plan
+        SET plan_title = #{plan_title},
             plan_detail=#{plan_detail},
             start_date=#{start_date},
             end_date=#{end_date},
             price=#{price}
-        where plan_idx = #{plan_idx}
+        WHERE plan_idx = #{plan_idx}
     </update>
+    <!--플랜삭제(DB삭제는 안함)-->
     <update id="delete">
-        update plan
-        set p_del_yn = 'Y'
-        where plan_idx = #{plan_idx}
+        UPDATE plan
+        SET p_del_yn = 'Y'
+        WHERE plan_idx = #{plan_idx}
     </update>
+    <!--플랜결제-->
     <insert id="pay" parameterType="com.goott.pj3.plan.dto.PayDTO">
         INSERT INTO pay(user_id, plan_idx, imp_uid, merchant_id)
-        values (#{buyer_id},#{plan_idx},#{imp_uid},#{merchant_uid})
+        VALUES (#{buyer_id},#{plan_idx},#{imp_uid},#{merchant_uid})
     </insert>
+    <!--결제된 플랜 판매+1-->
     <update id="count">
-        update plan
-        set sale_count = (sale_count+1)
-        where plan_idx=#{plan_idx}
+        UPDATE plan
+        SET sale_count = (sale_count+1)
+        WHERE plan_idx=#{plan_idx}
     </update>
+    <!--결제된 플랜 플래너성공 +1-->
     <update id="success">
         UPDATE user
         SET success_count =(success_count+1)

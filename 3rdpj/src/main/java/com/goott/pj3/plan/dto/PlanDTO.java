@@ -4,13 +4,16 @@ import java.util.Date;
 import java.util.List;
 
 //2023.04.05 길영준
+//2023.04.26 길영준 주석추가
 public class PlanDTO {
-    private int plan_idx,  price, sale_count;
-    private String start_date, end_date, plan_detail, plan_title, user_id;
-    private boolean p_del_yn;
-    private Date create_date, update_date;
-    private List<String> p_img;
-    private List<Integer> p_img_idx;
+
+    private int plan_idx, price, sale_count;
+                //플랜번호 //가격 //판매횟수
+    private String start_date, end_date, plan_detail, plan_detail_img, plan_title, user_id;
+                    //여행시작일//종료일  //플랜상세정보  //플렌이미지     //플랜제목      //작성자
+    private boolean p_del_yn;   //플랜 삭제여부
+    private Date create_date, update_date;  //작성일 // 수정일
+
 
     public int getPlan_idx() {
         return plan_idx;

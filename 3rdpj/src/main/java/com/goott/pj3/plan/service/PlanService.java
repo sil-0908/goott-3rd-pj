@@ -6,6 +6,7 @@ import com.goott.pj3.plan.dto.ImgDTO;
 import com.goott.pj3.plan.dto.PlanDTO;
 
 import java.util.List;
+
 //2023.04.05 길영준
 public interface PlanService {
 
@@ -22,7 +23,7 @@ public interface PlanService {
 
     void planDelete(int plan_idx);
 
-	PagingDTO paging(Criteria cri);
+    PagingDTO paging(Criteria cri);
 
     void uploadImg(ImgDTO imgDTO);
 
