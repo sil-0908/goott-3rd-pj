@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: chowonjae
@@ -6,6 +7,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <html>
@@ -14,8 +18,11 @@
 </head>
 <body>
 <h1>여행지 정보 작성</h1>
-<p>기존 이미지 : <img src="${data.country_img}" height="200px" width="200px" style="border: 1px solid red;"></p>
-<form method="POST" onsubmit="travelAdress();">
+<p>기존 이미지 : </p>
+<c:forEach var="img" items="${data.t_img}">
+<img src="${img}" height="200px" width="200px" style="border: 1px solid red;">
+</c:forEach>
+<form method="POST" enctype="multipart/form-data" onsubmit="travelAdress();">
     <p>여행지 이름 : <input type="text" name="country_c" value="${data.country_c}"></p>
     <p>국가 : <input type="text" name="country_a" value="${data.country_b}"></p>
     <p>지역 : <input type="text" name="country_b" value="${data.country_a}"></p>
@@ -26,16 +33,17 @@
             <input id="total_adress" type="hidden" name="country_script" value="">
             <input type="text" id="travel_postcode" class="address_item" placeholder="우편번호">
             <input type="button" onclick="travelPostcode()" value="우편번호 찾기" class="d_btn"><br>
-            <input type="text" id="travel_roadAddress" class="address_item" placeholder="도로명주소">
+            <input type="text" id="travel_roadAddress" class="address_item" placeholder="도로명주소" >
             <input type="text" id="travel_jibunAddress" class="address_item" placeholder="지번주소">
             <span id="guide" style="color:#999;display:none"></span>
             <input type="text" id="travel_detailAddress" class="address_item" placeholder="상세주소">
             <input type="text" id="travel_extraAddress" class="address_item" placeholder="참고항목">
         </p>
     </div>
-    <p>변경할 이미지 : <input type="file" multiple name="country_img" value="${data.country_img}"></p> </p>
+    <p>변경할 이미지 : <input id="fileItem" type="file" name="file[]" onchange="previewFile()" multiple></p> </p>
     <input type="submit" value="저장">
 </form>
+<div id="preview"></div>
 </body>
 </html>
 
@@ -46,10 +54,47 @@
      */
     let addressItem = document.querySelectorAll(".address_item");
     let total_adress = document.querySelector("#total_adress");
+    let adress ="";
 
     function travelAdress(){
         for(item of addressItem){
-            total_adress.value += item.value+" ";
+            adress += item.value+" ";
+        }
+        total_adress.value = adress
+    }
+    /**
+     * 조원재 23.04.22 이미지 미리보기
+     * @returns {Promise<void>}
+     */
+    async function previewFile() {
+        var preview = document.getElementById("preview"); // 미리보기 띄울 div
+        var files = document.getElementById('fileItem').files; // img 파일들
+        var cnt = 0; // 이미지 갯수
+        preview.innerHTML = ''; // 미리보기 초기화
+
+        for (const file of files) {  // 반복문 한번 반복 때마다 이미지 1개씩 view
+            await new Promise((resolve, reject) => {
+                var reader = new FileReader(); // FileReader 객체를 생성
+                reader.onload = function() { // 파일 로드가 성공시 호출 될 함수
+                    var img = document.createElement("img"); // img 생성
+                    img.src = reader.result; // 로드된 파일을 img 요소의 src에 할당
+                    img.onload = () => { // 이미지 로드가 완료되면 이 함수가 호출
+                        preview.appendChild(img); // preview 요소의 자식 노드로 img 추가
+                        resolve(); // 결과 호출
+                        cnt++ // 이미지 갯수 더하기
+                        if(cnt == files.length){
+                            $('#upload-btn').prop('disabled', false); // 이미지 파일 올리면 저장버튼 활성화
+                        }
+                        else if(cnt != files.length){
+                            $('#upload-btn').prop('disabled', true); // 이미지 파일 취소 할 경우 다시 비활성화
+                        }
+                    }
+                };
+                reader.onerror = function() {
+                    reject(new Error('파일 로드 실패'));
+                };
+                reader.readAsDataURL(file);
+            });
         }
     }
     /**

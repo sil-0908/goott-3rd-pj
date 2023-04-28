@@ -3,15 +3,16 @@
 <mapper namespace="review">
 
     <!--조원재 23.04.05 리뷰 생성-->
-    <insert id="insert" parameterType="com.goott.pj3.board.review.dto.ReviewDTO" useGeneratedKeys="true" keyProperty="review_idx">
+    <insert id="insert" parameterType="com.goott.pj3.board.review.dto.ReviewDTO"
+            useGeneratedKeys="true" keyProperty="review_idx">
         insert into plan_review(user_id, plan_idx, review_content, review_rating)
         values (#{user_id}, #{plan_idx}, #{review_content}, #{review_rating})
     </insert>
     <!--조원재 23.04.21 리뷰 이미지 파일 생성-->
-    <insert id="file" parameterType="com.goott.pj3.board.review.dto.ReviewDTO">
+    <insert id="insertFile" parameterType="com.goott.pj3.board.review.dto.ReviewDTO">
             insert into review_img(review_idx, r_img) values
-            <foreach collection="r_img" item="item" separator=",">
-                 (#{review_idx}, #{item})
+            <foreach collection="r_img" item="img" separator=",">
+                 (#{review_idx}, #{img})
             </foreach>
     </insert>
 
@@ -22,7 +23,7 @@
          from plan_review r left join review_img i
            on r.review_idx = i.review_idx
         where r.review_idx = #{review_idx}
-          and r.r_del_yn='y'
+          and r.r_del_yn='n'
     </select>
 
     <resultMap id="reviewResultMap" type="com.goott.pj3.board.review.dto.ReviewDTO">
@@ -42,30 +43,32 @@
 
     <!--조원재 23.04.05 리뷰 수정 시작-->
     <!--본문 내용 수정-->
-    <update id="update" parameterType="com.goott.pj3.board.review.dto.ReviewDTO" useGeneratedKeys="true" keyProperty="review_idx">
+    <update id="update" parameterType="com.goott.pj3.board.review.dto.ReviewDTO"
+            useGeneratedKeys="true" keyProperty="review_idx">
         update plan_review
            set review_content=#{review_content}
          where review_idx = #{review_idx}
     </update>
     <!--기존 이미지 파일 삭제-->
-    <delete id="deleteimg" parameterType="com.goott.pj3.board.review.dto.ReviewDTO">
+    <delete id="deleteImg" parameterType="com.goott.pj3.board.review.dto.ReviewDTO">
         delete
           from review_img
          where review_idx=#{review_idx}
     </delete>
     <!--새 이미지 파일 생성-->
     <insert id="updateImg" parameterType="com.goott.pj3.board.review.dto.ReviewDTO">
-        insert into review_img(review_idx, r_img) values
-        <foreach collection="r_img" item="item" separator=",">
-            (#{review_idx}, #{item})
-        </foreach>
+        insert into review_img(review_idx, r_img)
+             values
+                    <foreach collection="r_img" item="img" separator=",">
+                        (#{review_idx}, #{img})
+                    </foreach>
     </insert>
     <!--리뷰 수정 끝 -->
 
     <!--조원재 23.04.05 리뷰 삭제-->
-    <update id="delete" parameterType="hashMap">
+    <update id="delete" parameterType="com.goott.pj3.board.review.dto.ReviewDTO">
         update plan_review
-          set r_del_yn = 'n'
+          set r_del_yn = 'y'
         where review_idx=#{review_idx}
     </update>
 
@@ -83,11 +86,12 @@
          limit #{pageStart}, #{perPageNum}
     </select>
 
+    <!--조원재 23.04.26 리뷰 이미지 목록-->
     <select id="imglist" resultMap="reviewlistResultMap">
         select i.review_idx, i.r_img
           from review_img i left join plan_review r
             on i.review_idx = r.review_idx
-         where r.r_del_yn='y'
+         where r.r_del_yn='n'
     </select>
 
     <resultMap id="reviewlistResultMap" type="com.goott.pj3.board.review.dto.ReviewDTO">
@@ -104,7 +108,7 @@
 		   	<if test="option == 'user_id'"> user_id like CONCAT('%',#{keyword},'%')</if>
 	        <if test="option == 'content'"> review_content like CONCAT('%',#{keyword},'%')</if>
 	        <if test="option == null or option == ''">1=1</if>
-          and r_del_yn = 'y'
+          and r_del_yn = 'n'
     </select>
 
 <!--	<insert id="replywrite">-->

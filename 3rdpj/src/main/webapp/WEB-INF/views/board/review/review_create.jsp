@@ -60,7 +60,7 @@
                         if(cnt == files.length){
                             $('#upload-btn').prop('disabled', false); // 이미지 파일 올리면 저장버튼 활성화
                         }
-                        else if(cnt != file.length){
+                        else if(cnt != files.length){
                             $('#upload-btn').prop('disabled', true); // 이미지 파일 취소 할 경우 다시 비활성화
                         }
                     }

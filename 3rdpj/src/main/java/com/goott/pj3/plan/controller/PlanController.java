@@ -33,7 +33,7 @@ public class PlanController {
     }
 
     // 작성 get
-    @Auth(role = Auth.Role.PLANNER)
+//    @Auth(role = Auth.Role.PLANNER)
     @GetMapping("create")
     public String planGet() {
         return "plan/plan_create";
@@ -41,49 +41,23 @@ public class PlanController {
 
     // 작성 post
     @PostMapping("create")
-    public String planPut(PlanDTO planDTO, ImgDTO imgDTO, HttpSession httpSession, @RequestParam("files[]") List<MultipartFile> multipartFile) {
+    public String planPut(PlanDTO planDTO, ImgDTO imgDTO, HttpSession httpSession,
+                          @RequestParam("files[]") List<MultipartFile> multipartFile) throws IOException {
         String user = (String) httpSession.getAttribute("user_id");
         planDTO.setUser_id(user);
-        planService.planCreate(planDTO);
-        int idx = planDTO.getPlan_idx();
-        imgDTO.setPlan_idx(idx);
-        try {
-            List<String> img = s3FileUploadService.upload(multipartFile);
-            if (!img.get(0).isEmpty()) {
-                imgDTO.setImg1(img.get(0));
+        int plan_idx = planService.planCreate(planDTO); // 게시글 생성
+        if(plan_idx!=0){ // 이미지 파일 생성
+            if(multipartFile !=null || !multipartFile.isEmpty()){
+                List<String> imgList = s3FileUploadService.upload(multipartFile);
+                planDTO.setPlan_idx(plan_idx);
+                planDTO.setP_img(imgList);
+                boolean success = this.planService.planImgCreate(planDTO);
+                if(success){
+                    return "redirect:/plan/list";
+                }
             }
-            if (!img.get(1).isEmpty()) {
-                imgDTO.setImg2(img.get(1));
-            }
-            if (!img.get(2).isEmpty()) {
-                imgDTO.setImg3(img.get(2));
-            }
-            if (!img.get(3).isEmpty()) {
-                imgDTO.setImg4(img.get(3));
-            }
-            if (!img.get(4).isEmpty()) {
-                imgDTO.setImg5(img.get(4));
-            }
-            if (!img.get(5).isEmpty()) {
-                imgDTO.setImg6(img.get(5));
-            }
-            if (!img.get(6).isEmpty()) {
-                imgDTO.setImg7(img.get(6));
-            }
-            if (!img.get(7).isEmpty()) {
-                imgDTO.setImg8(img.get(7));
-            }
-            if (!img.get(8).isEmpty()) {
-                imgDTO.setImg9(img.get(8));
-            }
-            if (!img.get(9).isEmpty()) {
-                imgDTO.setImg10(img.get(9));
-            }
-            planService.uploadImg(imgDTO);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
-        return "redirect:/plan/list";
+        return "redirect:/plan/create";
     }
 
     // 리스트 겟
@@ -98,6 +72,7 @@ public class PlanController {
     // 디테일
     @GetMapping("list/{plan_idx}")
     public ModelAndView planDetail(ModelAndView modelAndView, @PathVariable("plan_idx") int plan_idx) {
+
         modelAndView.addObject("data", planService.detail(plan_idx));
         modelAndView.setViewName("plan/plan_detail");
         return modelAndView;

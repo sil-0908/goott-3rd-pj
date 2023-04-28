@@ -11,7 +11,9 @@ import java.util.List;
 public interface PlanService {
 
 
-    void planCreate(PlanDTO planDTO);
+    int planCreate(PlanDTO planDTO);
+
+    boolean planImgCreate(PlanDTO planDTO);
 
     List<PlanDTO> list(Criteria cri);
 
@@ -24,6 +26,7 @@ public interface PlanService {
     PagingDTO paging(Criteria cri);
 
     void uploadImg(ImgDTO imgDTO);
+
 
 
 }
