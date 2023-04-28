@@ -25,6 +25,8 @@
 @import "./user/user_page.css";
 @import "./user/planner_page.css";
 
+@import "./plan/plan_list.css";
+
 
 :root {
   --black: #181823;

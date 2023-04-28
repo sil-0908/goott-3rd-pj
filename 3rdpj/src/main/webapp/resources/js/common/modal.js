@@ -9,8 +9,15 @@ const sendMessage = document.querySelector(".chatbox__submit");
 
 for (const openModal of openModals) {
   openModal.addEventListener("click", function () {
-    // 모달창 열기
-    windowOfDetail.open = true;
+	  const id = openModal.dataset.id;
+	  const name = openModal.dataset.name;
+	  
+	  // 모달창에 데이터 삽입
+	  /*fruitName.textContent = name;
+	  fruitDescription.textContent = `This is a ${name}.`;*/
+	  
+	  // 모달창 열기
+	  windowOfDetail.open = true;
   });
 }
 
