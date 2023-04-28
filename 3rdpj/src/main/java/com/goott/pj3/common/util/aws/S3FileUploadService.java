@@ -28,7 +28,6 @@ public class S3FileUploadService {
     @Value("${aws.s3.bucket.url}") //지역정보
     private String defaultUrl;
 
-    List<String> urlList = new ArrayList<>(); //업로드된 url을 받기위한 리스트
 
     public S3FileUploadService(AmazonS3Client amazonS3Client) {
         this.amazonS3Client = amazonS3Client;
@@ -36,6 +35,8 @@ public class S3FileUploadService {
 
     //생성자 주입
     public List<String> upload(List<MultipartFile> uploadFile) throws IOException {
+        List<String> urlList = new ArrayList<>(); //업로드된 url을 받기위한 리스트
+
         //파일이름 새로만들어서 리스트에 담기
         List<Map<String, String>> fileList = new ArrayList<>();
         for (int i = 0; i < uploadFile.size(); i++) {
