@@ -21,7 +21,7 @@ import java.util.*;
 @Service
 public class S3FileUploadService {
 
-    @Autowired
+
     private final AmazonS3Client amazonS3Client; //아마존 계정정보 propertie파일 -> common-context에서 주입
     @Value("${aws.s3.bucket}")
     private String bucket; //S3버킷정보
@@ -81,12 +81,12 @@ public class S3FileUploadService {
         }
     }
 
-    private void deleteFromS3(final String findName) {
+    public void deleteFromS3(final String findName) {
         String realFileName = findName.substring(53);
         // 삭제할 객체 생성
         final DeleteObjectRequest deleteRequest = new DeleteObjectRequest(bucket, realFileName);
         // 삭제
-        amazonS3Client.deleteObject(deleteRequest);
+        this.amazonS3Client.deleteObject(deleteRequest);
     }
 
 }

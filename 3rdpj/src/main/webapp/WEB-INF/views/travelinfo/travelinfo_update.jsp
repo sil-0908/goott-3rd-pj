@@ -40,7 +40,7 @@
             <input type="text" id="travel_extraAddress" class="address_item" placeholder="참고항목">
         </p>
     </div>
-    <p>변경할 이미지 : <input id="fileItem" type="file" name="file[]" onchange="previewFile()" multiple></p> </p>
+    <p>변경할 이미지 : <input id="fileItem" type="file" name="file[]" onchange="previewFile()" multiple></p>
     <input type="submit" value="저장">
 </form>
 <div id="preview"></div>

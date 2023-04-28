@@ -52,12 +52,13 @@ public class PlanController {
                 planDTO.setPlan_idx(plan_idx);
                 planDTO.setP_img(imgList);
                 boolean success = this.planService.planImgCreate(planDTO);
+                System.out.println("success" + success);
                 if(success){
                     return "redirect:/plan/list";
                 }
             }
         }
-        return "redirect:/plan/create";
+        return "/plan/plan_create";
     }
 
     // 리스트 겟
@@ -72,7 +73,6 @@ public class PlanController {
     // 디테일
     @GetMapping("list/{plan_idx}")
     public ModelAndView planDetail(ModelAndView modelAndView, @PathVariable("plan_idx") int plan_idx) {
-
         modelAndView.addObject("data", planService.detail(plan_idx));
         modelAndView.setViewName("plan/plan_detail");
         return modelAndView;
@@ -93,20 +93,33 @@ public class PlanController {
     }
 
     // 수정 포스트
-    @PutMapping("list/edit")
+    @PostMapping("list/edit")
     public String planEditPut(PlanDTO planDTO, HttpSession httpSession,
-                              @RequestParam("idx") int plan_idx, @RequestParam("auth") String user_id) {
+                              @RequestParam("idx") int plan_idx, @RequestParam("auth") String user_id,
+                              @RequestParam("file[]") List<MultipartFile> multipartFiles) throws IOException {
         String user = (String) httpSession.getAttribute("user_id");
         if (user.equals(user_id)) {
             planDTO.setPlan_idx(plan_idx);
-            planService.planEdit(planDTO);
+            planService.planEdit(planDTO); // 게시글 업로드
+            for (String test : planService.detail(plan_idx).getP_img()) {
+                s3FileUploadService.deleteFromS3(test); // s3서버 이미지 파일 삭제
+            }
+            boolean success = planService.planImgDelete(planDTO); // 기존 이미지 파일 삭제
+            try {
+                if (multipartFiles != null || !multipartFiles.isEmpty()) {
+                    List<String> imgList = s3FileUploadService.upload(multipartFiles);
+                    planDTO.setP_img(imgList);
+                    planDTO.setPlan_idx(plan_idx);
+                    this.planService.planImgUpdate(planDTO);
+                }
+            } catch (IOException e){
+                throw new RuntimeException(e);
+            }
             return "redirect:/plan/list";
         } else {
             return "redirect:/plan/list";
         }
-
     }
-
     // 삭제
     @PostMapping("list/delete")
     public String planDelete(int plan_idx) {
