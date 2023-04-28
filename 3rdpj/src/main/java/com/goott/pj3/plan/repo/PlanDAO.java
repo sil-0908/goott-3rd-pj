@@ -21,8 +21,17 @@ public class PlanDAO {
     }
 
     //플랜 생성
-    public void create(PlanDTO planDTO) {
-        ss.insert("plan.create", planDTO);
+    public int create(PlanDTO planDTO) {
+        int affecrRowCnt= this.ss.insert("plan.create", planDTO);
+        if(affecrRowCnt != 0){
+            return planDTO.getPlan_idx();
+        }
+        return 0;
+    }
+
+    //플랜이미지 업로드
+    public int planImgCreate(PlanDTO planDTO) {
+        return this.ss.insert("plan.createImg", planDTO);
     }
 
     //플랜리스트
@@ -50,11 +59,11 @@ public class PlanDAO {
         ss.delete("plan.delete", plan_idx);
     }
 
-    //플랜이미지 업로드
-    public void uploadImg(ImgDTO imgDTO) {
-        ss.insert("plan.upload", imgDTO);
+    public int planImgDelete(PlanDTO planDTO) {
+        return this.ss.delete("plan.planImgDelete", planDTO);
     }
 
-
-
+    public void planImgUpdate(PlanDTO planDTO) {
+        this.ss.insert("plan.planImgUpdate", planDTO);
+    }
 }
