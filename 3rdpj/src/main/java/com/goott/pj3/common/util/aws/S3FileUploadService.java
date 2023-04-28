@@ -1,4 +1,4 @@
-package com.goott.pj3.common.util;
+package com.goott.pj3.common.util.aws;
 
 import com.amazonaws.AmazonClientException;
 import com.amazonaws.services.s3.AmazonS3Client;
@@ -13,6 +13,8 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
+//2023.04.16 길영준 S3 단일업로드
+//2023.04.19 길영준 S3 다중업로드로 변경
 @Service
 public class S3FileUploadService {
 

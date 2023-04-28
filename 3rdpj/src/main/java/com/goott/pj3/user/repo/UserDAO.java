@@ -41,5 +41,15 @@ public class UserDAO {
 	public String del_yn(UserDTO u_dto) {
 		return ss.selectOne("user.del_yn", u_dto);
 	}
+
+//	비밀번호 찾기 - 장민실 23.04.23
+	public String find_get_pw(UserDTO u_dto) {
+		return ss.selectOne("user.find_get_pw", u_dto);
+	}
+
+//  비밀번호 변경 - 장민실 23.04.25
+	public void set_new_pw(UserDTO u_dto) {
+		ss.update("user.find_set_pw", u_dto);
+	}
 	
 }

@@ -1,7 +1,7 @@
 package com.goott.pj3.plan.service;
 
-import com.goott.pj3.common.util.Criteria;
-import com.goott.pj3.common.util.PagingDTO;
+import com.goott.pj3.common.util.paging.Criteria;
+import com.goott.pj3.common.util.paging.PagingDTO;
 import com.goott.pj3.plan.dto.ImgDTO;
 import com.goott.pj3.plan.dto.PlanDTO;
 
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import com.goott.pj3.plan.repo.PlanDAO;
 
 import java.util.List;
-
+//2023.04.05 길영준
 @Service
 public class PlanServiceImpl implements PlanService {
 
@@ -41,11 +41,10 @@ public class PlanServiceImpl implements PlanService {
     }
 
     @Override
-    public void uploadImg(ImgDTO imgDTO, PlanDTO planDTO) {
-        String plan_idx = planDAO.find_idx(planDTO);
-        imgDTO.setPlan_idx(plan_idx);
+    public void uploadImg(ImgDTO imgDTO) {
         planDAO.uploadImg(imgDTO);
     }
+
 
 
     @Override
@@ -62,6 +61,5 @@ public class PlanServiceImpl implements PlanService {
     public void planDelete(int planIdx) {
         planDAO.delete(planIdx);
     }
-
 
 }

@@ -1,4 +1,4 @@
-package com.goott.pj3.common.util;
+package com.goott.pj3.common.util.chat;
 
 import com.goott.pj3.user.dto.UserDTO;
 import com.mysql.cj.util.StringUtils;

@@ -1,7 +1,7 @@
 package com.goott.pj3.plan.dto;
 
 import java.util.Date;
-
+//2023.04.05 길영준
 public class PlanDTO {
     private int plan_idx,  price, sale_count;
     private String start_date, end_date, plan_detail, plan_detail_img, plan_title, user_id;

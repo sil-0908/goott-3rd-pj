@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,6 +25,8 @@ public class UserController {
 
 	@Autowired
 	UserService userService;
+	@Autowired
+	BCryptPasswordEncoder bcrypt;
 	
 	// 추가필요 : 카카오, 네이버, 구글 로그인 API / 회원가입할때 핸드폰 인증 / 비밀번호 찾기
 	
@@ -40,15 +43,21 @@ public class UserController {
 	}
 	
 //	로그인 페이지 이동 - 장민실 23.04.04
-	@GetMapping("signin")
-	public String go_sign_in() {
-		return "user/sign_in";
-	}
+//	@GetMapping("signin")
+//	public String go_sign_in() {
+//		return "user/sign_in";
+//	}
 	
 //	아이디 비밀번호 찾기 페이지 이동 - 장민실 23.04.19
 	@GetMapping("find_user")
 	public String go_find_user() {
 		return "user/find_user";
+	}
+	
+//	사용자 마이페이지 이동 - 장민실 23.04.26
+	@GetMapping("userpage")
+	public String go_user_page() {
+		return "user/user_page";
 	}
 	
 //	회원가입 - 장민실 23.04.04
@@ -102,33 +111,56 @@ public class UserController {
 		return "redirect:/user/mypage";
 	}
 	
-//	아이디 찾기 - 장민실 23.04.13
-	@PostMapping("find_id")
+//	아이디 찾기 - 장민실 23.04.13 > 현재 DB에 중복정보 다량으로 기능구현 완료 후 주석처리
+//	@PostMapping("find_id")
+//	@ResponseBody
+//	public String find_id(@RequestParam("email") String email, @RequestParam("hp") String hp, UserDTO u_dto) {
+////		휴대폰 인증기능 완료되면 휴대폰인증 추가하기
+//		u_dto.setEmail(email);
+//		u_dto.setHp(hp);
+//		String id = userService.find_id(u_dto);
+//		return id;
+//	}
+	
+//	비밀번호 찾기 - 장민실 23.04.23
+	@PostMapping("find_get_pw")
 	@ResponseBody
-	public String find_id(@RequestParam("email") String email, @RequestParam("hp") String hp, UserDTO u_dto) {
-//		휴대폰 인증기능 완료되면 휴대폰인증 추가하기
-		u_dto.setEmail(email);
+	public String find_get_pw(@RequestParam("id") String id, @RequestParam("hp") String hp, UserDTO u_dto) {
+		u_dto.setUser_id(id);
 		u_dto.setHp(hp);
-		String id = userService.find_id(u_dto);
-		return id;
+		String origin_pw = userService.find_get_pw(u_dto);	// 입력정보와 일치하는 비밀번호 담아오기
+		return origin_pw;
 	}
 	
-//	비밀번호 찾기 / 저장하기 따로 메소드 생성하기
-//	@PostMapping("find_pw")
-//	@ResponseBody
-//	public String find_pw(@RequestParam("id") String id, @RequestParam("hp") String hp, UserDTO u_dto) {
-////		Bcrypt라서 복호화 불가하니, 비밀번호 찾기는 비밀번호 변경으로 처리		
-////		1. 사용자가 id, hp 입력
-////		2. 입력받은 정보를 컨트롤러에서 dto에 셋팅
-////		3. dto로 db에서 id, hp가 일치하는 pw가 있는지 int로 반환
-////			> 1이면 있는거니까 비밀번호 변경하도록 창 띄우고, 변경 비밀번호 암호화 해서 db저장 - 서비스에서 작업
-////			> 0이면 없는거니까 id랑 hp 다시 확인하라고 문구출력 - 서비스에서 작업
-//		
-//		u_dto.setUser_id(id);
-//		u_dto.setHp(hp);
-//		userService.find_pw(u_dto);
-//		return "redirect:/user/sign_in";
-//	}
+//	비밀번호 찾기 후 새로운 비밀번호 저장 - 장민실 23.04.25	// DB에 암호화값 새로 저장까지 진행되고 있으나 JSON 넘어가지 않아 마무리작업중
+	@PostMapping("find_set_pw")
+	@ResponseBody
+	public ModelAndView find_set_pw(@RequestParam("id") String id, @RequestParam("hp") String hp, @RequestParam("pw") String pw, UserDTO u_dto, ModelAndView mav) {
+		u_dto.setUser_id(id);
+		u_dto.setHp(hp);
+		u_dto.setPw(pw);
+		System.out.println("pw plus after : " + u_dto);
+//		int pw_cnt = userService.pw_cnt(u_dto);	// 비밀번호값 존재 여부 : 1=입력한 비밀번호와 동일, 0=동일하지 않음
+		Map<String, String> responseData = new HashMap<>();
+//		System.out.println("컨트롤러 pw_cnt임ㅇㅇㅇ : " + pw_cnt);
+//		if(pw_cnt==1) {
+//			System.out.println("컨트롤러에서 1탔음");
+//			responseData.put("msg", "same_pw");
+//		}
+//		else if(pw_cnt==0) {
+//			System.out.println("컨트롤러에서 0탔음");
+			userService.set_new_pw(u_dto);
+			responseData.put("msg", "different_pw");
+//		}
+		mav.setView(new MappingJackson2JsonView());
+        mav.addObject("setpw_msg", responseData);
+        
+//        System.out.println("dddddddd : " + mav.toString());        
+//       System.out.println("타입확인1111 : " + responseData.getClass().getSimpleName());
+//       System.out.println("타입확인2222 : " + mav.getClass().getSimpleName());
+        
+		return mav;
+	}
 	
 //	마이페이지
 //	@PostMapping("mypage")

@@ -3,6 +3,7 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd">
     <bean id="amazonS3Client" class="com.amazonaws.services.s3.AmazonS3Client">
+        <!--2023.04.22 길영준 S3, iamport 용-->
         <constructor-arg>
             <bean class="com.amazonaws.auth.BasicAWSCredentials">
                 <constructor-arg value="${aws.accessKey}" />
@@ -11,9 +12,13 @@
         </constructor-arg>
     </bean>
     <bean id="awsProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
-        <property name="location" value="classpath:s3.properties" />
+        <property name="location" value="classpath:common.properties" />
     </bean>
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="properties" ref="awsProperties" />
+    </bean>
+    <bean id="iamport" class="com.siot.IamportRestClient.IamportClient">
+        <constructor-arg index="0" value="${iamport.api}"/>
+        <constructor-arg index="1" value="${iamport.api_secret}"/>
     </bean>
 </beans>

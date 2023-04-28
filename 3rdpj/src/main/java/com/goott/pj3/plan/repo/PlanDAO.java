@@ -1,13 +1,13 @@
 package com.goott.pj3.plan.repo;
 
-import com.goott.pj3.common.util.Criteria;
+import com.goott.pj3.common.util.paging.Criteria;
 import com.goott.pj3.plan.dto.ImgDTO;
 import com.goott.pj3.plan.dto.PlanDTO;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
+//2023.04.05 길영준
 @Repository
 public class PlanDAO {
 
@@ -47,7 +47,5 @@ public class PlanDAO {
         ss.insert("plan.upload", imgDTO);
     }
 
-    public String find_idx(PlanDTO planDTO) {
-        return ss.selectOne("plan.find_idx", planDTO);
-    }
+
 }

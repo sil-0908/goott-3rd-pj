@@ -1,0 +1,120 @@
+/* form */
+.signup_main {
+	min-height: 100vh;
+	background-image: url("/resources/img/user_page_bg.jpg");
+	background-size: cover;
+}
+
+.signup_main_div {
+	display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.signup_box, .signup_accept {
+	display: flex;
+	flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    position: relative;
+    padding: 1.5rem 0;
+    border-radius: 0.8rem;
+    line-height: 3.5rem;
+}
+
+.signup_box {
+	margin-top: 7rem;
+	line-height: 2rem;
+	width: 25%;
+}
+
+.signup_accept {
+	height: 100%;
+	background-color: black;
+	color: white;
+	width: 40%;
+}
+
+/* input */
+.sign_input {
+	height: 100%;
+    width: 90%;
+    border: none;
+    outline: none;
+    padding: 0;
+    padding-left: 2rem;
+    padding-bottom: 0.2rem;
+    color: #333;
+    transition: all 0.2s ease;
+    border-bottom: 1.5px solid #aaaaaa;    
+}
+
+.sign_input:focus {
+	border-bottom : 1.5px solid var(--blue);
+}
+
+.input_box {
+	position: relative;
+	line-height: 2rem;
+}
+
+.sign_up_btn {
+	margin-top: 1rem;
+}
+
+/* button */
+.signup_main_div .sign_up_btn {
+	color: var(--white);
+	background-color: var(--blue);
+	width: 50%;
+	padding: 0.65rem 0;
+	border-radius: 10px;
+	transition: background-color 0.2s;  
+}
+
+.sign_up_btn {
+	margin: 1rem 0;
+	border: 2px solid #fff;
+	background: transparent;
+	cursor: pointer;
+}
+
+.sign_up_btn:hover {
+	background-color: var(--yellow);
+}
+
+/* text */
+.chk_text {
+	font-size: 12px;
+	width: 20rem;
+	height: 2rem;
+	margin-top: -0.5rem;
+}
+
+.pwd_valid_text {
+	margin-top: 0.1rem;
+	margin-bottom: 2rem;
+	line-height: 1.2rem;
+}
+
+/* icon */
+.signup_main_div .icon {
+	position: absolute;
+	font-size: 20px;
+	color: #707070;
+	margin-top: 0.4rem;
+	left: 0;
+}
+
+.origin_pw_hide, .copy_pw_hide {
+	position: absolute;
+	font-size: 20px;
+	color: #707070;
+	margin-top: 0.4rem;
+	margin-left: -1.5rem;
+	cursor: pointer;
+}
+
+.sign_input:focus ~ .icon {
+	color: var(--blue);
+}

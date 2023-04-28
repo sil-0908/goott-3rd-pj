@@ -1,4 +1,4 @@
-package com.goott.pj3.common.util;
+package com.goott.pj3.common.util.paging;
 
 public class Criteria {
     // 게시글 조회 쿼리에 전달괼 파라미터를 담는 클래스 - 04.02 김범수

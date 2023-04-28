@@ -130,7 +130,7 @@
 				url : '/freeReply/update',
 				data : {"free_idx" : free_idx, 'reply_idx' : reply_idx, 'r_content' : r_content},
 				type : 'post',
-				success : function (result){
+				success : function (){
 					alert('댓글이 수정되었습니다')
 					location.href = "/free/detail/"+free_idx;
 				}
@@ -145,7 +145,7 @@
 				url : '/freeReply/delete',
 				data : {"free_idx" : free_idx, 'reply_idx' : reply_idx},
 				type : 'post',
-				success : function (result){
+				success : function (){
 					alert('댓글이 삭제되었습니다')
 					location.href = "/free/detail/"+free_idx;
 				}

@@ -17,11 +17,14 @@
 <h1> 리뷰 화면</h1>
 
 <p>번호 : ${data.review_idx}</p>
-<p>리뷰 사진 : <img src="" height="200px" width="200px" style="border: 1px solid red;"></p>
+<c:forEach var="img" items="${data.r_img}" >
+    <p>리뷰 사진 : <img src="${img}" height="200px" width="200px" style="border: 1px solid red;"></p>
+</c:forEach>
 <p>내용 : ${data.review_content}</p>
 <p>작성자 : ${data.user_id}</p>
 <p>작성일 : ${data.create_date}"</p>
-<c:if test="${data.user_id == sessionScope.user_id}">
+
+<%--<c:if test="${data.user_id == sessionScope.user_id}">--%>
 <p>
     <a href="/review/update/${data.review_idx}">수정</a>
 </p>
@@ -29,7 +32,7 @@
 <form method="POST" action="/review/delete/${data.review_idx}">
     <input type="submit" value="삭제">
 </form>
-</c:if>
+<%--</c:if>--%>
 <p>
     <a href="/review/list">목록</a>
 </p>
@@ -97,7 +100,7 @@
 		// 		url : '/reviewReply/update',
 		// 		data : {"review_idx" : review_idx, 'reply_idx' : reply_idx, 'r_content' : r_content},
 		// 		type : 'post',
-		// 		success : function (result){
+		// 		success : function (){
 		// 			alert('댓글이 수정되었습니다')
 		// 			location.href = "/review/detail/"+review_idx;
 		// 		}
@@ -112,7 +115,7 @@
 		// 		url : '/reviewReply/delete',
 		// 		data : {"review_idx" : review_idx, 'reply_idx' : reply_idx},
 		// 		type : 'post',
-		// 		success : function (result){
+		// 		success : function (){
 		// 			alert('댓글이 삭제되었습니다')
 		// 			location.href = "/review/detail/"+review_idx;
 		// 		}
