@@ -2,6 +2,7 @@ package com.goott.pj3.common.util.aws;
 
 import com.amazonaws.AmazonClientException;
 import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.transfer.TransferManager;
 import com.amazonaws.services.s3.transfer.Upload;
@@ -78,6 +79,14 @@ public class S3FileUploadService {
         } catch (AmazonClientException | InterruptedException amazonClientException) {
             amazonClientException.printStackTrace();
         }
+    }
+
+    private void deleteFromS3(final String findName) {
+
+        // 삭제할 객체 생성
+        final DeleteObjectRequest deleteRequest = new DeleteObjectRequest(bucket, findName);
+        // 삭제
+        amazonS3Client.deleteObject(deleteRequest);
     }
 
 }

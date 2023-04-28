@@ -5,7 +5,7 @@ import org.springframework.web.socket.WebSocketSession;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
-
+//2023.04.28 길영준
 public class ChatRoomDTO {
     private String roomId;
     private String name;

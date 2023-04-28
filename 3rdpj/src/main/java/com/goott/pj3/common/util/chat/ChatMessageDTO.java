@@ -1,5 +1,5 @@
 package com.goott.pj3.common.util.chat;
-
+//2023.04.28 길영준
 public class ChatMessageDTO {
     private String roomId;
     private String writer;
