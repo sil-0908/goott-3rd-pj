@@ -43,20 +43,20 @@ public class PlanController {
     @PostMapping("create")
     public String planPut(PlanDTO planDTO, ImgDTO imgDTO, HttpSession httpSession,
                           @RequestParam("files[]") List<MultipartFile> multipartFile) throws IOException {
-        String user = (String) httpSession.getAttribute("user_id");
-        planDTO.setUser_id(user);
-        int plan_idx = planService.planCreate(planDTO); // 게시글 생성
-        if(plan_idx!=0){ // 이미지 파일 생성
-            if(multipartFile !=null || !multipartFile.isEmpty()){
-                List<String> imgList = s3FileUploadService.upload(multipartFile);
-                planDTO.setPlan_idx(plan_idx);
-                planDTO.setP_img(imgList);
-                boolean success = this.planService.planImgCreate(planDTO);
-                if(success){
-                    return "redirect:/plan/list";
-                }
-            }
-        }
+//        String user = (String) httpSession.getAttribute("user_id");
+//        planDTO.setUser_id(user);
+//        int plan_idx = planService.planCreate(planDTO); // 게시글 생성
+//        if(plan_idx!=0){ // 이미지 파일 생성
+//            if(multipartFile !=null || !multipartFile.isEmpty()){
+//                List<String> imgList = s3FileUploadService.upload(multipartFile);
+//                planDTO.setPlan_idx(plan_idx);
+//                planDTO.setP_img(imgList);
+//                boolean success = this.planService.planImgCreate(planDTO);
+//                if(success){
+//                    return "redirect:/plan/list";
+//                }
+//            }
+//        }
         return "redirect:/plan/create";
     }
 
