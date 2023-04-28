@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/layout.jsp" %>
-<main>
+<main class="free">
 	<hgroup class="free__title">
         <h1>문의 등록</h1>
     </hgroup>
-	<section>
+	<section class="free__sheet">
 		<form name="test1" action="/free/enroll" method="post">
 			<ul>
 				<label class="free__label">Title</label>
