@@ -25,8 +25,7 @@ public interface PlanService {
 
     PagingDTO paging(Criteria cri);
 
-    void uploadImg(ImgDTO imgDTO);
+    boolean planImgDelete(PlanDTO planDTO);
 
-
-
+    void planImgUpdate(PlanDTO planDTO);
 }

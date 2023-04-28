@@ -26,7 +26,7 @@
     <br>
     <label for="plan_detail">내용</label>
     <textarea id="plan_detail" name="plan_detail"></textarea>
-    <input type="file" name="files[]" id="file-input" multiple/>
+    <input type="file" name="files[]" id="file-input" onchange="previewFile()" multiple/>
     <button type="submit" id="upload-btn">Upload</button>
 </form>
 <div id="preview"></div>

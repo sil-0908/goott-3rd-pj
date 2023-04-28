@@ -32,11 +32,14 @@ public class PlanServiceImpl implements PlanService {
         }
         return 0;
     }
-
+    //이미지 업로드
     @Override
     public boolean planImgCreate(PlanDTO planDTO) {
         int affectRowCnt = this.planDAO.planImgCreate(planDTO);
-        return affectRowCnt==1;
+        if(affectRowCnt!=0){
+            return true;
+        }
+        return false;
     }
 
     //플랜 리스트
@@ -54,10 +57,18 @@ public class PlanServiceImpl implements PlanService {
         return paging;
     }
 
-    //이미지 업로드
     @Override
-    public void uploadImg(ImgDTO imgDTO) {
-        planDAO.uploadImg(imgDTO);
+    public boolean planImgDelete(PlanDTO planDTO) {
+        int affectRowCnt = this.planDAO.planImgDelete(planDTO);
+        if(affectRowCnt !=0){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public void planImgUpdate(PlanDTO planDTO) {
+        this.planDAO.planImgUpdate(planDTO);
     }
 
     //플랜 디테일

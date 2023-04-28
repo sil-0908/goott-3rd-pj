@@ -1,11 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="plan">
+
     <!--플랜만들기-->
     <insert id="create" parameterType="com.goott.pj3.plan.dto.PlanDTO" useGeneratedKeys="true" keyProperty="plan_idx">
         INSERT INTO plan(user_id, start_date, end_date, price, plan_title, plan_detail)
         VALUES (#{user_id}, #{start_date}, #{end_date}, #{price}, #{plan_title}, #{plan_detail})
     </insert>
+
+    <insert id="createImg" parameterType="com.goott.pj3.plan.dto.PlanDTO">
+        insert into plan_img(plan_idx, p_img)
+             values
+                   <foreach collection="p_img" item="img" separator=",">
+                       (#{plan_idx}, #{img})
+                   </foreach>
+    </insert>
+
     <!--플랜리스트-->
     <select id="list" resultType="com.goott.pj3.plan.dto.PlanDTO">
         SELECT plan_idx, plan_title, price, user_id
@@ -29,11 +39,31 @@
         <if test="option == null or option == ''">1=1</if>
     </select>
     <!--플랜상세-->
-    <select id="detail" resultType="com.goott.pj3.plan.dto.PlanDTO">
-        SELECT plan_title, plan_detail, user_id, start_date, end_date, price, plan_idx
-        FROM plan
-        WHERE plan_idx = #{plan_idx}
+    <select id="detail" resultMap="planResultMap">
+        SELECT p.plan_title, p.plan_detail, p.user_id,
+               p.start_date, p.end_date, p.price, p.plan_idx, i.p_img_idx, i.p_img
+         FROM plan p left join plan_img i
+           on p.plan_idx = i.plan_idx
+        WHERE p.plan_idx = #{plan_idx}
+          and p.p_del_yn='n'
     </select>
+
+    <resultMap id="planResultMap" type="com.goott.pj3.plan.dto.PlanDTO">
+        <id property="plan_idx" column="plan_idx"/>
+        <result property="plan_title" column="plan_title"/>
+        <result property="plan_detail" column="plan_detail"/>
+        <result property="user_id" column="user_id"/>
+        <result property="start_date" column="start_date"/>
+        <result property="end_date" column="end_date"/>
+        <result property="price" column="price"/>
+        <collection property="p_img_idx" column="p_img_idx" javaType="List" ofType="String">
+            <result column="p_img_idx"/>
+        </collection>
+        <collection property="p_img" column="p_img" javaType="List" ofType="String">
+            <result column="p_img"/>
+        </collection>
+    </resultMap>
+
     <!--플랜수정-->
     <update id="edit">
         UPDATE plan
@@ -44,6 +74,21 @@
             price=#{price}
         WHERE plan_idx = #{plan_idx}
     </update>
+
+    <delete id="planImgDelete">
+        delete
+          from plan_img
+         where plan_idx=#{plan_idx}
+    </delete>
+
+    <insert id="planImgUpdate">
+        insert into plan_img(plan_idx, p_img)
+             values
+                   <foreach collection="p_img" item="img" separator=",">
+                       (#{plan_idx},#{img})
+                   </foreach>
+    </insert>
+
     <!--플랜삭제(DB삭제는 안함)-->
     <update id="delete">
         UPDATE plan
