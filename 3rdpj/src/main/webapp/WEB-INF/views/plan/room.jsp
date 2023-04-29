@@ -18,7 +18,8 @@
 
 <div class="container">
     <div class="col-6">
-        <h1 id="room-name">${room.name}</h1>
+        <h1 id="room-name">보낸사람 : ${room.send_id}</h1>
+        <h1>받는사람 : ${room.receive_id}</h1>
     </div>
     <div>
         <div id="msgArea" class="col"></div>
@@ -44,11 +45,10 @@
 <script>
     $(document).ready(function () {
 
-        let roomName = '${room.name}';
-        let roomId = '${room.roomId}';
+        let roomId = '${room.msg_idx}';
         let username = '${sessionScope.user_id}';
 
-            console.log(roomName + ", " + roomId + ", " + username);
+            console.log( roomId + ", " + username);
 
         let sockJs = new SockJS("/stomp/chat");
         //1. SockJS를 내부에 들고있는 stomp를 내어줌

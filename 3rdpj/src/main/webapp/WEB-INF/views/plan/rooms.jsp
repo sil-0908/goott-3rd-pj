@@ -18,15 +18,18 @@
     <div>
         <ul>
             <c:forEach items="${list}" var="room">
-                <li><a href="/chat/room?roomid=${room.roomId}" id="room-name">${room.name}</a></li>
+                <c:if test="${sessionScope.user_id == room.send_id}">
+                <li><a href="/chat/room/${room.msg_idx}" id="room-name">${room.receive_id} 와 대화하기</a></li>
+                    <p>채팅 생성날짜 :${room.create_date}</p>
+                </c:if>
+                <c:if test="${sessionScope.user_id == room.receive_id}">
+                    <li><a href="/chat/room/${room.msg_idx}" id="room-name2">${room.send_id} 와 대화하기</a></li>
+                    <p>채팅 생성날짜 :${room.create_date}</p>
+                </c:if>
             </c:forEach>
         </ul>
     </div>
 </div>
-<form action="/chat/room" method="post">
-    <input type="text" name="name" id="name" class="form-control">
-    <button class="btn btn-secondary">개설하기</button>
-</form>
 </body>
 <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
@@ -34,23 +37,23 @@
         crossorigin="anonymous">
 </script>
 <script>
-    $(document).ready(function () {
-
-        var roomName = $('#room-name').val();
-
-        if (roomName != null)
-            alert(roomName + "방이 개설되었습니다.");
-
-        $(".btn-create").on("click", function (e) {
-            e.preventDefault();
-
-            var name = $("#name").val();
-
-            if (name == "")
-                alert("Please write the name.")
-            else
-                $("form").submit();
-        });
-    });
+    // $(document).ready(function () {
+    //
+    //     var roomName = $('#room-name').val();
+    //
+    //     if (roomName != null)
+    //         alert(roomName + "방이 개설되었습니다.");
+    //
+    //     $(".btn-create").on("click", function (e) {
+    //         e.preventDefault();
+    //
+    //         var name = $("#name").val();
+    //
+    //         if (name == "")
+    //             alert("Please write the name.")
+    //         else
+    //             $("form").submit();
+    //     });
+    // });
 </script>
 </html>
