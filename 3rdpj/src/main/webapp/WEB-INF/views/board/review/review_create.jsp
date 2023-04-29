@@ -24,7 +24,7 @@
 <form method="POST" enctype="multipart/form-data" >
     <p>내용 : <input type="text" name="review_content"></p>
     <p>사진 : <input id="fileItem" type="file" name="file[]" onchange="previewFile()" multiple ></p>
-    <p>평점 :
+    <p>플래너 평점 :
         <input type="radio" name="review_rating" value="1">1
         <input type="radio" name="review_rating" value="2">2
         <input type="radio" name="review_rating" value="3">3

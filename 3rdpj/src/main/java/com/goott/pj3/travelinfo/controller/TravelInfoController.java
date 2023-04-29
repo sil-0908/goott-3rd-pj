@@ -176,9 +176,9 @@ public class TravelInfoController {
 			List<String> tImgList = dto.getT_img(); // 이미지만 List에 담기
 			if (tImgList != null && !tImgList.isEmpty()) { // 이미지가 있는 경우
 				String firstImg = tImgList.get(0); // 첫번째 이미지 변수에 담기
-				TravelInfoDTO newDto = new TravelInfoDTO(); //
-				newDto.setTravel_location_idx(dto.getTravel_location_idx());
-				newDto.setT_img(Collections.singletonList(firstImg));
+				TravelInfoDTO newDto = new TravelInfoDTO(); // 인덱스+첫번째 이미지 값 담을 dto
+				newDto.setTravel_location_idx(dto.getTravel_location_idx()); // 인덱스 담기
+				newDto.setT_img(Collections.singletonList(firstImg)); // 첫번째 이미지 담기
 				newList.add(newDto);
 			}
 		}
