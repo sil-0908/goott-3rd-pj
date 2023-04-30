@@ -19,15 +19,18 @@
         <ul>
             <c:forEach items="${list}" var="room">
                 <c:if test="${sessionScope.user_id == room.send_id}">
-                <li><a href="/chat/room/${room.msg_idx}" id="room-name">${room.receive_id} 와 대화하기</a></li>
+                    <li><a href="/chat/room/${room.msg_idx}" id="room-name">${room.receive_id} 와 대화하기</a></li>
+                    <div id="msgArea" style="display: none"></div>
                     <p>채팅 생성날짜 :${room.create_date}</p>
                 </c:if>
                 <c:if test="${sessionScope.user_id == room.receive_id}">
                     <li><a href="/chat/room/${room.msg_idx}" id="room-name2">${room.send_id} 와 대화하기</a></li>
+                    <div id="msgArea"></div>
                     <p>채팅 생성날짜 :${room.create_date}</p>
                 </c:if>
             </c:forEach>
         </ul>
+        <div id="msgArea1" class="col"></div>
     </div>
 </div>
 </body>
@@ -36,24 +39,27 @@
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous">
 </script>
+<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
 <script>
-    // $(document).ready(function () {
-    //
-    //     var roomName = $('#room-name').val();
-    //
-    //     if (roomName != null)
-    //         alert(roomName + "방이 개설되었습니다.");
-    //
-    //     $(".btn-create").on("click", function (e) {
-    //         e.preventDefault();
-    //
-    //         var name = $("#name").val();
-    //
-    //         if (name == "")
-    //             alert("Please write the name.")
-    //         else
-    //             $("form").submit();
-    //     });
-    // });
+    //2023.05.01 길영준
+    //실시간 채팅알람
+    let alarmLaunched = false;
+    $(document).ready(function () {
+        let sockJs = new SockJS("/stomp/chat");
+        let stomp = Stomp.over(sockJs);
+        stomp.connect({}, function () {
+            console.log("STOMP Connection")
+            stomp.subscribe("/sub/chat/alarm/" + '${sessionScope.user_id}', function (chat) {
+                if (!alarmLaunched) {
+                    let msg = chat.body
+                    console.log(msg)
+                    var str = `<div class='col-6'><div class='alert alert-secondary'><input id="alert"  value="\${chat.body}\"></div></div>`;
+                    $("#msgArea").append(str);
+                    alarmLaunched = true;
+                }
+            });
+        });
+    });
 </script>
 </html>

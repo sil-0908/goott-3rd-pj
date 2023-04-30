@@ -47,8 +47,15 @@
 
         let roomId = '${room.msg_idx}';
         let username = '${sessionScope.user_id}';
+        let receiveName = '';
+        if (username === '${room.send_id}') {
+            receiveName = '${room.receive_id}';
+        } else {
+            receiveName = '${room.send_id}';
+        }
 
-            console.log( roomId + ", " + username);
+
+        console.log(roomId + ", " + username);
 
         let sockJs = new SockJS("/stomp/chat");
         //1. SockJS를 내부에 들고있는 stomp를 내어줌
@@ -90,7 +97,12 @@
             var msg = document.getElementById("msg");
 
             console.log(username + ":" + msg.value);
-            stomp.send('/pub/chat/message', {}, JSON.stringify({roomId: roomId, message: msg.value, writer: username}));
+            stomp.send('/pub/chat/message', {}, JSON.stringify({
+                roomId: roomId,
+                message: msg.value,
+                writer: username,
+                receiver: receiveName
+            }));
             msg.value = '';
         });
     });

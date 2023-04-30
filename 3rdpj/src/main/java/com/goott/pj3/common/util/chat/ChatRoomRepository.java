@@ -38,7 +38,7 @@ public class ChatRoomRepository {
 
     // 보내는 사람 받는사람 이름으로 채팅방이 이미 존재하는지 확읺하고
     // 있다면 채팅방ID를 리턴한다
-    public int findRoomByName(ChatRoomDTO chatRoomDTO) {
+    public ChatRoomDTO findRoomByName(ChatRoomDTO chatRoomDTO) {
         return session.selectOne("chat.findRoomByName", chatRoomDTO);
     }
 

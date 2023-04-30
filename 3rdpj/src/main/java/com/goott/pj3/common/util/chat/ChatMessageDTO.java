@@ -3,6 +3,7 @@ package com.goott.pj3.common.util.chat;
 public class ChatMessageDTO {
     private String roomId;
     private String writer;
+    private String receiver;
     private String message;
 
     public String getRoomId() {
@@ -21,11 +22,29 @@ public class ChatMessageDTO {
         this.writer = writer;
     }
 
+    public String getReceiver() {
+        return receiver;
+    }
+
+    public void setReceiver(String receiver) {
+        this.receiver = receiver;
+    }
+
     public String getMessage() {
         return message;
     }
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    @Override
+    public String toString() {
+        return "ChatMessageDTO{" +
+                "roomId='" + roomId + '\'' +
+                ", writer='" + writer + '\'' +
+                ", receiver='" + receiver + '\'' +
+                ", message='" + message + '\'' +
+                '}';
     }
 }

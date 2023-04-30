@@ -32,7 +32,6 @@ public class RoomController {
         }
         return mv;
     }
-
     //채팅방 개설
 //    @PostMapping(value = "/room")
 //    public String create(@RequestParam String name, RedirectAttributes rttr) {
@@ -45,16 +44,17 @@ public class RoomController {
         if (chatRoomDTO.getSend_id().equals(chatRoomDTO.getReceive_id())) {
             return "redirect:/plan/list";   // 플래너가 본인에게 채팅 요청했을시
         }
-        ChatRoomDTO existRoom = new ChatRoomDTO();
-        int tf =  repository.findRoomByName(chatRoomDTO);
-        System.out.println("폼으로 가져온 방 : "+ chatRoomDTO.toString());
-        if (existRoom == null) {
-            repository.createChatRoomDTO(chatRoomDTO); //DB에 채팅방 생성
-            System.out.println("createroom 후에 : " + chatRoomDTO.toString());
-            int roomId = chatRoomDTO.getMsg_idx();
-            return "redirect:/chat/room/" + roomId; // 채팅방으로 이동
-        } else {
+        ChatRoomDTO formData = chatRoomDTO; // 폼에서 받아온 dto
+        System.out.println("폼으로 받아온 dto : " + formData.toString());
+
+        if (repository.findRoomByName(formData) != null) {  //이미 해당 플래너와 채팅방이 존재하면 존재하는 방으로 이동시킴
+            int msg_idx = repository.findRoomByName(formData).getMsg_idx();
+            System.out.println("방이 존재할때 가져온 방 idx : " + msg_idx);
+            return "redirect:/chat/room/" + msg_idx;
+        } else {                                             //없다면 새로 생성해주고 방으로 이동
+            repository.createChatRoomDTO(formData);
             int msg_idx = chatRoomDTO.getMsg_idx();
+            System.out.println("방만들고 받아온 idx : " + chatRoomDTO.getMsg_idx());
             return "redirect:/chat/room/" + msg_idx;
         }
     }
@@ -77,12 +77,12 @@ public class RoomController {
         ChatRoomDTO chatRoomDTO = new ChatRoomDTO();
         chatRoomDTO.setMsg_idx(msg_idx);
         chatRoomDTO = repository.findRoomById(chatRoomDTO);
-//        repository.findRoomById(chatRoomDTO); // 왜 DTO로 리턴이 안되는지 모르겠음...
-        if (chatRoomDTO.getSend_id().equals(user)      // 고로 하드코딩
-                || chatRoomDTO.getReceive_id().equals(planner)) { //보낸아이디와 세션유저아이디가 맞거나
-            model.addAttribute("room", repository.findRoomById(chatRoomDTO));                                    //받은아이디와 세션플래너아이디가 맞으면
+        if (chatRoomDTO.getSend_id().equals(user)
+                || chatRoomDTO.getReceive_id().equals(planner)) { // 보낸아이디와 세션유저아이디가 맞거나
+            model.addAttribute("room", chatRoomDTO);  // 받은아이디와 세션플래너아이디가 맞으면
             return "/plan/room";
+        } else {
+            return "redirect:/main";                            // 아닐경우 메인으로
         }
-        return "redirect:/main";
     }
 }
