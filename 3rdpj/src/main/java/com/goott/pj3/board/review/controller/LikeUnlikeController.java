@@ -21,14 +21,16 @@ public class LikeUnlikeController {
                                    @RequestParam("action") String action,
                                    LikeUnlikeDTO likeUnlikeDTO, ModelAndView mv) {
         likeUnlikeDTO.setUser_id(user_id);
-        if (action.equals("like")){
+        if (action.equals("like")) {
             this.likeUnlikeService.like(likeUnlikeDTO);
         } else if (action.equals("unlike")) {
             this.likeUnlikeService.unlike(likeUnlikeDTO);
         }
-        LikeUnlikeDTO dto = likeUnlikeService.getLikeUnlikeCnt(likeUnlikeDTO);
-        mv.addObject("likeCount", dto.getP_like());
-        mv.addObject("unlikeCount", dto.getP_unlike());
+////        LikeUnlikeDTO dto = likeUnlikeService.getLikeUnlikeCnt(likeUnlikeDTO);
+//        mv.addObject("likeCount", dto.getP_like());
+//        mv.addObject("unlikeCount", dto.getP_unlike());
+//        return mv;
+//    }
         return mv;
     }
 }

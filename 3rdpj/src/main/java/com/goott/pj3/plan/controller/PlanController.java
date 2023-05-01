@@ -134,7 +134,7 @@ public class PlanController {
             }
             return "redirect:/plan/list";
         } else {
-            return "redirect:/plan/list";
+            return "redirect:/plan/list/edit";
         }
     }
     // 삭제

@@ -68,7 +68,7 @@ public class ReviewController {
 			// 예외 처리
 			System.err.println("리뷰 생성 중 오류가 발생했습니다: " + e.getMessage());
 			// 오류 페이지로 리다이렉트 또는 예외 처리에 맞는 다른 로직 수행
-			mv.setViewName("error/500");
+			mv.setViewName("/error/500");
 		}
 
 		return mv;
@@ -177,13 +177,15 @@ public class ReviewController {
 
 	/**
 	 * 조원재 23.04.05 리뷰 삭제
-	 * @param
+	 * @param review_idx
+	 * @param reviewDTO
+	 * @param mv
 	 * @return
 	 */
 	@PostMapping("delete/{review_idx}")
 	public ModelAndView delete(@PathVariable int review_idx, ReviewDTO reviewDTO, ModelAndView mv) {
 		reviewDTO.setReview_idx(review_idx);
-		boolean success = this.reviewService.delete(reviewDTO); // 게시글 삭제
+		boolean success = this.reviewService.delete(reviewDTO); // 게시글 삭제 (이미지 제외)
 		try {
 			ReviewDTO detailDTO = this.reviewService.detail(reviewDTO); // 리뷰 상세 정보 가져오기
 			if (detailDTO != null && detailDTO.getR_img() != null) {
@@ -208,8 +210,10 @@ public class ReviewController {
 	}
 
 	/**
-	 * 조원재 23.04.05 리뷰 리스트 조회 및 검색
-	 * @param
+	 * 조원재 23.04.05 리스트 조회, 검색, 페이징
+	 * @param mv
+	 * @param cri
+	 * @param reviewDTO
 	 * @return
 	 */
 	@RequestMapping("list")
@@ -217,16 +221,13 @@ public class ReviewController {
 		try {
 			List<ReviewDTO> originalList = reviewService.imglist(reviewDTO);
 			List<ReviewDTO> newList = new ArrayList<>(); // 인덱스와 첫번째 이미지만 담을 List 생성
-
 			for (ReviewDTO dto : originalList) {
 				List<String> rImgList = dto.getR_img(); // 이미지만 List에 담기
-
 				if (rImgList != null && !rImgList.isEmpty()) { // 이미지가 있는 경우
 					String firstImg = rImgList.get(0); // 첫번째 이미지 변수에 담기
-
-					ReviewDTO newDto = new ReviewDTO();
-					newDto.setReview_idx(dto.getReview_idx());
-					newDto.setR_img(Collections.singletonList(firstImg));
+					ReviewDTO newDto = new ReviewDTO(); // 인덱스+첫번째 이미지 값 담을 dto
+					newDto.setReview_idx(dto.getReview_idx()); // 인덱스 담기
+					newDto.setR_img(Collections.singletonList(firstImg)); // 첫번째 이미지 담기
 					newList.add(newDto);
 				}
 			}
@@ -238,7 +239,7 @@ public class ReviewController {
 			// 예외 처리
 			System.err.println("리뷰 목록 조회 중 오류가 발생했습니다: " + e.getMessage());
 			// 오류 페이지로 리다이렉트 또는 예외 처리에 맞는 다른 로직 수행
-			mv.setViewName("error/500");
+			mv.setViewName("/error/500");
 		}
 		return mv;
 	}
