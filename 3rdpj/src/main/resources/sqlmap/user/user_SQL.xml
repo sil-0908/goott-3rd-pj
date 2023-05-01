@@ -61,4 +61,13 @@
    		 where user_id = #{user_id}
    		   and hp = #{hp}
    	</update>
+   	
+   	<select id="get_user_info" resultType="com.goott.pj3.user.dto.UserDTO">
+   		<![CDATA[
+   		select user_id, birth, email, hp, u_point, create_date, update_date
+   		  from user
+   		 where user_id = #{user_id}
+   		   and auth = "auth_c"
+   		]]>
+   	</select>
 </mapper>

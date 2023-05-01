@@ -7,17 +7,21 @@
 		
 	</div>
 	<div class="info_div">
-		<form name="user_info_form" method="post">
-			<p>아이디</p>
-			<input type="text" class="">
-			<p>비밀번호</p>
-			<p>이메일</p>
-			<p>생년월일</p>
-			<p>핸드폰번호</p>
-			<p>현재 보유 포인트</p>
-			<p>회원 가입 일자</p>
-			<p>마지막 수정 일자</p>
-		</form>
+		<p>아이디</p>
+		<input type="text" class="id" value="${user_info_dto.id}" />
+		<p>비밀번호 변경하기</p>
+		<p>이메일</p>
+		<input type="text" class="id" value="${user_info_dto.email}" />
+		<p>생년월일</p>
+		<input type="text" class="id" value="${info.birth}" />
+		<p>핸드폰번호</p>
+		<input type="text" class="id" value="${info.hp}" />
+		<p>현재 보유 포인트</p>
+		<input type="text" class="id" value="${info.u_point}" />
+		<p>회원 가입 일자</p>
+		<input type="text" class="id" value="${info.create_date}" />
+		<p>마지막 수정 일자</p>
+		<input type="text" class="id" value="${info.update_date}" />
 	</div>
 	
 </main>
