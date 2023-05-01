@@ -20,7 +20,7 @@
             <c:forEach items="${list}" var="room">
                 <c:if test="${sessionScope.user_id == room.send_id}">
                     <li><a href="/chat/room/${room.msg_idx}" id="room-name">${room.receive_id} 와 대화하기</a></li>
-                    <div id="msgArea" style="display: none"></div>
+                    <div id="msgArea"></div>
                     <p>채팅 생성날짜 :${room.create_date}</p>
                 </c:if>
                 <c:if test="${sessionScope.user_id == room.receive_id}">

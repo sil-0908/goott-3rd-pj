@@ -4,7 +4,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 
@@ -32,6 +31,7 @@ public class RoomController {
         }
         return mv;
     }
+
     //채팅방 개설
 //    @PostMapping(value = "/room")
 //    public String create(@RequestParam String name, RedirectAttributes rttr) {
@@ -79,6 +79,11 @@ public class RoomController {
         chatRoomDTO = repository.findRoomById(chatRoomDTO);
         if (chatRoomDTO.getSend_id().equals(user)
                 || chatRoomDTO.getReceive_id().equals(planner)) { // 보낸아이디와 세션유저아이디가 맞거나
+            int roomID = chatRoomDTO.getMsg_idx();
+//            if(repository.findMessageLog(roomID)!=null){  //로그를 찾아왔을때
+//
+//            repository.findMessageLog(roomID);
+//            }
             model.addAttribute("room", chatRoomDTO);  // 받은아이디와 세션플래너아이디가 맞으면
             return "/plan/room";
         } else {

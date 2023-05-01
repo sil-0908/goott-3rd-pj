@@ -1,16 +1,16 @@
 package com.goott.pj3.common.util.chat;
 
 import org.apache.ibatis.session.SqlSession;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import javax.annotation.PostConstruct;
 import java.util.*;
 
 // 2023.04.28 길영준
 // 추후 내용 DB저장으로 고도화해야함
 // 2023.04.29 길영준
 // DB저장으로 고도화 완료
+// 2023.05.01 길영준
+// 메세지 로그 저장 구현
 @Repository
 public class ChatRoomRepository {
     private Map<String, ChatRoomDTO> chatRoomDTOMap;
@@ -43,4 +43,11 @@ public class ChatRoomRepository {
     }
 
 
+    public void saveMessageLog(ChatMessageDTO chatMessageDTO) {
+        session.insert("chat.saveMessageLog", chatMessageDTO);
+    }
+
+    public List<ChatMessageDTO> findMessageLog(int roomID) {
+        return session.selectList("chat.findMessageLog", roomID);
+    }
 }
