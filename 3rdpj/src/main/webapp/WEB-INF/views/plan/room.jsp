@@ -22,6 +22,11 @@
         <h1>받는사람 : ${room.receive_id}</h1>
     </div>
     <div>
+        <div class='col-6'>
+            <div class='alert alert-secondary'>
+                <b> writer : content.message</b>
+            </div>
+        </div>
         <div id="msgArea" class="col"></div>
         <div class="col-6">
             <div class="input-group mb-3">
