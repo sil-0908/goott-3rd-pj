@@ -17,13 +17,21 @@
 <h1> 리뷰 화면</h1>
 
 <p>번호 : ${data.review_idx}</p>
+<p>리뷰 사진 : </p>
 <c:forEach var="img" items="${data.r_img}" >
-    <p>리뷰 사진 : <img src="${img}" height="200px" width="200px" style="border: 1px solid red;"></p>
+	<img src="${img}" height="200px" width="200px" style="border: 1px solid red;">
 </c:forEach>
 <p>내용 : ${data.review_content}</p>
 <p>작성자 : ${data.user_id}</p>
 <p>작성일 : ${data.create_date}"</p>
 
+<div class="likeUnlike">
+	<p>좋아요 : <span id="likeCount">값0</span></p>
+	<p>싫어요 : <span id="unlikeCount">값0</span></p>
+	<input type="hidden" id="user_id" value="${sessionScope.user_id}" />
+	<button id="likeButton">좋아요</button>
+	<button id="unlikeButton">싫어요</button>
+</div>
 <%--<c:if test="${data.user_id == sessionScope.user_id}">--%>
 <p>
     <a href="/review/update/${data.review_idx}">수정</a>
@@ -57,71 +65,106 @@
 	</div>
 <script>
 
-		$(document).ready(function() {
-			getList();
-		})
+	/**
+	 * 23.05.01. 좋아요, 싫어요 Ajax 코드
+	 */
+	$(document).ready(function() {
+		$("#likeButton").click(function() {
+			likeUnlike("like");
+		});
 
-		 function getList() {
-		 	var free_idx = $('input[name=review_idx]').val();
-		 	var user_id = $('input[name=r_writer]').val();
-		 	$.ajax({
-		 		type : 'GET',
-		 		url : '/reviewReply/getList',
-		 		data : {'review_idx' : review_idx},
-		 		success : function(result) {
-		 			for(var i = 0; i < result.length; i++){
-		 				var str = "<div class='replyarea'>"
-		 				str += result[i].r_writer + "&nbsp;:&nbsp;"
-		 				if(user_id == (result[i].r_writer)){
-		 					str += "<input type='text' name='r_content' value=" + result[i].r_content + " >"
-		 				}
-		 				else{
-		 					str += 	"<input type='text' name='r_content' value="+result[i].r_content+" readonly>"
-		 				}
-		 				str	+= "&nbsp;&nbsp;"
-		 				str += "<button onclick = 'r_edit()'>수정</button>"
-		 				str += "&nbsp;<button onclick = 'r_delete()'>삭제</button>"
-		 				str += "<input type='hidden' name='reply_idx' value="+result[i].reply_idx+">"
-		 				str += "</div><hr>"
-		 				$("#reply").append(str);
-		 			}
-		 		},
-		 		error : function() {
-		 			alert("에러")
-		 		}
-		 	})
-		 }
+		$("#unlikeButton").click(function() {
+			likeUnlike("unlike");
+		});
 
-		 function r_edit() {
-			var free_idx = $('input[name=review_idx]').val();
-			var reply_idx = document.querySelector('.replyarea').children.reply_idx.value
-			var r_content = document.querySelector('.replyarea').children[0].value
-
+		function likeUnlike(action) {
+			var user_id = $("#user_id").val();
+			var data = {
+				user_id: user_id,
+				action: action
+			};
 			$.ajax({
-				url : '/reviewReply/update',
-				data : {"review_idx" : review_idx, 'reply_idx' : reply_idx, 'r_content' : r_content},
-				type : 'post',
-				success : function (){
-					alert('댓글이 수정되었습니다')
-					location.href = "/review/detail/"+review_idx;
+				type: "POST",
+				url: "/like_unlike",
+				data: data,
+				success: function(response) {
+					// 서버 응답을 처리하는 코드
+					$("#likeCount").text(response.likeCount);
+					$("#unlikeCount").text(response.unlikeCount);
+				},
+				error: function(xhr, status, error) {
+					// 에러 처리 코드
 				}
-			})
+			});
 		}
+	});
 
-		function r_delete() {
-			var free_idx = $('input[name=review_idx]').val();
-			var reply_idx = document.querySelector('.replyarea').children.reply_idx.value
+//댓글
+$(document).ready(function() {
+	getList();
+})
 
-			$.ajax({
-				url : '/reviewReply/delete',
-				data : {"review_idx" : review_idx, 'reply_idx' : reply_idx},
-				type : 'post',
-				success : function (){
-					alert('댓글이 삭제되었습니다')
-					location.href = "/review/detail/"+review_idx;
+ function getList() {
+	var free_idx = $('input[name=review_idx]').val();
+	var user_id = $('input[name=r_writer]').val();
+	$.ajax({
+		type : 'GET',
+		url : '/reviewReply/getList',
+		data : {'review_idx' : review_idx},
+		success : function(result) {
+			for(var i = 0; i < result.length; i++){
+				var str = "<div class='replyarea'>"
+				str += result[i].r_writer + "&nbsp;:&nbsp;"
+				if(user_id == (result[i].r_writer)){
+					str += "<input type='text' name='r_content' value=" + result[i].r_content + " >"
 				}
-			})
+				else{
+					str += 	"<input type='text' name='r_content' value="+result[i].r_content+" readonly>"
+				}
+				str	+= "&nbsp;&nbsp;"
+				str += "<button onclick = 'r_edit()'>수정</button>"
+				str += "&nbsp;<button onclick = 'r_delete()'>삭제</button>"
+				str += "<input type='hidden' name='reply_idx' value="+result[i].reply_idx+">"
+				str += "</div><hr>"
+				$("#reply").append(str);
+			}
+		},
+		error : function() {
+			alert("에러")
 		}
-	</script>
+	})
+ }
+
+ function r_edit() {
+	var free_idx = $('input[name=review_idx]').val();
+	var reply_idx = document.querySelector('.replyarea').children.reply_idx.value
+	var r_content = document.querySelector('.replyarea').children[0].value
+
+	$.ajax({
+		url : '/reviewReply/update',
+		data : {"review_idx" : review_idx, 'reply_idx' : reply_idx, 'r_content' : r_content},
+		type : 'post',
+		success : function (){
+			alert('댓글이 수정되었습니다')
+			location.href = "/review/detail/"+review_idx;
+		}
+	})
+}
+
+function r_delete() {
+	var free_idx = $('input[name=review_idx]').val();
+	var reply_idx = document.querySelector('.replyarea').children.reply_idx.value
+
+	$.ajax({
+		url : '/reviewReply/delete',
+		data : {"review_idx" : review_idx, 'reply_idx' : reply_idx},
+		type : 'post',
+		success : function (){
+			alert('댓글이 삭제되었습니다')
+			location.href = "/review/detail/"+review_idx;
+		}
+	})
+}
+</script>
 </body>
 </html>

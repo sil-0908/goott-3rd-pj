@@ -78,9 +78,9 @@ public class PlanController {
                 newList.add(newDto);
             }
         }
-        modelAndView.addObject("imgList", newList);
-        modelAndView.addObject("paging", planService.paging(cri));
-        modelAndView.addObject("data", planService.list(cri));
+        modelAndView.addObject("imgList", newList); // 게시글 이미지 데이터
+        modelAndView.addObject("paging", planService.paging(cri)); // 페이징
+        modelAndView.addObject("data", planService.list(cri)); // 게시글 데이터
         modelAndView.setViewName("plan/plan_list");
         return modelAndView;
     }
@@ -112,7 +112,6 @@ public class PlanController {
     public String planEditPut(PlanDTO planDTO, HttpSession httpSession,
                               @RequestParam("idx") int plan_idx, @RequestParam("auth") String user_id,
                               @RequestParam("files[]") List<MultipartFile> multipartFiles) {
-        System.out.println("이미지 파일 : " + multipartFiles);
         String user = (String) httpSession.getAttribute("user_id");
         if (user.equals(user_id)) {
             planDTO.setPlan_idx(plan_idx);
@@ -121,7 +120,6 @@ public class PlanController {
                 s3FileUploadService.deleteFromS3(fileName); // s3서버 이미지 파일 삭제
             }
             boolean success = planService.planImgDelete(planDTO); // 기존 이미지 파일 삭제
-            System.out.println("test : " + success);
             if(success){  // 이미지 업데이트
                 try {
                     if (multipartFiles != null || !multipartFiles.isEmpty()) {

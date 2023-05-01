@@ -92,6 +92,7 @@
           from review_img i left join plan_review r
             on i.review_idx = r.review_idx
          where r.r_del_yn='n'
+         order by r.review_idx desc
     </select>
 
     <resultMap id="reviewlistResultMap" type="com.goott.pj3.board.review.dto.ReviewDTO">
