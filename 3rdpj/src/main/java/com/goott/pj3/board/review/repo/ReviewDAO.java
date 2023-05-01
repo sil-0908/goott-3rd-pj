@@ -24,7 +24,7 @@ public class ReviewDAO {
 
 	public void createImg(ReviewDTO reviewDTO) {
 		System.out.println("files : " + reviewDTO);
-		this.ss.insert("review.file", reviewDTO);
+		this.ss.insert("review.insertFile", reviewDTO);
 	}
 
 	public ReviewDTO detail(ReviewDTO reviewDTO) {
@@ -36,7 +36,7 @@ public class ReviewDAO {
 	}
 
 	public void deleteImg(ReviewDTO reviewDTO) {
-		this.ss.delete("review.deleteimg", reviewDTO);
+		this.ss.delete("review.deleteImg", reviewDTO);
 	}
 
 	public void updateImg(ReviewDTO reviewDTO) {
