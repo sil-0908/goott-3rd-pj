@@ -215,7 +215,8 @@ $(".change_pw_btn").on('click', function() {
 			data : { id : id, hp : hp, pw : pw },
 			url : "/user/find_set_pw",
 			type : "POST",
-			dataType : "json",
+//			dataType : "json",
+			contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
 			success : function(data) {
 				console.log(JSON.stringify(data));
 //				var responseData = JSON.parse(data);

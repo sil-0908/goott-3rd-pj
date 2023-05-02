@@ -80,6 +80,7 @@
 		function likeUnlike(action) {
 			var user_id = $("#user_id").val();
 			var data = {
+				review_idx : ${data.review_idx},
 				user_id: user_id,
 				action: action
 			};
