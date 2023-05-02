@@ -2,6 +2,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="review">
 
+    <!--조원재 23.05.02. 리뷰 작성 정보-->
+    <select id="getCreate" resultMap="planResultMap">
+        select p.plan_idx, p.user_id, i.p_img
+          from plan p left join plan_img i
+            on p.plan_idx = i.plan_idx
+         where p.plan_idx = #{plan_idx}
+           and p.p_del_yn = 'n'
+    </select>
+
+    <resultMap id="planResultMap" type="com.goott.pj3.plan.dto.PlanDTO">
+        <id property="plan_idx" column="plan_idx"/>
+        <result property="user_id" column="user_id"/>
+        <collection property="p_img" column="p_img" javaType="List" ofType="String">
+            <result column="p_img"/>
+        </collection>
+    </resultMap>
+
     <!--조원재 23.04.05 리뷰 생성-->
     <insert id="insert" parameterType="com.goott.pj3.board.review.dto.ReviewDTO"
             useGeneratedKeys="true" keyProperty="review_idx">
@@ -15,6 +32,28 @@
                  (#{review_idx}, #{img})
             </foreach>
     </insert>
+
+    <!--조원재 23.05.02 플래너 평점 생성-->
+    <!--기존 평점 가져오기-->
+    <select id="rataing" parameterType="HashMap" resultType="Integer">
+        select planner_raing
+          from user
+         where user_id = #{user_id}
+    </select>
+
+    <!--평점 카운팅 가져오기 -->
+    <select id="cntring" parameterType="HashMap" resultType="Integer">
+        select rating_cnt
+          from user
+         where user_id = #{user_id}
+    </select>
+
+    <!--플래너 평점 업데이트-->
+    <update id="plannerRating" parameterType="HashMap">
+        update user
+        set planner_rating = #{planner_rating}, rating_cnt=#{rating_cnt}
+        where user_id = #{user_id}
+    </update>
 
     <!--조원재 23.04.05 디테일 페이지-->
     <select id="detail" resultMap="reviewResultMap">

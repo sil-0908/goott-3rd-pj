@@ -5,6 +5,7 @@ import com.goott.pj3.common.util.auth.Auth;
 import com.goott.pj3.common.util.aws.S3FileUploadService;
 import com.goott.pj3.common.util.paging.Criteria;
 
+import com.goott.pj3.plan.dto.PlanDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -34,8 +35,12 @@ public class ReviewController {
 	 * @return
 	 */
 	@GetMapping("create")
-	public ModelAndView create(){
-		ModelAndView mv = new ModelAndView();
+	public ModelAndView create(HttpSession httpSession, PlanDTO planDTO, ModelAndView mv){
+		// 아이디 값 파라미터로 받기 -> 로그인 아이디 세션과 아이디 값 비교 (마이 페이지 구현 후 진행예정)
+		planDTO.setPlan_idx(65);
+		PlanDTO planData = this.reviewService.getCreate(planDTO);
+		System.out.println("planData : " + planData);
+		mv.addObject("data", planData);
 		mv.setViewName("/board/review/review_create");
 		return mv;
 	}
@@ -52,11 +57,16 @@ public class ReviewController {
 	@Auth(role=Auth.Role.USER)
 	@PostMapping("create")
 	public ModelAndView createPost(ReviewDTO reviewDTO, ModelAndView mv, HttpSession httpSession,
-								   @RequestParam("file[]") List<MultipartFile> multipartFiles) {
+								   @RequestParam("file[]") List<MultipartFile> multipartFiles,
+								   @RequestParam("planner_id") String plannerId) {
 		try {
+			Map<String, Object> map = new HashMap<>();
+			map.put("user_id", plannerId);
+			map.put("planner_rating", reviewDTO.getPlanner_rating());
+			this.reviewService.plannerRating(map);
 			String user_id = (String) httpSession.getAttribute("user_id"); // 로그인한 유저 아이디 세션
 			reviewDTO.setUser_id(user_id); // DTO에 유저 아이디 할당
-			reviewDTO.setPlan_idx(1); // 임시 plan_idx값
+			reviewDTO.setPlan_idx(65); // 임시 plan_idx값
 			int review_idx = this.reviewService.create(reviewDTO); // 생성된 게시글 idx
 			imgFileUpload(reviewDTO, multipartFiles, review_idx); // 이미지 파일 업로드 API
 			if (review_idx != 0) {

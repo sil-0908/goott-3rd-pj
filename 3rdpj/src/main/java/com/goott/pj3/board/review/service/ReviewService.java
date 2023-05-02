@@ -6,6 +6,7 @@ import java.util.Map;
 import com.goott.pj3.board.review.dto.ReviewDTO;
 import com.goott.pj3.common.util.paging.Criteria;
 import com.goott.pj3.common.util.paging.PagingDTO;
+import com.goott.pj3.plan.dto.PlanDTO;
 
 public interface ReviewService {
     /**
@@ -38,4 +39,8 @@ public interface ReviewService {
     List<ReviewDTO> imglist(ReviewDTO reviewDTO);
 
     void updateDeleteImg(ReviewDTO reviewDTO);
+
+    PlanDTO getCreate(PlanDTO planDTO);
+
+    void plannerRating(Map<String, Object> map);
 }

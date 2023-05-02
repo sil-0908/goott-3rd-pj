@@ -1,5 +1,6 @@
 package com.goott.pj3.board.review.repo;
 
+import com.goott.pj3.plan.dto.PlanDTO;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,5 +62,21 @@ public class ReviewDAO {
 
 	public void updateDeleteImg(ReviewDTO reviewDTO) {
 		this.ss.update("review.updateDeleteImg", reviewDTO);
+	}
+
+	public PlanDTO getCreate(PlanDTO planDTO) {
+		return this.ss.selectOne("review.getCreate", planDTO);
+	}
+ 	// 기존 점수 가져오기
+	public int rating(Map<String, Object> map) {
+		return this.ss.selectOne("review.rating", map);
+	}
+	// 평점 매긴 인원 카운팅 
+	public int cnting(Map<String, Object> map) {
+		return this.ss.selectOne(("review.cntring"), map);
+	}
+	// 플래너 평점 업데이트
+	public void plannerRating(Map<String, Object> map) {
+		this.ss.update("review.plannerRating", map);
 	}
 }

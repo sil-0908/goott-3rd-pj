@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <html>
@@ -22,14 +23,20 @@
 <body>
 <h1>리뷰 작성</h1>
 <form method="POST" enctype="multipart/form-data" >
+    <input type="hidden" name="planner_id" value="${data.user_id}}">
+    <p>플랜 이미지</p>
+    <c:forEach var="row" items="${data.p_img}">
+        <img scr="${row}" width="200" height="200">
+    </c:forEach>
     <p>내용 : <input type="text" name="review_content"></p>
     <p>사진 : <input id="fileItem" type="file" name="file[]" onchange="previewFile()" multiple ></p>
+    <p>플레너 : ${data.user_id}</p>
     <p>플래너 평점 :
-        <input type="radio" name="review_rating" value="1">1
-        <input type="radio" name="review_rating" value="2">2
-        <input type="radio" name="review_rating" value="3">3
-        <input type="radio" name="review_rating" value="4">4
-        <input type="radio" name="review_rating" value="5">5
+        <input type="radio" name="planner_rating" value="1">1
+        <input type="radio" name="planner_rating" value="2">2
+        <input type="radio" name="planner_rating" value="3">3
+        <input type="radio" name="planner_rating" value="4">4
+        <input type="radio" name="planner_rating" value="5">5
     </p>
     <p> <input id="upload-btn" type="submit" value="저장" disabled="true"><span>사진 올려야 작성 가능</span></p>
 </form>
