@@ -8,6 +8,7 @@
 		<input type="text" value="${sessionScope.auth}" />
 		<input type="button" class="go_user_page" value="마이페이지" />
 	</c:if>
+	<h1>내가 구매한 플랜</h1>
 </main>
 
 <script src="/resources/js/common/layout.js"></script>

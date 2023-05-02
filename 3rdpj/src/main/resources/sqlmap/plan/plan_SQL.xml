@@ -30,10 +30,11 @@
     </select>
 
     <select id="imgList" resultMap="planListResultMap">
-        select i.p_img, i.p_img_idx
-          from plan_img i left join plan p
-            on i.plan_idx = p.plan_idx
-         where p.p_del_yn='n'
+           select i.p_img, i.plan_idx
+             from plan_img i left join plan p
+               on i.plan_idx = p.plan_idx
+            where p.p_del_yn='n'
+         order by p.plan_idx desc
     </select>
 
     <resultMap id="planListResultMap" type="com.goott.pj3.plan.dto.PlanDTO">

@@ -187,13 +187,7 @@ public class ReviewController {
 		reviewDTO.setReview_idx(review_idx);
 		boolean success = this.reviewService.delete(reviewDTO); // 게시글 삭제 (이미지 제외)
 		try {
-			ReviewDTO detailDTO = this.reviewService.detail(reviewDTO); // 리뷰 상세 정보 가져오기
-			if (detailDTO != null && detailDTO.getR_img() != null) {
-				for (String fileName : detailDTO.getR_img()) { // URL주소 하나씩 가져와서
-					s3FileUploadService.deleteFromS3(fileName); // 서버에서 삭제
-				}
-			}
-			this.reviewService.deleteImg(reviewDTO); // 이미지 삭제
+			this.reviewService.updateDeleteImg(reviewDTO); // 이미지 삭제(실제 삭제x)
 		} catch (Exception e) {
 			// 예외 처리
 			System.err.println("리뷰 삭제 중 오류가 발생했습니다: " + e.getMessage());

@@ -23,7 +23,6 @@
 			<input type="text" class="update_date" value="${user_info.update_date}" readonly />
 		</div>
 	</form>
-	
 </main>
 
 <script src="/resources/js/common/layout.js"></script>

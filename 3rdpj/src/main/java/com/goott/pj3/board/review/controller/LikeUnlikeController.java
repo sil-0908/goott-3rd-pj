@@ -19,8 +19,9 @@ public class LikeUnlikeController {
     @PostMapping("like_unlike")
     public ModelAndView likeUnlike(@RequestParam("user_id") String user_id,
                                    @RequestParam("action") String action,
+                                   @RequestParam("review_idx") int review_idx,
                                    LikeUnlikeDTO likeUnlikeDTO, ModelAndView mv) {
-        likeUnlikeDTO.setUser_id(user_id);
+//        likeUnlikeDTO.setUser_id(user_id);
         if (action.equals("like")) {
             this.likeUnlikeService.like(likeUnlikeDTO);
         } else if (action.equals("unlike")) {
