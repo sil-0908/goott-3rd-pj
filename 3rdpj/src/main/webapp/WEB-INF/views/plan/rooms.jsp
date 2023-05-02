@@ -22,11 +22,21 @@
                     <li><a href="/chat/room/${room.msg_idx}" id="room-name">${room.receive_id} 와 대화하기</a></li>
                     <div id="msgArea"></div>
                     <p>채팅 생성날짜 :${room.create_date}</p>
+                    <c:forEach items="${YorN}" var="test">
+                        <c:if test="${test.msg_idx eq room.msg_idx}">
+                            <p>읽지않은 메세지가 있습니다.</p>
+                        </c:if>
+                    </c:forEach>
                 </c:if>
                 <c:if test="${sessionScope.user_id == room.receive_id}">
                     <li><a href="/chat/room/${room.msg_idx}" id="room-name2">${room.send_id} 와 대화하기</a></li>
                     <div id="msgArea"></div>
                     <p>채팅 생성날짜 :${room.create_date}</p>
+                    <c:forEach items="${YorN}" var="test">
+                        <c:if test="${test.msg_idx eq room.msg_idx}">
+                            <p>읽지않은 메세지가 있습니다.</p>
+                        </c:if>
+                    </c:forEach>
                 </c:if>
             </c:forEach>
         </ul>
