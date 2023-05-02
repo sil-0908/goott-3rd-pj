@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="C" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <html lang="en">
 <head>
@@ -19,22 +19,24 @@
 
 <div class="container">
     <div class="col-6">
-        <h1 id="room-name">보낸사람 : ${room.send_id}</h1>
-        <h1>받는사람 : ${room.receive_id}</h1>
+        <h1 id="room-name">채팅방</h1>
     </div>
     <div>
         <c:forEach var="log" items="${chatLog}">
-            <c:if test="${log.writer == sessionScope.user_id}">
+            <c:if test="${log.send_id == sessionScope.user_id}">
                 <div class='col-6'>
                     <div class='alert alert-secondary'>
-                        <b> ${log.writer} : ${log.message}</b>
+                        <b> ${log.send_id} : ${log.msg_content}</b>
+                        <fmt:formatDate pattern="MM-dd HH:mm" value="${log.create_date}"/>
+                        <p>${log.read_yn}</p>
                     </div>
                 </div>
             </c:if>
-            <c:if test="${log.writer != sessionScope.user_id}">
+            <c:if test="${log.send_id != sessionScope.user_id}">
                 <div class='col-6'>
                     <div class='alert alert-warning'>
-                        <b> ${log.writer} : ${log.message}</b>
+                        <b> ${log.send_id} : ${log.msg_content} </b>
+                        <fmt:formatDate pattern="MM-dd HH:mm" value="${log.create_date}"/>
                     </div>
                 </div>
             </c:if>
@@ -86,19 +88,22 @@
             stomp.subscribe("/sub/chat/room/" + roomId, function (chat) {
                 var content = JSON.parse(chat.body);
 
-                var writer = content.writer;
+                var writer = content.send_id;
                 var str = '';
 
+                    let date = new Date().toLocaleString()
                 if (writer === username) {
                     str = "<div class='col-6'>";
                     str += "<div class='alert alert-secondary'>";
-                    str += "<b>" + writer + " : " + content.message + "</b>";
+                    str += "<b>" + writer + " : " + content.msg_content +"</b>";
+                    str += "<p>" + date + "</p>"
                     str += "</div></div>";
                     $("#msgArea").append(str);
                 } else {
                     str = "<div class='col-6'>";
                     str += "<div class='alert alert-warning'>";
-                    str += "<b>" + writer + " : " + content.message + "</b>";
+                    str += "<b>" + writer + " : " + content.msg_content +  "</b>";
+                    str += "<p>" + date + "</p>";
                     str += "</div></div>";
                     $("#msgArea").append(str);
                 }
@@ -107,7 +112,7 @@
             });
 
             //3. send(path, header, message)로 메세지를 보낼 수 있음
-            stomp.send('/pub/chat/enter', {}, JSON.stringify({roomId: roomId, writer: username}))
+            stomp.send('/pub/chat/enter', {}, JSON.stringify({msg_idx: roomId, send_id: username}))
         });
 
         $("#button-send").on("click", function (e) {
@@ -115,10 +120,10 @@
 
             console.log(username + ":" + msg.value);
             stomp.send('/pub/chat/message', {}, JSON.stringify({
-                roomId: roomId,
-                message: msg.value,
-                writer: username,
-                receiver: receiveName
+                msg_idx: roomId,
+                msg_content: msg.value,
+                send_id: username,
+                receive_id: receiveName
             }));
             msg.value = '';
         });

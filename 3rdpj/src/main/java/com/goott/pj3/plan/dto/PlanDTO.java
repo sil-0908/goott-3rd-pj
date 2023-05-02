@@ -135,6 +135,8 @@ public class PlanDTO {
                 ", p_del_yn=" + p_del_yn +
                 ", create_date=" + create_date +
                 ", update_date=" + update_date +
+                ", p_img=" + p_img +
+                ", p_img_idx=" + p_img_idx +
                 '}';
     }
 }

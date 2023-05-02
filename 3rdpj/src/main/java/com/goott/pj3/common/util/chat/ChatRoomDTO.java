@@ -2,15 +2,15 @@ package com.goott.pj3.common.util.chat;
 
 import org.springframework.web.socket.WebSocketSession;
 
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
+
 //2023.04.28 길영준
 public class ChatRoomDTO {
-    private String send_id,receive_id,read_yn,msg_content;
+    private String send_id,receive_id,read_yn, msg_content;
     private int msg_idx;
     private Date create_date;
+    private List<String> checkReadOrNot;
+
 
 //    private Set<WebSocketSession> sessions = new HashSet<>();
     //WebSocketSession은 Spring에서 Websocket Connection이 맺어진 세션
@@ -61,6 +61,14 @@ public class ChatRoomDTO {
 
     public void setCreate_date(Date create_date) {
         this.create_date = create_date;
+    }
+
+    public List<String> getCheckReadOrNot() {
+        return checkReadOrNot;
+    }
+
+    public void setCheckReadOrNot(List<String> checkReadOrNot) {
+        this.checkReadOrNot = checkReadOrNot;
     }
 
     @Override

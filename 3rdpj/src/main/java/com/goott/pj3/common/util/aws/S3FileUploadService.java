@@ -81,7 +81,7 @@ public class S3FileUploadService {
             amazonClientException.printStackTrace();
         }
     }
-
+    //S3 객체 삭제 메소드
     public void deleteFromS3(final String findName) {
         String realFileName = findName.substring(53);
         // 삭제할 객체 생성

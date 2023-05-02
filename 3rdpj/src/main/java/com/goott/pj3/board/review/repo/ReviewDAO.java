@@ -40,7 +40,6 @@ public class ReviewDAO {
 	}
 
 	public void updateImg(ReviewDTO reviewDTO) {
-		System.out.println("updateImg : " + reviewDTO);
 		this.ss.update("review.updateImg", reviewDTO);
 	}
 
@@ -56,8 +55,11 @@ public class ReviewDAO {
 		return this.ss.selectOne("review.totalCount",cri);
 	}
 
-
 	public List<ReviewDTO> imgList(ReviewDTO reviewDTO) {
 		return this.ss.selectList("review.imglist", reviewDTO);
+	}
+
+	public void updateDeleteImg(ReviewDTO reviewDTO) {
+		this.ss.update("review.updateDeleteImg", reviewDTO);
 	}
 }

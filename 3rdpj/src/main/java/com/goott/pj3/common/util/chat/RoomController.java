@@ -6,8 +6,12 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.Map;
 
 //2023.04.28길영준
+//2023.05.02 길영준
+// 로그 저장 후 로딩, 읽음확인, 방목록 안읽은 메세지 확인 추가
 @RequestMapping(value = "/chat")
 @Controller
 public class RoomController {
@@ -23,8 +27,10 @@ public class RoomController {
     public ModelAndView rooms(@PathVariable("user_id") String user_id, HttpSession httpSession, ModelAndView mv) {
         String sessionId = String.valueOf(httpSession.getAttribute("user_id"));
         if (sessionId.equals(user_id)) { //뷰에서 넘어온 user_id와 session user_id를 비교해서 일치하면 채팅방 목록을 보여줌
-//        ModelAndView mv = new ModelAndView("/plan/rooms");
             mv.setViewName("/plan/rooms");
+            if (repository.checkReadOrNot(sessionId) != null) {
+                mv.addObject("YorN", repository.checkReadOrNot(sessionId)); // 읽지않은 메세지가 있는지 DB에서 확인
+            }
             mv.addObject("list", repository.findAllRooms(sessionId)); //세션아이디가 가지고 있는 모든 채팅방 리스트 가져오기
         } else {
             mv.setViewName("redirect:/user/signin");    //일치하지 않으면 로그인페이지로 보냄
@@ -81,7 +87,12 @@ public class RoomController {
                 || chatRoomDTO.getReceive_id().equals(planner)) { // 보낸아이디와 세션유저아이디가 맞거나
             int roomID = chatRoomDTO.getMsg_idx();
             if (repository.findMessageLog(roomID) != null) {  //로그를 찾아왔을때
-                model.addAttribute("chatLog", repository.findMessageLog(roomID));
+                //세션값이 receive_id 일때 N-> Y 메세지 읽음 표시
+                Map<String, String> map = new HashMap<>();
+                map.put("msg_idx", String.valueOf(roomID));
+                map.put("session_id", String.valueOf(httpSession.getAttribute("user_id")));
+                repository.readNtoY(map);
+                model.addAttribute("chatLog", repository.findMessageLog(roomID)); //로그 불러오기
                 model.addAttribute("room", chatRoomDTO);  // 받은아이디와 세션플래너아이디가 맞으면
                 return "/plan/room";
             } else { //로그가 없을때

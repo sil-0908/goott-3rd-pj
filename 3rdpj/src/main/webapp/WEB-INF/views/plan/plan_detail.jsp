@@ -45,10 +45,12 @@
 
 <form action="/chat/room" method="post">
     <p>폼태그 안-> 추후 hidden</p>
-    <input type="text" name="name" id="name" class="form-control" value="">
-    <input type="text" name="send_id" id="send_id" class="form-control" value="${sessionScope.user_id}">
-    <input type="text" name="receive_id" id="receive_id" class="form-control" value="${data.user_id}">
+    <input type="hidden" name="name" id="name" class="form-control" value="">
+    <input type="hidden" name="send_id" id="send_id" class="form-control" value="${sessionScope.user_id}">
+    <input type="hidden" name="receive_id" id="receive_id" class="form-control" value="${data.user_id}">
+    <c:if test="${sessionScope.auth == 'auth_c'}">
     <button type="submit" class="btn btn-secondary">플래너에게 메세지 보내기</button>
+    </c:if>
 </form>
 
 <c:if test="${data.user_id == sessionScope.user_id}">

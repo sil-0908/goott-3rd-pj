@@ -78,6 +78,8 @@ public class PlanController {
                 newList.add(newDto);
             }
         }
+        System.out.println("newList첫번째이미지 : " + newList.get(0).getP_img());
+        System.out.println("data : " + planService.list(cri));
         modelAndView.addObject("imgList", newList); // 게시글 이미지 데이터
         modelAndView.addObject("paging", planService.paging(cri)); // 페이징
         modelAndView.addObject("data", planService.list(cri)); // 게시글 데이터

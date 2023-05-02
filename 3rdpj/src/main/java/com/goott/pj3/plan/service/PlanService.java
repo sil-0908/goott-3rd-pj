@@ -28,6 +28,5 @@ public interface PlanService {
 
     PagingDTO paging(Criteria cri);
 
-
     List<PlanDTO> imgList(PlanDTO planDTO);
 }
