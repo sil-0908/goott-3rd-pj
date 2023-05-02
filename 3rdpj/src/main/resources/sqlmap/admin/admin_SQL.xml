@@ -141,7 +141,7 @@
 
 	<!--신진영 23.04.18 리뷰 목록, 검색-->
 	<select id="reviewList" resultType="com.goott.pj3.board.review.dto.ReviewDTO">
-		select review_idx, user_id, plan_idx, review_content, r_del_yn, review_rating, create_date
+		select review_idx, user_id, plan_idx, review_content, planner_rating, r_del_yn, create_date
 # 		     , update_date
 		from plan_review
 		where
@@ -165,7 +165,7 @@
 
 	<!--신진영 23.04.18 디테일 페이지-->
 	<select id="reviewDetail" parameterType="hashMap" resultType="hashMap">
-		select review_idx, user_id, plan_idx, review_content, review_rating, create_date
+		select review_idx, user_id, plan_idx, review_content, planner_rating , create_date, update_date, r_del_yn,
 		from plan_review
 		where review_idx = #{review_idx}
 	</select>

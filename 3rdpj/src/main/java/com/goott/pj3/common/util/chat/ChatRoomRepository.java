@@ -1,38 +1,53 @@
 package com.goott.pj3.common.util.chat;
 
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
-import javax.annotation.PostConstruct;
 import java.util.*;
 
 // 2023.04.28 길영준
 // 추후 내용 DB저장으로 고도화해야함
+// 2023.04.29 길영준
+// DB저장으로 고도화 완료
+// 2023.05.01 길영준
+// 메세지 로그 저장 구현
 @Repository
 public class ChatRoomRepository {
     private Map<String, ChatRoomDTO> chatRoomDTOMap;
+    final
+    SqlSession session;
 
-    @PostConstruct
-    private void init() {
-        chatRoomDTOMap = new LinkedHashMap<>();
+    public ChatRoomRepository(SqlSession session) {
+        this.session = session;
     }
 
-    public List<ChatRoomDTO> findAllRooms() {
-        //채팅방 생성 순서 최근 순으로 반환
-        List<ChatRoomDTO> result = new ArrayList<>(chatRoomDTOMap.values());
-        Collections.reverse(result);
-
-        return result;
+    //채팅방 만들기
+    public void createChatRoomDTO(ChatRoomDTO chatRoomDTO) {
+        session.insert("chat.create", chatRoomDTO);
     }
 
-    public ChatRoomDTO findRoomById(String id) {
-        return chatRoomDTOMap.get(id);
+    // 소유하고있는 모든 채팅방 리스트 가져오기
+    public List<ChatRoomDTO> findAllRooms(String user_id) {
+        return session.selectList("chat.findAllRooms", user_id);
     }
 
-    public ChatRoomDTO createChatRoomDTO(String name) {
-        ChatRoomDTO room = ChatRoomDTO.create(name);
-        chatRoomDTOMap.put(room.getRoomId(), room);
-            // 채팅방이름 uuid부여후 가져오기
-            // 채팅방id : 방이름
-        return room;
+    // 채팅방ID로 채팅찾기
+    public ChatRoomDTO findRoomById(ChatRoomDTO chatRoomDTO) {
+        return session.selectOne("chat.findRoomById", chatRoomDTO);
+    }
+
+    // 보내는 사람 받는사람 이름으로 채팅방이 이미 존재하는지 확읺하고
+    // 있다면 채팅방ID를 리턴한다
+    public ChatRoomDTO findRoomByName(ChatRoomDTO chatRoomDTO) {
+        return session.selectOne("chat.findRoomByName", chatRoomDTO);
+    }
+
+
+    public void saveMessageLog(ChatMessageDTO chatMessageDTO) {
+        session.insert("chat.saveMessageLog", chatMessageDTO);
+    }
+
+    public List<ChatMessageDTO> findMessageLog(int roomID) {
+        return session.selectList("chat.findMessageLog", roomID);
     }
 }

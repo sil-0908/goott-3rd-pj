@@ -31,7 +31,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
         String authUser = (String) httpSession.getAttribute("auth");
         if (authUser == null) {
             response.sendRedirect(request.getContextPath() + "/user/signin");
-            return false; // 세션에 auth 값이 없으면 리다이렉트 디폴트=USER이므로 회원만 갈수있음
+            return false; // 세션에 auth 값이 없으면 리다이렉트
         }
         String role = auth.role().toString();
         if ("ADMIN".equals(role)) {

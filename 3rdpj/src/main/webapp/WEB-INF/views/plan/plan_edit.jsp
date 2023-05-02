@@ -36,7 +36,8 @@
     <br>
     <label for="plan_detail">내용</label>
     <textarea id="plan_detail" name="plan_detail" placeholder="${data.plan_detail}"></textarea>
-    <p>변경할 이미지 : <input type="file" name="files[]" id="file-input" onchange="previewFile()" multiple/></p>
+    <p>변경할 이미지 : </p>
+    <input type="file" name="files[]" id="file-input" onchange="previewFile()" multiple/>
     <c:if test="${data.user_id == sessionScope.user_id}">
         <button type="submit">수정</button>
         <button class="button" id="delete" type="button">삭제</button>
