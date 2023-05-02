@@ -21,7 +21,7 @@ import java.util.*;
 @Service
 public class S3FileUploadService {
 
-
+    @Autowired
     private final AmazonS3Client amazonS3Client; //아마존 계정정보 propertie파일 -> common-context에서 주입
     @Value("${aws.s3.bucket}")
     private String bucket; //S3버킷정보
@@ -34,7 +34,6 @@ public class S3FileUploadService {
 
     //생성자 주입
     public List<String> upload(List<MultipartFile> uploadFile) throws IOException {
-
         List<String> urlList = new ArrayList<>(); //업로드된 url을 받기위한 리스트
 
         //파일이름 새로만들어서 리스트에 담기

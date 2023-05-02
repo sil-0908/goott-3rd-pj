@@ -1,3 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="chat"></mapper>
+<mapper namespace="chat">
+    <insert id="create" parameterType="com.goott.pj3.common.util.chat.ChatRoomDTO"
+            useGeneratedKeys="true" keyProperty="msg_idx">
+        INSERT INTO msg (send_id, receive_id, msg_img, msg_content)
+        SELECT #{send_id}, #{receive_id}, '', ''
+        FROM DUAL
+        WHERE NOT #{send_id} = #{receive_id}
+          AND NOT EXISTS (SELECT msg_idx
+                          FROM msg
+                          WHERE (send_id = #{send_id} AND receive_id = #{receive_id})
+                             OR (send_id = #{receive_id} AND receive_id = #{send_id}))
+    </insert>
+    <!--방id로 채팅방 찾기-->
+    <select id="findRoomById" resultType="com.goott.pj3.common.util.chat.ChatRoomDTO">
+        SELECT msg_idx, send_id, receive_id, read_yn, create_date
+        FROM msg
+        WHERE msg_idx = #{msg_idx}
+    </select>
+    <!--해당 유저의 모든 방 찾기-->
+    <select id="findAllRooms" resultType="com.goott.pj3.common.util.chat.ChatRoomDTO">
+        SELECT msg_idx, send_id, receive_id, read_yn, msg_img, msg_content, create_date
+        FROM msg
+        WHERE send_id = #{user_id}
+           OR receive_id = #{user_id}
+        ORDER BY msg_idx DESC
+    </select>
+    <!--유저이름으로 채팅방 찾기-->
+    <select id="findRoomByName" resultType="com.goott.pj3.common.util.chat.ChatRoomDTO">
+        SELECT msg_idx, send_id, receive_id
+        FROM msg
+        WHERE (send_id = #{send_id} AND receive_id = #{receive_id})
+           OR (send_id = #{receive_id} AND receive_id = #{send_id})
+    </select>
+    <!--메세지 로그 저장 (이미지는 추후)-->
+    <insert id="saveMessageLog" parameterType="com.goott.pj3.common.util.chat.ChatMessageDTO">
+        INSERT INTO msg_log(msg_idx, send_id, receive_id, msg_content, msg_img)
+        VALUES (#{roomId}, #{writer}, #{receiver}, #{message}, '없음')
+    </insert>
+    <select id="findMessageLog" resultType="com.goott.pj3.common.util.chat.ChatMessageDTO">
+        SELECT msg_idx, send_id, receive_id, msg_img, msg_content, create_date
+        FROM msg_log
+        WHERE msg_idx = #{roomID}
+        ORDER BY create_date DESC
+        LIMIT 20
+    </select>
+</mapper>

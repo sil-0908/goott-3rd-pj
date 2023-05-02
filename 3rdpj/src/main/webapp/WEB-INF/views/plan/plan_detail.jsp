@@ -43,6 +43,14 @@
 <label for="planner">플래너</label>
 <input id="planner" type="text" value="${data.user_id}">
 
+<form action="/chat/room" method="post">
+    <p>폼태그 안-> 추후 hidden</p>
+    <input type="text" name="name" id="name" class="form-control" value="">
+    <input type="text" name="send_id" id="send_id" class="form-control" value="${sessionScope.user_id}">
+    <input type="text" name="receive_id" id="receive_id" class="form-control" value="${data.user_id}">
+    <button type="submit" class="btn btn-secondary">플래너에게 메세지 보내기</button>
+</form>
+
 <c:if test="${data.user_id == sessionScope.user_id}">
     <button type="button" onclick="location.href='edit?idx=${data.plan_idx}&auth=${data.user_id}'">수정</button>
     <button data-id="${data.plan_idx}" id="delete">삭제</button>
