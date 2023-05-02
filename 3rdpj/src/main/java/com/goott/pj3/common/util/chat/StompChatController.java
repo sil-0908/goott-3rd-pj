@@ -1,6 +1,5 @@
 package com.goott.pj3.common.util.chat;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
@@ -24,17 +23,17 @@ public class StompChatController {
     //"/pub/chat/enter"
     @MessageMapping(value = "/chat/enter")
     public void enter(ChatMessageDTO chatMessageDTO) {
-        chatMessageDTO.setMessage(chatMessageDTO.getWriter() + "님이 채팅방에 참여하였습니다.");
-        template.convertAndSend("/sub/chat/room/" + chatMessageDTO.getRoomId(), chatMessageDTO);
+        chatMessageDTO.setMsg_content(chatMessageDTO.getSend_id() + "님이 채팅방에 참여하였습니다.");
+        template.convertAndSend("/sub/chat/room/" + chatMessageDTO.getMsg_idx(), chatMessageDTO);
     }
 
     @MessageMapping(value = "/chat/message") //DTO = roomid, message, 보낸사람, 받는사람
     public void message(ChatMessageDTO chatMessageDTO) {
-        template.convertAndSend("/sub/chat/room/" + chatMessageDTO.getRoomId(), chatMessageDTO);
-        repository.saveMessageLog(chatMessageDTO);
+        template.convertAndSend("/sub/chat/room/" + chatMessageDTO.getMsg_idx(), chatMessageDTO);
+        repository.saveMessageLog(chatMessageDTO);  //로그 DB에 저장
         //실시간 알람
-        String alarmDestination = "/sub/chat/alarm/" + chatMessageDTO.getReceiver();
-        String alarmMessage = chatMessageDTO.getWriter() + "님이 새로운 메세지를 보냈습니다";
+        String alarmDestination = "/sub/chat/alarm/" + chatMessageDTO.getReceive_id();
+        String alarmMessage = chatMessageDTO.getSend_id() + "님이 새로운 메세지를 보냈습니다";
         template.convertAndSend(alarmDestination, alarmMessage);
     }
 
