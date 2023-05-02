@@ -27,6 +27,7 @@
 	
 //	사용자 마이페이지 이동 - 장민실 23.05.01
 	$(".go_user_page").click(function() {
-		location.href = "/user/userpage";
+		alert("click");
+//		location.href = "/user/userpage";
 	})
 	

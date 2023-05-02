@@ -49,10 +49,10 @@ public class UserController {
 	}
 	
 //	사용자 마이페이지 이동 - 장민실 23.04.26
-	@GetMapping("userpage")
-	public String go_user_page() {
-		return "user/user_page";
-	}
+//	@GetMapping("userpage")
+//	public String go_user_page() {
+//		return "user/user_page";
+//	}
 	
 //	플래너 마이페이지 이동 - 장민실 23.05.01
 	@GetMapping("plannerpage")
@@ -123,7 +123,7 @@ public class UserController {
 //	}
 	
 //	비밀번호 찾기 - 장민실 23.04.23
-	@PostMapping("find_get_pw")
+	@PostMapping(value="find_get_pw", produces="application/json")
 	@ResponseBody
 	public String find_get_pw(@RequestParam("id") String id, @RequestParam("hp") String hp, UserDTO u_dto) {
 		u_dto.setUser_id(id);
@@ -163,19 +163,18 @@ public class UserController {
 	}
 	
 //	사용자 마이페이지
-	@PostMapping("userpage")
+	@RequestMapping("userpage")
 	@ResponseBody
-	public ModelAndView my_page(HttpSession session, UserDTO u_dto, ModelAndView mav) {
+	public ModelAndView user_page(HttpSession session, UserDTO u_dto, ModelAndView mav) {
 //		세션에 저장된 id랑 권한으로 db정보 불러오기
-//			유저권한일때 : 아이디, 이메일, 핸드폰번호, 프로필이미지, 포인트
-//			플래너권한일때 : 아이디, 이메일, 핸드폰번호, 사업용핸드폰번호, 자기소개, 프로필이미지, 포인트, 사업자번호
+//		유저권한일때 : 아이디, 이메일, 핸드폰번호, 프로필이미지, 포인트
+//		플래너권한일때 : 아이디, 이메일, 핸드폰번호, 사업용핸드폰번호, 자기소개, 프로필이미지, 포인트, 사업자번호
 		String id = (String)session.getAttribute("user_id");
 		u_dto.setUser_id(id);
 		System.out.println("db작업전 : " + u_dto);
-//		유저정보 가져오는거..그냥 로그인할때 있는 메소드에 추가해서 가져와서 이용할까..따로 만들어야 할까..
 //		userService.get_user_info(u_dto);
-		mav.addObject("user_info_dto", userService.get_user_info(u_dto));
-		mav.setViewName("/user/user_page");
+		mav.addObject("user_info", userService.get_user_info(u_dto));
+		mav.setViewName("user/user_page");
 		System.out.println("db작업후 : " + u_dto);
 		return mav;
 	}
