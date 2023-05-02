@@ -5,8 +5,8 @@
     <!--조원재 23.04.05 리뷰 생성-->
     <insert id="insert" parameterType="com.goott.pj3.board.review.dto.ReviewDTO"
             useGeneratedKeys="true" keyProperty="review_idx">
-        insert into plan_review(user_id, plan_idx, review_content, review_rating)
-        values (#{user_id}, #{plan_idx}, #{review_content}, #{review_rating})
+        insert into plan_review(user_id, plan_idx, review_content, planner_rating)
+        values (#{user_id}, #{plan_idx}, #{review_content}, #{planner_rating})
     </insert>
     <!--조원재 23.04.21 리뷰 이미지 파일 생성-->
     <insert id="insertFile" parameterType="com.goott.pj3.board.review.dto.ReviewDTO">
@@ -18,7 +18,7 @@
 
     <!--조원재 23.04.05 디테일 페이지-->
     <select id="detail" resultMap="reviewResultMap">
-        select r.review_idx, r.user_id, r.plan_idx, r.review_content, r.review_rating, r.create_date,
+        select r.review_idx, r.user_id, r.plan_idx, r.review_content, r.planner_rating, r.create_date,
                i.r_img, i.r_img_idx
          from plan_review r left join review_img i
            on r.review_idx = i.review_idx
@@ -31,7 +31,7 @@
         <result property="user_id" column="user_id"/>
         <result property="plan_idx" column="plan_idx"/>
         <result property="review_content" column="review_content"/>
-        <result property="review_rating" column="review_rating"/>
+        <result property="planner_rating" column="planner_rating"/>
         <result property="create_date" column="create_date"/>
         <collection property="r_img" column="r_img" javaType="java.util.List" ofType="String" >
             <result column="r_img"/>
@@ -75,7 +75,7 @@
     <!--조원재 23.04.05 리뷰 목록, 검색-->
     <select id="list" resultType="com.goott.pj3.board.review.dto.ReviewDTO">
         select review_idx, user_id, plan_idx, review_content,
-               review_rating, create_date, update_date
+               planner_rating, create_date, update_date
           from plan_review
          where 
 		   	<if test="option == 'user_id'"> user_id like CONCAT('%',#{keyword},'%')</if>
@@ -92,6 +92,7 @@
           from review_img i left join plan_review r
             on i.review_idx = r.review_idx
          where r.r_del_yn='n'
+         order by r.review_idx desc
     </select>
 
     <resultMap id="reviewlistResultMap" type="com.goott.pj3.board.review.dto.ReviewDTO">

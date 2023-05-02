@@ -59,7 +59,10 @@ public class ReviewServiceImpl implements ReviewService {
 	@Override
 	public boolean delete(ReviewDTO reviewDTO) {
 		int cnt = this.reviewDAO.delete(reviewDTO);
-		return cnt==1;
+		if (cnt==1){
+			return true;
+		}
+		return false;
 	}
 
 	@Override

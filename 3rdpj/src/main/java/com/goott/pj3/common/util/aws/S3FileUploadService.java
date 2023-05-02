@@ -28,7 +28,6 @@ public class S3FileUploadService {
     @Value("${aws.s3.bucket.url}") //지역정보
     private String defaultUrl;
 
-
     public S3FileUploadService(AmazonS3Client amazonS3Client) {
         this.amazonS3Client = amazonS3Client;
     }
@@ -45,6 +44,7 @@ public class S3FileUploadService {
             String saveFileName = getUuid() + ext; //uuid로 새이름 만들기
             Map<String, String> map = new HashMap<>();
             map.put("saveFile", saveFileName);
+//            System.out.println("s3맵 : " + saveFileName );
             fileList.add(map);
         }
 

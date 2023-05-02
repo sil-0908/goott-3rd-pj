@@ -50,7 +50,7 @@
         </a>
       </td>
       <td>${row.user_id}</td>
-      <td>y/n</td>
+      <td>${row.r_del_yn}</td>
       <td>
         <fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${row.create_date}"/>
       </td>
