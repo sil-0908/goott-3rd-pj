@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="C" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <html lang="en">
 <head>
@@ -22,11 +23,22 @@
         <h1>받는사람 : ${room.receive_id}</h1>
     </div>
     <div>
-        <div class='col-6'>
-            <div class='alert alert-secondary'>
-                <b> writer : content.message</b>
-            </div>
-        </div>
+        <c:forEach var="log" items="${chatLog}">
+            <c:if test="${log.writer == sessionScope.user_id}">
+                <div class='col-6'>
+                    <div class='alert alert-secondary'>
+                        <b> ${log.writer} : ${log.message}</b>
+                    </div>
+                </div>
+            </c:if>
+            <c:if test="${log.writer != sessionScope.user_id}">
+                <div class='col-6'>
+                    <div class='alert alert-warning'>
+                        <b> ${log.writer} : ${log.message}</b>
+                    </div>
+                </div>
+            </c:if>
+        </c:forEach>
         <div id="msgArea" class="col"></div>
         <div class="col-6">
             <div class="input-group mb-3">

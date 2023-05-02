@@ -80,12 +80,14 @@ public class RoomController {
         if (chatRoomDTO.getSend_id().equals(user)
                 || chatRoomDTO.getReceive_id().equals(planner)) { // 보낸아이디와 세션유저아이디가 맞거나
             int roomID = chatRoomDTO.getMsg_idx();
-//            if(repository.findMessageLog(roomID)!=null){  //로그를 찾아왔을때
-//
-//            repository.findMessageLog(roomID);
-//            }
-            model.addAttribute("room", chatRoomDTO);  // 받은아이디와 세션플래너아이디가 맞으면
-            return "/plan/room";
+            if (repository.findMessageLog(roomID) != null) {  //로그를 찾아왔을때
+                model.addAttribute("chatLog", repository.findMessageLog(roomID));
+                model.addAttribute("room", chatRoomDTO);  // 받은아이디와 세션플래너아이디가 맞으면
+                return "/plan/room";
+            } else { //로그가 없을때
+                model.addAttribute("room", chatRoomDTO);  // 받은아이디와 세션플래너아이디가 맞으면
+                return "/plan/room";
+            }
         } else {
             return "redirect:/main";                            // 아닐경우 메인으로
         }

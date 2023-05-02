@@ -43,5 +43,6 @@
         FROM msg_log
         WHERE msg_idx = #{roomID}
         ORDER BY create_date DESC
+        LIMIT 20
     </select>
 </mapper>
