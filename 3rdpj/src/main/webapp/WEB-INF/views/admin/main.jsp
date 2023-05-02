@@ -12,6 +12,7 @@
 <body>
 <%-- 	<c:if test="${sessionScope.auth =='auth_a'}">--%>
 	<div>
+		<a href="noticelist">공지사항관리</a>
 		<a href="userlist">회원관리</a>
 		<a href="logout">로그아웃</a>
 		<a href="qnalist">질문게시판</a>
