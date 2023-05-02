@@ -32,6 +32,13 @@ public class PlanServiceImpl implements PlanService {
         }
         return 0;
     }
+
+    //플랜 디테일
+    @Override
+    public PlanDTO detail(int plan_idx) {
+        return planDAO.detail(plan_idx);
+    }
+
     //이미지 업로드
     @Override
     public boolean planImgCreate(PlanDTO planDTO) {
@@ -40,6 +47,26 @@ public class PlanServiceImpl implements PlanService {
             return true;
         }
         return false;
+    }
+
+    //플랜 수정
+    @Override
+    public void planEdit(PlanDTO planDTO) {
+        planDAO.edit(planDTO);
+    }
+
+    @Override
+    public boolean planImgDelete(PlanDTO planDTO) {
+        int affectRowCnt = this.planDAO.planImgDelete(planDTO);
+        if(affectRowCnt !=0){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public void planImgUpdate(PlanDTO planDTO) {
+        this.planDAO.planImgUpdate(planDTO);
     }
 
     //플랜 리스트
@@ -58,29 +85,8 @@ public class PlanServiceImpl implements PlanService {
     }
 
     @Override
-    public boolean planImgDelete(PlanDTO planDTO) {
-        int affectRowCnt = this.planDAO.planImgDelete(planDTO);
-        if(affectRowCnt !=0){
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public void planImgUpdate(PlanDTO planDTO) {
-        this.planDAO.planImgUpdate(planDTO);
-    }
-
-    //플랜 디테일
-    @Override
-    public PlanDTO detail(int plan_idx) {
-        return planDAO.detail(plan_idx);
-    }
-
-    //플랜 수정
-    @Override
-    public void planEdit(PlanDTO planDTO) {
-        planDAO.edit(planDTO);
+    public List<PlanDTO> imgList(PlanDTO planDTO) {
+        return this.planDAO.ImgList(planDTO);
     }
 
     //플랜 삭제

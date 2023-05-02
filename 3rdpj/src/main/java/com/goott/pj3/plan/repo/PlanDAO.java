@@ -34,6 +34,23 @@ public class PlanDAO {
         return this.ss.insert("plan.createImg", planDTO);
     }
 
+    //플랜 디테일
+    public PlanDTO detail(int plan_idx) {
+        return ss.selectOne("plan.detail", plan_idx);
+    }
+    
+    //플랜 수정 시작
+    public void edit(PlanDTO planDTO) {
+        ss.update("plan.edit", planDTO);
+    }
+    public int planImgDelete(PlanDTO planDTO) {
+        return this.ss.delete("plan.planImgDelete", planDTO);
+    }
+    public void planImgUpdate(PlanDTO planDTO) {
+        this.ss.insert("plan.planImgUpdate", planDTO);
+    }
+    //플랜 수정 끝
+    
     //플랜리스트
     public List<PlanDTO> list(Criteria cri) {
         return ss.selectList("plan.list", cri);
@@ -44,26 +61,13 @@ public class PlanDAO {
         return ss.selectOne("plan.totalCount", cri);
     }
 
-    //플랜 디테일
-    public PlanDTO detail(int plan_idx) {
-        return ss.selectOne("plan.detail", plan_idx);
-    }
-
-    //플랜 수정
-    public void edit(PlanDTO planDTO) {
-        ss.update("plan.edit", planDTO);
-    }
-
     //플랜 삭제(DB삭제는 안함)
     public void delete(int plan_idx) {
         ss.delete("plan.delete", plan_idx);
     }
 
-    public int planImgDelete(PlanDTO planDTO) {
-        return this.ss.delete("plan.planImgDelete", planDTO);
-    }
 
-    public void planImgUpdate(PlanDTO planDTO) {
-        this.ss.insert("plan.planImgUpdate", planDTO);
+    public List<PlanDTO> ImgList(PlanDTO planDTO) {
+        return this.ss.selectList("plan.imgList", planDTO);
     }
 }

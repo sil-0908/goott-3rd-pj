@@ -20,12 +20,14 @@ public interface PlanService {
     PlanDTO detail(int plan_idx);
 
     void planEdit(PlanDTO planDTO);
+    boolean planImgDelete(PlanDTO planDTO);
+
+    void planImgUpdate(PlanDTO planDTO);
 
     void planDelete(int plan_idx);
 
     PagingDTO paging(Criteria cri);
 
-    boolean planImgDelete(PlanDTO planDTO);
 
-    void planImgUpdate(PlanDTO planDTO);
+    List<PlanDTO> imgList(PlanDTO planDTO);
 }

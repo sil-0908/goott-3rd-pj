@@ -42,13 +42,14 @@
     </thead>
     <tbody>
     <% List<PlanDTO> list = (ArrayList<PlanDTO>) request.getAttribute("data");
+       List<PlanDTO> imgList = (ArrayList<PlanDTO>) request.getAttribute("imgList");
         for (int i = 0; i < list.size(); i++) { %>
     <tr>
         <th scope="row">
             <%=list.get(i).getPlan_idx()%>
         </th>
         <td><a href="/plan/list/<%=list.get(i).getPlan_idx()%>" style="text-decoration: none;">
-            <%=list.get(i).getPlan_title()%>
+            <img src="<%=imgList.get(i).getP_img()%>" height="100" width="100">
         </a></td>
         <td>
             <%=list.get(i).getPrice()%>
