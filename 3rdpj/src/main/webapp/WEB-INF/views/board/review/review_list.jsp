@@ -34,17 +34,19 @@
 <table>
   <thead>
   <tr>
-    <td>리뷰사진 : </td>
+    <td>리뷰목록 : </td>
     <td></td>
   </tr>
   </thead>
   <tbody>
-  <c:forEach var="row" items="${data}">
+  <c:forEach var="row" items="${imgList}">
     <tr>
       <td>
-        <a href="/review/detail?review_idx=${row.review_idx}">
-          <img src="" height="200px" width="200px" style="border: 1px solid red";>
-        </a>
+        <a href="/review/detail/${row.review_idx}">
+			<c:forEach var="img" items="${row.r_img}">
+          	<img src="${img}" height="200px" width="200px" style="border: 1px solid cadetblue";>
+			</c:forEach>
+        </a><span>좋아요 : </span><span>싫어요 : </span>
       </td>
     </tr>
   </c:forEach>

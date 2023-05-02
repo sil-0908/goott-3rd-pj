@@ -6,11 +6,11 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
-import com.goott.pj3.common.util.Criteria;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.goott.pj3.admin.dto.NoticeDTO;
+import com.goott.pj3.common.util.paging.Criteria;
 
 @Repository
 public class NoticeDAO {

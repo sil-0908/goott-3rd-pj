@@ -1,15 +1,19 @@
 package com.goott.pj3.plan.service;
 
-import com.goott.pj3.common.util.Criteria;
-import com.goott.pj3.common.util.PagingDTO;
+import com.goott.pj3.common.util.paging.Criteria;
+import com.goott.pj3.common.util.paging.PagingDTO;
 import com.goott.pj3.plan.dto.ImgDTO;
 import com.goott.pj3.plan.dto.PlanDTO;
 
 import java.util.List;
+
 //2023.04.05 길영준
 public interface PlanService {
 
-    void planCreate(PlanDTO planDTO);
+
+    int planCreate(PlanDTO planDTO);
+
+    boolean planImgCreate(PlanDTO planDTO);
 
     List<PlanDTO> list(Criteria cri);
 
@@ -19,7 +23,9 @@ public interface PlanService {
 
     void planDelete(int plan_idx);
 
-	PagingDTO paging(Criteria cri);
+    PagingDTO paging(Criteria cri);
 
-    void uploadImg(ImgDTO imgDTO);
+    boolean planImgDelete(PlanDTO planDTO);
+
+    void planImgUpdate(PlanDTO planDTO);
 }

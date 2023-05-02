@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.goott.pj3.board.review.dto.ReviewDTO;
-import com.goott.pj3.common.util.Criteria;
+import com.goott.pj3.common.util.paging.Criteria;
 
 import java.util.List;
 import java.util.Map;
@@ -22,9 +22,9 @@ public class ReviewDAO {
 		return this.ss.insert("review.insert", reviewDTO);
 	}
 
-	public void createFile(ReviewDTO reviewDTO) {
+	public void createImg(ReviewDTO reviewDTO) {
 		System.out.println("files : " + reviewDTO);
-		this.ss.insert("review.file", reviewDTO);
+		this.ss.insert("review.insertFile", reviewDTO);
 	}
 
 	public ReviewDTO detail(ReviewDTO reviewDTO) {
@@ -35,9 +35,13 @@ public class ReviewDAO {
 		return this.ss.update("review.update", reviewDTO);
 	}
 
-	public void updateFile(ReviewDTO reviewDTO) {
-		System.out.println("updateFile : " + reviewDTO);
-		this.ss.update("review.updatefile", reviewDTO);
+	public void deleteImg(ReviewDTO reviewDTO) {
+		this.ss.delete("review.deleteImg", reviewDTO);
+	}
+
+	public void updateImg(ReviewDTO reviewDTO) {
+		System.out.println("updateImg : " + reviewDTO);
+		this.ss.update("review.updateImg", reviewDTO);
 	}
 
 	public int delete(ReviewDTO reviewDTO) {
@@ -45,12 +49,15 @@ public class ReviewDAO {
 	}
 
 	public List<ReviewDTO> list(Criteria cri) {
-		return ss.selectList("review.list", cri);
+		return this.ss.selectList("review.list", cri);
 	}
 
 	public int totalCount(Criteria cri) {
-		return ss.selectOne("review.totalCount",cri);
+		return this.ss.selectOne("review.totalCount",cri);
 	}
 
 
+	public List<ReviewDTO> imgList(ReviewDTO reviewDTO) {
+		return this.ss.selectList("review.imglist", reviewDTO);
+	}
 }

@@ -4,8 +4,9 @@
 <main>
 	 <h1>mypage</h1>
 	 <c:if test="${sessionScope.user_id != null}">
-		<input type="text" value="${sessionScope.user_id}">
-		<input type="text" value="${sessionScope.auth}">
+		<input type="text" value="${sessionScope.user_id}" />
+		<input type="text" value="${sessionScope.auth}" />
+		<input type="button" class="go_user_page" value="마이페이지" />
 	</c:if>
 </main>
 

@@ -2,8 +2,6 @@ package com.goott.pj3.board.free.controller;
 
 import javax.servlet.http.HttpSession;
 
-import com.goott.pj3.common.util.Criteria;
-import com.goott.pj3.common.util.PagingDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +12,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.goott.pj3.board.free.dto.FreeBoardDTO;
 import com.goott.pj3.board.free.service.FreeBoardService;
+import com.goott.pj3.common.util.paging.Criteria;
+import com.goott.pj3.common.util.paging.PagingDTO;
 
 @Controller
 @RequestMapping("free/**")

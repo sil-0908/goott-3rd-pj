@@ -25,6 +25,9 @@ public interface UserService {
 //  비밀번호 변경 - 장민실 23.04.25
 	void set_new_pw(UserDTO u_dto);
 
+//	사용자 마이페이지 - 장민실 23.05.01
+	UserDTO get_user_info(UserDTO u_dto);
+
 	
 
 }

@@ -2,13 +2,12 @@ package com.goott.pj3.admin.repo;
 
 import java.util.List;
 
-
-import com.goott.pj3.common.util.Criteria;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.goott.pj3.admin.dto.AdminUserDTO;
+import com.goott.pj3.common.util.paging.Criteria;
 
 
 @Repository

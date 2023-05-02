@@ -4,16 +4,17 @@ import java.util.Date;
 import java.util.List;
 
 public class ReviewDTO {
-    private int review_idx, plan_idx, review_rating, r_img_idx;
+    private int review_idx, plan_idx, review_rating;
     private String user_id, review_content, r_del_yn;
     private Date create_date, update_date;
     private List<String> r_img;
+    private List<Integer> r_img_idx;
 
-    public int getR_img_idx() {
+    public List<Integer> getR_img_idx() {
         return r_img_idx;
     }
 
-    public void setR_img_idx(int r_img_idx) {
+    public void setR_img_idx(List<Integer> r_img_idx) {
         this.r_img_idx = r_img_idx;
     }
 
@@ -95,13 +96,13 @@ public class ReviewDTO {
                 "review_idx=" + review_idx +
                 ", plan_idx=" + plan_idx +
                 ", review_rating=" + review_rating +
-                ", r_img_idx=" + r_img_idx +
                 ", user_id='" + user_id + '\'' +
                 ", review_content='" + review_content + '\'' +
                 ", r_del_yn='" + r_del_yn + '\'' +
                 ", create_date=" + create_date +
                 ", update_date=" + update_date +
                 ", r_img=" + r_img +
+                ", r_img_idx=" + r_img_idx +
                 '}';
     }
 }

@@ -51,5 +51,10 @@ public class UserDAO {
 	public void set_new_pw(UserDTO u_dto) {
 		ss.update("user.find_set_pw", u_dto);
 	}
+
+//	사용자 마이페이지 - 23.05.01
+	public UserDTO get_user_info(UserDTO u_dto) {
+		return ss.selectOne("user.get_user_info", u_dto);
+	}
 	
 }

@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 <html>
 <head>
     <title>리뷰 화면</title>
@@ -17,14 +17,14 @@
 <h1> 리뷰 화면</h1>
 
 <p>번호 : ${data.review_idx}</p>
-<c:forEach var="image" items="${imglist}" >
-    <p>리뷰 사진 : <img src="${image}" height="200px" width="200px" style="border: 1px solid red;"></p>
+<c:forEach var="img" items="${data.r_img}" >
+    <p>리뷰 사진 : <img src="${img}" height="200px" width="200px" style="border: 1px solid red;"></p>
 </c:forEach>
 <p>내용 : ${data.review_content}</p>
 <p>작성자 : ${data.user_id}</p>
 <p>작성일 : ${data.create_date}"</p>
-
-
+<p>좋아요<button data-id="${data.user_id}" class="like">좋아요</button> : </p>
+<p>싫어요<button class="unlike">싫어요</button> : </p>
 <%--<c:if test="${data.user_id == sessionScope.user_id}">--%>
 <p>
     <a href="/review/update/${data.review_idx}">수정</a>
@@ -56,7 +56,7 @@
 <%--	<div id="reply">--%>
 <%--		--%>
 <%--	</div>--%>
-	<script>
+    })
 		// $(document).ready(function() {
 		// 	getList();
 		// })
@@ -101,7 +101,7 @@
 		// 		url : '/reviewReply/update',
 		// 		data : {"review_idx" : review_idx, 'reply_idx' : reply_idx, 'r_content' : r_content},
 		// 		type : 'post',
-		// 		success : function (result){
+		// 		success : function (){
 		// 			alert('댓글이 수정되었습니다')
 		// 			location.href = "/review/detail/"+review_idx;
 		// 		}
@@ -116,7 +116,7 @@
 		// 		url : '/reviewReply/delete',
 		// 		data : {"review_idx" : review_idx, 'reply_idx' : reply_idx},
 		// 		type : 'post',
-		// 		success : function (result){
+		// 		success : function (){
 		// 			alert('댓글이 삭제되었습니다')
 		// 			location.href = "/review/detail/"+review_idx;
 		// 		}

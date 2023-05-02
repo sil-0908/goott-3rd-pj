@@ -6,8 +6,9 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import com.goott.pj3.common.util.Auth;
-import com.goott.pj3.common.util.Criteria;
+import com.goott.pj3.common.util.auth.Auth;
+import com.goott.pj3.common.util.paging.Criteria;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

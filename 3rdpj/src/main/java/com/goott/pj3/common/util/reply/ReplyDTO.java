@@ -1,4 +1,4 @@
-package com.goott.pj3.common.util;
+package com.goott.pj3.common.util.reply;
 
 import java.util.Date;
 

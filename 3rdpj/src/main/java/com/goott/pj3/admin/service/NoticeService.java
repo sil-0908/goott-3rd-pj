@@ -3,8 +3,8 @@ package com.goott.pj3.admin.service;
 import java.util.List;
 
 import com.goott.pj3.admin.dto.NoticeDTO;
-import com.goott.pj3.common.util.Criteria;
-import com.goott.pj3.common.util.PagingDTO;
+import com.goott.pj3.common.util.paging.Criteria;
+import com.goott.pj3.common.util.paging.PagingDTO;
 
 
 public interface NoticeService {

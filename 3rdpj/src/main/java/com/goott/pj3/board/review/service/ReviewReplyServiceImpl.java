@@ -7,7 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.goott.pj3.board.review.repo.ReviewReplyDAO;
-import com.goott.pj3.common.util.ReplyDTO;
+import com.goott.pj3.common.util.reply.ReplyDTO;
 
 @Service
 public class ReviewReplyServiceImpl implements ReviewReplyService{

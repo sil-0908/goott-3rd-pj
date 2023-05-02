@@ -43,12 +43,14 @@
   </tr>
   </thead>
   <tbody>
-  <c:forEach var="row" items="${data}">
+  <c:forEach var="row" items="${imgList}">
     <tr>
       <td>
           <p>번호 : ${row.travel_location_idx}</p>
-        <a href="/travelinfo/detail?travel_location_idx=${row.travel_location_idx}">
-          <img src="${row.country_img}" height="200px" width="200px" style="border: 1px solid red";>
+        <a href="/travelinfo/detail/${row.travel_location_idx}">
+			<c:forEach var="img" items="${row.t_img}">
+          <img src="${img}" height="200px" width="200px" style="border: 1px solid red";>
+			</c:forEach>
         </a>
       </td>
     </tr>
