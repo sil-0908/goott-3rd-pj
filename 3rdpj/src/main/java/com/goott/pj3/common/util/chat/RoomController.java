@@ -39,12 +39,6 @@ public class RoomController {
     }
 
     //채팅방 개설
-//    @PostMapping(value = "/room")
-//    public String create(@RequestParam String name, RedirectAttributes rttr) {
-//        rttr.addFlashAttribute("roomName", repository.createChatRoomDTO(name));
-//        return "redirect:/chat/rooms";
-//    }
-    //채팅방 개설
     @PostMapping(value = "/room") //form으로 받는데이터 = send_id & receive_id
     public String create(ChatRoomDTO chatRoomDTO, ModelAndView mv) {
         if (chatRoomDTO.getSend_id().equals(chatRoomDTO.getReceive_id())) {
