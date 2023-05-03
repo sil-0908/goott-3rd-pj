@@ -2,6 +2,7 @@ package com.goott.pj3.admin.service;
 
 import java.util.*;
 
+import com.goott.pj3.admin.dto.chartDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -84,7 +85,8 @@ public class AdminUserServiceImpl implements AdminUserService {
     }
 
     @Override
-    public List<Map<String, Object>> getUserMonthByAuth(String auth) {
+    public List<chartDTO> getUserMonthByAuth(String auth) {
+
         return adminUserDAO.getUserMonthByAuth(auth);
     }
 
