@@ -28,6 +28,22 @@
         ORDER BY plan_idx DESC
         LIMIT #{pageStart}, #{perPageNum}
     </select>
+
+    <select id="imgList" resultMap="planListResultMap">
+           select i.p_img, i.plan_idx
+             from plan_img i left join plan p
+               on i.plan_idx = p.plan_idx
+            where p.p_del_yn='n'
+         order by p.plan_idx desc
+    </select>
+
+    <resultMap id="planListResultMap" type="com.goott.pj3.plan.dto.PlanDTO">
+        <id property="plan_idx" column="plan_idx"/>
+        <collection property="p_img" column="p_img" javaType="List" ofType="String">
+            <result column="p_img"/>
+        </collection>
+    </resultMap>
+
     <!--페이징을 위한 카운트-->
     <select id="totalCount" resultType="int">
         SELECT count(plan_idx)
@@ -38,6 +54,7 @@
         <if test="option == 'title'">plan_title like CONCAT('%',#{keyword},'%')</if>
         <if test="option == null or option == ''">1=1</if>
     </select>
+
     <!--플랜상세-->
     <select id="detail" resultMap="planResultMap">
         SELECT p.plan_title, p.plan_detail, p.user_id,
@@ -81,13 +98,14 @@
          where plan_idx=#{plan_idx}
     </delete>
 
-    <insert id="planImgUpdate">
+    <insert id="planImgUpdate" parameterType="com.goott.pj3.plan.dto.PlanDTO">
         insert into plan_img(plan_idx, p_img)
              values
                    <foreach collection="p_img" item="img" separator=",">
-                       (#{plan_idx},#{img})
+                       (#{plan_idx}, #{img})
                    </foreach>
     </insert>
+    <!--.플랜 수정 끝-->
 
     <!--플랜삭제(DB삭제는 안함)-->
     <update id="delete">

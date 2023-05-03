@@ -21,14 +21,12 @@ import java.util.*;
 @Service
 public class S3FileUploadService {
 
-
+    @Autowired
     private final AmazonS3Client amazonS3Client; //아마존 계정정보 propertie파일 -> common-context에서 주입
     @Value("${aws.s3.bucket}")
     private String bucket; //S3버킷정보
     @Value("${aws.s3.bucket.url}") //지역정보
     private String defaultUrl;
-
-    List<String> urlList = new ArrayList<>(); //업로드된 url을 받기위한 리스트
 
     public S3FileUploadService(AmazonS3Client amazonS3Client) {
         this.amazonS3Client = amazonS3Client;
@@ -36,6 +34,8 @@ public class S3FileUploadService {
 
     //생성자 주입
     public List<String> upload(List<MultipartFile> uploadFile) throws IOException {
+        List<String> urlList = new ArrayList<>(); //업로드된 url을 받기위한 리스트
+
         //파일이름 새로만들어서 리스트에 담기
         List<Map<String, String>> fileList = new ArrayList<>();
         for (int i = 0; i < uploadFile.size(); i++) {
@@ -44,6 +44,7 @@ public class S3FileUploadService {
             String saveFileName = getUuid() + ext; //uuid로 새이름 만들기
             Map<String, String> map = new HashMap<>();
             map.put("saveFile", saveFileName);
+//            System.out.println("s3맵 : " + saveFileName );
             fileList.add(map);
         }
 
@@ -80,7 +81,7 @@ public class S3FileUploadService {
             amazonClientException.printStackTrace();
         }
     }
-
+    //S3 객체 삭제 메소드
     public void deleteFromS3(final String findName) {
         String realFileName = findName.substring(53);
         // 삭제할 객체 생성

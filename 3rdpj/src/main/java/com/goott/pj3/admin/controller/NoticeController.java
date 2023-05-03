@@ -30,12 +30,11 @@ public class NoticeController {
      * 신진영 23.04.04 공지사항 리스트
      * @param mv
      * @param cri
-     * @param session
      * @return
      */
     @Auth(role = Auth.Role.ADMIN)
     @RequestMapping(value = "noticelist", produces="application/text; charset=UTF-8;")
-    public ModelAndView noticeList(ModelAndView mv, Criteria cri, HttpSession session) {
+    public ModelAndView noticeList(ModelAndView mv, Criteria cri) {
         mv.addObject("paging", noticeService.paging(cri));
         mv.addObject("noticelist", noticeService.noticeList(cri));
         mv.setViewName("admin/notice/noticelist");
