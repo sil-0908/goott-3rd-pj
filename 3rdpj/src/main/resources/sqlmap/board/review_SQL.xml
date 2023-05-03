@@ -42,21 +42,21 @@
 
     <!--조원재 23.05.02 플래너 평점 생성-->
     <!--기존 평점 가져오기-->
-    <select id="rating" parameterType="HashMap" resultType="Integer">
+    <select id="rating" parameterType="com.goott.pj3.board.review.dto.PlannerRatingDTO" resultType="Integer">
         select planner_rating
           from user
          where user_id = #{planner_id}
     </select>
 
     <!--평점 카운팅 가져오기 -->
-    <select id="cntring" parameterType="HashMap" resultType="Integer">
+    <select id="cntring" parameterType="com.goott.pj3.board.review.dto.PlannerRatingDTO" resultType="Integer">
         select rating_cnt
           from user
          where user_id = #{planner_id}
     </select>
 
     <!--플래너 평점 업데이트-->
-    <update id="plannerRating" parameterType="HashMap">
+    <update id="plannerRating" parameterType="com.goott.pj3.board.review.dto.PlannerRatingDTO">
         update user
         set planner_rating = #{planner_rating}, rating_cnt=#{rating_cnt}
         where user_id = #{planner_id}

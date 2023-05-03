@@ -1,6 +1,7 @@
 package com.goott.pj3.board.review.service;
 
 import com.goott.pj3.board.review.dto.LikeUnlikeDTO;
+import com.goott.pj3.board.review.dto.PlannerRatingDTO;
 import com.goott.pj3.plan.dto.PlanDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -12,7 +13,6 @@ import com.goott.pj3.common.util.paging.Criteria;
 import com.goott.pj3.common.util.paging.PagingDTO;
 
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class ReviewServiceImpl implements ReviewService {
@@ -85,7 +85,6 @@ public class ReviewServiceImpl implements ReviewService {
 		paging.setTotalCount(reviewDAO.totalCount(cri));
 		return paging;
 	}
-
 	@Override
 	public List<ReviewDTO> imglist(ReviewDTO reviewDTO) {
 		return this.reviewDAO.imgList(reviewDTO);
@@ -100,24 +99,38 @@ public class ReviewServiceImpl implements ReviewService {
 	public PlanDTO getCreate(PlanDTO planDTO) {
 		return this.reviewDAO.getCreate(planDTO);
 	}
-
 	/**
 	 * 조원재 23.05.03. 플래너 평점
-	 * @param map
+	 * @param plannerRatingDTO
 	 */
 	@Override
-	public void plannerRating(Map<String, Object> map) {
-		// 기존 점수 가지고와서 플랜점수 더하기
-		int rating = reviewDAO.rating(map); // 기존 점수
-		int sumRating = rating + (int) map.get("planner_rating"); // 기존 점수 + 평가한 점수
-		int cnt = reviewDAO.cnting(map); // 기존 평가한 인원 카운트
-		int sumCnt = cnt + 1; // 기존 평가한 인원 카운트 + 1
-		int affectRowCnt =reviewDAO.yOrN(map); // 평점 남긴 여부
-		map.put("planner_rating", sumRating);
-		map.put("rating_cnt", sumCnt);
-		this.reviewDAO.plannerRating(map); // 플래너 평점 매기기
+	public void plannerRating(PlannerRatingDTO plannerRatingDTO) {
+		// 기존 점수 가져오기
+		int rating = reviewDAO.rating(plannerRatingDTO);
+		// 기존 점수 + 평가한 점수 계산
+		int sumRating = rating + (int) plannerRatingDTO.getPlanner_rating();
+
+		// 기존 평가 인원 수 가져오기
+		int cnt = reviewDAO.cnting(plannerRatingDTO);
+		// 기존 평가 인원 수 + 1
+		int sumCnt = cnt + 1;
+
+		// 평점을 남겼는지 여부 가져오기
+		reviewDAO.yOrN(plannerRatingDTO);
+
+		// 평가된 내용 업데이트
+		plannerRatingDTO.setPlanner_rating(sumRating);
+		plannerRatingDTO.setRating_cnt(sumCnt);
+
+		// 플래너 평점 업데이트
+		this.reviewDAO.plannerRating(plannerRatingDTO);
 	}
 
+	/**
+	 * 조원재 23.05.03 리뷰 좋아요, 싫어요 카운트
+	 * @param likeUnlikeDTO
+	 * @return
+	 */
 	@Override
 	public LikeUnlikeDTO likeUnlikeCnt(LikeUnlikeDTO likeUnlikeDTO) {
 		return this.reviewDAO.likeUnlikeCnt(likeUnlikeDTO);

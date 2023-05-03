@@ -13,40 +13,64 @@ public class LikeUnlikeServiceImpl implements LikeUnlikeService{
 
     @Override
     public void like(LikeUnlikeDTO likeUnlikeDTO) {
-        LikeUnlikeDTO likeUnlikeCnt = this.likeUnlikeDAO.likeUnlikeCnt(likeUnlikeDTO); // 내 라이크, 언라이크 수
-        System.out.println("likeUnlikeCnt : " + likeUnlikeCnt);
-        if(likeUnlikeCnt==null){ // 최초 라이크 +1
-            System.out.println("보여야돼!");
-            likeUnlikeDTO.setR_like(1); // 라이크 +1
-            this.likeUnlikeDAO.createLike(likeUnlikeDTO);
-        }else if(likeUnlikeCnt.getR_like()==0 && likeUnlikeCnt.getR_unlike()==0){ // 라이크 취소 후 다시 +1
-            likeUnlikeDTO.setR_like(1); // 라이크 +1
-            this.likeUnlikeDAO.like(likeUnlikeDTO);
-        } else if(likeUnlikeCnt.getR_like()==0 && likeUnlikeCnt.getR_unlike()==1){ // 언라이크 취소, 라이크+1
-            likeUnlikeDTO.setR_like(1); // 라이크 +1
-            likeUnlikeCnt.setR_unlike(likeUnlikeCnt.getR_unlike()-1); // 언라이크 -1
-            this.likeUnlikeDAO.relike(likeUnlikeDTO);
-        }else if(likeUnlikeCnt.getR_like()==1 && likeUnlikeCnt.getR_unlike()==0){ // 라이크 취소
-            likeUnlikeDTO.setR_like(0);
-            this.likeUnlikeDAO.cancelLike(likeUnlikeDTO);
-        }
+        processLikeUnlike(likeUnlikeDTO, true);
     }
+
     @Override
     public void unlike(LikeUnlikeDTO likeUnlikeDTO) {
-        LikeUnlikeDTO likeUnlikeCnt = this.likeUnlikeDAO.likeUnlikeCnt(likeUnlikeDTO); // 내 라이크, 언라이크 수
-        if(likeUnlikeCnt==null){ // 최초 언 라이크 +1
-            likeUnlikeDTO.setR_unlike(1); // 라이크 +1
-            this.likeUnlikeDAO.createUnlike(likeUnlikeDTO);
-        }else if(likeUnlikeCnt.getR_like()==0 && likeUnlikeCnt.getR_unlike()==0){ // 언라이크 취소 후 다시 +1
-            likeUnlikeDTO.setR_unlike(1);
-            this.likeUnlikeDAO.unlike(likeUnlikeDTO);
-        }else if(likeUnlikeCnt.getR_like()==1 && likeUnlikeCnt.getR_unlike()==0){ // 라이크 취소, 언라이크+1
-            likeUnlikeDTO.setR_unlike(1); // 언라이크 +1
-            likeUnlikeCnt.setR_like(likeUnlikeCnt.getR_like()-1); // 라이크 -1
-            this.likeUnlikeDAO.reUnLike(likeUnlikeDTO);
-        }else if(likeUnlikeCnt.getR_like()==0 && likeUnlikeCnt.getR_unlike()==1){ // 라이크 취소
-            likeUnlikeDTO.setR_unlike(0);
-            this.likeUnlikeDAO.cancelUnLike(likeUnlikeDTO);
+        processLikeUnlike(likeUnlikeDTO, false);
+    }
+
+    /**
+     * 라이크 또는 언라이크 처리
+     *
+     * @param likeUnlikeDTO LikeUnlikeDTO 객체
+     * @param isLike        라이크 여부 (true: 라이크, false: 언라이크)
+     */
+    private void processLikeUnlike(LikeUnlikeDTO likeUnlikeDTO, boolean isLike) {
+        LikeUnlikeDTO likeUnlikeCnt = this.likeUnlikeDAO.likeUnlikeCnt(likeUnlikeDTO);
+
+        if (likeUnlikeCnt == null) {
+            // 최초 라이크 또는 언라이크 처리
+            if (isLike) {
+                likeUnlikeDTO.setR_like(1);
+                this.likeUnlikeDAO.createLike(likeUnlikeDTO);
+            } else {
+                likeUnlikeDTO.setR_unlike(1);
+                this.likeUnlikeDAO.createUnlike(likeUnlikeDTO);
+            }
+        } else {
+            int rLike = likeUnlikeCnt.getR_like();
+            int rUnlike = likeUnlikeCnt.getR_unlike();
+
+            if (rLike == 1 && rUnlike == 0 && isLike) {
+                // 라이크 취소 처리
+                likeUnlikeDTO.setR_like(0);
+                this.likeUnlikeDAO.cancelLike(likeUnlikeDTO);
+            } else if (rLike == 0 && rUnlike == 1 && !isLike) {
+                // 언라이크 취소 처리
+                likeUnlikeDTO.setR_unlike(0);
+                this.likeUnlikeDAO.cancelUnLike(likeUnlikeDTO);
+            } else if (rLike == 0 && rUnlike == 0) {
+                // 라이크 또는 언라이크 처리
+                if (isLike) {
+                    likeUnlikeDTO.setR_like(1);
+                    this.likeUnlikeDAO.like(likeUnlikeDTO);
+                } else {
+                    likeUnlikeDTO.setR_unlike(1);
+                    this.likeUnlikeDAO.unlike(likeUnlikeDTO);
+                }
+            } else if (rLike == 0 && rUnlike == 1 && isLike) {
+                // 언라이크 취소 후 라이크 처리
+                likeUnlikeDTO.setR_like(1);
+                likeUnlikeDTO.setR_unlike(0);
+                this.likeUnlikeDAO.relike(likeUnlikeDTO);
+            } else if (rLike == 1 && rUnlike == 0 && !isLike) {
+                // 라이크 취소 후 언라이크 처리
+                likeUnlikeDTO.setR_unlike(1);
+                likeUnlikeDTO.setR_like(0);
+                this.likeUnlikeDAO.reUnLike(likeUnlikeDTO);
+            }
         }
     }
 

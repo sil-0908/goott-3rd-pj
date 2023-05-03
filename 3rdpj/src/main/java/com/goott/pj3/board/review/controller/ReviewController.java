@@ -2,6 +2,7 @@ package com.goott.pj3.board.review.controller;
 
 import com.goott.pj3.board.review.dto.LikeUnlikeDTO;
 import com.goott.pj3.board.review.dto.ReviewDTO;
+import com.goott.pj3.board.review.dto.PlannerRatingDTO;
 import com.goott.pj3.common.util.auth.Auth;
 import com.goott.pj3.common.util.aws.S3FileUploadService;
 import com.goott.pj3.common.util.paging.Criteria;
@@ -40,9 +41,8 @@ public class ReviewController {
 		// 아이디 값 파라미터로 받기 -> 로그인 아이디 세션과 아이디 값 비교 (마이 페이지 구현 후 진행예정)
 //		String longinId = httpSession.getAttribute("user_id");
 //		if(user_id.equals(longinId)){ 아래 코드 넣기 }
-		planDTO.setPlan_idx(67);
+		planDTO.setPlan_idx(66);
 		PlanDTO planData = this.reviewService.getCreate(planDTO);
-		System.out.println("planData : " + planData);
 		mv.addObject("data", planData);
 		mv.setViewName("/board/review/review_create");
 		return mv;
@@ -59,20 +59,16 @@ public class ReviewController {
 	 */
 	@Auth(role=Auth.Role.USER)
 	@PostMapping("create")
-	public ModelAndView createPost(ReviewDTO reviewDTO, ModelAndView mv, HttpSession httpSession,
+	public ModelAndView createPost(ReviewDTO reviewDTO, PlannerRatingDTO plannerRatingDTO, ModelAndView mv, HttpSession httpSession,
 								   @RequestParam("file[]") List<MultipartFile> multipartFiles,
 								   @RequestParam("planner_id") String plannerId) {
 		try {
 			String user_id = (String) httpSession.getAttribute("user_id"); // 로그인한 유저 아이디 세션
-			Map<String, Object> ratingMap = new HashMap<>();
-			ratingMap.put("plan_idx", 67);
-			ratingMap.put("planner_id", plannerId); // 플래너 아이디
-			ratingMap.put("planner_rating", reviewDTO.getPlanner_rating()); // 평가한 평점
-			ratingMap.put("user_id", user_id); // 구매한 유저 아이디
-			System.out.println("rating Map : " + ratingMap);
-			this.reviewService.plannerRating(ratingMap); // 플래너 평점
+			plannerRatingDTO.setPlan_idx(66);
+			plannerRatingDTO.setUser_id(user_id);
+			this.reviewService.plannerRating(plannerRatingDTO); // 플래너 평점
 			reviewDTO.setUser_id(user_id); // DTO에 유저 아이디 할당
-			reviewDTO.setPlan_idx(67); // 임시 plan_idx값
+			reviewDTO.setPlan_idx(66); // 임시 plan_idx값
 			int review_idx = this.reviewService.create(reviewDTO); // 생성된 게시글 idx
 			imgFileUpload(reviewDTO, multipartFiles, review_idx); // 이미지 파일 업로드 API
 			if (review_idx != 0) {
@@ -89,7 +85,6 @@ public class ReviewController {
 
 		return mv;
 	}
-
 	/**
 	 * 조원재 23.04.21 이미지 파일 업로드 API
 	 * @param reviewDTO
@@ -100,7 +95,7 @@ public class ReviewController {
 		try {
 			if(multipartFiles !=null && !multipartFiles.isEmpty()) { // 이미지 파일이 존재하는 경우
 				List<String> imgList = s3FileUploadService.upload(multipartFiles); // AWS서버 저장 후 URL값 List에 담기
-				reviewDTO.setR_img(imgList);
+				reviewDTO.setR_img(imgList); //
 				reviewDTO.setReview_idx(review_idx);
 				this.reviewService.createImg(reviewDTO);
 			} else { // 이미지 파일이 없는 경우

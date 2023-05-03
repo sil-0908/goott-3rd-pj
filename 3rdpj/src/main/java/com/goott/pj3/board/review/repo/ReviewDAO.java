@@ -1,6 +1,7 @@
 package com.goott.pj3.board.review.repo;
 
 import com.goott.pj3.board.review.dto.LikeUnlikeDTO;
+import com.goott.pj3.board.review.dto.PlannerRatingDTO;
 import com.goott.pj3.plan.dto.PlanDTO;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.SqlSession;
@@ -25,10 +26,8 @@ public class ReviewDAO {
 	}
 
 	public void createImg(ReviewDTO reviewDTO) {
-		System.out.println("files : " + reviewDTO);
 		this.ss.insert("review.insertFile", reviewDTO);
 	}
-
 	public ReviewDTO detail(ReviewDTO reviewDTO) {
 		return this.ss.selectOne("review.detail", reviewDTO);
 	}
@@ -70,26 +69,21 @@ public class ReviewDAO {
 	}
 
 	// 기존 점수 가져오기
-	public int rating(Map<String, Object> map) {
-		System.out.println("기존점수 DAO : " + map);
-		return this.ss.selectOne("review.rating", map);
+	public int rating(PlannerRatingDTO plannerRatingDTO) {
+		return this.ss.selectOne("review.rating", plannerRatingDTO);
 	}
-
 	// 평점 매긴 인원 카운팅
-	public int cnting(Map<String, Object> map) {
-		return this.ss.selectOne("review.cntring", map);
+	public int cnting(PlannerRatingDTO plannerRatingDTO) {
+		return this.ss.selectOne("review.cntring", plannerRatingDTO);
 	}
-
 	// 플래너 평점 업데이트
-	public void plannerRating(Map<String, Object> map) {
-		this.ss.update("review.plannerRating", map);
+	public void plannerRating(PlannerRatingDTO plannerRatingDTO) {
+		this.ss.update("review.plannerRating", plannerRatingDTO);
 	}
-
 	// 플래너 평점 남긴 여부
-	public int yOrN(Map<String, Object> map) {
-		return this.ss.update("review.yOrN", map);
+	public void yOrN(PlannerRatingDTO plannerRatingDTO) {
+		this.ss.update("review.yOrN", plannerRatingDTO);
 	}
-
     public LikeUnlikeDTO likeUnlikeCnt(LikeUnlikeDTO likeUnlikeDTO) {
 		return this.ss.selectOne("review.likeUnlikeCnt", likeUnlikeDTO);
     }

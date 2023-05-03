@@ -14,7 +14,6 @@ public class LikeUnlikeDAO {
     public LikeUnlikeDTO likeUnlikeCnt(LikeUnlikeDTO likeUnlikeDTO) {
         return this.ss.selectOne("likeUnlike.likeUnlikeCnt", likeUnlikeDTO);
     }
-
     public void createLike(LikeUnlikeDTO likeUnlikeDTO) {
         this.ss.insert("likeUnlike.createLike", likeUnlikeDTO);
     }
