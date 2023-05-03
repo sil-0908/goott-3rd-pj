@@ -30,6 +30,7 @@
   flex-wrap: wrap;
   justify-content: flex-start;
   width: 60vw;
+  height: 100vh;
   overflow: auto;
 }
 

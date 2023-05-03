@@ -1,81 +1,76 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ page import="java.util.List" %>
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="com.goott.pj3.plan.dto.PlanDTO" %><%--
-  Created by IntelliJ IDEA.
-  User: 길영준
-  Date: 2023-04-05
-  Time: 오후 2:20
-  To change this template use File | Settings | File Templates.
---%>
-
-<%@ include file="/WEB-INF/views/common/layout.jsp" %>
-<div data-include-path=""></div>
-<main class="search">
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/FortAwesome/Font-Awesome@5.14.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../css/style.css" />
+    <title>Sun Tour | Search</title>
+  </head>
+  <body>
+    <div data-include-path="layout.html"></div>
+    <script src="../js/layout.js"></script>
+    <main class="search">
+   	<!-- 카테고리 버튼 -->
       <nav class="search__nav">
         <ul class="keywords__ul">
-          <li class="btn keywords__btn">
+          <li class="keywords__btn">
             <a href="">레저</a>
           </li>
-          <li class="btn keywords__btn">
+          <li class="keywords__btn">
             <a href="">힐링</a>
           </li>
-          <li class="btn keywords__btn">
+          <li class="keywords__btn">
             <a href="">식도락</a>
           </li>
-          <li class="btn keywords__btn">
+          <li class="keywords__btn">
             <a href="">페스티벌</a>
           </li>
-          <li class="btn keywords__btn">
+          <li class="keywords__btn">
             <a href="">파티</a>
           </li>
-          <li class="btn keywords__btn">
+          <li class="keywords__btn">
             <a href="">명승지</a>
           </li>
-          <li class="btn keywords__btn">
+          <li class="keywords__btn">
             <a href="">캠핑</a>
           </li>
         </ul>
       </nav>
+      <!-- 검색결과 / 그리드 형태로 썸네일 출력 -->
       <section class="search__results">
-      	<ul class="grid--theme-search">
-      	<!-- 이미지, 플랜 타이틀 반복 출력 -->
-		  <c:forEach var="img" items="${imgList}" varStatus="status">
-	        <c:set var="idx" value="#{status.index}"/>   
-		    <li class="thumbnail--theme-search modal__btn--detail-open"
-		    data-id="${data[idx].getPlan_idx()}">
-		        <img src="${img.p_img[0]}" alt="plan image">
-			      <div class="thumbnail__txt--theme-search">
-		              <p>${data[idx].getPlan_title()}</p>
-	              </div>
-		    </li>
-		  </c:forEach>
-		</ul>
+        <ul class="grid--theme-search">
+        <!-- 반복문으로 데이터 출력 -->
+          <li class="thumbnail--theme-search modal__btn--detail-open">
+          <!-- 이미지 출력 -->
+            <img src="../img/slave.jpg" alt="" />
+            <!-- 호버 효과(타이틀) -->
+            <div class="thumbnail__txt--theme-search">
+              <p>마우스 치워라</p>
+            </div>
+          </li>
+        </ul>
       </section>
 
-      <!-- 모달창 -->
-      <%-- <c:forEach var="img" items="${imgList}" varStatus="status">
-	        <c:set var="idx" value="#{status.index}"/>   
-		    <li class="thumbnail--theme-search modal__btn--detail-open"
-		    data-modal="${img.get(idx).getPlan_idx()}">
-		        <img src="${img.p_img[0]}" alt="plan image">
-			      <div class="thumbnail__txt--theme-search">
-		              <p>${data[idx].getPlan_title()}</p>
-	              </div>
-		    </li>
-		  </c:forEach> --%>
+      <!-- 썸네일 클릭 시 모달창 -->
       <dialog class="modal modal__detail">
         <section class="modal__window">
-          <!-- <ul class="modal__grid">
-	            <li class="thumbnail thumbnail--theme-modal">
-	              <img src="../img/slave.jpg" alt="" />
-	              <div class="thumbnail__txt--theme-modal">
-	                <p>마우스 치워라</p>
-	              </div>
-	            </li>
-          </ul> -->
-          <!-- <section class="modal__info">
+          <ul class="modal__grid">
+          <!-- 플랜 이미지 반복문으로 출력 -->
+            <li class="thumbnail thumbnail--theme-modal">
+              <img src="../img/slave.jpg" alt="" />
+              <!-- 호버 효과 -->
+              <div class="thumbnail__txt--theme-modal">
+                <p>마우스 치워라</p>
+              </div>
+            </li>
+          </ul>
+          <!-- 플랜 상세 정보 -->
+          <section class="modal__info">
             <hgroup class="profile">
               <div class="profile__title">
                 <h1>플랜 제목</h1>
@@ -83,14 +78,15 @@
                   <a href="../html/planner.html"> 플래너 페이지 바로가기 </a>
                 </button>
               </div>
+              <!-- 여행 일정 상세/ 날짜별 구분 안할 시 시작일, 종료일 정보 삽입하면 될 듯 -->
               <p>플랜 설명플랜 설명플랜 설명플랜 설명</p>
             </hgroup>
+            <!-- 제일 하단 버튼 클릭 시 버튼, DAY 한개씩 증가, 회색 버튼 갯수가 여행 일수 -->
             <div class="modal__btns--add-day">
-              <div class="modal__btn modal__btn--color-gray"></div>
-              <div class="modal__btn modal__btn--color-gray"></div>
               <div class="modal__btn modal__btn--color-gray"></div>
               <div class="modal__btn"></div>
             </div>
+            <!-- 스케줄 -->
             <section class="schedule">
               <article class="schedule__day">
                 <div class="schedule__day--img-node">
@@ -98,9 +94,11 @@
                 </div>
                 <div class="schedule__day--detail">
                   <hgroup class="schedule__day--detail-title">
-                    <h1>DAY</h1>
+                    <h1>DAY{i}</h1>
                   </hgroup>
+                  <!-- if문으로 플랜 작성한 플래너만 수정 가능하게 작성 -->
                   <div class="schedule__day--detail-info">
+                  <!-- 셀렉트 박스에 지역 상세 설정 -->
                     <div class="schedule__selectboxes">
                       <select class="schedule__selectbox" name="" id="">
                         <option value="">셀렉트박스1</option>
@@ -112,6 +110,7 @@
                         <option value="">셀렉트박스3</option>
                       </select>
                     </div>
+                    <!-- 일정별 플랜 상세 작성 -->
                     <div class="schedule__textbox">
                       <p>플랜 상세</p>
                     </div>
@@ -120,14 +119,15 @@
               </article>
             </section>
             <div class="modal__btns">
+            <!-- 모달창 닫기 -->
               <button class="modal__btn modal__btn--detail-close">닫기</button>
+              <!-- 대화 모달 열기 -->
               <button class="modal__btn modal__btn--talk-open">대화하기</button>
-            </div> -->
+            </div>
           </section>
         </section>
       </dialog>
-      
-      
+      <!-- 대화 모달 -->
       <dialog class="modal modal__talk">
         <section class="chatbox">
           <section class="chatbox__doc">
@@ -152,16 +152,11 @@
           </div>
         </section>
       </dialog>
-      
     </main>
-    <script src="/resources/js/common/layout.js"></script>
-    <!-- <script src="/resources/js/common/search.js"></script> -->
-    <script src="/resources/js/common/modal.js"></script>
-    <script 
-    	type="text/javascript" 
-    	src="https://service.iamport.kr/js/iamport.payment-1.2.0.js">
-    </script>
+    <script src="../js/search.js"></script>
     <script
       src="https://kit.fontawesome.com/7723a79ab5.js"
       crossorigin="anonymous"
     ></script>
+  </body>
+</html>
