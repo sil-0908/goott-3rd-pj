@@ -3,6 +3,7 @@ package com.goott.pj3.board.review.service;
 import java.util.List;
 import java.util.Map;
 
+import com.goott.pj3.board.review.dto.LikeUnlikeDTO;
 import com.goott.pj3.board.review.dto.ReviewDTO;
 import com.goott.pj3.common.util.paging.Criteria;
 import com.goott.pj3.common.util.paging.PagingDTO;
@@ -43,4 +44,6 @@ public interface ReviewService {
     PlanDTO getCreate(PlanDTO planDTO);
 
     void plannerRating(Map<String, Object> map);
+
+    LikeUnlikeDTO likeUnlikeCnt(LikeUnlikeDTO likeUnlikeDTO);
 }

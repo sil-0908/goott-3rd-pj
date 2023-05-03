@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="likeUnlike">
+
+    <!--조원재 23.05.03 라이크, 언라이크 카운트-->
+    <select id="likeUnlikeCnt" resultType="com.goott.pj3.board.review.dto.LikeUnlikeDTO">
+        select r_like, r_unlike
+          from like_unlike
+         where user_id=#{user_id}
+           and review_idx=#{review_idx}
+    </select>
+    <!--조원재 23.05.03 라이크 생성 +1 -->
+    <insert id="createLike" parameterType="com.goott.pj3.board.review.dto.LikeUnlikeDTO">
+        insert into like_unlike(user_id, review_idx, r_like, r_unlike)
+             values (#{user_id}, #{review_idx}, #{r_like}, #{r_unlike})
+    </insert>
+    <!--조원재 23.05.03. 라이크 +1-->
+    <update id="like">
+        update like_unlike
+        set r_like=#{r_like}, r_unlike=#{r_unlike}
+        where user_id=#{user_id}
+          and review_idx=#{review_idx}
+    </update>
+    <!--조원재 23.05.03 언라이크 -1, 라이크 +1-->
+    <update id="relike">
+    update like_unlike
+       set r_like=#{r_like}, r_unlike=#{r_unlike}
+     where user_id=#{user_id}
+       and review_idx=#{review_idx}
+    </update>
+
+    <!--조원재 23.05.03 라이크 삭제-->
+    <update id="deleteLike">
+        update like_unlike
+        set r_like=#{r_like}, r_unlike=#{r_unlike}
+        where user_id=#{user_id}
+          and review_idx=#{review_idx}
+    </update>
+
+    <!--조원재 23.05.03 언라이크 생성 +1 -->
+    <insert id="createUnlike" parameterType="com.goott.pj3.board.review.dto.LikeUnlikeDTO">
+        insert into like_unlike(user_id, review_idx, r_like, r_unlike)
+             values (#{user_id}, #{review_idx}, #{r_like}, #{r_unlike})
+    </insert>
+
+    <!--조원재 23.05.03 언라이크 +1 -->
+    <update id="unlike">
+        update like_unlike
+        set r_like=#{r_like}, r_unlike=#{r_unlike}
+        where user_id=#{user_id}
+          and review_idx=#{review_idx}
+    </update>
+
+    <!-- 23.05.03 라이크-1, 언라이크+1-->
+    <update id="reUnLike">
+        update like_unlike
+           set r_like=#{r_like}, r_unlike=#{r_unlike}
+         where user_id=#{user_id}
+           and review_idx=#{review_idx}
+    </update>
+
+    <!-- 23.05.03 언라이크 삭제-->
+    <update id="deleteUnlike">
+        update like_unlike
+        set r_like=#{r_like}, r_unlike=#{r_unlike}
+        where user_id=#{user_id}
+          and review_idx=#{review_idx}
+    </update>
+
+    <!--23.05.03 라이크, 언라이크 총 갯수-->
+    <select id="getLikeUnlikeCnt" resultType="com.goott.pj3.board.review.dto.LikeUnlikeDTO">
+        select sum(r_like) r_like, sum(r_unlike) r_unlike
+        from like_unlike
+        where review_idx=#{review_idx};
+    </select>
+
+</mapper>

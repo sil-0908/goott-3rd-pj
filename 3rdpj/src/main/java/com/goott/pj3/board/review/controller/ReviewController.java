@@ -1,5 +1,6 @@
 package com.goott.pj3.board.review.controller;
 
+import com.goott.pj3.board.review.dto.LikeUnlikeDTO;
 import com.goott.pj3.board.review.dto.ReviewDTO;
 import com.goott.pj3.common.util.auth.Auth;
 import com.goott.pj3.common.util.aws.S3FileUploadService;
@@ -37,7 +38,9 @@ public class ReviewController {
 	@GetMapping("create")
 	public ModelAndView create(HttpSession httpSession, PlanDTO planDTO, ModelAndView mv){
 		// 아이디 값 파라미터로 받기 -> 로그인 아이디 세션과 아이디 값 비교 (마이 페이지 구현 후 진행예정)
-		planDTO.setPlan_idx(65);
+//		String longinId = httpSession.getAttribute("user_id");
+//		if(user_id.equals(longinId)){ 아래 코드 넣기 }
+		planDTO.setPlan_idx(67);
 		PlanDTO planData = this.reviewService.getCreate(planDTO);
 		System.out.println("planData : " + planData);
 		mv.addObject("data", planData);
@@ -60,13 +63,16 @@ public class ReviewController {
 								   @RequestParam("file[]") List<MultipartFile> multipartFiles,
 								   @RequestParam("planner_id") String plannerId) {
 		try {
-			Map<String, Object> map = new HashMap<>();
-			map.put("user_id", plannerId);
-			map.put("planner_rating", reviewDTO.getPlanner_rating());
-			this.reviewService.plannerRating(map);
 			String user_id = (String) httpSession.getAttribute("user_id"); // 로그인한 유저 아이디 세션
+			Map<String, Object> ratingMap = new HashMap<>();
+			ratingMap.put("plan_idx", 67);
+			ratingMap.put("planner_id", plannerId); // 플래너 아이디
+			ratingMap.put("planner_rating", reviewDTO.getPlanner_rating()); // 평가한 평점
+			ratingMap.put("user_id", user_id); // 구매한 유저 아이디
+			System.out.println("rating Map : " + ratingMap);
+			this.reviewService.plannerRating(ratingMap); // 플래너 평점
 			reviewDTO.setUser_id(user_id); // DTO에 유저 아이디 할당
-			reviewDTO.setPlan_idx(65); // 임시 plan_idx값
+			reviewDTO.setPlan_idx(67); // 임시 plan_idx값
 			int review_idx = this.reviewService.create(reviewDTO); // 생성된 게시글 idx
 			imgFileUpload(reviewDTO, multipartFiles, review_idx); // 이미지 파일 업로드 API
 			if (review_idx != 0) {
@@ -117,8 +123,12 @@ public class ReviewController {
 	@GetMapping("detail/{review_idx}")
 	public ModelAndView detail(@PathVariable int review_idx,
 							   ReviewDTO reviewDTO, ModelAndView mv){
+		LikeUnlikeDTO likeUnlikeDTO = new LikeUnlikeDTO();
 		reviewDTO.setReview_idx(review_idx);
+		likeUnlikeDTO.setReview_idx(review_idx);
+		LikeUnlikeDTO dto = this.reviewService.likeUnlikeCnt(likeUnlikeDTO);
 		ReviewDTO detail = this.reviewService.detail(reviewDTO); // review 게시글 정보
+		mv.addObject("likeUnlike", dto); // 좋아요, 싫어요 정보
 		mv.addObject("data", detail); // 게시글 정보
 		mv.setViewName("/board/review/review_detail");
 		return mv;

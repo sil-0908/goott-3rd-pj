@@ -22,15 +22,16 @@
 </head>
 <body>
 <h1>리뷰 작성</h1>
+<p>플랜 타이틀 : ${data.plan_title}</p>
 <form method="POST" enctype="multipart/form-data" >
-    <input type="hidden" name="planner_id" value="${data.user_id}}">
+    <input type="hidden" name="planner_id" value="${data.user_id}">
     <p>플랜 이미지</p>
     <c:forEach var="row" items="${data.p_img}">
-        <img scr="${row}" width="200" height="200">
+        <img src="${row}" width="200" height="200">
     </c:forEach>
     <p>내용 : <input type="text" name="review_content"></p>
     <p>사진 : <input id="fileItem" type="file" name="file[]" onchange="previewFile()" multiple ></p>
-    <p>플레너 : ${data.user_id}</p>
+    <p>플래너 : ${data.user_id}</p>
     <p>플래너 평점 :
         <input type="radio" name="planner_rating" value="1">1
         <input type="radio" name="planner_rating" value="2">2

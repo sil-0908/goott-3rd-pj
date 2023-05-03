@@ -1,5 +1,6 @@
 package com.goott.pj3.board.review.service;
 
+import com.goott.pj3.board.review.dto.LikeUnlikeDTO;
 import com.goott.pj3.plan.dto.PlanDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -100,16 +101,26 @@ public class ReviewServiceImpl implements ReviewService {
 		return this.reviewDAO.getCreate(planDTO);
 	}
 
+	/**
+	 * 조원재 23.05.03. 플래너 평점
+	 * @param map
+	 */
 	@Override
 	public void plannerRating(Map<String, Object> map) {
 		// 기존 점수 가지고와서 플랜점수 더하기
-		int rating = reviewDAO.rating(map);
-		int sumRating = rating + (int) map.get("planner_rating");
-		int cnt = reviewDAO.cnting(map);
-		int sumCnt = cnt + 1;
-		map.put("planner_raing", sumRating);
+		int rating = reviewDAO.rating(map); // 기존 점수
+		int sumRating = rating + (int) map.get("planner_rating"); // 기존 점수 + 평가한 점수
+		int cnt = reviewDAO.cnting(map); // 기존 평가한 인원 카운트
+		int sumCnt = cnt + 1; // 기존 평가한 인원 카운트 + 1
+		int affectRowCnt =reviewDAO.yOrN(map); // 평점 남긴 여부
+		map.put("planner_rating", sumRating);
 		map.put("rating_cnt", sumCnt);
-		this.reviewDAO.plannerRating(map);
+		this.reviewDAO.plannerRating(map); // 플래너 평점 매기기
+	}
+
+	@Override
+	public LikeUnlikeDTO likeUnlikeCnt(LikeUnlikeDTO likeUnlikeDTO) {
+		return this.reviewDAO.likeUnlikeCnt(likeUnlikeDTO);
 	}
 
 

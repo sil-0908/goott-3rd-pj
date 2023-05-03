@@ -4,7 +4,8 @@
 
     <!--조원재 23.05.02. 리뷰 작성 정보-->
     <select id="getCreate" resultMap="planResultMap">
-        select p.plan_idx, p.user_id, i.p_img
+        select p.plan_idx, p.user_id, p.plan_title, p.start_date,
+               p.end_date, p.price, p.plan_detail, i.p_img
           from plan p left join plan_img i
             on p.plan_idx = i.plan_idx
          where p.plan_idx = #{plan_idx}
@@ -14,6 +15,11 @@
     <resultMap id="planResultMap" type="com.goott.pj3.plan.dto.PlanDTO">
         <id property="plan_idx" column="plan_idx"/>
         <result property="user_id" column="user_id"/>
+        <result property="start_date" column="start_date"/>
+        <result property="end_date" column="end_date"/>
+        <result property="price" column="price"/>
+        <result property="plan_detail" column="plan_detail"/>
+        <result property="plan_title" column="plan_title"/>
         <collection property="p_img" column="p_img" javaType="List" ofType="String">
             <result column="p_img"/>
         </collection>
@@ -25,6 +31,7 @@
         insert into plan_review(user_id, plan_idx, review_content, planner_rating)
         values (#{user_id}, #{plan_idx}, #{review_content}, #{planner_rating})
     </insert>
+
     <!--조원재 23.04.21 리뷰 이미지 파일 생성-->
     <insert id="insertFile" parameterType="com.goott.pj3.board.review.dto.ReviewDTO">
             insert into review_img(review_idx, r_img) values
@@ -35,25 +42,34 @@
 
     <!--조원재 23.05.02 플래너 평점 생성-->
     <!--기존 평점 가져오기-->
-    <select id="rataing" parameterType="HashMap" resultType="Integer">
-        select planner_raing
+    <select id="rating" parameterType="HashMap" resultType="Integer">
+        select planner_rating
           from user
-         where user_id = #{user_id}
+         where user_id = #{planner_id}
     </select>
 
     <!--평점 카운팅 가져오기 -->
     <select id="cntring" parameterType="HashMap" resultType="Integer">
         select rating_cnt
           from user
-         where user_id = #{user_id}
+         where user_id = #{planner_id}
     </select>
 
     <!--플래너 평점 업데이트-->
     <update id="plannerRating" parameterType="HashMap">
         update user
         set planner_rating = #{planner_rating}, rating_cnt=#{rating_cnt}
-        where user_id = #{user_id}
+        where user_id = #{planner_id}
     </update>
+
+    <!--플래너 평가한 여부-->
+    <update id="yOrN">
+        update pay
+           set rating_yn = 'y'
+        where user_id = #{user_id}
+          and plan_idx = #{plan_idx}
+    </update>
+    <!--플래너 평점 끝-->
 
     <!--조원재 23.04.05 디테일 페이지-->
     <select id="detail" resultMap="reviewResultMap">
@@ -132,6 +148,17 @@
          limit #{pageStart}, #{perPageNum}
     </select>
 
+    <select id="totalCount" resultType="int">
+        select count(review_idx)
+        from plan_review
+        where
+        <if test="option == 'user_id'"> user_id like CONCAT('%',#{keyword},'%')</if>
+        <if test="option == 'content'"> review_content like CONCAT('%',#{keyword},'%')</if>
+        <if test="option == null or option == ''">1=1</if>
+        and r_del_yn = 'n'
+    </select>
+
+
     <!--조원재 23.04.26 리뷰 이미지 목록-->
     <select id="imglist" resultMap="reviewlistResultMap">
         select i.review_idx, i.r_img
@@ -149,14 +176,11 @@
         </collection>
     </resultMap>
 
-    <select id="totalCount" resultType="int">
-        select count(review_idx)
-          from plan_review
-         where 
-		   	<if test="option == 'user_id'"> user_id like CONCAT('%',#{keyword},'%')</if>
-	        <if test="option == 'content'"> review_content like CONCAT('%',#{keyword},'%')</if>
-	        <if test="option == null or option == ''">1=1</if>
-          and r_del_yn = 'n'
+    <!--조원재 23.05.03 리뷰 좋아요, 싫어요 카운팅-->
+    <select id="likeUnlikeCnt" resultType="com.goott.pj3.board.review.dto.LikeUnlikeDTO">
+        select sum(r_like) r_like, sum(r_unlike) r_unlike
+        from like_unlike
+        where review_idx=#{review_idx};
     </select>
 
 <!--	<insert id="replywrite">-->

@@ -8,4 +8,5 @@ public interface LikeUnlikeService {
 
     void unlike(LikeUnlikeDTO likeUnlikeDTO);
 
+    LikeUnlikeDTO getLikeUnlikeCnt(LikeUnlikeDTO likeUnlikeDTO);
 }

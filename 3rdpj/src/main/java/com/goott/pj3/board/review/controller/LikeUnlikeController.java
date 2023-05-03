@@ -17,21 +17,22 @@ public class LikeUnlikeController {
 
     @ResponseBody
     @PostMapping("like_unlike")
-    public ModelAndView likeUnlike(@RequestParam("user_id") String user_id,
+    public LikeUnlikeDTO likeUnlike(@RequestParam("user_id") String user_id,
                                    @RequestParam("action") String action,
                                    @RequestParam("review_idx") int review_idx,
                                    LikeUnlikeDTO likeUnlikeDTO, ModelAndView mv) {
-//        likeUnlikeDTO.setUser_id(user_id);
+        System.out.println("로그인 아이디 : " + user_id);
+        System.out.println("액션 : " + action);
+        System.out.println("리뷰 인덱스 : " + review_idx);
+        likeUnlikeDTO.setUser_id(user_id);
+        likeUnlikeDTO.setReview_idx(review_idx);
         if (action.equals("like")) {
             this.likeUnlikeService.like(likeUnlikeDTO);
         } else if (action.equals("unlike")) {
             this.likeUnlikeService.unlike(likeUnlikeDTO);
         }
-////        LikeUnlikeDTO dto = likeUnlikeService.getLikeUnlikeCnt(likeUnlikeDTO);
-//        mv.addObject("likeCount", dto.getP_like());
-//        mv.addObject("unlikeCount", dto.getP_unlike());
-//        return mv;
-//    }
-        return mv;
+      LikeUnlikeDTO dto = likeUnlikeService.getLikeUnlikeCnt(likeUnlikeDTO);
+        System.out.println("dto : " + dto);
+        return dto;
     }
 }
