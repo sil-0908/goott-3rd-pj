@@ -1,4 +1,4 @@
-.detail {
+.detail { 
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -9,6 +9,11 @@
   display: flex;
   flex-direction: column;
   align-items: baseline;
+}
+.btns__box{
+	width: 100%;
+	display: flex;
+	justify-content: space-around;
 }
 .detail__title {
   margin: 4rem 0;
@@ -31,6 +36,7 @@
 .detail__content {
   border-bottom: 2px solid var(--blue);
   padding-bottom: 5rem;
+  width: 100%;
 }
 .detail__content > p {
   font-size: 1rem;

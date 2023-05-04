@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 public class ReviewDTO {
-    private int review_idx, plan_idx, review_rating;
+    private int review_idx, plan_idx, planner_rating;
     private String user_id, review_content, r_del_yn;
     private Date create_date, update_date;
     private List<String> r_img;
@@ -42,12 +42,12 @@ public class ReviewDTO {
         this.plan_idx = plan_idx;
     }
 
-    public int getReview_rating() {
-        return review_rating;
+    public int getPlanner_rating() {
+        return planner_rating;
     }
 
-    public void setReview_rating(int review_rating) {
-        this.review_rating = review_rating;
+    public void setPlanner_rating(int planner_rating) {
+        this.planner_rating = planner_rating;
     }
 
     public String getUser_id() {
@@ -95,7 +95,7 @@ public class ReviewDTO {
         return "ReviewDTO{" +
                 "review_idx=" + review_idx +
                 ", plan_idx=" + plan_idx +
-                ", review_rating=" + review_rating +
+                ", planner_rating=" + planner_rating +
                 ", user_id='" + user_id + '\'' +
                 ", review_content='" + review_content + '\'' +
                 ", r_del_yn='" + r_del_yn + '\'' +

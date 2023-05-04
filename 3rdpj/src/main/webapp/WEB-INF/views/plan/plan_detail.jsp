@@ -6,7 +6,7 @@
   Time: 오후 7:03
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %> 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
@@ -42,6 +42,16 @@
 <p>종료날짜 : ${data.end_date}</p>
 <label for="planner">플래너</label>
 <input id="planner" type="text" value="${data.user_id}">
+
+<form action="/chat/room" method="post">
+    <p>폼태그 안-> 추후 hidden</p>
+    <input type="hidden" name="name" id="name" class="form-control" value="">
+    <input type="hidden" name="send_id" id="send_id" class="form-control" value="${sessionScope.user_id}">
+    <input type="hidden" name="receive_id" id="receive_id" class="form-control" value="${data.user_id}">
+    <c:if test="${sessionScope.auth == 'auth_c'}">
+    <button type="submit" class="btn btn-secondary">플래너에게 메세지 보내기</button>
+    </c:if>
+</form>
 
 <c:if test="${data.user_id == sessionScope.user_id}">
     <button type="button" onclick="location.href='edit?idx=${data.plan_idx}&auth=${data.user_id}'">수정</button>
@@ -141,7 +151,7 @@
             }
 
         }).fail(function (error) {
-            alert('에이쟉스 실패')
+            alert('에이젝스 실패')
         })
     }
 

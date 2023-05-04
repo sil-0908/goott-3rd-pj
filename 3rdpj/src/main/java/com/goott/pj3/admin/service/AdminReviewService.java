@@ -13,10 +13,11 @@ public interface AdminReviewService {
 
     PagingDTO paging(Criteria cri);
 
-    public Map<String, Object> detail(Map<String, Object> map);
+    ReviewDTO detail(int reviewIdx);
 
-    boolean update(Map<String, Object> map);
+//    boolean update(Map<String, Object> map);
 
-    boolean delete(Map<String, Object> map);
+//    boolean delete(Map<String, Object> map);
+
 
 }

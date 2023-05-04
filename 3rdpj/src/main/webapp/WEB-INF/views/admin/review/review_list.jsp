@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
 
 <!DOCTYPE html>
 <html>
@@ -50,7 +50,7 @@
         </a>
       </td>
       <td>${row.user_id}</td>
-      <td>y/n</td>
+      <td>${row.r_del_yn}</td>
       <td>
         <fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${row.create_date}"/>
       </td>

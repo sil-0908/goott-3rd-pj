@@ -1,7 +1,8 @@
 package com.goott.pj3.admin.service;
 
-import java.util.List;
+import java.util.*;
 
+import com.goott.pj3.admin.dto.chartDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -81,6 +82,12 @@ public class AdminUserServiceImpl implements AdminUserService {
     public void adminUserDeleteReturn(AdminUserDTO dto) {
         // TODO Auto-generated method stub
         adminUserDAO.adminUserDeleteReturn(dto);
+    }
+
+    @Override
+    public List<chartDTO> getUserMonthByAuth(String auth) {
+
+        return adminUserDAO.getUserMonthByAuth(auth);
     }
 
 

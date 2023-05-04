@@ -1,6 +1,6 @@
 /* find_user area */
 /* form */
-.finduser_main {
+.finduser_main { 
 	min-height: 100vh;
 	background-image: url("/resources/img/user_page_bg.jpg");
 	background-size: cover;
@@ -22,21 +22,23 @@
     align-items: center;
     background-color: #fff;
     position: relative;
-    width: 20%;
+    width: 25%;
+    height: 30rem;
     padding: 1.5rem 0;
     border-radius: 0.8rem;
-    line-height: 3.5rem;
+    line-height: 4.5rem;
 }
 
 /* input */
 .finduser_input {
+	width: 16rem;
     border: none;
     outline: none;
     padding-left: 2rem;
     padding-bottom: 0.5rem;
     color: #333;
     transition: all 0.2s ease;
-    border-bottom: 1.5px solid #aaaaaa;    
+    border-bottom: 1.5px solid #aaaaaa;
 }
 
 .finduser_input:focus {
@@ -57,6 +59,7 @@
 
 .alert_text {
 	height: 3.5rem;
+	margin-top: -1.5rem;
 }
 
 /* icon */
@@ -64,7 +67,7 @@
 	font-size: 20px;
 	color: #707070;
 	margin-left: 6rem;
-    margin-top: 1.9rem;
+    margin-top: 2.2rem;
     position: absolute;
     left: 0;
     transform: translateY(-50%);
@@ -79,13 +82,13 @@
 	color: var(--white);
 	background-color: var(--blue);
 	width: 50%;
-	padding: 0.65rem 0;
+	padding: 1rem 0;
 	border-radius: 10px;
 	transition: background-color 0.2s;
 }
 
 .finduser_btn {
-	margin: 1rem 0;
+	margin: 2rem 0;
 	border: 2px solid #fff;
 	background: transparent;	
 	cursor: pointer;

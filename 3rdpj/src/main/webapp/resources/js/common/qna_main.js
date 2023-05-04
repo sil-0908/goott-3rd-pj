@@ -1,8 +1,8 @@
 /**
  * 
  */
-const qnaGuideModal = document.querySelector(".qna__guide");
-const closeBtnQnaGuide = document.querySelector(".qna__guide--btn-close");
+const qnaGuideModal = document.querySelector(".guide");
+const closeBtnQnaGuide = document.querySelector(".guide__btn-close");
 
 window.addEventListener("load", function () {
   qnaGuideModal.open = true;
@@ -10,4 +10,4 @@ window.addEventListener("load", function () {
 
 closeBtnQnaGuide.addEventListener("click", () => {
   qnaGuideModal.close();
-});
+}); 

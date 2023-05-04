@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="user">
-
-	<!-- 회원가입  - 장민실 23.04.04 -->
+	<!-- 장민실 23.04.04 -->
+	<!-- 회원가입 -->
 	<insert id="sign_up">
 		<![CDATA[
 		insert into user (user_id, pw, birth, email, hp)
@@ -10,14 +10,14 @@
 		]]>
 	</insert>
    
-	<!-- 아이디 중복체크  - 장민실 23.04.04 -->
+	<!-- 아이디 중복체크 -->
 	<select id="id_chk" parameterType="String" resultType="int">
 		select count(user_id)
 		  from user
 		 where user_id = #{user_id}
 	</select>
    
-	<!-- 로그인  - 장민실 23.04.04 -->
+	<!-- 로그인 -->
 	<select id="sign_in" resultType="com.goott.pj3.user.dto.UserDTO">
 		<![CDATA[
 		select user_id, auth, u_del_yn
@@ -27,7 +27,7 @@
 		]]>
 	</select>
 	  
-	<!-- DB의 암호화 비밀번호 가져오기 - 장민실 23.04.11 -->
+	<!-- DB의 암호화 비밀번호 가져오기 -->
 	<select id="get_hashed_pw" parameterType="com.goott.pj3.user.dto.UserDTO" resultType="String">
 		<![CDATA[
 		select pw
@@ -36,7 +36,7 @@
 		]]>
 	</select>
 	
-	<!-- 아이디 찾기 - 장민실 23.04.13 -->
+	<!-- 아이디 찾기 -->
 	<select id="find_id" parameterType="com.goott.pj3.user.dto.UserDTO" resultType="String">
 		<![CDATA[
 		select user_id
@@ -46,7 +46,7 @@
 		]]>
 	</select>
 	
-	<!-- 비밀번호 찾기 - 장민실 23.04.23 -->
+	<!-- 비밀번호 찾기 -->
    	<select id="find_get_pw" parameterType="com.goott.pj3.user.dto.UserDTO" resultType="String">
    		select pw
    		  from user
@@ -54,11 +54,20 @@
    		   and hp = #{hp}
    	</select>
    	
-   	<!-- 비밀번호 변경 - 장민실 23.04.26 -->
+   	<!-- 비밀번호 변경 -->
    	<update id="find_set_pw" parameterType="com.goott.pj3.user.dto.UserDTO">
    		update user
    		   set pw = #{pw}
    		 where user_id = #{user_id}
    		   and hp = #{hp}
    	</update>
+   	
+   	<select id="get_user_info" resultType="com.goott.pj3.user.dto.UserDTO">
+   		<![CDATA[
+   		select user_id, birth, email, hp, u_point, create_date, update_date
+   		  from user
+   		 where user_id = #{user_id}
+   		   and auth = "auth_c"
+   		]]>
+   	</select>
 </mapper>
