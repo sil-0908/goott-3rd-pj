@@ -20,50 +20,52 @@ public class ReviewDAO {
 
 	@Autowired
 	SqlSession ss;
-
+	
+	// 리뷰 생성
 	public int create(ReviewDTO reviewDTO) {
 		return this.ss.insert("review.insert", reviewDTO);
 	}
-
+	// 리뷰 이미지 생성
 	public void createImg(ReviewDTO reviewDTO) {
 		this.ss.insert("review.insertFile", reviewDTO);
 	}
+	// 리뷰 상세 정보 호출
 	public ReviewDTO detail(ReviewDTO reviewDTO) {
 		return this.ss.selectOne("review.detail", reviewDTO);
 	}
-
+	// 리뷰 업데이트
 	public int update(ReviewDTO reviewDTO) {
 		return this.ss.update("review.update", reviewDTO);
 	}
-
+	// 리뷰 이미지 삭제
 	public void deleteImg(ReviewDTO reviewDTO) {
 		this.ss.delete("review.deleteImg", reviewDTO);
 	}
-
+ 	// 리뷰 이미지 업데이트 
 	public void updateImg(ReviewDTO reviewDTO) {
 		this.ss.update("review.updateImg", reviewDTO);
 	}
-
+	// 리뷰 삭제
 	public int delete(ReviewDTO reviewDTO) {
 		return this.ss.update("review.delete", reviewDTO);
 	}
-
+	// 리뷰 목록 호출
 	public List<ReviewDTO> list(Criteria cri) {
 		return this.ss.selectList("review.list", cri);
 	}
-
+	// 리뷰 토탈 게시물 수 
 	public int totalCount(Criteria cri) {
 		return this.ss.selectOne("review.totalCount",cri);
 	}
-
+	// 이미지 목록 호출
 	public List<ReviewDTO> imgList(ReviewDTO reviewDTO) {
 		return this.ss.selectList("review.imglist", reviewDTO);
 	}
-
+	// 리뷰 이미지 업데이트 
 	public void updateDeleteImg(ReviewDTO reviewDTO) {
 		this.ss.update("review.updateDeleteImg", reviewDTO);
 	}
-
+	// 플랜 정보 호출
 	public PlanDTO getCreate(PlanDTO planDTO) {
 		return this.ss.selectOne("review.getCreate", planDTO);
 	}
@@ -84,7 +86,8 @@ public class ReviewDAO {
 	public void yOrN(PlannerRatingDTO plannerRatingDTO) {
 		this.ss.update("review.yOrN", plannerRatingDTO);
 	}
-    public LikeUnlikeDTO likeUnlikeCnt(LikeUnlikeDTO likeUnlikeDTO) {
+    // 리뷰 좋아요, 싫어요 개수 정보
+	public LikeUnlikeDTO likeUnlikeCnt(LikeUnlikeDTO likeUnlikeDTO) {
 		return this.ss.selectOne("review.likeUnlikeCnt", likeUnlikeDTO);
     }
 }

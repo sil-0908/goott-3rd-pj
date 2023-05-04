@@ -34,7 +34,10 @@ public class ReviewController {
 
 	/**
 	 * 조원재 23.04.05. 리뷰 페이지 호출
-	 * @return
+	 * @param httpSession 현재 세션 정보
+	 * @param planDTO 리뷰에 필요한 데이터를 담은 PlanDTO 객체
+	 * @param mv ModelAndView 객체
+	 * @return ModelAndView 객체에 데이터를 추가하고 view를 설정한 후 반환
 	 */
 	@GetMapping("create")
 	public ModelAndView create(HttpSession httpSession, PlanDTO planDTO, ModelAndView mv){
@@ -51,11 +54,13 @@ public class ReviewController {
 	/**
 	 * 조원재 23.04.05 리뷰 생성
 	 * 		 23.04.21 파일 업로드 기능 추가
-	 * @param reviewDTO
-	 * @param mv
-	 * @param httpSession
-	 * @param multipartFiles
-	 * @return
+	 * @param reviewDTO 리뷰 데이터를 담은 ReviewDTO 객체
+	 * @param plannerRatingDTO 플래너 평점 데이터를 담은 PlannerRatingDTO 객체
+	 * @param mv ModelAndView 객체
+	 * @param httpSession 현재 세션 정보
+	 * @param multipartFiles 업로드된 파일을 담은 List<MultipartFile> 객체
+	 * @param plannerId 플래너 아이디
+	 * @return ModelAndView 객체에 view를 설정한 후 반환합니다.
 	 */
 	@Auth(role=Auth.Role.USER)
 	@PostMapping("create")
@@ -85,11 +90,12 @@ public class ReviewController {
 
 		return mv;
 	}
+
 	/**
 	 * 조원재 23.04.21 이미지 파일 업로드 API
-	 * @param reviewDTO
-	 * @param multipartFiles
-	 * @param review_idx
+	 * @param reviewDTO 리뷰 데이터를 담은 ReviewDTO 객체
+	 * @param multipartFiles 업로드된 이미지 파일들을 담은 List<MultipartFile> 객체
+	 * @param review_idx 생성된 리뷰의 인덱스 값
 	 */
 	private void imgFileUpload(ReviewDTO reviewDTO, List<MultipartFile> multipartFiles, int review_idx) {
 		try {
@@ -108,12 +114,12 @@ public class ReviewController {
 	}
 
 	/**
-	 * 조원재 23.04.05 리뷰 디테일 페이지 호출
-	 * 		 23.04.25 리뷰 디테일 페이지 이미지 파일 추가
-	 * @param review_idx
-	 * @param reviewDTO
-	 * @param mv
-	 * @return
+	 * 조원재 리뷰 디테일 페이지 호출
+	 * 		 리뷰 디테일 페이지 이미지 파일 추가
+	 * @param review_idx 조회할 리뷰의 인덱스
+	 * @param reviewDTO 리뷰 데이터를 담은 ReviewDTO 객체
+	 * @param mv ModelAndView 객체
+	 * @return ModelAndView 객체에 데이터와 view를 설정한 후 반환
 	 */
 	@GetMapping("detail/{review_idx}")
 	public ModelAndView detail(@PathVariable int review_idx,
@@ -130,11 +136,11 @@ public class ReviewController {
 	}
 
 	/**
-	 * 조원재 23.04.05 리뷰 수정 화면 호출
-	 * @param review_idx
-	 * @param reviewDTO
-	 * @param mv
-	 * @return
+	 * 조원재 리뷰 수정 화면 호출
+	 * @param review_idx 리뷰의 인덱스 값
+	 * @param reviewDTO 리뷰 데이터를 담은 ReviewDTO 객체
+	 * @param mv ModelAndView 객체
+	 * @return ModelAndView 객체에 데이터를 추가하고 view를 설정한 후 반환
 	 */
 	@GetMapping("update/{review_idx}")
 	public ModelAndView update(@PathVariable int review_idx, ReviewDTO reviewDTO, ModelAndView mv) {
@@ -146,13 +152,13 @@ public class ReviewController {
 	}
 
 	/**
-	 * 조원재 23.04.05 리뷰 수정 기능
-	 * 		 23.04.25 리뷰 이미지 파일 업데이트 기능 수정
-	 * @param review_idx
-	 * @param reviewDTO
-	 * @param mv
-	 * @param multipartFile
-	 * @return
+	 * 조원재 리뷰 수정 기능
+	 * 		 리뷰 이미지 파일 업데이트 기능 수정
+	 * @param review_idx 수정할 리뷰의 인덱스 값
+	 * @param reviewDTO 수정할 리뷰 데이터를 담은 ReviewDTO 객체
+	 * @param mv ModelAndView 객체
+	 * @param multipartFile 업데이트할 이미지 파일들을 담은 List<MultipartFile> 객체
+	 * @return ModelAndView 객체에 view를 설정한 후 반환
 	 */
 	@PostMapping("update/{review_idx}")
 	public ModelAndView updatePost(@PathVariable int review_idx,  ReviewDTO reviewDTO, ModelAndView mv,
@@ -169,18 +175,18 @@ public class ReviewController {
 	}
 
 	/**
-	 * 조원재 23.04.25 이미지 파일 업데이트 API
-	 * @param review_idx
-	 * @param reviewDTO
-	 * @param mv
-	 * @param multipartFile
-	 * @param succeessIdx
+	 * 조원재 이미지 파일 업데이트 API
+	 * @param review_idx 리뷰의 인덱스 값
+	 * @param reviewDTO 리뷰 데이터를 담은 ReviewDTO 객체
+	 * @param mv ModelAndView 객체
+	 * @param multipartFile 업데이트할 이미지 파일들을 담은 List<MultipartFile> 객체
+	 * @param succeessIdx 성공적으로 업데이트된 리뷰의 인덱스 값
 	 */
 	private void ImgFileUpdate(int review_idx, ReviewDTO reviewDTO, ModelAndView mv,
 							   List<MultipartFile> multipartFile, int succeessIdx) {
 		try {
-			if(multipartFile !=null || !multipartFile.isEmpty()) {
-				List<String> imgList = s3FileUploadService.upload(multipartFile);
+			if(multipartFile !=null || !multipartFile.isEmpty()) { // 이미지 파일이 존재하는 경우
+				List<String> imgList = s3FileUploadService.upload(multipartFile); // 서버에 이미지 저장 후 URL 주소 list에 담기
 				reviewDTO.setR_img(imgList);
 				reviewDTO.setReview_idx(succeessIdx);
 				this.reviewService.updateImg(reviewDTO);
@@ -191,11 +197,11 @@ public class ReviewController {
 	}
 
 	/**
-	 * 조원재 23.04.05 리뷰 삭제
-	 * @param review_idx
-	 * @param reviewDTO
-	 * @param mv
-	 * @return
+	 * 조원재 리뷰 삭제
+	 * @param review_idx 삭제할 리뷰의 인덱스 값
+	 * @param reviewDTO 삭제할 리뷰 데이터를 담은 ReviewDTO 객체
+	 * @param mv ModelAndView 객체
+	 * @return ModelAndView 객체에 view를 설정한 후 반환
 	 */
 	@PostMapping("delete/{review_idx}")
 	public ModelAndView delete(@PathVariable int review_idx, ReviewDTO reviewDTO, ModelAndView mv) {
@@ -219,11 +225,11 @@ public class ReviewController {
 	}
 
 	/**
-	 * 조원재 23.04.05 리스트 조회, 검색, 페이징
-	 * @param mv
-	 * @param cri
-	 * @param reviewDTO
-	 * @return
+	 * 조원재 리스트 조회, 검색, 페이징
+	 * @param mv ModelAndView 객체
+	 * @param cri 페이징을 위한 Criteria 객체
+	 * @param reviewDTO 리뷰 데이터를 담은 ReviewDTO 객체
+	 * @return ModelAndView 객체에 데이터와 view를 설정한 후 반환
 	 */
 	@RequestMapping("list")
 	public ModelAndView list(ModelAndView mv, Criteria cri, ReviewDTO reviewDTO) {
