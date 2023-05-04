@@ -27,7 +27,9 @@
             <li class="nav__item sign_in">로그인</li>
 		  </c:if>
 		  <c:if test="${sessionScope.user_id != null}">
+		    <li class="nav__item my_page">마이페이지</li>
 		    <li class="nav__item sign_out">로그아웃</li>
+		    <input type="hidden" class="user_auth_input" value="${sessionScope.auth}" />
 		  </c:if>
         </ul>
       </nav>

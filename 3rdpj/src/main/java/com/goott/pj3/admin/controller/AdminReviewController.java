@@ -27,9 +27,10 @@ public class AdminReviewController {
 
 
     /**
-     * 신진영 23.04.18 리뷰 목록, 검색
-     * @param cri,mv
-     * @return
+     신진영 23.04.18 후기 목록
+     @param cri Criteria 객체
+     @param mv ModelAndView 객체
+     @return ModelAndView
      */
     @Auth(role = Auth.Role.ADMIN)
     @RequestMapping("reviewlist")
@@ -41,10 +42,10 @@ public class AdminReviewController {
     }
 
     /**
-     * 신진영 23.04.18 리뷰 상세페이지
-     * @param review_idx
-     * @param mv
-     * @return
+     * 신진영 23.04.18 리뷰 상세조회
+     * @param review_idx 조회할 리뷰의 인덱스
+     * @param mv ModelAndView 객체
+     * @return ModelAndView 객체
      */
     @Auth(role = Auth.Role.ADMIN)
     @RequestMapping("reviewdetail")
