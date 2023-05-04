@@ -35,9 +35,7 @@ public class StompChatController {
         repository.saveMessageLog(chatMessageDTO);  //로그 DB에 저장
         //실시간 알람
         String alarmDestination = "/sub/chat/alarm/" + chatMessageDTO.getReceive_id();
-        String alarmMessage = chatMessageDTO.getSend_id() + "님이 새로운 메세지를 보냈습니다";
+        String alarmMessage = chatMessageDTO.getSend_id() + "님의 새로운 메세지";
         template.convertAndSend(alarmDestination, alarmMessage);
     }
-
-
 }
