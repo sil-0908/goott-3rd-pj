@@ -151,7 +151,7 @@
             }
 
         }).fail(function (error) {
-            alert('에이쟉스 실패')
+            alert('에이젝스 실패')
         })
     }
 
