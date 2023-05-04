@@ -164,25 +164,44 @@
 	</select>
 
 	<!--신진영 23.04.18 디테일 페이지-->
-	<select id="reviewDetail" parameterType="hashMap" resultType="hashMap">
-		select review_idx, user_id, plan_idx, review_content, planner_rating , create_date, update_date, r_del_yn,
-		from plan_review
-		where review_idx = #{review_idx}
+	<select id="reviewDetail" resultMap="reviewResultMap">
+		select r.review_idx, r.user_id, r.plan_idx, r.review_content, r.planner_rating, r.create_date, r.update_date
+			   ,i.r_img, i.r_img_idx
+		from plan_review r inner join review_img i
+		on r.review_idx = i.review_idx
+		where r.review_idx = #{review_idx}
 	</select>
+
+	<resultMap id="reviewResultMap" type="com.goott.pj3.board.review.dto.ReviewDTO">
+		<id property="review_idx" column="review_idx"/>
+		<result property="user_id" column="user_id"/>
+		<result property="plan_idx" column="plan_idx"/>
+		<result property="review_content" column="review_content"/>
+		<result property="planner_rating" column="planner_rating"/>
+		<result property="create_date" column="create_date"/>
+		<result property="update_date" column="update_date"/>
+		<collection property="r_img" column="r_img" javaType="java.util.List" ofType="String" >
+			<result column="r_img"/>
+		</collection>
+		<collection property="r_img_idx" column="r_img_idx" javaType="List" ofType="String">
+			<result column="r_img_idx" />
+		</collection>
+	</resultMap>
+
 	<!--신진영 23.04.18 리뷰 수정-->
-	<update id="reviewUpdate" parameterType="hashMap">
-		update plan_review
-		set review_content=#{review_content},
-	# 	    review_img=#{review_img},
-			update_date=NOW()
-		where review_idx = #{review_idx}
-	</update>
+<!--	<update id="reviewUpdate" parameterType="hashMap">-->
+<!--		update plan_review-->
+<!--		set review_content=#{review_content},-->
+<!--	# 	    review_img=#{review_img},-->
+<!--			update_date=NOW()-->
+<!--		where review_idx = #{review_idx}-->
+<!--	</update>-->
 	<!--신진영 23.04.18 리뷰 삭제-->
-	<delete id="reviewDelete" parameterType="hashMap">
-		update plan_review
-		   set r_del_yn='n'
-		 where review_idx = #{review_idx}
-	</delete>
+<!--	<delete id="reviewDelete" parameterType="hashMap">-->
+<!--		update plan_review-->
+<!--		   set r_del_yn='n'-->
+<!--		 where review_idx = #{review_idx}-->
+<!--	</delete>-->
 
 	<!-- 신진영 23.04.19 자주묻는질문답변 목록-->
 	<select id="qnaList" resultType="com.goott.pj3.board.qna.dto.QnaDTO">
@@ -236,6 +255,24 @@
 		set q_del_yn='Y', update_date=NOW()
 		where qna_idx=#{qna_idx}
 	</delete>
+
+	<select id="getUserMonth" resultType="com.goott.pj3.admin.dto.chartDTO">
+		SELECT COUNT(*) as count, MONTH(create_date) as month
+		FROM user
+		GROUP BY MONTH(create_date),auth
+		HAVING auth = #{auth}
+		ORDER BY MONTH(create_date)
+	</select>
+	<resultMap id="getUserMonthresult" type="com.goott.pj3.admin.dto.chartDTO">
+
+
+
+
+	</resultMap>
+
+
+
+
 
 
 

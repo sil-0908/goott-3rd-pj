@@ -23,16 +23,17 @@ public class AdminReviewDAO {
         return sqlSession.selectOne("admin.r_total", cri);
     }
 
-    public Map<String, Object> detail(Map<String, Object> map) {
-        return this.sqlSession.selectOne("admin.reviewDetail", map);
+    public ReviewDTO detail(int reviewIdx) {
+        return  sqlSession.selectOne("admin.reviewDetail",reviewIdx);
     }
 
-    public int update(Map<String, Object> map) {
-        return this.sqlSession.update("admin.reviewUpdate", map);
-    }
+//    public int update(Map<String, Object> map) {
+//        return this.sqlSession.update("admin.reviewUpdate", map);
+//    }
 
-    public int delete(Map<String, Object> map) {
-        return this.sqlSession.delete("admin.reviewDelete", map);
-    }
+//    public int delete(Map<String, Object> map) {
+//        return this.sqlSession.delete("admin.reviewDelete", map);
+//    }
+
 
 }
