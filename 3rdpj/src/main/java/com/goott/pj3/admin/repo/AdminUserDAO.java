@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.goott.pj3.admin.dto.chartDTO;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -75,7 +76,7 @@ public class AdminUserDAO {
     }
 
 
-    public List<Map<String, Object>> getUserMonthByAuth(String auth) {
+    public List<chartDTO> getUserMonthByAuth(String auth) {
         Map<String, Object> paramMap = new HashMap<String, Object>();
         paramMap.put("auth", auth);
         return sqlSession.selectList("admin.getUserMonth", paramMap);

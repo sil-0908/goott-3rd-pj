@@ -1,9 +1,9 @@
 package com.goott.pj3.admin.service;
 
 import java.util.List;
-import java.util.Map;
 
 import com.goott.pj3.admin.dto.AdminUserDTO;
+import com.goott.pj3.admin.dto.chartDTO;
 import com.goott.pj3.common.util.paging.Criteria;
 import com.goott.pj3.common.util.paging.PagingDTO;
 
@@ -22,5 +22,5 @@ public interface AdminUserService {
 
     void adminUserDeleteReturn(AdminUserDTO dto);
 
-    public List<Map<String, Object>> getUserMonthByAuth(String auth);
+    List<chartDTO> getUserMonthByAuth(String auth);
 }

@@ -1,4 +1,4 @@
-package com.goott.pj3.common.util.chat;
+package com.goott.pj3.chat.dto;
 
 import java.util.Date;
 
