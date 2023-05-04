@@ -174,7 +174,7 @@
 	
 // 비밀번호 유효성 검사
 	function pwd_chk() {
-		var pwd = $('.pw').val();
+		var pwd = $('.origin_pw').val();
 		// 영문 소문자,숫자,특수문자 최소 1개 이상 입력 / 8~20자 / 공백X
 		var pwd_valid = /^(?=.*[a-z])(?=.*[0-9])(?=.*[\?!@#\$%\^&\*])[a-z0-9\?!@#\$%\^&\*]{8,20}$/;
 		var origin_pw_cnt;
@@ -199,8 +199,8 @@
 	
 // 비밀번호, 비밀번호 확인 값 일치여부 체크
 	function pwd_match(){
-		var origin_pwd = $('.pw').val();
-		var copy_pwd = $('.pw_chk').val();
+		var origin_pwd = $('.origin_pw').val();
+		var copy_pwd = $('.copy_pw').val();
 		var copy_pw_cnt;
 		
 		if(copy_pwd===""){

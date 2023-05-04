@@ -99,7 +99,7 @@ $(".find_pw").on('click', function() {
 	}	// hp 공란 else if end
 	else if(id!=""||hp!="") {
 		$.ajax({
-			data : { id : id, hp : hp },
+			data : { "id" : id, "hp" : hp },
 			url : "/user/find_get_pw",
 			type : "POST",
 			success : function(origin_pw) {
@@ -212,24 +212,19 @@ $(".change_pw_btn").on('click', function() {
 	}	// 유효성 검사 미통과 혹은 불일치 할 경우 if end
 	else if(total===2) {
 		$.ajax({
-			data : { id : id, hp : hp, pw : pw },
+			data : { "id" : id, "hp" : hp, "pw" : pw },
 			url : "/user/find_set_pw",
 			type : "POST",
 //			dataType : "json",
-			contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+//			contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
 			success : function(data) {
-				console.log(JSON.stringify(data));
-//				var responseData = JSON.parse(data);
-//		        console.log("2222222 : " + responseData.setpw_msg);
-				console.log("111111 : " + data);
-				console.log(data.setpw_msg);
-				if(data.setpw_msg.msg==="same_pw") {
+				if(data.msg==="same_pw") {
 					$(".change_pw_msg").html("현재 사용중인 비밀번호와 일치합니다");
 					$(".change_pw_msg").css("style", "red");
 				}	// 해당 사용자가 사용중인 비밀번호일 경우 if end
-				else if(data.setpw_msg.msg==="different_pw") {
+				else if(data.msg==="different_pw") {
 					alert("변경 완료");
-					location.href = "/user/signin"
+					location.href = data.view;
 				}	// 다른 비밀번호일 경우 else if end
 			},	// success end
 			error: function(xhr, status, error) {

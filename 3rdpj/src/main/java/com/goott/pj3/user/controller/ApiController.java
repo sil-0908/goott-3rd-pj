@@ -10,11 +10,22 @@
 //
 //import com.goott.pj3.user.service.ApiService;
 //
+//import net.nurigo.sdk.NurigoApp;
+//import net.nurigo.sdk.message.service.DefaultMessageService;
+//
 //@Controller
 //public class ApiController {
 //	
 //	@Autowired
 //	ApiService apiService;
+//	@Autowired
+//	DefaultMessageService messageService;	
+//	
+//	public void coolSms() {
+//		String api_key = "NCSMINAMEAOHNT2E";
+//		String api_secret = "ZDOP3TRPZXKC5RVTFJU4OJU8YL3XG3KU";
+//		this.messageService = NurigoApp.INSTANCE.initialize(api_key, api_secret, "https://api.coolsms.co.kr");
+//	}
 //	
 ////	8자리 랜덤 난수 생성 - 장민실 23.04.26
 //	@RequestMapping("send_sms")
@@ -30,7 +41,13 @@
 //		return ran_num;
 //	}
 //	
-//	
+//			<!-- sms인증발송 -->
+//		<dependency>
+//		    <groupId>net.nurigo</groupId>
+//		    <artifactId>sdk</artifactId>
+//		    <version>4.2.7</version>
+//		</dependency>
+//		<!-- sms인증발송 끝 -->
 //	
 //
 //}
