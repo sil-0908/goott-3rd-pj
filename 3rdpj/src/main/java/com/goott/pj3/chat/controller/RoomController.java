@@ -1,5 +1,7 @@
-package com.goott.pj3.common.util.chat;
+package com.goott.pj3.chat.controller;
 
+import com.goott.pj3.chat.dto.ChatRoomDTO;
+import com.goott.pj3.chat.repo.ChatRoomRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -38,12 +40,6 @@ public class RoomController {
         return mv;
     }
 
-    //채팅방 개설
-//    @PostMapping(value = "/room")
-//    public String create(@RequestParam String name, RedirectAttributes rttr) {
-//        rttr.addFlashAttribute("roomName", repository.createChatRoomDTO(name));
-//        return "redirect:/chat/rooms";
-//    }
     //채팅방 개설
     @PostMapping(value = "/room") //form으로 받는데이터 = send_id & receive_id
     public String create(ChatRoomDTO chatRoomDTO, ModelAndView mv) {

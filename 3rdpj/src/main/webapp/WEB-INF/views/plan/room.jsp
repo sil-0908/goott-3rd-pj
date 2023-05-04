@@ -73,7 +73,6 @@
             receiveName = '${room.send_id}';
         }
 
-
         console.log(roomId + ", " + username);
 
         let sockJs = new SockJS("/stomp/chat");
