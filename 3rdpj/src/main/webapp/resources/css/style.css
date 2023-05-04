@@ -27,6 +27,9 @@
 
 @import "./plan/plan_list.css";
 
+*{
+	font-family: 'IBM Plex Sans KR', sans-serif;
+}
 
 :root {
   --black: #181823;
@@ -35,6 +38,7 @@
   --white: #e9f8f9;
   --yellow: #f2bf0a;
   scroll-behavior: auto;
+  font-family: 'IBM Plex Sans KR', sans-serif;
 }
 
 body {

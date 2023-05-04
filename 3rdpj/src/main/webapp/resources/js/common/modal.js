@@ -6,6 +6,12 @@ const talkModal = document.querySelector(".modal__btn--talk-open");
 const closeTalk = document.querySelector(".modal__btn--talk-close");
 const sendMessage = document.querySelector(".chatbox__submit");
 
+const price = $('#price').val(); // 가격
+const name = $('#title').val(); //플랜명
+const buyer = $('.session').val(); //구매자아이디
+const planner = $('#planner').val(); // 플래너아이디
+const plan_idx = $('.plan_idx').val(); //플랜 pk
+
 
 for (const openModal of openModals) {
   openModal.addEventListener("click", function () {
@@ -30,7 +36,9 @@ $(function() {
 				url : '/plan/list/'+modalId,
 				dataType : 'json',
 				success : function(data){ 
-		            let planImages=["<ul class='modal__grid'>"]; 
+					console.log(modalId);
+					console.log(data);
+		            let planImages=["<section class='modal__window'>", "<ul class='modal__grid'>"]; 
 		            data["p_img"].forEach(
 		                    image => planImages.push(
 		                    		"<li class='thumbnail thumbnail--theme-modal'>" +
@@ -88,9 +96,11 @@ $(function() {
 		            "</section>"+
 		            "<div class='modal__btns'>"+
 		              "<button class='modal__btn modal__btn--detail-close'>닫기</button>"+
+		              "<button class='modal__btn modal__btn--cart-add'>카트담기</button>"+
 		              "<button class='modal__btn modal__btn--talk-open'>대화하기</button>"+
-		            "</div>"; 
-		            $(".modal__window").html(function(){
+		            "</div>"+
+		            "</section>"; 
+		            $(".modal__detail").html(function(){
 		            	let planModal=[];
 		            	planModal.push(planImages.join(""));
 		            	planModal.push(planInfo);
@@ -98,7 +108,43 @@ $(function() {
 		            });
 		            $(".modal__btn--detail-close").click(function(){
 		            	$(this).parentsUntil("dialog").parent().prop("open", false);
-		            })
+		            });
+		            $(".modal__btn--talk-open").click(function(){
+		            	windowOfDetail.close();
+	            	    windowOfTalk.open = true;
+		            	/*$(this).parentsUntil("dialog").parent().prop("open", true);*/
+		            });
+		            $(".modal__btn--talk-close").click(function(){
+		            	windowOfTalk.close();
+		            	/*$(this).parentsUntil("dialog").parent().prop("open", true);*/
+		            });
+		            $(".modal__btn--cart-add").click(function(){
+		            	let cart = {
+			                    plan_idx: plan_idx,
+			                    user_id: buyer
+			                };
+			                $.ajax({
+			                    type: 'Post',
+			                    url: '/addcart',
+			                    dataType: 'json',
+			                    contentType: 'application/json; charset=utf-8',
+			                    data: JSON.stringify(cart),
+			                    error: function(xhr, status, error) {
+			  	                  console.log(xhr.responseText);
+			  	                  console.log(xhr.status);
+			  	                  console.log(xhr.statusText);
+			  	            } 
+			                }).done(function (rsp) {
+			                    if (rsp.cart === '카트담기') {
+			                        alert('카트담기성공')
+			                    } else {
+			                        alert('카트담기실패');
+			                    }
+
+			                }).fail(function (error) {
+			                    alert('에이쟉스 실패')
+			                })
+		            });
 		            },
 		            //array의 요소들을 다 합쳐서 하나로 만든후 id="result"인 태그에 html로 출력				
 		            
@@ -112,6 +158,7 @@ $(function() {
 	}
 	
 })
+
 	
 /*window.addEventListener("load", function () {
 	  var allElements = document.getElementsByTagName("*");
@@ -143,6 +190,4 @@ talkModal.addEventListener("click", function () {
   windowOfTalk.open = true;
 });
 
-closeTalk.addEventListener("click", function () {
-  windowOfTalk.close();
-});
+

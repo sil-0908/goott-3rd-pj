@@ -55,9 +55,64 @@
 
       <!-- 모달창 -->
       <dialog class="modal modal__detail">
-        <section class="modal__window">
+      	<section class="modal__window">
+      		<ul class='modal__grid'>
+      			<li class="thumbnail thumbnail--theme-modal">
+				  <img src="image" />
+				  <div class="thumbnail__txt--theme-modal">
+				    <p>day</p>
+				  </div>
+				</li>
+			</ul>
+			<section class='modal__info'>
+			    <hgroup class='profile'>
+				  <div class='profile__title'>
+				    <h1>data["plan_title"]</h1>
+				    <button class='modal__btn'>
+				    	<a href='#'>플래너 페이지 바로가기 </a>
+				    </button>
+			      </div>
+			      <p>data["plan_detail"]</p>
+			    </hgroup>
+			    <div class='modal__btns--add-day'>
+			      <div class='modal__btn modal__btn--color-gray'></div>
+			      <div class='modal__btn'></div>
+			    </div>
+			    <section class='schedule'>
+			      <article class='schedule__day'>
+			        <div class='schedule__day--img-node'>
+			          <img src='../img/day_node.png' alt='' />
+			        </div>
+			        <div class='schedule__day--detail'>
+			          <hgroup class='schedule__day--detail-title'>
+			            <h1>DAY</h1>
+			          </hgroup>
+			          <div class='schedule__day--detail-info'>
+			            <div class='schedule__selectboxes'>
+			              <select class='schedule__selectbox' name='' id=''>
+			                <option value=''>셀렉트박스1</option>
+			              </select>
+			              <select class='schedule__selectbox' name='' id=''>
+			                <option value=''>셀렉트박스2</option>
+			              </select>
+			              <select class='schedule__selectbox' name='' id=''>
+			                <option value=''>셀렉트박스3</option>
+			              </select>
+			            </div>
+			            <div class='schedule__textbox'>
+			              <p>플랜 상세</p>
+			            </div>
+			          </div>
+			        </div>
+			      </article>
+			    </section>
+		    <div class='modal__btns'>
+		      <button class='modal__btn modal__btn--detail-close'>닫기</button>
+		      <button class='modal__btn modal__btn--cart-add'>카트담기</button>
+		      <button class='modal__btn modal__btn--talk-open'>대화하기</button>
+		    </div>
+	    </section>
         <!-- AJAX html 비동기 실행-->
-        </section>
       </dialog>
       
       
