@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="en"> 
+<!DOCTYPE html> 
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -15,6 +15,7 @@
     <div data-include-path="layout.html"></div>
     <script src="../js/layout.js"></script>
     <main class="search">
+   	<!-- 카테고리 버튼 -->
       <nav class="search__nav">
         <ul class="keywords__ul">
           <li class="keywords__btn">
@@ -40,22 +41,14 @@
           </li>
         </ul>
       </nav>
+      <!-- 검색결과 / 그리드 형태로 썸네일 출력 -->
       <section class="search__results">
         <ul class="grid--theme-search">
+        <!-- 반복문으로 데이터 출력 -->
           <li class="thumbnail--theme-search modal__btn--detail-open">
+          <!-- 이미지 출력 -->
             <img src="../img/slave.jpg" alt="" />
-            <div class="thumbnail__txt--theme-search">
-              <p>마우스 치워라</p>
-            </div>
-          </li>
-          <li class="thumbnail--theme-search modal__btn--detail-open">
-            <img src="../img/slave.jpg" alt="" />
-            <div class="thumbnail__txt--theme-search">
-              <p>마우스 치워라</p>
-            </div>
-          </li>
-          <li class="thumbnail--theme-search modal__btn--detail-open">
-            <img src="../img/slave.jpg" alt="" />
+            <!-- 호버 효과(타이틀) -->
             <div class="thumbnail__txt--theme-search">
               <p>마우스 치워라</p>
             </div>
@@ -63,53 +56,20 @@
         </ul>
       </section>
 
-      <!-- 모달창 -->
+      <!-- 썸네일 클릭 시 모달창 -->
       <dialog class="modal modal__detail">
         <section class="modal__window">
           <ul class="modal__grid">
+          <!-- 플랜 이미지 반복문으로 출력 -->
             <li class="thumbnail thumbnail--theme-modal">
               <img src="../img/slave.jpg" alt="" />
-              <div class="thumbnail__txt--theme-modal">
-                <p>마우스 치워라</p>
-              </div>
-            </li>
-            <li class="thumbnail thumbnail--theme-modal">
-              <img src="../img/slave.jpg" alt="" />
-              <div class="thumbnail__txt--theme-modal">
-                <p>마우스 치워라</p>
-              </div>
-            </li>
-            <li class="thumbnail thumbnail--theme-modal">
-              <img src="../img/slave.jpg" alt="" />
-              <div class="thumbnail__txt--theme-modal">
-                <p>마우스 치워라</p>
-              </div>
-            </li>
-            <li class="thumbnail thumbnail--theme-modal">
-              <img src="../img/slave.jpg" alt="" />
-              <div class="thumbnail__txt--theme-modal">
-                <p>마우스 치워라</p>
-              </div>
-            </li>
-            <li class="thumbnail thumbnail--theme-modal">
-              <img src="../img/slave.jpg" alt="" />
-              <div class="thumbnail__txt--theme-modal">
-                <p>마우스 치워라</p>
-              </div>
-            </li>
-            <li class="thumbnail thumbnail--theme-modal">
-              <img src="../img/slave.jpg" alt="" />
-              <div class="thumbnail__txt--theme-modal">
-                <p>마우스 치워라</p>
-              </div>
-            </li>
-            <li class="thumbnail thumbnail--theme-modal">
-              <img src="../img/slave.jpg" alt="" />
+              <!-- 호버 효과 -->
               <div class="thumbnail__txt--theme-modal">
                 <p>마우스 치워라</p>
               </div>
             </li>
           </ul>
+          <!-- 플랜 상세 정보 -->
           <section class="modal__info">
             <hgroup class="profile">
               <div class="profile__title">
@@ -118,12 +78,15 @@
                   <a href="../html/planner.html"> 플래너 페이지 바로가기 </a>
                 </button>
               </div>
+              <!-- 여행 일정 상세/ 날짜별 구분 안할 시 시작일, 종료일 정보 삽입하면 될 듯 -->
               <p>플랜 설명플랜 설명플랜 설명플랜 설명</p>
             </hgroup>
+            <!-- 제일 하단 버튼 클릭 시 버튼, DAY 한개씩 증가, 회색 버튼 갯수가 여행 일수 -->
             <div class="modal__btns--add-day">
               <div class="modal__btn modal__btn--color-gray"></div>
               <div class="modal__btn"></div>
             </div>
+            <!-- 스케줄 -->
             <section class="schedule">
               <article class="schedule__day">
                 <div class="schedule__day--img-node">
@@ -131,9 +94,11 @@
                 </div>
                 <div class="schedule__day--detail">
                   <hgroup class="schedule__day--detail-title">
-                    <h1>DAY</h1>
+                    <h1>DAY{i}</h1>
                   </hgroup>
+                  <!-- if문으로 플랜 작성한 플래너만 수정 가능하게 작성 -->
                   <div class="schedule__day--detail-info">
+                  <!-- 셀렉트 박스에 지역 상세 설정 -->
                     <div class="schedule__selectboxes">
                       <select class="schedule__selectbox" name="" id="">
                         <option value="">셀렉트박스1</option>
@@ -145,58 +110,7 @@
                         <option value="">셀렉트박스3</option>
                       </select>
                     </div>
-                    <div class="schedule__textbox">
-                      <p>플랜 상세</p>
-                    </div>
-                  </div>
-                </div>
-              </article>
-              <article class="schedule__day">
-                <div class="schedule__day--img-node">
-                  <img src="../img/day_node.png" alt="" />
-                </div>
-                <div class="schedule__day--detail">
-                  <hgroup class="schedule__day--detail-title">
-                    <h1>DAY</h1>
-                  </hgroup>
-                  <div class="schedule__day--detail-info">
-                    <div class="schedule__selectboxes">
-                      <select class="schedule__selectbox" name="" id="">
-                        <option value="">셀렉트박스1</option>
-                      </select>
-                      <select class="schedule__selectbox" name="" id="">
-                        <option value="">셀렉트박스2</option>
-                      </select>
-                      <select class="schedule__selectbox" name="" id="">
-                        <option value="">셀렉트박스3</option>
-                      </select>
-                    </div>
-                    <div class="schedule__textbox">
-                      <p>플랜 상세</p>
-                    </div>
-                  </div>
-                </div>
-              </article>
-              <article class="schedule__day">
-                <div class="schedule__day--img-node">
-                  <img src="../img/day_node.png" alt="" />
-                </div>
-                <div class="schedule__day--detail">
-                  <hgroup class="schedule__day--detail-title">
-                    <h1>DAY</h1>
-                  </hgroup>
-                  <div class="schedule__day--detail-info">
-                    <div class="schedule__selectboxes">
-                      <select class="schedule__selectbox" name="" id="">
-                        <option value="">셀렉트박스1</option>
-                      </select>
-                      <select class="schedule__selectbox" name="" id="">
-                        <option value="">셀렉트박스2</option>
-                      </select>
-                      <select class="schedule__selectbox" name="" id="">
-                        <option value="">셀렉트박스3</option>
-                      </select>
-                    </div>
+                    <!-- 일정별 플랜 상세 작성 -->
                     <div class="schedule__textbox">
                       <p>플랜 상세</p>
                     </div>
@@ -205,12 +119,15 @@
               </article>
             </section>
             <div class="modal__btns">
+            <!-- 모달창 닫기 -->
               <button class="modal__btn modal__btn--detail-close">닫기</button>
+              <!-- 대화 모달 열기 -->
               <button class="modal__btn modal__btn--talk-open">대화하기</button>
             </div>
           </section>
         </section>
       </dialog>
+      <!-- 대화 모달 -->
       <dialog class="modal modal__talk">
         <section class="chatbox">
           <section class="chatbox__doc">

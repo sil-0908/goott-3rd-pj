@@ -1,6 +1,7 @@
-.admin__notice-detail {
+.admin__notice-detail { 
   width: 90%;
   height: 100%;
+  margin-bottom: 25vh;
 }
 .admin__notice-detail--title {
   margin: 5rem 0;
@@ -20,7 +21,7 @@
 }
 .admin__notice-detail--list {
 }
-.admin__notice-detail--component {
+.admin__notice-component {
   margin-bottom: 1.5rem;
 }
 .admin__notice-component > :is(span, label, input) {
@@ -30,11 +31,10 @@
   border-style: none;
   height: 2rem;
 }
-.admin__notice-detail--component > :is(span, label, input):nth-child(1) {
+.admin__notice-component > :is(span, label, input):nth-child(1) {
   width: 4.5rem;
 }
-.admin__notice-detail--component > :is(span, label, input):nth-child(2) {
-  border: 1px solid var(--black);
+.admin__notice-component > :is(span, label, input):nth-child(2) {
   width: 30rem;
   border-radius: 3px;
 }

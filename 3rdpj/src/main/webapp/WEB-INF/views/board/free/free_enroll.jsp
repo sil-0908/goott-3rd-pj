@@ -1,28 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-<form name="test1" action="/free/enroll" method="post">
-    <div class="input_wrap">
-        <label>Title</label>
-        <input name="free_title">
-    </div>
-    <div class="input_wrap">
-        <label>Content</label>
-        <textarea rows="3" name="free_content"></textarea>
-    </div>
-	<input type="button" value="등록" onclick="test()">
-</form>
+<%@ include file="/WEB-INF/views/common/layout.jsp" %> 
+<main class="free">
+	<hgroup class="free__title">
+        <h1>문의 등록</h1>
+    </hgroup>
+	<section class="free__sheet">
+		<form name="test1" action="/free/enroll" method="post">
+			<ul>
+				<label class="free__label">Title</label>
+				<li class="input__wrap">
+		        	<input class="input__box" name="free_title">
+				</li>
+		        
+				<button class="btn btn__normal" type="submit" onclick="test()">등록</button>
+			</ul>
+		</form>
+	</section>
+</main>
+<script src="/resources/js/common/layout.js"></script>
 <script>
 function test() {
 	document.test1.submit();
 }
-
 </script>
-</body>
-</html>

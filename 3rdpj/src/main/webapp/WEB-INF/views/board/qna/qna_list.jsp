@@ -1,19 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"/>
-	<link rel="stylesheet" href="/resources/css/style.css"/>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"/>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-</head>
-<body>
+
 <%@ include file="/WEB-INF/views/common/layout.jsp" %>
-<%@ include file="/WEB-INF/views/common/qna_modal.jsp" %>
+<%@ include file="/WEB-INF/views/common/modal_right.jsp" %> 
 <main class="qna">
       <hgroup class="qna__title">
         <h1>공지사항</h1>
@@ -38,7 +27,7 @@
 	          <c:if test="${status.count <= 6}">
            		<li><input type="hidden" name="qna_idx" value="${list.qna_idx}"></li>
 	          	<li class="qna__list--question">
-					<a class="title"><c:out value="${list.qna_title}"/></a>
+					<a class="link__detail"><c:out value="${list.qna_title}"/></a>
 					<div>
 						<c:if test="${list.qna_pw != '' && list.qna_pw != null}">
 							<span><i class="fa-solid fa-lock"></i></span>
@@ -75,25 +64,22 @@
 			</form>
 		</div>
       </section>
-      <dialog class="qna__guide">
-        <hgroup class="qna__guide--title">
-          <h1>도움이 더 필요하신가요?</h1>
-        </hgroup>
-        <article class="qna__guide--list">
-          <a href="">- 이용가이드 바로가기</a><br />
-          <a href="">- Q&A 문의글 작성</a>
-        </article>
-        <button class="qna__guide--btn-close">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
-      </dialog>
     </main>
 	<script src="/resources/js/common/layout.js"></script>
-	<script src="/resources/js/common/qna_main.js"></script>
+	<script src="/resources/js/common/modal_right.js"></script>
 
 	<script>
+	// 23.04.27 김규동
+		/* const CATEGORY_IDX = 3;
+		$(function() {
+	        $('.link__detail').click(function(e) {
+	            const idx = e.target.parentElement.previousElementSibling.children[0]
+	            const arrUrl = document.location.href.split("/")
+	            location.href="/"+arrUrl[CATEGORY_IDX]+"/detail/"+idx.value
+	        })
+	    }) */
       $(function() {
-         $('.title').click(function(e) {
+         $('.link__detail').click(function(e) {
             const idx = e.target.parentElement.previousElementSibling.children[0]
             const lock = e.target.nextElementSibling
             if(lock.children.length == 2){
@@ -117,5 +103,3 @@
          }
       });
    </script>
-</body>
-</html>
