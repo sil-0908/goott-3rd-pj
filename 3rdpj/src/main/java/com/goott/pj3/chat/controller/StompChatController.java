@@ -1,5 +1,7 @@
-package com.goott.pj3.common.util.chat;
+package com.goott.pj3.chat.controller;
 
+import com.goott.pj3.chat.dto.ChatMessageDTO;
+import com.goott.pj3.chat.repo.ChatRoomRepository;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;

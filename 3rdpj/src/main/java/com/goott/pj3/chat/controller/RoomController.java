@@ -1,5 +1,7 @@
-package com.goott.pj3.common.util.chat;
+package com.goott.pj3.chat.controller;
 
+import com.goott.pj3.chat.dto.ChatRoomDTO;
+import com.goott.pj3.chat.repo.ChatRoomRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
