@@ -69,7 +69,7 @@
 				  <div class='profile__title'>
 				    <h1>data["plan_title"]</h1>
 				    <button class='modal__btn'>
-				    	<a href='#'>플래너 페이지 바로가기 </a>
+				    	<a href='#'>플래너 페이지 바로가기기기 </a>
 				    </button>
 			      </div>
 			      <p>data["plan_detail"]</p>
