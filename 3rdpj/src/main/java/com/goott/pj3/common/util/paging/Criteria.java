@@ -1,4 +1,4 @@
-package com.goott.pj3.common.util;
+package com.goott.pj3.common.util.paging;
 
 public class Criteria {
     // 게시글 조회 쿼리에 전달괼 파라미터를 담는 클래스 - 04.02 김범수
@@ -6,7 +6,7 @@ public class Criteria {
     private int page; // 현재 페이지 번호
     private int perPageNum; // 한 페이지당 보여줄 게시글의 갯수
     
-    private String category, keyword, option; // 04.06 김범수 - 카테고리 분류를 위해 추가
+    private String category, keyword, option, auth; // 04.06 김범수 - 카테고리 분류를 위해 추가
 
     public int getPageStart() { // 특정 페이지의 게시글 시작 번호(게시글 시작 행 번호)
         return (this.page-1)*perPageNum;
@@ -68,14 +68,24 @@ public class Criteria {
         this.option = option;
     }
 
-    @Override
-    public String toString() {
-        return "Criteria{" +
-                "page=" + page +
-                ", perPageNum=" + perPageNum +
-                ", category='" + category + '\'' +
-                ", keyword='" + keyword + '\'' +
-                ", option='" + option + '\'' +
-                '}';
-    }
+    public String getAuth() {
+		return auth;
+	}
+
+	public void setAuth(String auth) {
+		this.auth = auth;
+	}
+
+	@Override
+	public String toString() {
+		return "Criteria [page=" + page 
+				+ ", perPageNum=" + perPageNum 
+				+ ", category=" + category 
+				+ ", keyword=" + keyword 
+				+ ", option=" + option 
+				+ ", auth=" + auth 
+				+ "]";
+	}
+
+
 }

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Controller;
 
 import com.goott.pj3.board.qna.dto.QnaDTO;
 import com.goott.pj3.board.qna.service.QnaService;
-import com.goott.pj3.common.util.Criteria;
+import com.goott.pj3.common.util.paging.Criteria;
 
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,9 +28,7 @@ public class QnaController {
 	@RequestMapping("main")
 	public ModelAndView main(ModelAndView mv){
 		mv.addObject("data_n", qnaService.list_n());
-		mv.addObject("data_u", qnaService.list_u());
-		mv.addObject("data_r", qnaService.list_r());
-		mv.addObject("data_e", qnaService.list_e());
+		mv.addObject("data_q", qnaService.list_q());
 		mv.setViewName("board/qna/qna_main");
 		return mv;
 	}
@@ -43,16 +41,18 @@ public class QnaController {
 	@RequestMapping(value = "enroll", method = RequestMethod.POST)
 	public String enroll(QnaDTO qnaDTO, HttpSession session) {
 		String user_id = (String) session.getAttribute("user_id");
+		String auth = (String) session.getAttribute("auth");
 		qnaDTO.setUser_id(user_id);
-		System.out.println(qnaDTO);
+		qnaDTO.setAuth(auth);
 		return qnaService.enroll(qnaDTO);
 	}
 
-	@RequestMapping(value = {"list_N","list_U","list_R","list_E"}, produces="application/text; charset=UTF-8;")
-	public ModelAndView list(ModelAndView mv, Criteria cri, HttpServletRequest request) {
+	@RequestMapping(value = {"list_N","list_Q","list_U","list_R"}, produces="application/text; charset=UTF-8;")
+	public ModelAndView list(ModelAndView mv, Criteria cri, HttpServletRequest request, HttpSession session) {
 		String requestUrl = request.getRequestURL().toString();
-		mv.addObject("paging", qnaService.paging(requestUrl, cri));
-		mv.addObject("list", qnaService.list(cri));
+		String auth = (String) session.getAttribute("auth");
+		mv.addObject("paging", qnaService.paging(requestUrl, cri, auth));
+		mv.addObject("list", qnaService.list(requestUrl, cri, auth));
 		mv.setViewName("board/qna/qna_list");
 		return mv;
 	}

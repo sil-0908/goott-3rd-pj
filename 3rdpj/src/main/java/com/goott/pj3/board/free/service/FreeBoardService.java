@@ -2,9 +2,9 @@ package com.goott.pj3.board.free.service;
 
 import java.util.List;
 
-import com.goott.pj3.common.util.Criteria;
-import com.goott.pj3.common.util.PagingDTO;
 import com.goott.pj3.board.free.dto.FreeBoardDTO;
+import com.goott.pj3.common.util.paging.Criteria;
+import com.goott.pj3.common.util.paging.PagingDTO;
 
 public interface FreeBoardService {
 

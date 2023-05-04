@@ -1,0 +1,167 @@
+/* login_div */
+.login_div {
+	position: fixed;
+	max-width: 20rem;
+	width: 100%;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%) scale(1.2);
+	z-index: 101;
+	background: #fff;
+	padding: 25px;
+	border-radius: 12px;
+	display: none;
+	transition: all 0.4s ease-out;
+	pointer-events: none;
+}
+
+.signin_section.show .login_div {
+	display: block;
+	pointer-events: auto;
+}
+
+/* signin_section */
+.signin_section {
+	position: absolute;
+	height: 100vh;
+	width: 100%;
+	background-size: cover;
+	background-position: center;
+}
+
+.signin_section::before {
+	content: "";
+	position: absolute;
+	margin-top: -160px;
+	height: 120%;
+	width: 100%;
+	background-color: rgba(0, 0, 0, 0.6);
+	z-index: 100;
+	opacity: 0;
+	pointer-events: none;
+	transition: all 0.5s ease-out;
+}
+
+.signin_section.show::before {
+	opacity: 1;
+	pointer-events: auto;
+}
+
+/* input */
+.signin_input_box {
+	position: relative;
+	margin-top: 30px;
+	width: 100%;
+	height: 40px;
+}
+
+.id, .pw {
+	height: 100%;
+	width: 80%;
+	border: none;
+	outline: none;
+	padding: 0 30px;
+	color: #333;
+	transition: all 0.2s ease;
+	border-bottom: 1.5px solid #aaaaaa;
+}
+
+.id:focus, .pw:focus {
+	border-color: var(--blue);
+}
+
+/* icon */
+.login_div .close_icon {
+	position: absolute;
+	top: 10px;
+	right: 20px;
+	color: #0b0217;
+	font-size: 22px;
+	opacity: 0.7;
+	cursor: pointer;
+}
+
+.login_div .id_icon,
+.login_div .pw_icon,
+.login_div .pw_hide {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	font-size: 20px;
+	color: #707070;
+}
+
+.id_icon, .pw_icon {
+	left: 0;
+}
+
+.pw_hide {
+	right: 0;
+	font-size: 18px;
+	cursor: pointer;
+}
+
+.id:focus ~ .id_icon,
+.pw:focus ~ .pw_icon {
+	color: var(--blue);
+}
+
+/* text */
+.login_text {
+	font-size: 22px;
+	color: #0b0217;
+	text-align: center;
+}
+
+.signin_text {
+	font-size: 12px;
+}
+
+.signup_div, .signin_msg, .forgot_info_div {
+	text-align: center;
+}
+
+.signin_input_box .id_alert_text,
+.signin_input_box .pw_alert_text {
+	margin-top: 10px;
+	margin-left: 30px;
+}
+
+.signup_div, .forgot_info_div {
+	margin-top: 15px;
+}
+
+.signin_msg {
+	margin-top: 2.6rem;
+}
+
+.forgot_info, .sign_up_span, .sign_in, .sign_out {
+	cursor: pointer;
+}
+
+.forgot_info:hover, .sign_up_span:hover {
+	color: var(--blue);
+}
+
+/* button */
+.login_div .signin_btn {
+	color: var(--white);
+	background-color: var(--blue);
+	margin-top: 1rem;
+	width: 100%;
+	padding: 10px 0;
+	border-radius: 10px;
+	transition: background-color 0.2s;
+}
+
+.signin_btn {
+	padding: 6px 24px;
+	border: 2px solid #fff;
+	background: transparent;
+	border-radius: 6px;
+	cursor: pointer;
+}
+
+.signin_btn:hover {
+	background-color: var(--yellow);
+}

@@ -7,8 +7,8 @@
 	
 	<!-- 웹소켓 -->
   
-	<bean id="msgHandler" class="com.goott.pj3.common.util.MsgHandler" />
-	<bean id="alertHandler" class="com.goott.pj3.common.util.AlertHandler" />        
+	<bean id="msgHandler" class="com.goott.pj3.common.util.chat.MsgHandler" />
+	<bean id="alertHandler" class="com.goott.pj3.common.util.chat.AlertHandler" />        
 	
 	<websocket:handlers>
 		<websocket:mapping handler="msgHandler" path="/msg-ws"/>

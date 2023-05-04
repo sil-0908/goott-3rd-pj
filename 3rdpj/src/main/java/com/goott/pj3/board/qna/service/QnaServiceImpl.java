@@ -1,14 +1,16 @@
 package com.goott.pj3.board.qna.service;
 
-import com.goott.pj3.common.util.Criteria;
-import com.goott.pj3.common.util.PagingDTO;
 import com.goott.pj3.board.qna.dto.QnaDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.goott.pj3.board.qna.repo.QnaDAO;
+import com.goott.pj3.common.util.paging.Criteria;
+import com.goott.pj3.common.util.paging.PagingDTO;
 
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 @Service
 public class QnaServiceImpl implements QnaService {
@@ -24,40 +26,51 @@ public class QnaServiceImpl implements QnaService {
 		qnaDAO.enroll(qnaDTO);
 		if(qnaDTO.getCategory().equals("N")){
 			return "redirect:/qna/list_N";
-		} else if (qnaDTO.getCategory().equals("U")) {
-			return "redirect:/qna/list_U";
+		} else if (qnaDTO.getCategory().equals("Q")) {
+			return "redirect:/qna/list_Q";
 		} else if (qnaDTO.getCategory().equals("R")) {
 			return "redirect:/qna/list_R";
 		} else {
-			return "redirect:/qna/list_E";
+			return "redirect:/qna/list_U";
 		}
 	}
 
 	@Override
-	public List<QnaDTO> list(Criteria cri) {
+	public List<QnaDTO> list(String requestUrl, Criteria cri, String auth) {
+		cri.setAuth(auth);
+		if(requestUrl.contains("list_R")) {
+			return qnaDAO.UR_list(cri);
+		}
+		else if(requestUrl.contains("list_U")) {
+			return qnaDAO.UR_list(cri);
+		}
 		return qnaDAO.list(cri);
 	}
 
 	@Override
-	public PagingDTO paging(String requestUrl, Criteria cri) {
+	public PagingDTO paging(String requestUrl, Criteria cri, String auth) {
 		PagingDTO paging = new PagingDTO();
+		cri.setAuth(auth);
 		if(requestUrl.contains("list_N")){
 			cri.setCategory("N");
 			paging.setCri(cri);
+			paging.setTotalCount(qnaDAO.totalCount(cri));
 
-		} else if(requestUrl.contains("list_U")){
-			cri.setCategory("U");
+		} else if(requestUrl.contains("list_Q")){
+			cri.setCategory("Q");
 			paging.setCri(cri);
+			paging.setTotalCount(qnaDAO.totalCount(cri));
 
 		} else if(requestUrl.contains("list_R")){
 			cri.setCategory("R");
 			paging.setCri(cri);
+			paging.setTotalCount(qnaDAO.UR_totalCount(cri));
 
 		} else {
-			cri.setCategory("E");
+			cri.setCategory("U");
 			paging.setCri(cri);
+			paging.setTotalCount(qnaDAO.UR_totalCount(cri));
 		}
-		paging.setTotalCount(qnaDAO.totalCount(cri));
 		return paging;
 	}
 
@@ -78,26 +91,16 @@ public class QnaServiceImpl implements QnaService {
 		return qnaDAO.get_category(qnaDTO);
 	}
 
+	// 공지사항
 	@Override
 	public List<QnaDTO> list_n() {
 		return qnaDAO.list_n();
 	}
 
+	// 자주묻는 질문
 	@Override
-	public List<QnaDTO> list_u() {
-		return qnaDAO.list_u();
+	public List<QnaDTO> list_q() {
+		return qnaDAO.list_q();
 	}
-
-	@Override
-	public List<QnaDTO> list_r() {
-		return qnaDAO.list_r();
-	}
-
-	@Override
-	public List<QnaDTO> list_e() {
-		return qnaDAO.list_e();
-	}
-
-
 
 }
