@@ -1,3 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="chat"></mapper>
+<mapper namespace="chat">
+    <insert id="create" parameterType="com.goott.pj3.common.util.chat.ChatRoomDTO"
+            useGeneratedKeys="true" keyProperty="msg_idx">
+        INSERT INTO msg (send_id, receive_id, msg_img, msg_content)
+        SELECT #{send_id}, #{receive_id}, '', ''
+        FROM DUAL
+        WHERE NOT #{send_id} = #{receive_id}
+          AND NOT EXISTS (SELECT msg_idx
+                          FROM msg
+                          WHERE (send_id = #{send_id} AND receive_id = #{receive_id})
+                             OR (send_id = #{receive_id} AND receive_id = #{send_id}))
+    </insert>
+    <!--방id로 채팅방 찾기-->
+    <select id="findRoomById" resultType="com.goott.pj3.common.util.chat.ChatRoomDTO">
+        SELECT msg_idx, send_id, receive_id, create_date
+        FROM msg
+        WHERE msg_idx = #{msg_idx}
+    </select>
+    <!--해당 유저의 모든 방 찾기-->
+    <select id="findAllRooms" resultType="com.goott.pj3.common.util.chat.ChatRoomDTO">
+        SELECT msg_idx, send_id, receive_id, msg_img, msg_content, create_date
+        FROM msg
+        WHERE send_id = #{user_id}
+           OR receive_id = #{user_id}
+        ORDER BY msg_idx DESC
+    </select>
+    <!--유저이름으로 채팅방 찾기-->
+    <select id="findRoomByName" resultType="com.goott.pj3.common.util.chat.ChatRoomDTO">
+        SELECT msg_idx, send_id, receive_id
+        FROM msg
+        WHERE (send_id = #{send_id} AND receive_id = #{receive_id})
+           OR (send_id = #{receive_id} AND receive_id = #{send_id})
+    </select>
+    <!--메세지 로그 저장 (이미지는 추후)-->
+    <insert id="saveMessageLog" parameterType="com.goott.pj3.common.util.chat.ChatMessageDTO">
+        INSERT INTO msg_log(msg_idx, send_id, receive_id, msg_content, msg_img)
+        VALUES (#{msg_idx}, #{send_id}, #{receive_id}, #{msg_content}, '없음')
+    </insert>
+    <!--메세지 로그 찾아오기-->
+    <select id="findMessageLog" resultType="com.goott.pj3.common.util.chat.ChatMessageDTO">
+        SELECT msg_idx, send_id, receive_id, msg_img, msg_content, create_date, read_yn
+        FROM (SELECT msg_idx, send_id, receive_id, msg_img, msg_content, create_date, read_yn
+              FROM msg_log
+              WHERE msg_idx=#{msg_idx}
+              ORDER BY create_date DESC
+              LIMIT 10) as sub
+        ORDER BY create_date ASC
+    </select>
+    <!--읽었나 확인-->
+    <update id="readNtoY">
+        UPDATE  msg_log
+        SET read_yn = 'y'
+        WHERE msg_idx = #{msg_idx} AND receive_id = #{session_id}
+    </update>
+    <!--채팅방 리스트 생성시 안읽은 메세지가 있는 방을 표시해줌-->
+    <select id="checkReadorNot" resultMap="msgidxResultMap">
+        SELECT msg_idx
+        FROM msg_log
+        WHERE receive_id = #{receive_id}
+          AND read_yn = 'n'
+    </select>
+    <resultMap id="msgidxResultMap" type="com.goott.pj3.common.util.chat.ChatRoomDTO">
+        <collection property="msg_idx" column="msg_idx" javaType="List" ofType="Integer">
+            <result column="msg_idx"/>
+        </collection>
+    </resultMap>
+</mapper>

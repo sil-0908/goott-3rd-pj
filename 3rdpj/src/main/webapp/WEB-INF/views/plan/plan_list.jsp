@@ -9,6 +9,10 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+
 <html>
 <head>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -31,35 +35,20 @@
         </div>
     </div>
 </form>
-<table class="table">
-    <thead>
+<p> 플랜 목록 : </p>
+<c:forEach var="row" items="${imgList}">
     <tr>
-        <th scope="col">번호</th>
-        <th scope="col">제목</th>
-        <th scope="col">가격</th>
-        <th scope="col">작성자</th>
-    </tr>
-    </thead>
-    <tbody>
-    <% List<PlanDTO> list = (ArrayList<PlanDTO>) request.getAttribute("data");
-        for (int i = 0; i < list.size(); i++) { %>
-    <tr>
-        <th scope="row">
-            <%=list.get(i).getPlan_idx()%>
-        </th>
-        <td><a href="/plan/list/<%=list.get(i).getPlan_idx()%>" style="text-decoration: none;">
-            <%=list.get(i).getPlan_title()%>
-        </a></td>
         <td>
-            <%=list.get(i).getPrice()%>
-        </td>
-        <td>
-            <%=list.get(i).getUser_id()%>
+            <a href="/plan/list/${row.plan_idx}">
+                <c:forEach var="img" items="${row.p_img}">
+                    <img src="${img}" height="200px" width="200px" style="border: 1px solid cadetblue";>
+                </c:forEach>
+            </a>
         </td>
     </tr>
-    <%}%>
-    </tbody>
-</table>
+</c:forEach>
+
+
 <div class="pagination">
     <form action="form1">
         <ul class="btn-group pagination">

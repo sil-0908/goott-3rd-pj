@@ -51,6 +51,7 @@ public class ReviewServiceImpl implements ReviewService {
 		}
 		return 0;
 	}
+
 	@Override
 	public void updateImg(ReviewDTO reviewDTO) {
 		this.reviewDAO.updateImg(reviewDTO);
@@ -59,7 +60,10 @@ public class ReviewServiceImpl implements ReviewService {
 	@Override
 	public boolean delete(ReviewDTO reviewDTO) {
 		int cnt = this.reviewDAO.delete(reviewDTO);
-		return cnt==1;
+		if (cnt==1){
+			return true;
+		}
+		return false;
 	}
 
 	@Override
@@ -83,6 +87,11 @@ public class ReviewServiceImpl implements ReviewService {
 	@Override
 	public List<ReviewDTO> imglist(ReviewDTO reviewDTO) {
 		return this.reviewDAO.imgList(reviewDTO);
+	}
+
+	@Override
+	public void updateDeleteImg(ReviewDTO reviewDTO) {
+		this.reviewDAO.updateDeleteImg(reviewDTO);
 	}
 
 

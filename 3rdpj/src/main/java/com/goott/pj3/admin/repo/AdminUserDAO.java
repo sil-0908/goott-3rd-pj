@@ -1,6 +1,8 @@
 package com.goott.pj3.admin.repo;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,4 +75,9 @@ public class AdminUserDAO {
     }
 
 
+    public List<Map<String, Object>> getUserMonthByAuth(String auth) {
+        Map<String, Object> paramMap = new HashMap<String, Object>();
+        paramMap.put("auth", auth);
+        return sqlSession.selectList("admin.getUserMonth", paramMap);
+    }
 }

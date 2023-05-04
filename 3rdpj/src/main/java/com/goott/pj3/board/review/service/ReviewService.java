@@ -36,4 +36,6 @@ public interface ReviewService {
     PagingDTO paging(Criteria cri);
 
     List<ReviewDTO> imglist(ReviewDTO reviewDTO);
+
+    void updateDeleteImg(ReviewDTO reviewDTO);
 }

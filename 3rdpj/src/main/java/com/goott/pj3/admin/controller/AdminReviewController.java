@@ -42,18 +42,15 @@ public class AdminReviewController {
 
     /**
      * 신진영 23.04.18 리뷰 상세페이지
-     * @param map
+     * @param review_idx
+     * @param mv
      * @return
      */
     @Auth(role = Auth.Role.ADMIN)
     @RequestMapping("reviewdetail")
-    public ModelAndView detail(@RequestParam Map<String, Object> map){
-        ModelAndView mv = new ModelAndView();
-        Map<String, Object> detail = this.reviewService.detail(map);
-        mv.addObject("data", detail);
-        String review_idx = map.get("review_idx").toString();
-        mv.addObject("review_idx", review_idx);
+    public ModelAndView detail(int review_idx, ModelAndView mv){
         mv.setViewName("/admin/review/review_detail");
+        mv.addObject("data", reviewService.detail(review_idx));
         return mv;
     }
 
@@ -62,53 +59,53 @@ public class AdminReviewController {
      * @param map
      * @return
      */
-    @Auth(role = Auth.Role.ADMIN)
-    @RequestMapping("reviewupdate")
-    public ModelAndView update(@RequestParam Map<String, Object> map) {
-        ModelAndView mv = new ModelAndView();
-        Map<String, Object> detail = this.reviewService.detail(map);
-        mv.addObject("data", detail);
-        mv.setViewName("admin/review/review_update");
-        return mv;
-    }
+//    @Auth(role = Auth.Role.ADMIN)
+//    @RequestMapping("reviewupdate")
+//    public ModelAndView update(@RequestParam Map<String, Object> map) {
+//        ModelAndView mv = new ModelAndView();
+//        Map<String, Object> detail = this.reviewService.detail(map);
+//        mv.addObject("data", detail);
+//        mv.setViewName("admin/review/review_update");
+//        return mv;
+//    }
 
     /**
      * 신진영 23.04.18 리뷰 수정
      * @param map
      * @return
      */
-    @Auth(role = Auth.Role.ADMIN)
-    @RequestMapping(value = "reviewupdate", method = RequestMethod.POST)
-    public ModelAndView updatePost(@RequestParam Map<String, Object> map){
-        ModelAndView mv = new ModelAndView();
-        boolean update = this.reviewService.update(map);
-        if(update){
-            String review_idx = map.get("review_idx").toString();
-            mv.setViewName("redirect:/admin/review/reviewdetail?review_idx="+review_idx);
-        } else {
-            mv = this.update(map);
-        }
-        return mv;
-    }
+//    @Auth(role = Auth.Role.ADMIN)
+//    @RequestMapping(value = "reviewupdate", method = RequestMethod.POST)
+//    public ModelAndView updatePost(@RequestParam Map<String, Object> map){
+//        ModelAndView mv = new ModelAndView();
+//        boolean update = this.reviewService.update(map);
+//        if(update){
+//            String review_idx = map.get("review_idx").toString();
+//            mv.setViewName("redirect:/admin/review/reviewdetail?review_idx="+review_idx);
+//        } else {
+//            mv = this.update(map);
+//        }
+//        return mv;
+//    }
 
     /**
      * 신진영 23.04.18 리뷰 삭제
      * @param map
      * @return
      */
-    @Auth(role = Auth.Role.ADMIN)
-    @RequestMapping("reviewdelete")
-    public ModelAndView delete(@RequestParam Map<String, Object> map){
-        ModelAndView mv = new ModelAndView();
-        boolean delete = this.reviewService.delete(map);
-        if (delete){
-            mv.setViewName("redirect:/admin/reviewlist");
-        } else {
-            String review_idx = map.get("review_idx").toString();
-            mv.setViewName("redirect:/admin/review/reviewdetail?review_idx="+review_idx);
-        }
-        return mv;
-    }
+//    @Auth(role = Auth.Role.ADMIN)
+//    @RequestMapping("reviewdelete")
+//    public ModelAndView delete(@RequestParam Map<String, Object> map){
+//        ModelAndView mv = new ModelAndView();
+//        boolean delete = this.reviewService.delete(map);
+//        if (delete){
+//            mv.setViewName("redirect:/admin/reviewlist");
+//        } else {
+//            String review_idx = map.get("review_idx").toString();
+//            mv.setViewName("redirect:/admin/reviewdetail?review_idx="+review_idx);
+//        }
+//        return mv;
+//    }
 
 
 
