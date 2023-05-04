@@ -27,10 +27,10 @@ public class NoticeController {
     NoticeService noticeService;
 
     /**
-     * 신진영 23.04.04 공지사항 리스트
-     * @param mv
-     * @param cri
-     * @return
+     * 신진영 23.04.04 공지사항 리스트 페이지 요청
+     * @param mv ModelAndView 객체
+     * @param cri Criteria 객체
+     * @return ModelAndView 객체
      */
     @Auth(role = Auth.Role.ADMIN)
     @RequestMapping(value = "noticelist", produces="application/text; charset=UTF-8;")
@@ -42,8 +42,8 @@ public class NoticeController {
     }
 
     /**
-     * 신진영 23.04.04 공지사항 작성
-     * @return
+     * 신진영 23.04.04  관리자 공지사항 작성 페이지로 이동하는 메소드
+     * @return 관리자 공지사항 작성 페이지
      */
     @Auth(role = Auth.Role.ADMIN)
     @RequestMapping("noticewrite")
@@ -54,24 +54,28 @@ public class NoticeController {
 
     /**
      * 신진영 23.04.04 공지사항 입력
-     * @param dto
-     * @param session
-     * @return
+     @param dto 등록할 공지사항 정보
+     @param session 세션 객체
+     @return 공지사항 목록 페이지로 리다이렉트
      */
     @Auth(role = Auth.Role.ADMIN)
     @RequestMapping("noticeinsert")
     public String noticeInsert(NoticeDTO dto, HttpSession session) {
+        // 로그인한 관리자의 아이디 가져오기
         String user_id = (String) session.getAttribute("user_id");
+        // 공지사항 작성자로 등록
         dto.setUser_id(user_id);
+        // 공지사항 등록 서비스 호출
         noticeService.noticeInsert(dto);
+        // 공지사항 목록 페이지로 리다이렉트
         return "redirect:/admin/notice/noticelist";
     }
 
 
     /**
      * 신진영 23.04.04 공지사항 상세페이지
-     * @param idx
-     * @return
+     * @param idx 조회할 공지사항의 인덱스
+     * @return ModelAndView 객체를 반환하며, 뷰 이름과 조회된 데이터를 담아 전달
      */
     @Auth(role = Auth.Role.ADMIN)
     @RequestMapping("noticedetail")
@@ -85,8 +89,8 @@ public class NoticeController {
 
     /**
      * 신진영 23.04.04 공지사항 수정
-     * @param dto
-     * @return
+     * @param dto : 수정할 공지사항 정보가 담긴 DTO
+     * @return : 공지사항 목록 페이지로 리다이렉트
      */
     @Auth(role = Auth.Role.ADMIN)
     @RequestMapping("noticeupdate")
@@ -98,8 +102,8 @@ public class NoticeController {
 
     /**
      * 신진영 23.04.04 공지사항 삭제
-     * @param dto
-     * @return
+     * @param dto 공지사항 DTO
+     * @return 공지사항 목록 페이지로 이동
      */
     @Auth(role = Auth.Role.ADMIN)
     @RequestMapping("noticedelete")
@@ -111,8 +115,8 @@ public class NoticeController {
 
     /**
      * 신진영 23.04.04 공지사항 복원
-     * @param dto
-     * @return
+     * @param dto 삭제 복구할 공지사항 정보를 담은 DTO
+     * @return 공지사항 목록 페이지로 리다이렉트
      */
     @Auth(role = Auth.Role.ADMIN)
     @RequestMapping("noticedeletere")
