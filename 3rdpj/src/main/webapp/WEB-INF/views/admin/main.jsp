@@ -14,6 +14,7 @@
 	<div>
 		<a href="noticelist">공지사항관리</a>
 		<a href="userlist">회원관리</a>
+		<a href="userchart">월별 가입된 회원차트</a>
 		<a href="logout">로그아웃</a>
 		<a href="qnalist">질문게시판</a>
 		<a href="reviewlist">리뷰관리</a>
