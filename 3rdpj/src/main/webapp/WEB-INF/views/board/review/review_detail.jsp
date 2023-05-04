@@ -26,8 +26,8 @@
 <p>작성일 : ${data.create_date}"</p>
 
 <div class="likeUnlike">
-	<p>좋아요 : <span id="likeCount">값0</span></p>
-	<p>싫어요 : <span id="unlikeCount">값0</span></p>
+	<p>좋아요 : <span id="likeCount">${likeUnlike.r_like}</span></p>
+	<p>싫어요 : <span id="unlikeCount">${likeUnlike.r_unlike}</span></p>
 	<input type="hidden" id="user_id" value="${sessionScope.user_id}" />
 	<button id="likeButton">좋아요</button>
 	<button id="unlikeButton">싫어요</button>
@@ -78,7 +78,7 @@
 		});
 
 		function likeUnlike(action) {
-			var user_id = $("#user_id").val();
+			var user_id = $("#user_id").val(); // 로그인한 유저 아이디
 			var data = {
 				review_idx : ${data.review_idx},
 				user_id: user_id,
@@ -90,8 +90,9 @@
 				data: data,
 				success: function(response) {
 					// 서버 응답을 처리하는 코드
-					$("#likeCount").text(response.likeCount);
-					$("#unlikeCount").text(response.unlikeCount);
+					console.log(response);
+					$("#likeCount").text(response.r_like);
+					$("#unlikeCount").text(response.r_unlike);
 				},
 				error: function(xhr, status, error) {
 					// 에러 처리 코드

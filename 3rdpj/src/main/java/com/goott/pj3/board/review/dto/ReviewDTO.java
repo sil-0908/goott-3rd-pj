@@ -95,7 +95,7 @@ public class ReviewDTO {
         return "ReviewDTO{" +
                 "review_idx=" + review_idx +
                 ", plan_idx=" + plan_idx +
-                ", review_rating=" + planner_rating +
+                ", planner_rating=" + planner_rating +
                 ", user_id='" + user_id + '\'' +
                 ", review_content='" + review_content + '\'' +
                 ", r_del_yn='" + r_del_yn + '\'' +
