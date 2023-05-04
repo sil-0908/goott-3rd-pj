@@ -29,8 +29,7 @@ $(function() {
 				type : 'POST',
 				url : '/plan/list/'+modalId,
 				dataType : 'json',
-				success : function(data){
-					console.log(data); 
+				success : function(data){ 
 		            let planImages=["<ul class='modal__grid'>"]; 
 		            data["p_img"].forEach(
 		                    image => planImages.push(
@@ -90,13 +89,16 @@ $(function() {
 		            "<div class='modal__btns'>"+
 		              "<button class='modal__btn modal__btn--detail-close'>닫기</button>"+
 		              "<button class='modal__btn modal__btn--talk-open'>대화하기</button>"+
-		            "</div>"
+		            "</div>"; 
 		            $(".modal__window").html(function(){
 		            	let planModal=[];
 		            	planModal.push(planImages.join(""));
 		            	planModal.push(planInfo);
 		            	return planModal.join("");
-		            });  
+		            });
+		            $(".modal__btn--detail-close").click(function(){
+		            	$(this).parentsUntil("dialog").parent().prop("open", false);
+		            })
 		            },
 		            //array의 요소들을 다 합쳐서 하나로 만든후 id="result"인 태그에 html로 출력				
 		            
