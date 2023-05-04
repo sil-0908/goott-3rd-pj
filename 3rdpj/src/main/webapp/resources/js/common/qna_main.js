@@ -10,4 +10,4 @@ window.addEventListener("load", function () {
 
 closeBtnQnaGuide.addEventListener("click", () => {
   qnaGuideModal.close();
-});
+}); 

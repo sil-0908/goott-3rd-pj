@@ -1,5 +1,5 @@
 /* 모달창 스타일 */
-.modal__detail {
+.modal__detail { 
   width: 100vw;
   height: 100vh;
   position: fixed;

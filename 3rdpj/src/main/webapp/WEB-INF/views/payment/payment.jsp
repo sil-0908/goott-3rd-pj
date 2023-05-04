@@ -6,7 +6,7 @@
   Date: 2023-05-04
   Time: 오후 4:00
 --%>
-<%@ include file="/WEB-INF/views/common/layout.jsp" %>
+<%@ include file="/WEB-INF/views/common/layout.jsp" %> 
 <main class="payment">
       <section class="payment__doc">
         <section class="payment__info">

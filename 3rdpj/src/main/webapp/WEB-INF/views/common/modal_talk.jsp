@@ -11,7 +11,7 @@
 <body> --%>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="com.goott.pj3.plan.dto.PlanDTO" %>
+<%@ page import="com.goott.pj3.plan.dto.PlanDTO" %> 
 
 <div class="modal modal__talk">
   <section class="chatbox">

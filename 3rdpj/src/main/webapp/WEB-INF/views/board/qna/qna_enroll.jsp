@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/views/common/layout.jsp" %>
+<%@ include file="/WEB-INF/views/common/layout.jsp" %> 
 <main class="qna">
       <hgroup class="qna__title">
         <h1>문의 등록</h1>

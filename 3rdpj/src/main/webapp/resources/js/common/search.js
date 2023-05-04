@@ -4,7 +4,7 @@ const openModals = document.querySelectorAll(".modal__btn--detail-open");
 const closeModal = document.querySelector(".modal__btn--detail-close");
 const talkModal = document.querySelector(".modal__btn--talk-open");
 const closeTalk = document.querySelector(".modal__btn--talk-close");
-const sendMessage = document.querySelector(".chatbox__submit");
+const sendMessage = document.querySelector(".chatbox__submit"); 
 // const openPaymentPage = document.querySelector(".modal__btn--pay-open");
 
 for (const openModal of openModals) {

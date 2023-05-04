@@ -100,7 +100,7 @@ $(function() {
 		              "<button class='modal__btn modal__btn--talk-open'>대화하기</button>"+
 		            "</div>"+
 		            "</section>"; 
-		            $(".modal__detail").html(function(){
+		            $(".modal__detail").html(function(){ 
 		            	let planModal=[];
 		            	planModal.push(planImages.join(""));
 		            	planModal.push(planInfo);
