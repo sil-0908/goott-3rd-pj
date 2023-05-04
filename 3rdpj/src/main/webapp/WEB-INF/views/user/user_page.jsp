@@ -25,4 +25,5 @@
 	</form>
 </main>
 
+<script src="/resources/js/user/user_page.js"></script>
 <script src="/resources/js/common/layout.js"></script>

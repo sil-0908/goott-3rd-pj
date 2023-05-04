@@ -23,7 +23,6 @@
 			<param-value>
 				/WEB-INF/spring/appServlet/servlet-context.xml
 				/WEB-INF/spring/appServlet/security-context.xml
-				/WEB-INF/spring/appServlet/websocket-context.xml
 				/WEB-INF/spring/appServlet/common-context.xml
 			</param-value>
 		</init-param>

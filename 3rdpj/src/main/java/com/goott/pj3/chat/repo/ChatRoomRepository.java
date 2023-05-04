@@ -1,5 +1,7 @@
-package com.goott.pj3.common.util.chat;
+package com.goott.pj3.chat.repo;
 
+import com.goott.pj3.chat.dto.ChatMessageDTO;
+import com.goott.pj3.chat.dto.ChatRoomDTO;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 

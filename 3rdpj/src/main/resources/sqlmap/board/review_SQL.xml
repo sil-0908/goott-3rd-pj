@@ -2,13 +2,37 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="review">
 
-    <!--조원재 23.04.05 리뷰 생성-->
+    <!--리뷰 작성 정보-->
+    <select id="getCreate" resultMap="planResultMap">
+        select p.plan_idx, p.user_id, p.plan_title, p.start_date,
+               p.end_date, p.price, p.plan_detail, i.p_img
+          from plan p left join plan_img i
+            on p.plan_idx = i.plan_idx
+         where p.plan_idx = #{plan_idx}
+           and p.p_del_yn = 'n'
+    </select>
+
+    <resultMap id="planResultMap" type="com.goott.pj3.plan.dto.PlanDTO">
+        <id property="plan_idx" column="plan_idx"/>
+        <result property="user_id" column="user_id"/>
+        <result property="start_date" column="start_date"/>
+        <result property="end_date" column="end_date"/>
+        <result property="price" column="price"/>
+        <result property="plan_detail" column="plan_detail"/>
+        <result property="plan_title" column="plan_title"/>
+        <collection property="p_img" column="p_img" javaType="List" ofType="String">
+            <result column="p_img"/>
+        </collection>
+    </resultMap>
+
+    <!--리뷰 생성-->
     <insert id="insert" parameterType="com.goott.pj3.board.review.dto.ReviewDTO"
             useGeneratedKeys="true" keyProperty="review_idx">
         insert into plan_review(user_id, plan_idx, review_content, planner_rating)
         values (#{user_id}, #{plan_idx}, #{review_content}, #{planner_rating})
     </insert>
-    <!--조원재 23.04.21 리뷰 이미지 파일 생성-->
+
+    <!--리뷰 이미지 파일 생성-->
     <insert id="insertFile" parameterType="com.goott.pj3.board.review.dto.ReviewDTO">
             insert into review_img(review_idx, r_img) values
             <foreach collection="r_img" item="img" separator=",">
@@ -16,7 +40,38 @@
             </foreach>
     </insert>
 
-    <!--조원재 23.04.05 디테일 페이지-->
+    <!--플래너 평점 생성-->
+    <!--기존 평점 가져오기-->
+    <select id="rating" parameterType="com.goott.pj3.board.review.dto.PlannerRatingDTO" resultType="Integer">
+        select planner_rating
+          from user
+         where user_id = #{planner_id}
+    </select>
+
+    <!--평점 카운팅 가져오기 -->
+    <select id="cntring" parameterType="com.goott.pj3.board.review.dto.PlannerRatingDTO" resultType="Integer">
+        select rating_cnt
+          from user
+         where user_id = #{planner_id}
+    </select>
+
+    <!--플래너 평점 업데이트-->
+    <update id="plannerRating" parameterType="com.goott.pj3.board.review.dto.PlannerRatingDTO">
+        update user
+        set planner_rating = #{planner_rating}, rating_cnt=#{rating_cnt}
+        where user_id = #{planner_id}
+    </update>
+
+    <!--플래너 평가한 여부-->
+    <update id="yOrN">
+        update pay
+           set rating_yn = 'y'
+        where user_id = #{user_id}
+          and plan_idx = #{plan_idx}
+    </update>
+    <!--플래너 평점 끝-->
+
+    <!--디테일 페이지-->
     <select id="detail" resultMap="reviewResultMap">
         select r.review_idx, r.user_id, r.plan_idx, r.review_content, r.planner_rating, r.create_date,
                i.r_img, i.r_img_idx
@@ -42,7 +97,7 @@
         </collection>
     </resultMap>
 
-    <!--조원재 23.04.05 리뷰 수정 시작-->
+    <!--리뷰 수정 시작-->
     <!--본문 내용 수정-->
     <update id="update" parameterType="com.goott.pj3.board.review.dto.ReviewDTO"
             useGeneratedKeys="true" keyProperty="review_idx">
@@ -50,12 +105,14 @@
            set review_content=#{review_content}
          where review_idx = #{review_idx}
     </update>
+
     <!--기존 이미지 파일 삭제-->
     <delete id="deleteImg" parameterType="com.goott.pj3.board.review.dto.ReviewDTO">
         delete
           from review_img
          where review_idx=#{review_idx}
     </delete>
+
     <!--새 이미지 파일 생성-->
     <insert id="updateImg" parameterType="com.goott.pj3.board.review.dto.ReviewDTO">
         insert into review_img(review_idx, r_img)
@@ -66,20 +123,21 @@
     </insert>
     <!--리뷰 수정 끝 -->
 
-    <!--조원재 23.04.05 리뷰 삭제-->
+    <!--리뷰 삭제-->
     <update id="delete" parameterType="com.goott.pj3.board.review.dto.ReviewDTO">
         update plan_review
           set r_del_yn = 'y'
         where review_idx=#{review_idx}
     </update>
 
+    <!--리뷰 이미지 업데이트-->
     <update id="updateDeleteImg">
         update review_img
            set r_img_del_yn='y'
          where review_idx=#{review_idx}
     </update>
 
-    <!--조원재 23.04.05 리뷰 목록, 검색-->
+    <!--리뷰 목록, 검색-->
     <select id="list" resultType="com.goott.pj3.board.review.dto.ReviewDTO">
         select review_idx, user_id, plan_idx, review_content,
                planner_rating, create_date, update_date
@@ -93,7 +151,18 @@
          limit #{pageStart}, #{perPageNum}
     </select>
 
-    <!--조원재 23.04.26 리뷰 이미지 목록-->
+    <!--페이지 전체 개수-->
+    <select id="totalCount" resultType="int">
+        select count(review_idx)
+        from plan_review
+        where
+        <if test="option == 'user_id'"> user_id like CONCAT('%',#{keyword},'%')</if>
+        <if test="option == 'content'"> review_content like CONCAT('%',#{keyword},'%')</if>
+        <if test="option == null or option == ''">1=1</if>
+        and r_del_yn = 'n'
+    </select>
+
+    <!--리뷰 이미지 목록-->
     <select id="imglist" resultMap="reviewlistResultMap">
         select i.review_idx, i.r_img
           from review_img i left join plan_review r
@@ -110,14 +179,11 @@
         </collection>
     </resultMap>
 
-    <select id="totalCount" resultType="int">
-        select count(review_idx)
-          from plan_review
-         where 
-		   	<if test="option == 'user_id'"> user_id like CONCAT('%',#{keyword},'%')</if>
-	        <if test="option == 'content'"> review_content like CONCAT('%',#{keyword},'%')</if>
-	        <if test="option == null or option == ''">1=1</if>
-          and r_del_yn = 'n'
+    <!--리뷰 좋아요, 싫어요 카운팅-->
+    <select id="likeUnlikeCnt" resultType="com.goott.pj3.board.review.dto.LikeUnlikeDTO">
+        select sum(r_like) r_like, sum(r_unlike) r_unlike
+        from like_unlike
+        where review_idx=#{review_idx};
     </select>
 
 <!--	<insert id="replywrite">-->
