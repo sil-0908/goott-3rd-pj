@@ -94,7 +94,7 @@
 						$(".signin_msg").html("탈퇴한 사용자 입니다. 탈퇴 취소는 고객센터로 문의 바랍니다.");
 						$(".signin_msg").css("color", "red");
 					}
-					else if(data.msg==="not_user") {
+					else if(data.msg==="not_user"||data.msg==="admin") {
 						$(".signin_msg").html("로그인 실패. 다시 확인해주세요");
 						$(".signin_msg").css("color", "red");
 					}
