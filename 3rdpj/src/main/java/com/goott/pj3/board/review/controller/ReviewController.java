@@ -39,6 +39,7 @@ public class ReviewController {
 	 * @param mv ModelAndView 객체
 	 * @return ModelAndView 객체에 데이터를 추가하고 view를 설정한 후 반환
 	 */
+	@Auth(role=Auth.Role.USER)
 	@GetMapping("create")
 	public ModelAndView create(HttpSession httpSession, PlanDTO planDTO, ModelAndView mv){
 		// 아이디 값 파라미터로 받기 -> 로그인 아이디 세션과 아이디 값 비교 (마이 페이지 구현 후 진행예정)
@@ -83,9 +84,7 @@ public class ReviewController {
 			}
 		} catch (Exception e) {
 			// 예외 처리
-			System.err.println("리뷰 생성 중 오류가 발생했습니다: " + e.getMessage());
-			// 오류 페이지로 리다이렉트 또는 예외 처리에 맞는 다른 로직 수행
-			mv.setViewName("/error/500");
+			e.printStackTrace();
 		}
 
 		return mv;
@@ -126,7 +125,7 @@ public class ReviewController {
 							   ReviewDTO reviewDTO, ModelAndView mv){
 		LikeUnlikeDTO likeUnlikeDTO = new LikeUnlikeDTO();
 		reviewDTO.setReview_idx(review_idx);
-		likeUnlikeDTO.setReview_idx(review_idx);
+		likeUnlikeDTO.setReview_idx(review_idx); // 조회할 게시글 인덱스 할당
 		LikeUnlikeDTO dto = this.reviewService.likeUnlikeCnt(likeUnlikeDTO);
 		ReviewDTO detail = this.reviewService.detail(reviewDTO); // review 게시글 정보
 		mv.addObject("likeUnlike", dto); // 좋아요, 싫어요 정보
@@ -211,9 +210,7 @@ public class ReviewController {
 			this.reviewService.updateDeleteImg(reviewDTO); // 이미지 삭제(실제 삭제x)
 		} catch (Exception e) {
 			// 예외 처리
-			System.err.println("리뷰 삭제 중 오류가 발생했습니다: " + e.getMessage());
-			// 오류 페이지로 리다이렉트 또는 예외 처리에 맞는 다른 로직 수행
-			mv.setViewName("/error/500");
+			e.printStackTrace();;
 			return mv;
 		}
 		if (success) {
@@ -234,6 +231,8 @@ public class ReviewController {
 	@RequestMapping("list")
 	public ModelAndView list(ModelAndView mv, Criteria cri, ReviewDTO reviewDTO) {
 		try {
+			reviewDTO.setKeyword(cri.getKeyword()); // 검색 키워드 할당
+			reviewDTO.setOption(cri.getOption()); // 검색 옵션 할당
 			List<ReviewDTO> originalList = reviewService.imglist(reviewDTO);
 			List<ReviewDTO> newList = new ArrayList<>(); // 인덱스와 첫번째 이미지만 담을 List 생성
 			for (ReviewDTO dto : originalList) {
@@ -252,9 +251,7 @@ public class ReviewController {
 			mv.setViewName("/board/review/review_list");
 		} catch (Exception e) {
 			// 예외 처리
-			System.err.println("리뷰 목록 조회 중 오류가 발생했습니다: " + e.getMessage());
-			// 오류 페이지로 리다이렉트 또는 예외 처리에 맞는 다른 로직 수행
-			mv.setViewName("/error/500");
+			e.printStackTrace();;
 		}
 		return mv;
 	}

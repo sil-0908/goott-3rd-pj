@@ -2,15 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="travelinfo">
 
-    <!--조원재 23.04.08. 여행지 정보 생성-->
+    <!--여행지 정보 생성-->
     <insert id="insert" parameterType="com.goott.pj3.travelinfo.dto.TravelInfoDTO"
             useGeneratedKeys="true" keyProperty="travel_location_idx">
         insert into travel_location(user_id, country_a, country_b, country_c,
                                     country_detail, country_script)
-             values ("test1234", #{country_a}, #{country_b},
+             values (#{user_id}, #{country_a}, #{country_b},
                      #{country_c}, #{country_detail}, #{country_script})
     </insert>
-
+    <!--여행지 정보 이미지 생성-->
     <insert id="insertfile" parameterType="com.goott.pj3.travelinfo.dto.TravelInfoDTO">
         insert into travel_img(travel_location_idx, t_img) values
         <foreach collection="t_img" item="img" separator=",">
@@ -18,7 +18,7 @@
         </foreach>
     </insert>
 
-    <!--조원재 23.04.08. 여행지 정보 디테일 페이지 데이터 조회-->
+    <!--여행지 정보 디테일 페이지 데이터 조회-->
     <select id="detail" resultMap="travelInfoResultMap">
         select t.travel_location_idx, t.user_id, t.country_a, t.country_b, t.country_c,
                t.country_detail, t.country_script, t.create_date, t.update_date,
@@ -48,7 +48,7 @@
 
     </resultMap>
 
-    <!--조원재 23.04.08. 여행지 정보 업데이트 시작-->
+    <!--여행지 정보 업데이트 시작-->
     <!--본문 내용 수정-->
     <update id="update" parameterType="com.goott.pj3.travelinfo.dto.TravelInfoDTO"
             useGeneratedKeys="true" keyProperty="travel_location_idx">
@@ -71,28 +71,28 @@
                         (#{travel_location_idx}, #{img})
                     </foreach>
     </insert>
-    
-    <select id="findAddress" resultType="com.goott.pj3.travelinfo.dto.TravelInfoDTO">
-        select country_script
-          from travel_location
-         where travel_locaion_idx = #{travel_location_idx}
-    </select>
     <!--여행지 정보 업데이트 끝-->
 
-    <!--조원재 23.04.08. 여행지 정보 삭제-->
+    <!--여행지 정보 삭제-->
     <update id="delete" parameterType="com.goott.pj3.travelinfo.dto.TravelInfoDTO">
         update travel_location
            set t_del_yn = 'n'
         where travel_location_idx=#{travel_location_idx}
     </update>
 
-    <!--조원재 23.04.26 여행 정보 이미지 목록-->
+    <!--여행 정보 이미지 목록-->
     <select id="imgList" resultMap="travelInfoListResultMap">
         select i.travel_location_idx, i.t_img
           from travel_img i left join travel_location t
             on i.travel_location_idx = t.travel_location_idx
           where t.t_del_yn='n'
-
+            and
+                <if test="option == 'country_a'"> t.country_a like CONCAT('%',#{keyword},'%')</if>
+                <if test="option == 'country_b'"> t.country_b like CONCAT('%',#{keyword},'%')</if>
+                <if test="option == 'country_c'"> t.country_c like CONCAT('%',#{keyword},'%')</if>
+                <if test="option == 'country_detail'"> t.country_detail like CONCAT('%',#{keyword},'%')</if>
+                <if test="option == 'country_script'"> t.country_script like CONCAT('%',#{keyword},'%')</if>
+                <if test="option == null or option == ''">1=1</if>
     </select>
 
     <resultMap id="travelInfoListResultMap" type="com.goott.pj3.travelinfo.dto.TravelInfoDTO">
@@ -102,7 +102,7 @@
         </collection>
     </resultMap>
 
-    <!--조원재 23.04.08. 여행지 정보 리스트 & 검색-->
+    <!--여행지 정보 리스트 & 검색-->
     <select id="list" resultType="com.goott.pj3.travelinfo.dto.TravelInfoDTO">
         select travel_location_idx, user_id, country_a, country_b, country_c,
                country_detail, country_script, create_date, update_date
@@ -117,7 +117,7 @@
          order by travel_location_idx desc
          limit #{pageStart}, #{perPageNum}
     </select>
-
+    <!--게시글 전체 개수 -->
     <select id="totalCount" resultType="int">
         select count(travel_location_idx)
           from travel_location

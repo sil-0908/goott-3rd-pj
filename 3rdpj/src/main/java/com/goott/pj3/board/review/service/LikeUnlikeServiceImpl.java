@@ -23,7 +23,6 @@ public class LikeUnlikeServiceImpl implements LikeUnlikeService{
 
     /**
      * 라이크 또는 언라이크 처리
-     *
      * @param likeUnlikeDTO LikeUnlikeDTO 객체
      * @param isLike        라이크 여부 (true: 라이크, false: 언라이크)
      */
@@ -74,6 +73,11 @@ public class LikeUnlikeServiceImpl implements LikeUnlikeService{
         }
     }
 
+    /**
+     * 좋아요, 싫어요 갯수 조회
+     * @param likeUnlikeDTO 좋아요, 싫어요 DTO
+     * @return 조회 한 게시글에 대한 좋아요, 싫어요 갯수 리턴
+     */
     @Override
     public LikeUnlikeDTO getLikeUnlikeCnt(LikeUnlikeDTO likeUnlikeDTO) {
         return this.likeUnlikeDAO.getLikeUnlikeCnt(likeUnlikeDTO);

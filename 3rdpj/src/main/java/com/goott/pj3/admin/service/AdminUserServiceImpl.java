@@ -86,9 +86,10 @@ public class AdminUserServiceImpl implements AdminUserService {
 
     @Override
     public List<ChartDTO> getUserMonthByAuth(String auth) {
-
         return adminUserDAO.getUserMonthByAuth(auth);
     }
+
+
 
 
 }

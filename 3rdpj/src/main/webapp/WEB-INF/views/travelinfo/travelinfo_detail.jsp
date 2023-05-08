@@ -25,7 +25,7 @@
 <p>위치 : ${data.country_b}</p>
 <p>상세주소 : ${data.country_script}</p>
 <p>여행지 상세 내용 : ${data.country_detail}</p>
-<%--<c:if test="${data.user_id == sessionScope.user_id}">--%>
+<c:if test="${data.user_id == sessionScope.user_id}">
 <p>
     <a href="/travelinfo/update/${data.travel_location_idx}">수정</a>
 </p>
@@ -33,7 +33,7 @@
 <form method="POST" action="/travelinfo/delete/${data.travel_location_idx}">
     <input type="submit" value="삭제">
 </form>
-<%--</c:if>--%>
+</c:if>
 <p>
     <a href="/travelinfo/list">목록</a>
 </p>

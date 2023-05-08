@@ -16,9 +16,13 @@ public class TravelInfoServiceImpl implements TravelInfoService {
     @Autowired
     TravelInfoDAO travelInfoDAO;
 
+    /**
+     * 여행 정보 생성
+     * @param travelInfoDTO 여행 정보 생성 정보
+     * @return 생성된 게시글 인덱스
+     */
     @Override
     public int create(TravelInfoDTO travelInfoDTO) {
-        System.out.println("serviceimpl : " + travelInfoDTO);
         int affectRowCnt = this.travelInfoDAO.create(travelInfoDTO);
         if(affectRowCnt==1){
             return travelInfoDTO.getTravel_location_idx();
@@ -26,16 +30,30 @@ public class TravelInfoServiceImpl implements TravelInfoService {
         return 0;
     }
 
+    /**
+     * 여행 정보 이미지 생성
+     * @param travelInfoDTO 여행 정보 이미지 정보
+     */
     @Override
     public void createImg(TravelInfoDTO travelInfoDTO) {
         this.travelInfoDAO.createImg(travelInfoDTO);
     }
 
+    /**
+     * 여행 정보 상세 페이지 호출
+     * @param travelInfoDTO 상세 페이지 정보
+     * @return 상세 페이지 정보 리턴
+     */
     @Override
     public TravelInfoDTO detail(TravelInfoDTO travelInfoDTO) {
         return this.travelInfoDAO.detail(travelInfoDTO);
     }
 
+    /**
+     * 여행 정보 업데이트
+     * @param travelInfoDTO 업데이트 할 정보
+     * @return 업데이트 된 게시글 인덱스
+     */
     @Override
     public int update(TravelInfoDTO travelInfoDTO) {
         int cnt = this.travelInfoDAO.update(travelInfoDTO);
@@ -44,44 +62,62 @@ public class TravelInfoServiceImpl implements TravelInfoService {
         }
         return 0;
     }
+
+    /**
+     * 여행 정보 이미지 삭제
+     * @param travelInfoDTO 삭제할 게시글 정보
+     * @return 삭제 성공 여부
+     */
     @Override
-    public boolean deleteImg(TravelInfoDTO travelInfoDTO) {
-        System.out.println("delImgImpl : " + travelInfoDTO );
-        int affectRowCnt = this.travelInfoDAO.deleteImg(travelInfoDTO);
-        if(affectRowCnt!=0){
-            return true;
-        }
-        return false;
+    public void deleteImg(TravelInfoDTO travelInfoDTO) {
+        this.travelInfoDAO.deleteImg(travelInfoDTO);
     }
 
+    /**
+     * 여행 정보 이미지 업데이트
+     * @param travelInfoDTO  업데이트 할 게시글 정보
+     */
     @Override
     public void updateImg(TravelInfoDTO travelInfoDTO) {
-        System.out.println("updateImg serviceimpl : " + travelInfoDTO);
         this.travelInfoDAO.updateImg(travelInfoDTO);
     }
 
+    /**
+     * 여행 정보 게시글 삭제
+     * @param travelInfoDTO 삭제 할 게시글 정보 
+     * @return 삭제 성공 여부 리턴
+     */
     @Override
     public boolean delete(TravelInfoDTO travelInfoDTO) {
         int cnt = this.travelInfoDAO.delete(travelInfoDTO);
         return cnt==1;
     }
 
+    /**
+     * 이미지 목록 호출
+     * @param travelInfoDTO 이미지 목록 호출하기 위한 게시글 정보  
+     * @return 이미지 목록 리턴
+     */
     @Override
     public List<TravelInfoDTO> imgList(TravelInfoDTO travelInfoDTO) {
         return this.travelInfoDAO.imgList(travelInfoDTO);
     }
 
     /**
-     * 조원재 23.04.08. 여행지 정보 리스트;
-     * @param
-     * @return
+     * 게시글 목록 조회
+     * @param cri 게시글 조회 할 정보   
+     * @return 게시글 목록 리턴
      */
     @Override
     public List<TravelInfoDTO> list(Criteria cri) {
-        // TODO Auto-generated method stub
         return travelInfoDAO.list(cri);
     }
 
+    /**
+     * 게시글 페이징 
+     * @param cri 페이징 할 정보
+     * @return 페이징 정보 리턴
+     */
     @Override
     public PagingDTO paging(Criteria cri) {
         PagingDTO paging = new PagingDTO();

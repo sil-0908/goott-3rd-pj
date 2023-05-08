@@ -9,13 +9,29 @@ public class PlanDTO {
 
     private int plan_idx, price, sale_count;
                 //플랜번호 //가격 //판매횟수
-    private String start_date, end_date, plan_detail, plan_title, user_id;
-                    //여행시작일//종료일  //플랜상세정보   //플랜제목      //작성자
+    private String start_date, end_date, plan_detail, plan_title, user_id, keyword, option;
+                    //여행시작일//종료일  //플랜상세정보   //플랜제목    //작성자  //검색어  //검색옵션
     private boolean p_del_yn;   //플랜 삭제여부
     private Date create_date, update_date;  //작성일 // 수정일
 
     private List<String> p_img; // 플랜 이미지
     private List<Integer> p_img_idx; // 플랜 이미지 번호
+
+    public String getKeyword() {
+        return keyword;
+    }
+
+    public void setKeyword(String keyword) {
+        this.keyword = keyword;
+    }
+
+    public String getOption() {
+        return option;
+    }
+
+    public void setOption(String option) {
+        this.option = option;
+    }
 
     public int getPlan_idx() {
         return plan_idx;
