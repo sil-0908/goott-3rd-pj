@@ -68,6 +68,8 @@ public class PlanController {
     // 리스트 겟
     @GetMapping("list")
     public ModelAndView mv(ModelAndView modelAndView, Criteria cri, PlanDTO planDTO) {
+        planDTO.setKeyword(cri.getKeyword()); // 검색어 할당
+        planDTO.setOption((cri.getOption())); // 검색 옵션 할당
         List<PlanDTO> originalList = planService.imgList(planDTO);
         List<PlanDTO> newList = new ArrayList<>(); // 인덱스+첫번째 이미지 값만 있는 dto 담을 List
         for(PlanDTO dto : originalList){
@@ -93,8 +95,8 @@ public class PlanController {
     @PostMapping(value = "list/{plan_idx}")
     @ResponseBody
     public PlanDTO planDetail(ModelAndView modelAndView, @PathVariable("plan_idx") int plan_idx) {
-    	PlanDTO dto = planService.detail(plan_idx);
-    	System.out.println(dto);
+        PlanDTO dto = planService.detail(plan_idx);
+        System.out.println(dto);
 //    	modelAndView.addObject("data", planService.detail(plan_idx));
 //        modelAndView.setViewName("plan/plan_detail");
         return dto;

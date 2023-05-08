@@ -169,6 +169,10 @@
             on i.review_idx = r.review_idx
          where r.r_del_yn='n'
            and i.r_img_del_yn='n'
+           and
+        <if test="option == 'user_id'"> r.user_id like CONCAT('%',#{keyword},'%')</if>
+        <if test="option == 'content'"> r.review_content like CONCAT('%',#{keyword},'%')</if>
+        <if test="option == null or option == ''">1=1</if>
          order by r.review_idx desc
     </select>
 

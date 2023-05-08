@@ -69,7 +69,6 @@ public class ReviewDAO {
 	public PlanDTO getCreate(PlanDTO planDTO) {
 		return this.ss.selectOne("review.getCreate", planDTO);
 	}
-
 	// 기존 점수 가져오기
 	public int rating(PlannerRatingDTO plannerRatingDTO) {
 		return this.ss.selectOne("review.rating", plannerRatingDTO);

@@ -34,6 +34,10 @@
              from plan_img i left join plan p
                on i.plan_idx = p.plan_idx
             where p.p_del_yn='n'
+              and
+                <if test="option == 'user_id'">p.user_id like CONCAT('%',#{keyword},'%')</if>
+                <if test="option == 'title'">p.ㅎplan_title like CONCAT('%',#{keyword},'%')</if>
+                <if test="option == null or option == ''">1=1</if>
          order by p.plan_idx desc
     </select>
 
