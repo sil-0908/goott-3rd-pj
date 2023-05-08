@@ -4,11 +4,27 @@ import java.util.Date;
 import java.util.List;
 
 public class ReviewDTO {
-    private int review_idx, plan_idx, planner_rating;
-    private String user_id, review_content, r_del_yn;
-    private Date create_date, update_date;
-    private List<String> r_img;
-    private List<Integer> r_img_idx;
+    private int review_idx, plan_idx, planner_rating; // 리뷰 인덱스 // 플랜 인덱스 // 플래너 점수
+    private String user_id, review_content, r_del_yn, keyword, option; // 유저 아이디 // 리뷰 내용 // 삭제여부 // 검색 키워드 // 검색 옵션
+    private Date create_date, update_date; // 생성 날짜 // 수정 날짜
+    private List<String> r_img; // 이미지 URL 주소
+    private List<Integer> r_img_idx; // 이미지 인덱스 번호
+
+    public String getKeyword() {
+        return keyword;
+    }
+
+    public void setKeyword(String keyword) {
+        this.keyword = keyword;
+    }
+
+    public String getOption() {
+        return option;
+    }
+
+    public void setOption(String option) {
+        this.option = option;
+    }
 
     public List<Integer> getR_img_idx() {
         return r_img_idx;

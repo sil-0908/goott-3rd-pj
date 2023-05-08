@@ -16,54 +16,44 @@ public class TravelInfoDAO {
     @Autowired
     SqlSession ss;
 
-    /**
-     * 조원재 23.04.08. 여행지 정보 리스트
-     * @param
-     * @return
-     */
-
+    // 여행 정보 게시글 생성
     public int create(TravelInfoDTO travelInfoDTO) {
-        System.out.println("DAO : " + travelInfoDTO);
         return this.ss.insert("travelinfo.insert", travelInfoDTO);
     }
-
+    // 여행 정보 이미지 생성
     public void createImg(TravelInfoDTO travelInfoDTO) {
-        System.out.println("DAOImg : " + travelInfoDTO.toString());
         this.ss.insert("travelinfo.insertfile", travelInfoDTO);
     }
-
+    // 여행 정보 상세 정보 호출
     public TravelInfoDTO detail(TravelInfoDTO travelInfoDTO) {
         return this.ss.selectOne("travelinfo.detail", travelInfoDTO);
     }
-
+    // 여행 정보 게시글 업데이트
     public int update(TravelInfoDTO travelInfoDTO) {
         return this.ss.update("travelinfo.update", travelInfoDTO);
     }
-
-    public int deleteImg(TravelInfoDTO travelInfoDTO) {
-        System.out.println("deleteImgDAO: " + travelInfoDTO);
-        return this.ss.delete("travelinfo.deleteImg", travelInfoDTO);
+    // 여행 정보 기존 이미지 삭제
+    public void deleteImg(TravelInfoDTO travelInfoDTO) {
+         this.ss.delete("travelinfo.deleteImg", travelInfoDTO);
     }
-
+    // 여행 정보 이미지 업데이트
     public void updateImg(TravelInfoDTO travelInfoDTO) {
-        System.out.println("udateImg DAO : " + travelInfoDTO);
         this.ss.insert("travelinfo.updateImg", travelInfoDTO);
     }
-
+    // 게시글 삭제
     public int delete(TravelInfoDTO travelInfoDTO) {
         return this.ss.update("travelinfo.delete", travelInfoDTO);
     }
-
+    // 이미지 목록 조회
     public List<TravelInfoDTO> imgList(TravelInfoDTO travelInfoDTO) {
         return this.ss.selectList("travelinfo.imgList", travelInfoDTO);
     }
+    // 게시글 목록 조회
     public List<TravelInfoDTO> list(Criteria cri) {
         return ss.selectList("travelinfo.list", cri);
     }
-
+    // 게시글 전체 수
     public int totalCount(Criteria cri) {
         return ss.selectOne("travelinfo.totalCount", cri);
     }
-
-
 }

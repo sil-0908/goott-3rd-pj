@@ -5,9 +5,7 @@ public class Criteria {
 
     private int page; // 현재 페이지 번호
     private int perPageNum; // 한 페이지당 보여줄 게시글의 갯수
-    
     private String category, keyword, option, auth; // 04.06 김범수 - 카테고리 분류를 위해 추가
-
     public int getPageStart() { // 특정 페이지의 게시글 시작 번호(게시글 시작 행 번호)
         return (this.page-1)*perPageNum;
     }

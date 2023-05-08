@@ -46,7 +46,6 @@
 			<c:forEach var="img" items="${row.r_img}">
           	<img src="${img}" height="200px" width="200px" style="border: 1px solid cadetblue";>
 			</c:forEach>
-        </a><span>좋아요 : </span><span>싫어요 : </span>
       </td>
     </tr>
   </c:forEach>
