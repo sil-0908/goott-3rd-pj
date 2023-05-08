@@ -20,5 +20,5 @@ $(document).ready(function() {
 });
 
 $(".page_change_pw").on('click', function() {
-	location.href = "/user/find_user";
+	// input 창 하나 열리면서 거기에 입력되는걸로 비밀번호 변경시키기(유효성검사 적용시키고 값 넘겨서 컨트롤러에서 암호화)
 });

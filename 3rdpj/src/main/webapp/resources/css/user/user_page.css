@@ -1,11 +1,9 @@
 /* form */
-
 .user_page_main {
 	position: relative;
 	display: flex;
-  justify-content: space-evenly;
-  background-color: beige;
-  height: 70rem;
+	background-color: beige;
+	height: 70rem;
 }
 
 .profile_img_div {
@@ -16,4 +14,29 @@
 
 .payment_list_div {
 	display: none;
+}
+
+/* input */
+.user_page_main input {
+	border: none;
+}
+
+/* button */
+.user_page_main .page_change_pw {
+	color: var(--white);
+	background-color: var(--blue);
+	width: 50%;
+	padding: 0.5rem 0;
+	border-radius: 10px;
+	transition: background-color 0.2s;
+}
+
+.page_change_pw {
+	border: 2px solid #fff;
+	background: transparent;	
+	cursor: pointer;
+}
+
+.page_change_pw:hover {
+	background-color: var(--yellow);
 }

@@ -2,7 +2,7 @@
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ include file="/WEB-INF/views/common/layout.jsp" %>
 
-<main class="user_page_main">	
+<main class="user_page_main">
 	<div class="tab_area_div">
 		<h2>마이페이지</h2>
 		<div class="profile_img_div"></div>
@@ -11,8 +11,7 @@
 		<p>결제내역</p>
 	</div>
 	<div class="info_div">
-		<form name="user_page_form" method="post">				
-			<input type="button" class="page_change_pw" value="비밀번호 변경하기" />
+		<form name="user_page_form" method="post">
 			<p>생년월일</p>
 			<input type="text" class="page_birth" readonly />
 			<p>이메일</p>
@@ -25,6 +24,7 @@
 			<input type="text" class="page_create_date" readonly />
 			<p>마지막 수정 일자</p>
 			<input type="text" class="page_update_date" readonly />		
+			<input type="button" class="page_change_pw" value="비밀번호 변경하기" />
 		</form>
 	</div>
 	<div class="payment_list_div">
