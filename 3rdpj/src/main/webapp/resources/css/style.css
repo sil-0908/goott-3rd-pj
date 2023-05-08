@@ -1,4 +1,4 @@
-@charset "UTF-8";
+@charset "UTF-8"; 
 
 @import "./common/reset.css";
 @import "./common/layout.css";
@@ -8,6 +8,7 @@
 @import "./common/talkmodal.css";
 @import "./common/payment.css";
 @import "./common/component.css";
+@import "./common/modal_right.css";
 
 @import "./board/qna/qna.css";
 @import "./board/qna/qna_create.css";
@@ -24,6 +25,11 @@
 @import "./user/user_page.css";
 @import "./user/planner_page.css";
 
+@import "./plan/plan_list.css";
+
+*{
+	font-family: 'IBM Plex Sans KR', sans-serif;
+}
 
 :root {
   --black: #181823;
@@ -32,6 +38,7 @@
   --white: #e9f8f9;
   --yellow: #f2bf0a;
   scroll-behavior: auto;
+  font-family: 'IBM Plex Sans KR', sans-serif;
 }
 
 body {
@@ -41,6 +48,7 @@ body {
 main {
   height: 100%;
   min-height: 100%;
-  margin: 7vh 0 25vh 0;
+  margin-top: 7vh;
+  margin-bottom: 25vh;
   /* border: 2px solid green; */
 }

@@ -90,11 +90,14 @@ public class PlanController {
     }
 
     // 디테일
-    @GetMapping("list/{plan_idx}")
-    public ModelAndView planDetail(ModelAndView modelAndView, @PathVariable("plan_idx") int plan_idx) {
-        modelAndView.addObject("data", planService.detail(plan_idx));
-        modelAndView.setViewName("plan/plan_detail");
-        return modelAndView;
+    @PostMapping(value = "list/{plan_idx}")
+    @ResponseBody
+    public PlanDTO planDetail(ModelAndView modelAndView, @PathVariable("plan_idx") int plan_idx) {
+    	PlanDTO dto = planService.detail(plan_idx);
+    	System.out.println(dto);
+//    	modelAndView.addObject("data", planService.detail(plan_idx));
+//        modelAndView.setViewName("plan/plan_detail");
+        return dto;
     }
 
     // 수정 겟
