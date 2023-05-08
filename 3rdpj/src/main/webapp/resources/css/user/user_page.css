@@ -1,10 +1,11 @@
 /* form */
+
 .user_page_main {
 	position: relative;
 	display: flex;
-    justify-content: space-evenly;
-    background-color: beige;
-    height: 70rem;
+  justify-content: space-evenly;
+  background-color: beige;
+  height: 70rem;
 }
 
 .profile_img_div {

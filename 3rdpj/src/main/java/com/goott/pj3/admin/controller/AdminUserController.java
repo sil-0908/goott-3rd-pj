@@ -23,9 +23,9 @@ public class AdminUserController {
 
     /**
      * 신진영 23.04.05 회원목록 리스트
-     * @param mv
-     * @param cri
-     * @return
+     * @param mv ModelAndView 객체
+     * @param cri Criteria 객체
+     * @return ModelAndView
      */
     @Auth(role = Auth.Role.ADMIN)
     @RequestMapping(value="userlist",produces="application/text; charset=UTF-8;")
@@ -38,8 +38,8 @@ public class AdminUserController {
 
     /**
      * 신진영 23.04.05 회원 상세정보
-     * @param user_id
-     * @return
+     * @param user_id 조회할 사용자의 아이디
+     * @return ModelAndView 객체
      */
     @Auth(role = Auth.Role.ADMIN)
     @RequestMapping("userdetail")
@@ -53,8 +53,8 @@ public class AdminUserController {
 
     /**
      * 신진영 23.04.05 회원정보 수정
-     * @param dto
-     * @return
+     * @param dto 수정할 사용자 정보를 담은 DTO 객체
+     * @return 사용자 정보 수정 후 사용자 목록 페이지로 이동합니다.
      */
     @Auth(role = Auth.Role.ADMIN)
     @RequestMapping("userupdate")
@@ -66,8 +66,8 @@ public class AdminUserController {
 
     /**
      * 신진영 23.04.05 회원탈퇴
-     * @param dto
-     * @return
+     * @param dto 삭제할 회원의 정보가 담긴 DTO 객체
+     * @return 회원 목록 페이지로 이동
      */
     @Auth(role = Auth.Role.ADMIN)
     @RequestMapping("userdelete")
@@ -79,8 +79,8 @@ public class AdminUserController {
 
     /**
      * 신진영 23.04.05 회원탈퇴 복원
-     * @param dto
-     * @return
+     * @param dto 복구할 유저의 정보를 담고 있는 DTO 객체
+     * @return 관리자 유저 리스트 페이지로 이동하는 redirect 경로
      */
     @Auth(role = Auth.Role.ADMIN)
     @RequestMapping("userdeletere")

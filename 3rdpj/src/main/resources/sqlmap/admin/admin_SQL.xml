@@ -256,14 +256,14 @@
 		where qna_idx=#{qna_idx}
 	</delete>
 
-	<select id="getUserMonth" resultType="com.goott.pj3.admin.dto.chartDTO">
+	<select id="getUserMonth" resultType="com.goott.pj3.admin.dto.ChartDTO">
 		SELECT COUNT(*) as count, MONTH(create_date) as month
 		FROM user
 		GROUP BY MONTH(create_date),auth
 		HAVING auth = #{auth}
 		ORDER BY MONTH(create_date)
 	</select>
-	<resultMap id="getUserMonthresult" type="com.goott.pj3.admin.dto.chartDTO">
+	<resultMap id="getUserMonthresult" type="com.goott.pj3.admin.dto.ChartDTO">
 
 
 

@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.3.js"></script> 
 <html>
 <head>
     <title>리뷰 상세 페이지</title>

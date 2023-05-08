@@ -73,7 +73,7 @@
         <result property="start_date" column="start_date"/>
         <result property="end_date" column="end_date"/>
         <result property="price" column="price"/>
-        <collection property="p_img_idx" column="p_img_idx" javaType="List" ofType="String">
+        <collection property="p_img_idx" column="p_img_idx" javaType="List" ofType="Integer">
             <result column="p_img_idx"/>
         </collection>
         <collection property="p_img" column="p_img" javaType="List" ofType="String">

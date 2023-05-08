@@ -1,20 +1,13 @@
-<!DOCTYPE html> 
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/gh/FortAwesome/Font-Awesome@5.14.0/css/all.min.css"
-    />
-    <link rel="stylesheet" href="../css/style.css" />
-    <title>Sun Tour | Payment</title>
-  </head>
-  <body>
-    <div data-include-path="layout.html"></div>
-    <script src="../js/layout.js"></script>
-    <main class="payment">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%--
+  Created by STS.
+  User: 김규동
+  Date: 2023-05-04
+  Time: 오후 4:00
+--%>
+<%@ include file="/WEB-INF/views/common/layout.jsp" %> 
+<main class="payment">
       <section class="payment__doc">
         <section class="payment__info">
           <article class="payment__prof--img"></article>
@@ -52,10 +45,14 @@
         </section>
       </section>
     </main>
-    <script src="../js/payment.js"></script>
+<script src="/resources/js/common/layout.js"></script>
+	<script src="/resources/js/common/payment.js"></script>
+    <!-- <script src="/resources/js/common/search.js"></script> -->
+    <script 
+    	type="text/javascript" 
+    	src="https://service.iamport.kr/js/iamport.payment-1.2.0.js">
+    </script>
     <script
       src="https://kit.fontawesome.com/7723a79ab5.js"
       crossorigin="anonymous"
     ></script>
-  </body>
-</html>

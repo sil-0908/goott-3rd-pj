@@ -1,8 +1,6 @@
 package com.goott.pj3.admin.dto;
 
-import java.util.Date;
-
-public class chartDTO {
+public class ChartDTO {
 
     int count, month;
 
