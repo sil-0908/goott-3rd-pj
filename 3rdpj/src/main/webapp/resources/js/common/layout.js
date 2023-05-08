@@ -24,12 +24,10 @@ $(".sign_out").on('click', function(){
 });
 
 //마이페이지 - 장민실 23.05.04
-$(".my_page").on('click', function() {
-	var auth = $(".user_auth_input").val();
-	if(auth==="auth_c") {
-		location.href = "/user/userpage";
-	}
-	else if(auth==="auth_b") {
-		location.href = "/user/plannerpage"
-	}
+$(".user_page").on('click', function() {
+	location.href = "/user/userpage";
+});
+
+$(".planner_page").on('click', function() {
+	location.href = "/user/plannerpage"
 });

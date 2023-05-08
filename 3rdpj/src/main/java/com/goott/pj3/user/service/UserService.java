@@ -26,8 +26,11 @@ public interface UserService {
 //  비밀번호 변경
 	void set_new_pw(UserDTO u_dto);
 
-//	사용자 마이페이지
+//	일반사용자 마이페이지
 	UserDTO get_user_info(UserDTO u_dto);
+
+//	플래너 마이페이지
+	UserDTO get_planner_info(UserDTO u_dto);
 
 	
 

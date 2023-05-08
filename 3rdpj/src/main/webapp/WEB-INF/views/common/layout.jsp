@@ -13,7 +13,7 @@
 	<header class="header">
 	  <div class="header__logo">
         <div class="logo">
-          <a href="./user/mypage" class="logo__link">
+          <a href="/" class="logo__link">
             <img src="/resources/img/logo_suntour_purple.png" alt="" />
           </a>
         </div>
@@ -27,9 +27,13 @@
             <li class="nav__item sign_in">로그인</li>
 		  </c:if>
 		  <c:if test="${sessionScope.user_id != null}">
-		    <li class="nav__item my_page">마이페이지</li>
+		  	<c:if test="${sessionScope.auth == 'auth_c'}">
+		      <li class="nav__item user_page">마이페이지</li>
+		    </c:if>
+		    <c:if test="${sessionScope.auth == 'auth_b'}">
+		      <li class="nav__item planner_page">마이페이지</li>
+		    </c:if>
 		    <li class="nav__item sign_out">로그아웃</li>
-		    <input type="hidden" class="user_auth_input" value="${sessionScope.auth}" />
 		  </c:if>
         </ul>
       </nav>
@@ -57,12 +61,12 @@
 			<form name="signin" method="post">
 				<h2 class="login_text">로그인</h2>
 				<div class="signin_input_box id_area">
-					<input type="text" placeholder="아이디" maxlength='20' class="id" required />
+					<input type="text" placeholder="아이디" maxlength="20" class="id" required />
 					<i class="fa-solid fa-user id_icon"></i>
 					<p class="signin_text id_alert_text"></p>
 				</div>
 				<div class="signin_input_box pw_area">
-					<input type="password" placeholder="비밀번호" maxlength='20' class="pw" required />
+					<input type="password" placeholder="비밀번호" maxlength="20" class="pw" required />
 					<i class="fa-solid fa-lock pw_icon"></i>
 					<i class="fa-solid fa-eye-slash pw_hide"></i>
 					<p class="signin_text pw_alert_text"></p>

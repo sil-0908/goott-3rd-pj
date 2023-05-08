@@ -79,10 +79,16 @@ public class UserServiceImpl implements UserService {
 		userDAO.set_new_pw(u_dto);
 	}
 
-//	사용자 마이페이지
+//	일반사용자 마이페이지
 	@Override
 	public UserDTO get_user_info(UserDTO u_dto) {
 		return userDAO.get_user_info(u_dto);
+	}
+
+//	플래너 마이페이지
+	@Override
+	public UserDTO get_planner_info(UserDTO u_dto) {
+		return userDAO.get_planner_info(u_dto);
 	}
 
 
