@@ -1,16 +1,19 @@
 package com.goott.pj3.user.dto;
 
-import java.sql.Date;
+import java.time.LocalDateTime;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class UserDTO {
 	
 	// 공통 DTO : 아이디, 비밀번호, 생년월일, 이메일, 폰번호, 권한, 탈퇴여부, 프로필사진, 포인트, 회원가입일자, 정보수정일자
-	String user_id, pw, birth, email, hp, auth, u_del_yn, profile_img;
-	int u_point;
-	Date create_date, update_date;
-	// 플래너 DTO : 사업용 폰번호, 자기소개, 사업자등록번호, 계좌, 성공횟수, 플래너 좋아요/싫어요
-	String hp_emp, intro, emp_num, acount;
-	int success_count, planner_like, planner_unlike;	
+	private String user_id, pw, birth, email, hp, auth, u_del_yn, profile_img;
+	private int u_point;
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss", timezone="Asia/Seoul")
+	private LocalDateTime create_date, update_date;
+	// 플래너 DTO : 사업용 폰번호, 자기소개, 사업자등록번호, 계좌, 성공횟수, 플래너 평균점수
+	private String hp_emp, intro, emp_num, acount, planner_score;
+	private int success_count;
 
 	public String getUser_id() {
 		return user_id;
@@ -84,19 +87,19 @@ public class UserDTO {
 		this.u_point = u_point;
 	}
 
-	public Date getCreate_date() {
+	public LocalDateTime getCreate_date() {
 		return create_date;
 	}
 
-	public void setCreate_date(Date create_date) {
+	public void setCreate_date(LocalDateTime create_date) {
 		this.create_date = create_date;
 	}
 
-	public Date getUpdate_date() {
+	public LocalDateTime getUpdate_date() {
 		return update_date;
 	}
 
-	public void setUpdate_date(Date update_date) {
+	public void setUpdate_date(LocalDateTime update_date) {
 		this.update_date = update_date;
 	}
 
@@ -131,6 +134,14 @@ public class UserDTO {
 	public void setAcount(String acount) {
 		this.acount = acount;
 	}
+	
+	public String getPlanner_score() {
+		return planner_score;
+	}
+
+	public void setPlanner_score(String planner_score) {
+		this.planner_score = planner_score;
+	}
 
 	public int getSuccess_count() {
 		return success_count;
@@ -138,22 +149,6 @@ public class UserDTO {
 
 	public void setSuccess_count(int success_count) {
 		this.success_count = success_count;
-	}
-
-	public int getPlanner_like() {
-		return planner_like;
-	}
-
-	public void setPlanner_like(int planner_like) {
-		this.planner_like = planner_like;
-	}
-
-	public int getPlanner_unlike() {
-		return planner_unlike;
-	}
-
-	public void setPlanner_unlike(int planner_unlike) {
-		this.planner_unlike = planner_unlike;
 	}
 
 	@Override
@@ -173,9 +168,8 @@ public class UserDTO {
 			+ ", intro = " + intro
 			+ ", emp_num = " + emp_num
 			+ ", acount = " + acount
+			+ ", planner_score = " + planner_score
 			+ ", success_count = " + success_count
-			+ ", planner_like = " + planner_like
-			+ ", planner_unlike = " + planner_unlike
 			+ "]";
 	}
 

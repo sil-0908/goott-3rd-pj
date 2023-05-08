@@ -1,17 +1,18 @@
 /* form */
 .user_page_main {
-	min-height: 100vh;
-	background-image: url("/resources/img/user_page_bg.jpg");
-	background-size: cover;
-	/*
+	position: relative;
 	display: flex;
-    flex-direction: column;
-    justify-content: center;
-    */
+    justify-content: space-evenly;
+    background-color: beige;
+    height: 70rem;
 }
 
 .profile_img_div {
 	width: 15rem;
 	height: 15rem;
-	background-color: white;
+	background-color: black;
+}
+
+.payment_list_div {
+	display: none;
 }
