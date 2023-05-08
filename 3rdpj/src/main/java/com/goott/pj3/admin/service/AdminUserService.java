@@ -23,4 +23,7 @@ public interface AdminUserService {
     void adminUserDeleteReturn(AdminUserDTO dto);
 
     List<ChartDTO> getUserMonthByAuth(String auth);
+
+
+//    void salesChart();
 }
