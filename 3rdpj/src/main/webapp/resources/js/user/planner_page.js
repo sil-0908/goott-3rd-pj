@@ -8,7 +8,7 @@ $(document).ready(function() {
 			$(".page_birth").attr('value', data.dto.birth);
 			$(".page_email").attr('value', data.dto.email);
 			$(".page_hp").attr('value', data.dto.hp);
-			$(".page_emphp").attr('value', data.dto.hp_emp);
+			$(".page_emp_hp").attr('value', data.dto.hp_emp);
 			if(data.dto.intro===null) {
 				$(".page_intro").attr('value', "아직 입력된 자기소개가 없습니다");
 			}
@@ -16,7 +16,7 @@ $(document).ready(function() {
 				$(".page_intro").attr('value', data.dto.intro);
 			}
 			$(".page_u_point").attr('value', data.dto.u_point);
-			$(".page_empnum").attr('value', data.dto.emp_num);
+			$(".page_emp_num").attr('value', data.dto.emp_num);
 			$(".page_success_cnt").attr('value', data.dto.success_count);
 			$(".page_create_date").attr('value', data.dto.create_date);
 			$(".page_update_date").attr('value', data.dto.update_date);
@@ -28,4 +28,21 @@ $(document).ready(function() {
                console.log(error);
 		}	// error end
 	});	// ajax end
+});
+
+//좌측 탭마다 표시될 화면변경
+$(".planner_info_text").on('click', function() {
+	$(".paylist_section").removeClass("show");
+	$(".pay_list_text").removeClass("active");
+	$(".info_section").removeClass("none");
+	$(".info_section").addClass("show");
+	$(".privacy_text").addClass("active");
+});
+
+$(".privacy_text").on('click', function() {
+	$(".info_section").removeClass("show");
+	$(".info_section").addClass("none");
+	$(".privacy_text").removeClass("active");
+	$(".paylist_section").addClass("show");
+	$(".pay_list_text").addClass("active");
 });

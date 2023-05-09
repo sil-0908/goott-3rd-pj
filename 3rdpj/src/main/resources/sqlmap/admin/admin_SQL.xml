@@ -256,6 +256,7 @@
 		where qna_idx=#{qna_idx}
 	</delete>
 
+	<!-- 신진영 23.05.04 회원 차트	-->
 	<select id="getUserMonth" resultType="com.goott.pj3.admin.dto.ChartDTO">
 		SELECT COUNT(*) as count, MONTH(create_date) as month
 		FROM user
@@ -263,13 +264,11 @@
 		HAVING auth = #{auth}
 		ORDER BY MONTH(create_date)
 	</select>
-	<resultMap id="getUserMonthresult" type="com.goott.pj3.admin.dto.ChartDTO">
+
+	<select id="todayVisitCheck" resultType="String">
 
 
-
-
-	</resultMap>
-
+	</select>
 
 
 

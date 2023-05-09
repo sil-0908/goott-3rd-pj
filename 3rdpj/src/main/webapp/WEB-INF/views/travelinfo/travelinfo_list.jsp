@@ -15,7 +15,7 @@
 </head>
 <body>
 <h1>여행지 정보 목록</h1>
-<c:if test="${sessionScope.auth ne 'auth_c'}">
+<c:if test="${sessionScope.auth == 'auth_c'}">
 <p>
   <a href="/travelinfo/create">리뷰 작성</a>
 </p>

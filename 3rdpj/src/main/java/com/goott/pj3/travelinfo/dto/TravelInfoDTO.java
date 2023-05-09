@@ -5,10 +5,26 @@ import java.util.List;
 
 public class TravelInfoDTO {
    int travel_location_idx;
-   String user_id, country_a, country_b, country_c, country_detail, country_script;
+   String user_id, country_a, country_b, country_c, country_detail, country_script, keyword, option;
    List<String> t_img;
    List<Integer> t_img_idx;
    Date create_date, update_date;
+
+    public String getKeyword() {
+        return keyword;
+    }
+
+    public void setKeyword(String keyword) {
+        this.keyword = keyword;
+    }
+
+    public String getOption() {
+        return option;
+    }
+
+    public void setOption(String option) {
+        this.option = option;
+    }
 
     public int getTravel_location_idx() {
         return travel_location_idx;

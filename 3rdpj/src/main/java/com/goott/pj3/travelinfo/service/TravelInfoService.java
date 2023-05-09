@@ -18,7 +18,7 @@ public interface TravelInfoService {
 
     int update(TravelInfoDTO travelInfoDTO);
 
-    boolean deleteImg(TravelInfoDTO travelInfoDTO);
+    void deleteImg(TravelInfoDTO travelInfoDTO);
 
     void updateImg(TravelInfoDTO travelInfoDTO);
 
