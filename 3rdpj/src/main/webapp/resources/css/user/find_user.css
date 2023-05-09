@@ -3,9 +3,9 @@
 .finduser_main {
 	background-size: cover;
 	display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin-top: 13.5rem;
+	flex-direction: column;
+	justify-content: center;
+	margin-top: 13.5rem;
 }
 
 .finduser_div {
