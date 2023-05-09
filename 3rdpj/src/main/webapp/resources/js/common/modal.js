@@ -133,7 +133,10 @@ $(function() {
 			  	                  console.log(xhr.responseText);
 			  	                  console.log(xhr.status);
 			  	                  console.log(xhr.statusText);
-			  	            } 
+			                    },
+			                	success: function(){
+			                		alert("에이쟉스 성공");
+			                	} 
 			                }).done(function (rsp) {
 			                    if (rsp.cart === '카트담기') {
 			                        alert('카트담기성공')
