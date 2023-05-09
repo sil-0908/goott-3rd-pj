@@ -6,11 +6,10 @@
 		<h2>마이페이지</h2>
 		<div class="profile_img_div"></div>
 		<p class="page_text id_text"></p>
-		<input type="text" name="page_id" class="page_input page_id" readonly />
+		<input type="text" class="page_input page_id" readonly />
+		<input type="text" class="session_id" value="${sessionScope.user_id}" />
 			<p class="menu_tab planner_info_text">플래너 정보</p>
-		<c:if test="${sessionScope.user_id == param.page_id}">
 			<p class="menu_tab privacy_text">개인 정보</p>
-		</c:if>
 	</div>
 	<!-- 본인 이외에도 보여줄 영역 -->
 	<section class="planner_info_section">
@@ -45,6 +44,7 @@
 					<input type="text" class="page_input page_intro" readonly />
 				</div>
 				<div class="btn_div">
+					<input type="button" class="page_btn edit_info" value="정보 수정하기" />
 					<input type="button" class="page_btn write_review" value="이 플래너에게 리뷰달기" />
 				</div>
 			</form>

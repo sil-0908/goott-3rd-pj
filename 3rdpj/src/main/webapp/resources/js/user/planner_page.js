@@ -21,6 +21,12 @@ $(document).ready(function() {
 			$(".page_create_date").attr('value', data.dto.create_date);
 			$(".page_update_date").attr('value', data.dto.update_date);
 			$(".page_planner_score").attr('value', data.dto.planner_score);
+			if($(".page_id").val()!=$(".session_id").val()) {
+				$(".privacy_text").css("display", "none");
+			}
+			else {
+				$(".privacy_text").css("display", "block");
+			}
 		},	// success end
 		error: function(xhr, status, error) {
                console.log(xhr);
@@ -32,17 +38,17 @@ $(document).ready(function() {
 
 //좌측 탭마다 표시될 화면변경
 $(".planner_info_text").on('click', function() {
-	$(".paylist_section").removeClass("show");
-	$(".pay_list_text").removeClass("active");
-	$(".info_section").removeClass("none");
-	$(".info_section").addClass("show");
-	$(".privacy_text").addClass("active");
+	$(".privacy_info_section").removeClass("show");
+	$(".privacy_text").removeClass("active");
+	$(".planner_info_section").removeClass("none");
+	$(".planner_info_section").addClass("show");
+	$(".planner_info_text").addClass("active");
 });
 
 $(".privacy_text").on('click', function() {
-	$(".info_section").removeClass("show");
-	$(".info_section").addClass("none");
-	$(".privacy_text").removeClass("active");
-	$(".paylist_section").addClass("show");
-	$(".pay_list_text").addClass("active");
+	$(".planner_info_section").removeClass("show");
+	$(".planner_info_section").addClass("none");
+	$(".planner_info_text").removeClass("active");
+	$(".privacy_info_section").addClass("show");
+	$(".privacy_text").addClass("active");
 });

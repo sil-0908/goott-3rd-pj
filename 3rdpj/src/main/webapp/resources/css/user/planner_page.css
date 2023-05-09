@@ -110,7 +110,6 @@
     padding-top: 2.5rem;
 }
 
-
 .input_div {
 	width: 20rem;
 	text-align: center;
@@ -136,9 +135,8 @@
     justify-content: space-evenly;
 }
 
-.planner_page_main .change_pw,
-.planner_page_main .edit_info,
-.planner_page_main .write_review {
+.planner_info_div .edit_info,
+.planner_info_div .write_review {
 	color: var(--white);
 	background-color: var(--blue);
 	width: 8rem;
@@ -162,9 +160,13 @@
 	background-color: var(--yellow);
 }
 
-/* paylist_section */
+/* privacy_info_section */
+.privacy_info_section {
+	display: none;
+}
+
 .privacy_info_section.show {
-	odisplay: block;
+	display: block;
 	pointer-events: auto;
 }
 
@@ -174,9 +176,35 @@
 }
 
 .privacy_info_div {
-	display: none;
-	background: cornflowerblue;
-	width: 50rem;
-    height: 35rem;
-    line-height: 1.8rem;
+    width: 50rem;
+    height: 40rem;
+    line-height: 1.8rem;    
+    position: relative;
+    box-shadow: 0 0.5rem 1rem rgba(0,0,0,.15)!important;
+}
+
+.privacy_info_form {
+	display: flex;
+    height: 30rem;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    padding-top: 2.5rem;
+}
+
+.privacy_info_div .btn_div {
+	display: flex;
+    width: 20rem;
+    margin-top: 1rem;
+    justify-content: space-evenly;
+}
+
+.privacy_info_div .edit_info,
+.privacy_info_div .change_pw {
+	color: var(--white);
+	background-color: var(--blue);
+	width: 8rem;
+	padding: 0.5rem 0;
+	border-radius: 10px;
+	transition: background-color 0.2s;
 }
