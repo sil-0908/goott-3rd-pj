@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import com.goott.pj3.user.dto.UserDTO;
 import com.goott.pj3.user.service.UserService;
@@ -110,16 +108,16 @@ public class UserController {
 		return "redirect:/";
 	}
 	
-//	아이디 찾기 > 현재 DB에 중복정보 다량으로 기능구현 완료 후 주석처리
-//	@PostMapping("find_id")
-//	@ResponseBody
-//	public String find_id(@RequestParam("email") String email, @RequestParam("hp") String hp, UserDTO u_dto) {
-////		휴대폰 인증기능 완료되면 휴대폰인증 추가하기
-//		u_dto.setEmail(email);
-//		u_dto.setHp(hp);
-//		String id = userService.find_id(u_dto);
-//		return id;
-//	}
+//	아이디 찾기
+	@PostMapping("find_id")
+	@ResponseBody
+	public String find_id(@RequestParam("email") String email, @RequestParam("hp") String hp, UserDTO u_dto) {
+//		휴대폰 인증기능 완료되면 휴대폰인증 추가하기
+		u_dto.setEmail(email);
+		u_dto.setHp(hp);
+		String id = userService.find_id(u_dto);
+		return id;
+	}
 	
 //	비밀번호 찾기
 	@PostMapping("find_get_pw")
@@ -131,7 +129,7 @@ public class UserController {
 		return origin_pw;
 	}
 	
-//	비밀번호 찾기 후 새로운 비밀번호 저장 // DB에 암호화값 새로 저장까지 진행되고 있으나 JSON 넘어가지 않아 마무리작업중
+//	새로운 비밀번호 저장
 	@PostMapping("find_set_pw")
 	@ResponseBody
 	public Map<String, String> find_set_pw(@RequestParam("id") String id, @RequestParam("hp") String hp, @RequestParam("pw") String pw, UserDTO u_dto) {
@@ -152,22 +150,20 @@ public class UserController {
 	}
 	
 //	사용자 마이페이지
-	@RequestMapping("userpage")
+	@RequestMapping("mypage")
 	@ResponseBody
 	public Map<String, UserDTO> user_page(HttpSession session, UserDTO u_dto) {
-//		세션에 저장된 id랑 권한으로 db정보 불러오기
-//		유저권한일때 : 아이디, 이메일, 핸드폰번호, 프로필이미지, 포인트
-//		플래너권한일때 : 아이디, 이메일, 핸드폰번호, 사업용핸드폰번호, 자기소개, 프로필이미지, 포인트, 사업자번호
-		Map<String, UserDTO> userpage_map = new HashMap<>();
+		Map<String, UserDTO> mypage_map = new HashMap<>();
 		String id = (String)session.getAttribute("user_id");
+		String auth = (String)session.getAttribute("auth");
 		u_dto.setUser_id(id);
-		System.out.println("db작업전 : " + u_dto);
-//		userService.get_user_info(u_dto);
-//		mav.addObject("user_info", userService.get_user_info(u_dto));
-//		mav.setViewName("user/user_page");
-		System.out.println("db작업후 : " + u_dto);
-		userpage_map.put("user_dto", u_dto);
-		return userpage_map;
+		if(auth.equals("auth_c")) {
+			mypage_map.put("dto", userService.get_user_info(u_dto));
+		}	// 접속자가 일반사용자일때 if end
+		else if(auth.equals("auth_b")) {
+			mypage_map.put("dto", userService.get_planner_info(u_dto));
+		}	// 접속자가 플래너일때 else if end
+		return mypage_map;
 	}
 
 	

@@ -1,9 +1,10 @@
-/* form */
+
+/*
 .signup_main { 
 	min-height: 100vh;
-	background-image: url("/resources/img/user_page_bg.jpg");
 	background-size: cover;
 }
+*/
 
 .signup_main_div {
 	display: flex;
@@ -20,6 +21,7 @@
     padding: 1.5rem 0;
     border-radius: 0.8rem;
     line-height: 3.5rem;
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
 }
 
 .signup_box {
