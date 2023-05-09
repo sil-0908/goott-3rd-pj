@@ -25,18 +25,18 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 
         HttpSession httpSession = request.getSession();
         if (httpSession == null) {
-            response.sendRedirect(request.getContextPath() + "/user/signin");
+            response.sendRedirect(request.getContextPath() + "/");
             return false; //어노테이션은 있으나 세션이 없으면 리다이렉트
         }
         String authUser = (String) httpSession.getAttribute("auth");
         if (authUser == null) {
-            response.sendRedirect(request.getContextPath() + "/user/signin");
+            response.sendRedirect(request.getContextPath() + "/");
             return false; // 세션에 auth 값이 없으면 리다이렉트
         }
         String role = auth.role().toString();
         if ("ADMIN".equals(role)) {
             if (!"auth_a".equals(authUser)) {
-                response.sendRedirect(request.getContextPath() + "/user/signin");
+                response.sendRedirect(request.getContextPath() + "/");
                 return false; // 롤이 ADMIN 이 아니면 리다이렉트
             }
         }
@@ -45,7 +45,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
                 return true; //롤이 어드민이면 통과
             }
             if (!"auth_b".equals(authUser)) {
-                response.sendRedirect(request.getContextPath() + "/user/signin");
+                response.sendRedirect(request.getContextPath() + "/");
                 return false; //롤이 플래너가 아니면 통과시키지 않음
             }
         }

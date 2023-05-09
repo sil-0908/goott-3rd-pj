@@ -27,8 +27,7 @@ $(document).ready(function() {
 	var original_U_point = $("#u_point").val();
 	var original_Emp_num = $("#emp_num").val();
 	var original_Success_count = $("#success_count").val();
-	var original_Planner_like = $("#planner_like").val();
-	var original_Planner_unlike = $("#planner_unlike").val();
+	var original_Planner_rating = $("#planner_rating").val();
 	var original_Acount = $("#acount").val();
 	
 	$("#btnUpdate").click(function(){
@@ -44,8 +43,7 @@ $(document).ready(function() {
 		var current_U_point = $("#u_point").val();
 		var current_Emp_num = $("#emp_num").val();
 		var current_Success_count = $("#success_count").val();
-		var current_Planner_like = $("#planner_like").val();
-		var current_Planner_unlike = $("#planner_unlike").val();
+		var current_Planner_rating = $("#Planner_rating").val();
 		var current_Acount = $("#acount").val();
 		
 		if (current_Pw !== original_Pw 
@@ -60,8 +58,7 @@ $(document).ready(function() {
 				|| current_U_point !== original_U_point 
 				|| current_Emp_num !== original_Emp_num 
 				|| current_Success_count !== original_Success_count 
-				|| current_Planner_like !== original_Planner_like 
-				|| current_Planner_unlike !== original_Planner_unlike 
+				|| current_Planner_rating !== original_Planner_rating
 				|| current_Acount !== original_Acount) {
 			  document.form1.action="/admin/userupdate";
 			  document.form1.submit();
@@ -132,11 +129,11 @@ $(document).ready(function() {
                                </tr>
                                <c:if test="${dto.auth == 'auth_b' }">
 								    <tr>
-								        <td>플래너 좋아요 수 :<input name="planner_like" id="planner_like" value="${dto.planner_like}"></td>
+								        <td>플래너 평점 :<input name="planner_score" id="planner_score" value="${dto.planner_score}"></td>
 								    </tr>
-								    <tr>
-								        <td>플래너 싫어요 수 :<input name="planner_unlike" id="planner_unlike" value="${dto.planner_unlike}"></td>
-								    </tr>
+<%--								    <tr>--%>
+<%--								        <td>플래너 싫어요 수 :<input name="planner_unlike" id="planner_unlike" value="${dto.planner_unlike}"></td>--%>
+<%--								    </tr>--%>
 							    </c:if>
 								<tr>
                                     <td>계좌번호 :<input name="acount" id="acount" value="${dto.acount}"></td>
