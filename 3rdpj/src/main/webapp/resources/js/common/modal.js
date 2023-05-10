@@ -9,6 +9,8 @@ const sendMessage = document.querySelector(".chatbox__submit");
 const price = $('#price').val(); // 가격
 const name = $('#title').val(); //플랜명
 const planner = $('#planner').val(); // 플래너아이디
+const buyer = $('.session').val(); //구매자아이디
+const plan_idx = $('.plan_idx').val(); //플랜 pk
 
 
 for (const openModal of openModals) {
@@ -53,8 +55,6 @@ $(function() {
 	            	"<section class='modal__info'>" +
 	            	"<hgroup class='profile'>" +
 	            	"<div class='profile__title'>" +
-	            	/*"<input class='session' type='hidden' value='${sessionScope.user_id}'>"+
-	            	"<input class='plan_idx' type='hidden' value='${data.plan_idx}'>"+*/
 	            	"<h1>"+data["plan_title"]+"</h1>"+
 	                "<button class='modal__btn'>"+
 	                "<a href='#'>플래너 페이지 바로가기 </a>"+
@@ -119,10 +119,8 @@ $(function() {
 		            	/*$(this).parentsUntil("dialog").parent().prop("open", true);*/
 		            });
 		            $(".modal__btn--cart-add").click(function(){
-		            	const buyer = $('.session').val(); //구매자아이디
-		            	const plan_idx = $('.plan_idx').val(); //플랜 pk
 		            	let cart = {
-			                    plan_idx: plan_idx,
+			                    plan_idx: data.plan_idx,
 			                    user_id: buyer
 			                };
 			                $.ajax({
