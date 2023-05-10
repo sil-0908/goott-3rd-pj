@@ -33,6 +33,10 @@ public class UserServiceImpl implements UserService {
 	public List<UserDTO> get_signup_accept() {
 		return userDAO.get_signup_accept();
 	}
+	@Override
+	public List<UserDTO> get_signup_privacy() {
+		return userDAO.get_signup_privacy();
+	}
 
 //	아이디 중복체크
 	@Override

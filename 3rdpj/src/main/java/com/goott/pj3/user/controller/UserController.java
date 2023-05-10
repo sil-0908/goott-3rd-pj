@@ -1,6 +1,7 @@
 package com.goott.pj3.user.controller;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,7 +34,12 @@ public class UserController {
 	
 //	회원가입 페이지 이동
 	@GetMapping("signup")
-	public String go_sign_up() {
+	public String go_sign_up(Model model) {
+		// 회원가입 이용약관 불러오기
+		List<UserDTO> accept_list = userService.get_signup_accept();
+		List<UserDTO> privacy_list = userService.get_signup_privacy();
+	    model.addAttribute("accept", accept_list);
+	    model.addAttribute("privacy", privacy_list);
 		return "user/sign_up";
 	}
 	
@@ -59,17 +66,6 @@ public class UserController {
 	public String sign_up(UserDTO u_dto) {
 		userService.sign_up(u_dto);
 		return "redirect:/";
-	}
-	
-//	회원가입 이용약관
-	@GetMapping("signup_accept")
-	public Map<String, UserDTO> signup_accept() {
-		List<UserDTO> accept_list = userService.get_signup_accept();
-		Map<String, UserDTO> accept_map = new HashMap<String, UserDTO>();
-		for (UserDTO accept : accept_list) {
-			accept_map.put(accept.getAccept_id(), accept);
-		}
-		return accept_map;
 	}
 	
 //	아이디 중복체크
@@ -139,6 +135,12 @@ public class UserController {
 		u_dto.setHp(hp);
 		String origin_pw = userService.find_get_pw(u_dto);	// 입력정보와 일치하는 비밀번호 담아오기
 		return origin_pw;
+	}
+	
+//	비밀번호 변경 모달창
+	@GetMapping("go_newpw_modal")
+	public String new_pw_modal() {
+		return "user/new_pw_modal";
 	}
 	
 //	새로운 비밀번호 저장

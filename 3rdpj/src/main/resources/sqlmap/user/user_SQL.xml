@@ -13,8 +13,14 @@
 	<!-- 회원가입 이용약관 -->
 	<select id="get_signup_accept" resultType="com.goott.pj3.user.dto.UserDTO">
 		<![CDATA[
-		select id as accept_id, title as accept_title, content as accept_content
+		select concat(title, '\n' , content , '\n') as accept_detail
 		  from accept_signup
+		]]>
+	</select>
+	<select id="get_signup_privacy" resultType="com.goott.pj3.user.dto.UserDTO">
+		<![CDATA[
+		select concat(title, '\n' , content , '\n') as privacy_detail
+		  from privacy_policy
 		]]>
 	</select>
    

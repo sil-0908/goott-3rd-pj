@@ -15,7 +15,7 @@ public class UserDTO {
 	private String hp_emp, intro, emp_num, acount, planner_score;
 	private int success_count;
 	// 회원가입 이용약관 DTO
-	private String accept_id, accept_title, accept_content;
+	private String accept_detail, privacy_detail;
 
 	public String getUser_id() {
 		return user_id;
@@ -153,28 +153,20 @@ public class UserDTO {
 		this.success_count = success_count;
 	}		
 
-	public String getAccept_id() {
-		return accept_id;
+	public String getAccept_detail() {
+		return accept_detail;
 	}
 
-	public void setAccept_id(String accept_id) {
-		this.accept_id = accept_id;
+	public void setAccept_content(String accept_detail) {
+		this.accept_detail = accept_detail;
+	}	
+
+	public String getPrivacy_detail() {
+		return privacy_detail;
 	}
 
-	public String getAccept_title() {
-		return accept_title;
-	}
-
-	public void setAccept_title(String accept_title) {
-		this.accept_title = accept_title;
-	}
-
-	public String getAccept_content() {
-		return accept_content;
-	}
-
-	public void setAccept_content(String accept_content) {
-		this.accept_content = accept_content;
+	public void setPrivacy_detail(String privacy_detail) {
+		this.privacy_detail = privacy_detail;
 	}
 
 	@Override
@@ -196,9 +188,8 @@ public class UserDTO {
 			+ ", acount = " + acount
 			+ ", planner_score = " + planner_score
 			+ ", success_count = " + success_count
-			+ ", accept_id = " + accept_id
-			+ ", accept_title = " + accept_title
-			+ ", accept_content = " + accept_content
+			+ ", accept_detail = " + accept_detail
+			+ ", privacy_detail = " + privacy_detail
 			+ "]";
 	}
 

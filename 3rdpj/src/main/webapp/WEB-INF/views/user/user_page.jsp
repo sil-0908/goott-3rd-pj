@@ -50,6 +50,7 @@
 			결제내역ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
 		</div>
 	</section>
+	<section class="newpw_modal_section"></section>
 </main>
 
 <script src="/resources/js/user/user_page.js"></script>

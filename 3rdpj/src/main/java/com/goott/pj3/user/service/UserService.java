@@ -12,6 +12,7 @@ public interface UserService {
 	
 //	회원가입 이용약관
 	List<UserDTO> get_signup_accept();
+	List<UserDTO> get_signup_privacy();
 
 //	아이디 중복체크
 	int id_chk(String id);

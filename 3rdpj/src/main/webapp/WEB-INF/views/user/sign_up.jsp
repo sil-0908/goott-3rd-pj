@@ -9,11 +9,35 @@
 		<p class="accept_tab accecpt_2_p">서비스 제공 및 회원관리</p>
 		<p class="accept_tab accecpt_3_p">구매, 계약 및 지급서비스</p>
 		<p class="accept_tab accecpt_4_p">개인정보 보호 및 법정의무</p>
-		<p class="accept_tab accecpt_5_p">개인정보 처리방침</p>
+		<p class="accept_tab pravacy_p">개인정보 처리방침</p>
 	</div>
 	<section class="accept_section">
 		<div class="accept_box">
-			<input type="text" class="accept_text accept_1_input" readonly />
+			<div class="accept_div accept1_div">
+				<c:forEach var="accept1" items="${accept}" begin="0" end="2">
+					<c:out value="${accept1.accept_detail}"/>
+				</c:forEach>
+			</div>
+			<div class="accept_div accept2_div">
+				<c:forEach var="accept2" items="${accept}" begin="3" end="7">
+					<c:out value="${accept2.accept_detail}"/>
+				</c:forEach>
+			</div>
+			<div class="accept_div accept3_div">
+				<c:forEach var="accept3" items="${accept}" begin="8" end="15">
+					<c:out value="${accept3.accept_detail}"/>
+				</c:forEach>
+			</div>
+			<div class="accept_div accept4_div">
+				<c:forEach var="accept4" items="${accept}" begin="16" end="23">
+					<c:out value="${accept4.accept_detail}"/>
+				</c:forEach>
+			</div>
+			<div class="accept_div privacy_div">
+				<c:forEach var="privacy" items="${privacy}" begin="0" end="14">
+					<c:out value="${privacy.privacy_detail}"/>
+				</c:forEach>
+			</div>
 		</div>	
 	</section>
 	<!-- 회원가입 -->

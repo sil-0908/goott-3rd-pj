@@ -24,6 +24,9 @@ public class UserDAO {
 	public List<UserDTO> get_signup_accept() {
 		return ss.selectList("user.get_signup_accept");
 	}
+	public List<UserDTO> get_signup_privacy() {
+		return ss.selectList("user.get_signup_privacy");
+	}
 
 //	아이디 중복체크
 	public int id_chk(String id) {

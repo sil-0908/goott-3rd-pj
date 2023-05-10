@@ -1,7 +1,9 @@
 $(document).ready(function() {
+	var id = $(".session_id").val();
 	$.ajax({
-		url : "/user/mypage",
+		url : "/user/user_page",
 		type : "POST",
+		data : { "id" : id },
 		success : function(data) {
 			console.log(data.dto.intro);
 			$(".page_id").attr('value', data.dto.user_id);
