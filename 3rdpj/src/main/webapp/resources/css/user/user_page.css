@@ -5,7 +5,7 @@
 	height: 100%;
     width: 100%;
     justify-content: center;
-    padding-top: 9rem;
+    padding-top: 8.5rem;
 }
 
 .user_page_main input {
@@ -18,7 +18,7 @@
 }
 
 /* tab_area */
-.tab_area_div {
+.user_page_main .tab_area_div {
 	width: 20rem;
 	height: 35rem;
     line-height: 3rem;
@@ -26,27 +26,28 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    border-radius: 0.8rem;
     box-shadow: 0 0.5rem 1rem rgba(0,0,0,.15)!important;
 }
 
-.tab_area_div h2 {
+.user_page_main .tab_area_div h2 {
 	font-weight: 500;
 	font-size: 1.5rem;
 	cursor: default;
 }
 
-.tab_area_div .menu_tab {
+.user_page_main .tab_area_div .menu_tab {
 	margin: 1.5rem 1rem 0 9rem;
     padding-right: 0.7rem;
 }
 
-.tab_area_div .privacy_text,
-.tab_area_div .pay_list_text {
+.user_page_main .tab_area_div .privacy_text,
+.user_page_main .tab_area_div .pay_list_text {
 	cursor: pointer;
 }
 
-.tab_area_div .privacy_text:hover,
-.tab_area_div .pay_list_text:hover {
+.user_page_main .tab_area_div .privacy_text:hover,
+.user_page_main .tab_area_div .pay_list_text:hover {
 	color: var(--yellow);
 	border-right: 3px solid var(--yellow);
 }
@@ -57,7 +58,7 @@
 	border-right: 3px solid var(--blue);
 }
 
-.profile_img_div {
+.user_page_main .profile_img_div {
 	width: 13rem;
 	height: 13rem;
 	background-color: black;
@@ -65,7 +66,7 @@
 	margin: 1rem 0;
 }
 
-.tab_area_div .page_input {
+.user_page_main .tab_area_div .page_input {
 	width: 50%;
     height: 2rem;
     font-size: 1rem;
@@ -74,30 +75,31 @@
 }
 
 /* info_section */
-.info_section.show {
+.user_page_main .info_section.show {
 	display: block;
 	pointer-events: auto;
 }
 
-.info_section.show .info_div {
+.user_page_main .info_section.show .info_div {
 	display: block;
 	pointer-events: auto;
 }
 
-.info_section.none .info_div {
+.user_page_main .info_section.none .info_div {
 	display: none;
 }
 
-.info_section.none {
+.user_page_main .info_section.none {
 	display: none;
 	pointer-events: auto;
 }
 
-.info_div {
+.user_page_main .info_div {
     width: 50rem;
     height: 35rem;
     line-height: 1.8rem;    
     position: relative;
+    border-radius: 0.8rem;
     box-shadow: 0 0.5rem 1rem rgba(0,0,0,.15)!important;
 }
 
@@ -111,25 +113,25 @@
 }
 
 
-.input_div {
+.user_page_main .input_div {
 	width: 20rem;
 	text-align: center;
 	margin-bottom: 1.5rem;
 }
 
-.input_div .page_text {
+.user_page_main .input_div .page_text {
 	text-align: initial;
     margin-left: 2rem;
 }
 
-.input_div .page_input {
+.user_page_main .input_div .page_input {
 	width: 80%;
     height: 2rem;
     font-size: 1rem;
     border-bottom: 1.5px solid #aaaaaa;
 }
 
-.info_div .btn_div {
+.user_page_main .info_div .btn_div {
 	display: flex;
     width: 20rem;
     margin-top: 1rem;
@@ -160,20 +162,22 @@
 }
 
 /* paylist_section */
-.paylist_section.show {
+.user_page_main .paylist_section.show {
 	odisplay: block;
 	pointer-events: auto;
 }
 
-.paylist_section.show .paylist_div {
+.user_page_main .paylist_section.show .paylist_div {
 	display: block;
 	pointer-events: auto;
 }
 
-.paylist_div {
+.user_page_main .paylist_div {
 	display: none;
 	background: cornflowerblue;
 	width: 50rem;
     height: 35rem;
+    border-radius: 0.8rem;
     line-height: 1.8rem;
+    box-shadow: 0 0.5rem 1rem rgba(0,0,0,.15)!important;
 }

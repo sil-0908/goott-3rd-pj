@@ -84,6 +84,24 @@
 		if(total<6) {
 			$(".signup_chk_text").html("회원가입 실패! 입력 항목들을 다시 확인해주세요");
 			$(".signup_chk_text").css("color", "red");
+			if(id===0) {
+				$(".user_id").focus();
+			}
+			else if(origin_pwd===0) {
+				$(".origin_pw").focus();
+			}
+			else if(copy_pwd===0) {
+				$(".copy_pw").focus();
+			}
+			else if(email===0) {
+				$(".email").focus();
+			}
+			else if(birth===0) {
+				$(".birth").fucus();
+			}
+			else if(hp===0) {
+				$(".hp").focus();
+			}
 		}
 		else if(total===6) {
 			document.signup_form.action="/user/signup";
@@ -93,23 +111,23 @@
 	
 // pw input type text/password 전환
 	$(".origin_pw_hide").on("click", function() {
-		if($(".pw").attr("type")==="password"){
-			$(".pw").prop("type", "text");
+		if($(".origin_pw").attr("type")==="password"){
+			$(".origin_pw").prop("type", "text");
 			$(".origin_pw_hide").removeClass("fa-eye-slash").addClass("fa-eye");
 		}
 		else {
-			$(".pw").prop("type", "password");
+			$(".origin_pw").prop("type", "password");
 			$(".origin_pw_hide").removeClass("fa-eye").addClass("fa-eye-slash");
 		}		
 	});
 	
 	$(".copy_pw_hide").on("click", function() {
-		if($(".pw_chk").attr("type")==="password"){
-			$(".pw_chk").prop("type", "text");
+		if($(".copy_pw").attr("type")==="password"){
+			$(".copy_pw").prop("type", "text");
 			$(".copy_pw_hide").removeClass("fa-eye-slash").addClass("fa-eye");
 		}
 		else {
-			$(".pw_chk").prop("type", "password");
+			$(".copy_pw").prop("type", "password");
 			$(".copy_pw_hide").removeClass("fa-eye").addClass("fa-eye-slash");
 		}		
 	});
@@ -291,7 +309,7 @@
 	function birth_chk() {
 		var birth = $('.birth').val();
 		// 숫자만 입력 / 무조건 8자리 / - 자동입력 / 공백X
-		var birth_valid = /^([0-9]{4})-?(0[1-9]|1[0-2]{2})-?(0[1-9]|1[0-9]|2[0-9]|3[0-1]{2})$/;
+		var birth_valid = /^([0-9]{4})-?(0[1-9]|1[0-2]{2})-?(0[1-9]|1[0-9]|2[0-9]|3[0-1])$/;
 		
 		var birth_cnt;
 		

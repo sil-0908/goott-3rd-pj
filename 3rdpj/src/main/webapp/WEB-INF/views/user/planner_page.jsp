@@ -8,8 +8,8 @@
 		<div class="profile_img_div"></div>
 		<p class="page_text id_text"></p>
 		<input type="text" class="page_input page_id" readonly />
-			<p class="menu_tab planner_info_text">플래너 정보</p>
-			<p class="menu_tab privacy_text">개인 정보</p>
+		<p class="menu_tab planner_info_text">플래너 정보</p>
+		<p class="menu_tab privacy_text">개인 정보</p>
 	</div>
 	<!-- 본인 이외에도 보여줄 영역 -->
 	<section class="planner_info_section">

@@ -5,25 +5,25 @@
 	height: 100%;
     width: 100%;
     justify-content: center;
-    padding-top: 5.5rem;
-}
-
-.signup_main input {
-	border: none;
-	cursor: default;
+    margin: 8rem 0;
 }
 
 /* accept_menu */
-.accept_menu {
+.signup_main .accept_menu {
     width: 12rem;
     background: antiquewhite;
 }
 
-.accept_section .accept_box {
+.signup_main .accept_section {
+	width: 45rem;
+    height: 30rem;
+}
+
+.signup_main .accept_section .accept_box {
 	
 }
 
-.accept_box .accept_div {
+.signup_main .accept_box .accept_div {
 	width: 45rem;
     height: 30rem;
     white-space: pre-line;
@@ -32,51 +32,50 @@
     background: bisque;
 }
 
-.accept_box .accept1_div {
+.signup_main .accept_box .accept1_div {
 	
 }
 
-.accept_box .accept2_div {
+.signup_main .accept_box .accept2_div {
 	display : none;
 }
 
-.accept_box .accept3_div {
+.signup_main .accept_box .accept3_div {
 	display : none;
 }
 
-.accept_box .accept4_div {
+.signup_main .accept_box .accept4_div {
 	display : none;
 }
 
-.accept_box .privacy_div {
+.signup_main .accept_box .privacy_div {
 	display : none;
 }
 
 /* accept_section */
 
 /* signup_section */
-/*
-.signup_box, .accept_menu, .accept_section {
+.signup_main .signup_box {
 	display: flex;
 	flex-direction: column;
     align-items: center;
     position: relative;
-    padding: 1.5rem 0;
+    padding: 1rem 1.5rem 0.7rem 1.5rem;
     border-radius: 0.8rem;
-    line-height: 3.5rem;
+    line-height: 3rem;
     box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
 }
-
+/*
 .signup_box {
 	margin: 4rem 0 5rem 0;
 	line-height: 2rem;
 	width: 25%;
 	padding: 2.5rem 0;
 }
-
-.sign_input {
+*/
+.signup_main .sign_input {
 	height: 100%;
-    width: 90%;
+    width: 85%;
     border: none;
     outline: none;
     padding: 0;
@@ -87,16 +86,16 @@
     border-bottom: 1.5px solid #aaaaaa;    
 }
 
-.sign_input:focus {
+.signup_main .sign_input:focus {
 	border-bottom : 1.5px solid var(--blue);
 }
 
-.input_box {
+.signup_main .input_box {
 	position: relative;
 	line-height: 2rem;
 }
 
-.sign_up_btn {
+.signup_main .sign_up_btn {
 	margin-top: 1rem;
 }
 
@@ -110,7 +109,7 @@
 }
 
 .sign_up_btn {
-	margin: 1rem 0;
+	margin: 0.6rem 0;
 	border: 2px solid #fff;
 	background: transparent;
 	cursor: pointer;
@@ -120,14 +119,14 @@
 	background-color: var(--yellow);
 }
 
-.chk_text {
+.signup_main .chk_text {
 	font-size: 12px;
 	width: 20rem;
 	height: 2rem;
 	margin-top: -0.5rem;
 }
 
-.pwd_valid_text {
+.signup_main .pwd_valid_text {
 	margin-top: 0.1rem;
 	margin-bottom: 2rem;
 	line-height: 1.2rem;
@@ -141,16 +140,15 @@
 	left: 0;
 }
 
-.origin_pw_hide, .copy_pw_hide {
-	position: absolute;
+.signup_main .origin_pw_hide,
+.signup_main .copy_pw_hide {
 	font-size: 20px;
 	color: #707070;
 	margin-top: 0.4rem;
-	margin-left: -1.5rem;
+	margin-left: -2rem;
 	cursor: pointer;
 }
 
-.sign_input:focus ~ .icon {
+.signup_main .sign_input:focus ~ .icon {
 	color: var(--blue);
 }
-*/

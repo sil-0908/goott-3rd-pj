@@ -4,7 +4,7 @@
 <main class="signup_main">
 	<!-- 이용약관 -->
 	<div class="accept_menu">
-		<h2 class="signup_h2 accept_text">약관동의</h2>
+		<h2>약관동의</h2>
 		<p class="accept_tab accecpt_1_p">목적 및 약관동의</p>
 		<p class="accept_tab accecpt_2_p">서비스 제공 및 회원관리</p>
 		<p class="accept_tab accecpt_3_p">구매, 계약 및 지급서비스</p>
@@ -43,6 +43,7 @@
 	<!-- 회원가입 -->
 	<section class="signup_section">
 		<div class="signup_box">
+			<h2>개인정보 입력</h2>
 			<form name="signup_form" method="post">
 				<!-- 아이디 -->
 				<div class="input_box id_area">
@@ -87,10 +88,12 @@
 					<i class="fa-solid fa-phone icon"></i>
 					<input type="text" name="hp" class="sign_input hp" maxlength='11' oninput="hp_chk()" />
 					<p class="chk_text hp_chk_text"></p>
+					<!-- 
 					<input type="button" name="certi_btn" class="sign_input certi_btn" value="인증번호 발송" onclick="certi_chk()"/>
 					<p class="p_text certi_text">인증번호 입력</p>
 					<input type="text" name="certi_num" class="sign_input certi_num" />
 					<p class="chk_text certi_chk_text"></p>
+					 -->
 				</div>
 				<!-- 버튼 -->
 				<div class="input_box btn_area">
