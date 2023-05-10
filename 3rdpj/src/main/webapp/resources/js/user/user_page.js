@@ -1,7 +1,9 @@
 $(document).ready(function() {
-	$.ajax({
-		url : "/user/mypage",
+	var id = $(".session_id").val();
+	$.ajax({		
+		url : "/user/user_page",
 		type : "POST",
+		data : { "id" : id },
 		success : function(data) {
 			$(".page_id").attr('value', data.dto.user_id);
 			$(".page_birth").attr('value', data.dto.birth);
@@ -20,7 +22,8 @@ $(document).ready(function() {
 });
 
 $(".change_pw").on('click', function() {
-	// input 창 하나 열리면서 거기에 입력되는걸로 비밀번호 변경시키기(유효성검사 적용시키고 값 넘겨서 컨트롤러에서 암호화)
+	$(".newpw_modal_section").load("/user/go_newpw_modal");
+	$(".change_pw_section").addClass("show");
 });
 
 // 좌측 탭마다 표시될 화면변경

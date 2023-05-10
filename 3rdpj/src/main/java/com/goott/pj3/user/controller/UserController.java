@@ -1,6 +1,8 @@
 package com.goott.pj3.user.controller;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -8,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,7 +34,12 @@ public class UserController {
 	
 //	회원가입 페이지 이동
 	@GetMapping("signup")
-	public String go_sign_up() {
+	public String go_sign_up(Model model) {
+		// 회원가입 이용약관 불러오기
+		List<UserDTO> accept_list = userService.get_signup_accept();
+		List<UserDTO> privacy_list = userService.get_signup_privacy();
+	    model.addAttribute("accept", accept_list);
+	    model.addAttribute("privacy", privacy_list);
 		return "user/sign_up";
 	}
 	
@@ -102,7 +110,7 @@ public class UserController {
 	}
 	
 //	로그아웃
-	@RequestMapping("sign_out")
+	@GetMapping("sign_out")
 	public String sign_out(HttpSession session) {
 		session.invalidate();
 		return "redirect:/";
@@ -129,6 +137,12 @@ public class UserController {
 		return origin_pw;
 	}
 	
+//	비밀번호 변경 모달창
+	@GetMapping("go_newpw_modal")
+	public String new_pw_modal() {
+		return "user/new_pw_modal";
+	}
+	
 //	새로운 비밀번호 저장
 	@PostMapping("find_set_pw")
 	@ResponseBody
@@ -150,21 +164,29 @@ public class UserController {
 	}
 	
 //	사용자 마이페이지
-	@RequestMapping("mypage")
+	@PostMapping("user_page")
 	@ResponseBody
-	public Map<String, UserDTO> user_page(HttpSession session, UserDTO u_dto) {
+	public Map<String, UserDTO> user_page(@RequestParam("id") String id, HttpSession session, UserDTO u_dto) {
 		Map<String, UserDTO> mypage_map = new HashMap<>();
-		String id = (String)session.getAttribute("user_id");
+		String session_id = (String)session.getAttribute("user_id");
 		String auth = (String)session.getAttribute("auth");
-		u_dto.setUser_id(id);
-		if(auth.equals("auth_c")) {
-			mypage_map.put("dto", userService.get_user_info(u_dto));
-		}	// 접속자가 일반사용자일때 if end
-		else if(auth.equals("auth_b")) {
-			mypage_map.put("dto", userService.get_planner_info(u_dto));
-		}	// 접속자가 플래너일때 else if end
+		if(!id.equals(session_id)) {
+			u_dto.setUser_id(id);
+			mypage_map.put("planner_dto", userService.get_planner_info(u_dto));
+		}	// 로그인 사용자와 마이페이지 주인이 동일할 경우 if end
+		else {
+			if(auth.equals("auth_c")) {
+				u_dto.setUser_id(session_id);
+				mypage_map.put("dto", userService.get_user_my_info(u_dto));
+			}	// 접속자가 일반사용자 본인일때 if end
+			else if(auth.equals("auth_b")) {
+				u_dto.setUser_id(session_id);
+				mypage_map.put("dto", userService.get_planner_my_info(u_dto));
+			}	// 접속자가 플래너 본인일때 else if end
+		}	// 로그인 사용자와 마이페이지 주인이 동일할 경우 else if end
 		return mypage_map;
 	}
-
+	
+	
 	
 }

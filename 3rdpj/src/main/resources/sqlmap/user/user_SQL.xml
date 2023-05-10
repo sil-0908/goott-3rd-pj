@@ -9,6 +9,20 @@
 		values (#{user_id}, #{pw}, #{birth}, #{email}, #{hp})
 		]]>
 	</insert>
+	
+	<!-- 회원가입 이용약관 -->
+	<select id="get_signup_accept" resultType="com.goott.pj3.user.dto.UserDTO">
+		<![CDATA[
+		select concat(title, '\n' , content , '\n') as accept_detail
+		  from accept_signup
+		]]>
+	</select>
+	<select id="get_signup_privacy" resultType="com.goott.pj3.user.dto.UserDTO">
+		<![CDATA[
+		select concat(title, '\n' , content , '\n') as privacy_detail
+		  from privacy_policy
+		]]>
+	</select>
    
 	<!-- 아이디 중복체크 -->
 	<select id="id_chk" parameterType="String" resultType="int">
@@ -62,8 +76,18 @@
    		   and hp = #{hp}
    	</update>
    	
+   	<!-- 일반 사용자가 플래너 마이페이지 접속할때 -->
+   	<select id="get_planner_info" resultType="com.goott.pj3.user.dto.UserDTO">
+   		<![CDATA[
+   		select user_id, birth, email, hp_emp, intro, profile_img, success_count,
+   			   update_date, round(avg(planner_rating/rating_cnt), 1) as planner_score
+   		  from user
+   		 where user_id = #{user_id}
+   		]]>
+   	</select>
+   	
    	<!-- 일반사용자 마이페이지 -->
-   	<select id="get_user_info" resultType="com.goott.pj3.user.dto.UserDTO">
+   	<select id="get_user_my_info" resultType="com.goott.pj3.user.dto.UserDTO">
    		<![CDATA[
    		select user_id, birth, email, hp, profile_img, u_point, create_date, update_date
    		  from user
@@ -72,7 +96,7 @@
    	</select>
    	
    	<!-- 플래너 마이페이지 -->
-   	<select id="get_planner_info" resultType="com.goott.pj3.user.dto.UserDTO">
+   	<select id="get_planner_my_info" resultType="com.goott.pj3.user.dto.UserDTO">
    		<![CDATA[
    		select user_id, birth, email, hp, hp_emp, intro, profile_img, u_point, emp_num, success_count,
    			   create_date, update_date, round(avg(planner_rating/rating_cnt), 1) as planner_score

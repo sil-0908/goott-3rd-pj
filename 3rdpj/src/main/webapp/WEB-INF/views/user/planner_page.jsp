@@ -4,13 +4,12 @@
 <main class="planner_page_main">
 	<div class="tab_area_div">
 		<h2>마이페이지</h2>
+		<input type="hidden" class="session_id" value="${sessionScope.user_id}" />
 		<div class="profile_img_div"></div>
 		<p class="page_text id_text"></p>
-		<input type="text" name="page_id" class="page_input page_id" readonly />
+		<input type="text" class="page_input page_id" readonly />
 			<p class="menu_tab planner_info_text">플래너 정보</p>
-		<c:if test="${sessionScope.user_id == param.page_id}">
 			<p class="menu_tab privacy_text">개인 정보</p>
-		</c:if>
 	</div>
 	<!-- 본인 이외에도 보여줄 영역 -->
 	<section class="planner_info_section">
@@ -45,6 +44,7 @@
 					<input type="text" class="page_input page_intro" readonly />
 				</div>
 				<div class="btn_div">
+					<input type="button" class="page_btn planner_info_edit" value="플래너 정보 수정하기" />
 					<input type="button" class="page_btn write_review" value="이 플래너에게 리뷰달기" />
 				</div>
 			</form>
@@ -53,7 +53,7 @@
 	<!-- 플래너 본인만 볼 영역 -->
 	<section class="privacy_info_section">
 		<div class="privacy_info_div">
-			<form name="planner_page_form" class="planner_page_form" method="post">
+			<form name="privacy_info_form" class="privacy_info_form" method="post">
 				<div class="input_div hp_div">
 					<p class="page_text hp_text">개인 연락처</p>
 					<input type="text" class="page_input page_hp" readonly />
@@ -71,8 +71,9 @@
 					<input type="text" class="page_input page_create_date" readonly />
 				</div>
 				<div class="btn_div">
-					<input type="button" class="page_btn edit_info" value="정보 수정하기" />
+					<input type="button" class="page_btn my_info_edit" value="개인 정보 수정하기" />
 					<input type="button" class="page_btn change_pw" value="비밀번호 변경하기" />
+					<div class="change_pw_area"></div>
 				</div>
 			</form>
 		</div>

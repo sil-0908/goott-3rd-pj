@@ -10,12 +10,26 @@ public class AdminUserDTO {
     //결제할때 올라가는 포인트 : u_point
     //사업자번호 :emp_num
     //결제성공횟수 : success_count
-    //플래너 좋아요 수: planner_like
-    //플래너 싫어요 수 : planner_unlike
     //계좌번호 : acount
-    private String user_id, pw, birth, email, hp, hp_emp, intro, profile_img, auth, u_del_yn, acount;
+    private String user_id;
+    private String pw;
+    private String birth;
+    private String email;
+    private String hp;
+    private String hp_emp;
+    private String intro;
+    private String profile_img;
+    private String auth;
+    private String u_del_yn;
+    private String acount;
 
-    private int u_point, emp_num, success_count, planner_like, planner_unlike;
+    private String planner_score;
+
+    private int u_point;
+    private int emp_num;
+    private int success_count;
+
+    private int planner_rating ;
 
     private Date create_date;
     private Date update_date;
@@ -161,23 +175,20 @@ public class AdminUserDTO {
     }
 
 
-    public int getPlanner_like() {
-        return planner_like;
+    public String getPlanner_score() {
+        return planner_score;
     }
 
-
-    public void setPlanner_like(int planner_like) {
-        this.planner_like = planner_like;
+    public void setPlanner_score(String planner_score) {
+        this.planner_score = planner_score;
     }
 
-
-    public int getPlanner_unlike() {
-        return planner_unlike;
+    public int getPlanner_rating() {
+        return planner_rating;
     }
 
-
-    public void setPlanner_unlike(int planner_unlike) {
-        this.planner_unlike = planner_unlike;
+    public void setPlanner_rating(int planner_rating) {
+        this.planner_rating = planner_rating;
     }
 
 
@@ -203,26 +214,25 @@ public class AdminUserDTO {
 
     @Override
     public String toString() {
-        return "AdminUserDTO [user_id = " + user_id
-                + ", pw = " + pw
-                + ", birth = " + birth
-                + ", email = " + email
-                + ", hp = " + hp
-                + ", hp_emp = " + hp_emp
-                + ", intro = " + intro
-                + ", profile_img = " + profile_img
-                + ", auth = " + auth
-                + ", u_del_yn =" + u_del_yn
-                + ", u_point = " + u_point
-                + ", emp_num = " + emp_num
-                + ", success_count = " + success_count
-                + ", planner_like = " + planner_like
-                + ", planner_unlike = " + planner_unlike
-                + ", acount = " + acount
-                + ", create_date = " + create_date
-                + ", update_date = " + update_date
-                + "]";
+        return "AdminUserDTO{" +
+                "user_id='" + user_id + '\'' +
+                ", pw='" + pw + '\'' +
+                ", birth='" + birth + '\'' +
+                ", email='" + email + '\'' +
+                ", hp='" + hp + '\'' +
+                ", hp_emp='" + hp_emp + '\'' +
+                ", intro='" + intro + '\'' +
+                ", profile_img='" + profile_img + '\'' +
+                ", auth='" + auth + '\'' +
+                ", u_del_yn='" + u_del_yn + '\'' +
+                ", acount='" + acount + '\'' +
+                ", planner_score='" + planner_score + '\'' +
+                ", u_point=" + u_point +
+                ", emp_num=" + emp_num +
+                ", success_count=" + success_count +
+                ", planner_rating=" + planner_rating +
+                ", create_date=" + create_date +
+                ", update_date=" + update_date +
+                '}';
     }
-
-
 }
