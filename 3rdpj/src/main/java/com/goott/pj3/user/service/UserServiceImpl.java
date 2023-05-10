@@ -1,5 +1,7 @@
 package com.goott.pj3.user.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -24,6 +26,16 @@ public class UserServiceImpl implements UserService {
 //		비밀번호 암호화 추가 - 장민실 23.04.11
 		u_dto.setPw(bcrypt.encode(u_dto.getPw()));
 		userDAO.sign_up(u_dto);
+	}
+	
+//	회원가입 이용약관
+	@Override
+	public List<UserDTO> get_signup_accept() {
+		return userDAO.get_signup_accept();
+	}
+	@Override
+	public List<UserDTO> get_signup_privacy() {
+		return userDAO.get_signup_privacy();
 	}
 
 //	아이디 중복체크
@@ -79,17 +91,25 @@ public class UserServiceImpl implements UserService {
 		userDAO.set_new_pw(u_dto);
 	}
 
-//	일반사용자 마이페이지
-	@Override
-	public UserDTO get_user_info(UserDTO u_dto) {
-		return userDAO.get_user_info(u_dto);
-	}
-
-//	플래너 마이페이지
+//	일반 사용자가 플래너 마이페이지 접속할때
 	@Override
 	public UserDTO get_planner_info(UserDTO u_dto) {
 		return userDAO.get_planner_info(u_dto);
 	}
+
+//	일반사용자 마이페이지
+	@Override
+	public UserDTO get_user_my_info(UserDTO u_dto) {
+		return userDAO.get_user_my_info(u_dto);
+	}
+
+//	플래너 마이페이지
+	@Override
+	public UserDTO get_planner_my_info(UserDTO u_dto) {
+		return userDAO.get_planner_my_info(u_dto);
+	}
+
+	
 
 
 	

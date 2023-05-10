@@ -1,22 +1,65 @@
-
-/*
-.signup_main { 
-	min-height: 100vh;
-	background-size: cover;
-}
-*/
-
-.signup_main_div {
+/* signup_main */
+.signup_main {
+	position: relative;
 	display: flex;
-    align-items: center;
-    justify-content: space-evenly;
+	height: 100%;
+    width: 100%;
+    justify-content: center;
+    padding-top: 5.5rem;
 }
 
-.signup_box, .signup_accept {
+.signup_main input {
+	border: none;
+	cursor: default;
+}
+
+/* accept_menu */
+.accept_menu {
+    width: 12rem;
+    background: antiquewhite;
+}
+
+.accept_section .accept_box {
+	
+}
+
+.accept_box .accept_div {
+	width: 45rem;
+    height: 30rem;
+    white-space: pre-line;
+    overflow-y: scroll;
+    line-height: 1.5rem;
+    background: bisque;
+}
+
+.accept_box .accept1_div {
+	
+}
+
+.accept_box .accept2_div {
+	display : none;
+}
+
+.accept_box .accept3_div {
+	display : none;
+}
+
+.accept_box .accept4_div {
+	display : none;
+}
+
+.accept_box .privacy_div {
+	display : none;
+}
+
+/* accept_section */
+
+/* signup_section */
+/*
+.signup_box, .accept_menu, .accept_section {
 	display: flex;
 	flex-direction: column;
     align-items: center;
-    background-color: #fff;
     position: relative;
     padding: 1.5rem 0;
     border-radius: 0.8rem;
@@ -25,19 +68,12 @@
 }
 
 .signup_box {
-	margin-top: 7rem;
+	margin: 4rem 0 5rem 0;
 	line-height: 2rem;
 	width: 25%;
+	padding: 2.5rem 0;
 }
 
-.signup_accept {
-	height: 100%;
-	background-color: black;
-	color: white;
-	width: 40%;
-}
-
-/* input */
 .sign_input {
 	height: 100%;
     width: 90%;
@@ -64,8 +100,7 @@
 	margin-top: 1rem;
 }
 
-/* button */
-.signup_main_div .sign_up_btn {
+.signup_main .sign_up_btn {
 	color: var(--white);
 	background-color: var(--blue);
 	width: 50%;
@@ -85,7 +120,6 @@
 	background-color: var(--yellow);
 }
 
-/* text */
 .chk_text {
 	font-size: 12px;
 	width: 20rem;
@@ -99,8 +133,7 @@
 	line-height: 1.2rem;
 }
 
-/* icon */
-.signup_main_div .icon {
+.signup_main .icon {
 	position: absolute;
 	font-size: 20px;
 	color: #707070;
@@ -120,3 +153,4 @@
 .sign_input:focus ~ .icon {
 	color: var(--blue);
 }
+*/

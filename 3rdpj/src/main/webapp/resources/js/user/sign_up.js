@@ -54,7 +54,7 @@
 	    });
 	    $(".hp").focusout(function() {
 	    	$(this).val($(this).val().replace(/^([0-9]{3})([0-9]{3,4})([0-9]{4})$/, '$1-$2-$3'));
-	    }); 
+	    });
 	});	// function end
 	
 //	회원가입(엔터키)

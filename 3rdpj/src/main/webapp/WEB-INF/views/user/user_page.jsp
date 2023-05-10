@@ -4,6 +4,7 @@
 <main class="user_page_main">
 	<div class="tab_area_div">
 		<h2>마이페이지</h2>
+		<input type="hidden" class="session_id" value="${sessionScope.user_id}" />
 		<div class="profile_img_div"></div>
 		<p class="page_text id_text"></p>
 		<input type="text" class="page_input page_id" readonly />
@@ -49,6 +50,7 @@
 			결제내역ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
 		</div>
 	</section>
+	<section class="newpw_modal_section"></section>
 </main>
 
 <script src="/resources/js/user/user_page.js"></script>
