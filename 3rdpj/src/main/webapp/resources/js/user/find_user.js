@@ -58,31 +58,31 @@
 	    });
 });	// function end
 
-// 아이디 찾기 > 현재 DB에 중복정보 다량으로 기능구현 완료 후 주석처리
-//$(".find_id").on('click', function() {
-//	var email = $(".id_email").val();
-//	var hp = $(".id_hp").val();
-//	
-//	if(email==="") {
-//		$(".id_text").html("이메일을 입력해 주세요");
-//		$(".id_text").css("color", "red");
-//	}	// email 공란 if end
-//	else if(hp==="") {
-//		$(".id_text").html("핸드폰번호를 입력해 주세요");
-//		$(".id_text").css("color", "red");
-//	}	// hp 공란 else if end
-//	else if(email!=""||hp!="") {
-//		$.ajax({
-//			data : { email : email, hp : hp },
-//			url : "/user/find_id",
-//			type : "POST",
-//			success : function(id) {
-//				$(".id_text").html("회원님의 아이디는 " + id +"입니다");
-//				$(".id_text").css("color", "black");
-//			}	// success end
-//		});	// ajax end
-//	}	// 둘다 입력 else if end
-//});	// function end
+// 아이디 찾기
+$(".find_id").on('click', function() {
+	var email = $(".id_email").val();
+	var hp = $(".id_hp").val();
+	
+	if(email==="") {
+		$(".id_text").html("이메일을 입력해 주세요");
+		$(".id_text").css("color", "red");
+	}	// email 공란 if end
+	else if(hp==="") {
+		$(".id_text").html("핸드폰번호를 입력해 주세요");
+		$(".id_text").css("color", "red");
+	}	// hp 공란 else if end
+	else if(email!=""||hp!="") {
+		$.ajax({
+			data : { email : email, hp : hp },
+			url : "/user/find_id",
+			type : "POST",
+			success : function(id) {
+				$(".id_text").html("회원님의 아이디는 " + id +"입니다");
+				$(".id_text").css("color", "black");
+			}	// success end
+		});	// ajax end
+	}	// 둘다 입력 else if end
+});	// function end
 
 // 비밀번호 찾기
 $(".find_pw").on('click', function() {
@@ -215,8 +215,6 @@ $(".change_pw_btn").on('click', function() {
 			data : { "id" : id, "hp" : hp, "pw" : pw },
 			url : "/user/find_set_pw",
 			type : "POST",
-//			dataType : "json",
-//			contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
 			success : function(data) {
 				if(data.msg==="same_pw") {
 					$(".change_pw_msg").html("현재 사용중인 비밀번호와 일치합니다");

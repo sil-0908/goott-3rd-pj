@@ -186,6 +186,4 @@ public class ReviewServiceImpl implements ReviewService {
 	public LikeUnlikeDTO likeUnlikeCnt(LikeUnlikeDTO likeUnlikeDTO) {
 		return this.reviewDAO.likeUnlikeCnt(likeUnlikeDTO);
 	}
-
-
 }

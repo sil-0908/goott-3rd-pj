@@ -1,12 +1,11 @@
 /* find_user area */
 /* form */
-.finduser_main { 
-	min-height: 100vh;
-	background-image: url("/resources/img/user_page_bg.jpg");
+.finduser_main {
 	background-size: cover;
 	display: flex;
-    flex-direction: column;
-    justify-content: center;
+	flex-direction: column;
+	justify-content: center;
+	margin-top: 13.5rem;
 }
 
 .finduser_div {
@@ -27,6 +26,7 @@
     padding: 1.5rem 0;
     border-radius: 0.8rem;
     line-height: 4.5rem;
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
 }
 
 /* input */

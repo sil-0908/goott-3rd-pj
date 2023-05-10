@@ -51,9 +51,13 @@
 				<!-- 핸드폰번호 -->
 				<div class="input_box hp_area">
 					<p class="p_text hp_p_text">핸드폰번호</p>
-					<input type="text" name="hp" class="sign_input hp" maxlength='11' oninput="hp_chk()" />
 					<i class="fa-solid fa-phone icon"></i>
+					<input type="text" name="hp" class="sign_input hp" maxlength='11' oninput="hp_chk()" />
 					<p class="chk_text hp_chk_text"></p>
+					<input type="button" name="certi_btn" class="sign_input certi_btn" value="인증번호 발송" onclick="certi_chk()"/>
+					<p class="p_text certi_text">인증번호 입력</p>
+					<input type="text" name="certi_num" class="sign_input certi_num" />
+					<p class="chk_text certi_chk_text"></p>
 				</div>
 				<!-- 버튼 -->
 				<div class="input_box btn_area">

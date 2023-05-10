@@ -62,12 +62,22 @@
    		   and hp = #{hp}
    	</update>
    	
+   	<!-- 일반사용자 마이페이지 -->
    	<select id="get_user_info" resultType="com.goott.pj3.user.dto.UserDTO">
    		<![CDATA[
-   		select user_id, birth, email, hp, u_point, create_date, update_date
+   		select user_id, birth, email, hp, profile_img, u_point, create_date, update_date
    		  from user
    		 where user_id = #{user_id}
-   		   and auth = "auth_c"
+   		]]>
+   	</select>
+   	
+   	<!-- 플래너 마이페이지 -->
+   	<select id="get_planner_info" resultType="com.goott.pj3.user.dto.UserDTO">
+   		<![CDATA[
+   		select user_id, birth, email, hp, hp_emp, intro, profile_img, u_point, emp_num, success_count,
+   			   create_date, update_date, round(avg(planner_rating/rating_cnt), 1) as planner_score
+   		  from user
+   		 where user_id = #{user_id} 
    		]]>
    	</select>
 </mapper>

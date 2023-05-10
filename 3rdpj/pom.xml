@@ -256,6 +256,20 @@
             <version>2.3.4</version>
         </dependency>
         <!--채팅관련 끝-->
+        <!-- userdto내 localdatetime 사용 위한 의존성 주입 추가 - 장민실 23.05.08 -->
+		<dependency>
+    		<groupId>com.fasterxml.jackson.datatype</groupId>
+    		<artifactId>jackson-datatype-jsr310</artifactId>
+    		<version>2.13.0</version>
+		</dependency>
+		<!-- userdto내 localdatetime 사용 위한 의존성 주입 추가 끝 -->
+        <!-- sms인증발송 관련 - 장민실 23.05.08 -->
+		<dependency>
+		    <groupId>net.nurigo</groupId>
+		    <artifactId>sdk</artifactId>
+		    <version>4.2.7</version>
+		</dependency>
+		<!-- sms인증발송 관련 끝 -->
     </dependencies>
     <!-- 아임포트 repo-->
     <repositories>

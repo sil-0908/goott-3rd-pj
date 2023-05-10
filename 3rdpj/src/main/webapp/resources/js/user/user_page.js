@@ -1,20 +1,15 @@
 $(document).ready(function() {
 	$.ajax({
-		url : "/user/userpage",
+		url : "/user/mypage",
 		type : "POST",
 		success : function(data) {
-			console.log(data.user_dto.user_id);
-//			if(data.msg==="success") {
-//				location.href = data.view;
-//			}
-//			else if(data.msg==="user_del_y") {
-//				$(".signin_msg").html("탈퇴한 사용자 입니다. 탈퇴 취소는 고객센터로 문의 바랍니다.");
-//				$(".signin_msg").css("color", "red");
-//			}
-//			else if(data.msg==="not_user") {
-//				$(".signin_msg").html("로그인 실패. 다시 확인해주세요");
-//				$(".signin_msg").css("color", "red");
-//			}
+			$(".page_id").attr('value', data.dto.user_id);
+			$(".page_birth").attr('value', data.dto.birth);
+			$(".page_email").attr('value', data.dto.email);
+			$(".page_hp").attr('value', data.dto.hp);
+			$(".page_u_point").attr('value', data.dto.u_point);
+			$(".page_create_date").attr('value', data.dto.create_date);
+			$(".page_update_date").attr('value', data.dto.update_date);
 		},	// success end
 		error: function(xhr, status, error) {
                console.log(xhr);
@@ -23,3 +18,25 @@ $(document).ready(function() {
 		}	// error end
 	});	// ajax end
 });
+
+$(".change_pw").on('click', function() {
+	// input 창 하나 열리면서 거기에 입력되는걸로 비밀번호 변경시키기(유효성검사 적용시키고 값 넘겨서 컨트롤러에서 암호화)
+});
+
+// 좌측 탭마다 표시될 화면변경
+$(".privacy_text").on('click', function() {
+	$(".paylist_section").removeClass("show");
+	$(".pay_list_text").removeClass("active");
+	$(".info_section").removeClass("none");
+	$(".info_section").addClass("show");
+	$(".privacy_text").addClass("active");
+});
+
+$(".pay_list_text").on('click', function() {
+	$(".info_section").removeClass("show");
+	$(".info_section").addClass("none");
+	$(".privacy_text").removeClass("active");
+	$(".paylist_section").addClass("show");
+	$(".pay_list_text").addClass("active");
+});
+

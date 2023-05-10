@@ -32,7 +32,7 @@
 	<button id="likeButton">좋아요</button>
 	<button id="unlikeButton">싫어요</button>
 </div>
-<%--<c:if test="${data.user_id == sessionScope.user_id}">--%>
+<c:if test="${data.user_id == sessionScope.user_id}">
 <p>
     <a href="/review/update/${data.review_idx}">수정</a>
 </p>
@@ -40,7 +40,7 @@
 <form method="POST" action="/review/delete/${data.review_idx}">
     <input type="submit" value="삭제">
 </form>
-<%--</c:if>--%>
+</c:if>
 <p>
     <a href="/review/list">목록</a>
 </p>

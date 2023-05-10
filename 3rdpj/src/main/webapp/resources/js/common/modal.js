@@ -8,8 +8,8 @@ const sendMessage = document.querySelector(".chatbox__submit");
 
 const price = $('#price').val(); // 가격
 const name = $('#title').val(); //플랜명
-const buyer = $('.session').val(); //구매자아이디
 const planner = $('#planner').val(); // 플래너아이디
+const buyer = $('.session').val(); //구매자아이디
 const plan_idx = $('.plan_idx').val(); //플랜 pk
 
 
@@ -120,7 +120,7 @@ $(function() {
 		            });
 		            $(".modal__btn--cart-add").click(function(){
 		            	let cart = {
-			                    plan_idx: plan_idx,
+			                    plan_idx: data.plan_idx,
 			                    user_id: buyer
 			                };
 			                $.ajax({
@@ -133,7 +133,10 @@ $(function() {
 			  	                  console.log(xhr.responseText);
 			  	                  console.log(xhr.status);
 			  	                  console.log(xhr.statusText);
-			  	            } 
+			                    },
+			                	success: function(){
+			                		alert("에이쟉스 성공");
+			                	} 
 			                }).done(function (rsp) {
 			                    if (rsp.cart === '카트담기') {
 			                        alert('카트담기성공')

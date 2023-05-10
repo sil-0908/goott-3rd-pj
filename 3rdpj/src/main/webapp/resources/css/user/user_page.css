@@ -1,17 +1,179 @@
-/* form */
-.user_page_main { 
-	min-height: 100vh;
-	background-image: url("/resources/img/user_page_bg.jpg");
-	background-size: cover;
-	/*
+/* main */
+.user_page_main {
+	position: relative;
 	display: flex;
-    flex-direction: column;
+	height: 100%;
+    width: 100%;
     justify-content: center;
-    */
+    padding-top: 9rem;
+}
+
+.user_page_main input {
+	border: none;
+	cursor: default;
+}
+
+.user_page_main input:focus {
+	outline: none;
+}
+
+/* tab_area */
+.tab_area_div {
+	width: 20rem;
+	height: 35rem;
+    line-height: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0.5rem 1rem rgba(0,0,0,.15)!important;
+}
+
+.tab_area_div h2 {
+	font-weight: 500;
+	font-size: 1.5rem;
+	cursor: default;
+}
+
+.tab_area_div .menu_tab {
+	margin: 1.5rem 1rem 0 9rem;
+    padding-right: 0.7rem;
+}
+
+.tab_area_div .privacy_text,
+.tab_area_div .pay_list_text {
+	cursor: pointer;
+}
+
+.tab_area_div .privacy_text:hover,
+.tab_area_div .pay_list_text:hover {
+	color: var(--yellow);
+	border-right: 3px solid var(--yellow);
+}
+
+.tab_area_div .privacy_text.active,
+.tab_area_div .pay_list_text.active {
+	color: var(--blue);
+	border-right: 3px solid var(--blue);
 }
 
 .profile_img_div {
-	width: 15rem;
-	height: 15rem;
-	background-color: white;
+	width: 13rem;
+	height: 13rem;
+	background-color: black;
+	border-radius: 50%;
+	margin: 1rem 0;
+}
+
+.tab_area_div .page_input {
+	width: 50%;
+    height: 2rem;
+    font-size: 1rem;
+    text-align: center;
+    border-bottom: 1.5px solid #aaaaaa;
+}
+
+/* info_section */
+.info_section.show {
+	display: block;
+	pointer-events: auto;
+}
+
+.info_section.show .info_div {
+	display: block;
+	pointer-events: auto;
+}
+
+.info_section.none .info_div {
+	display: none;
+}
+
+.info_section.none {
+	display: none;
+	pointer-events: auto;
+}
+
+.info_div {
+    width: 50rem;
+    height: 35rem;
+    line-height: 1.8rem;    
+    position: relative;
+    box-shadow: 0 0.5rem 1rem rgba(0,0,0,.15)!important;
+}
+
+.user_page_form {
+	display: flex;
+    height: 30rem;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    padding-top: 2.5rem;
+}
+
+
+.input_div {
+	width: 20rem;
+	text-align: center;
+	margin-bottom: 1.5rem;
+}
+
+.input_div .page_text {
+	text-align: initial;
+    margin-left: 2rem;
+}
+
+.input_div .page_input {
+	width: 80%;
+    height: 2rem;
+    font-size: 1rem;
+    border-bottom: 1.5px solid #aaaaaa;
+}
+
+.info_div .btn_div {
+	display: flex;
+    width: 20rem;
+    margin-top: 1rem;
+    justify-content: space-evenly;
+}
+
+.user_page_main .change_pw,
+.user_page_main .edit_info {
+	color: var(--white);
+	background-color: var(--blue);
+	width: 8rem;
+	padding: 0.5rem 0;
+	border-radius: 10px;
+	transition: background-color 0.2s;
+}
+
+.change_pw,
+.edit_info {
+	border: 2px solid #fff;
+	background: transparent;	
+	cursor: pointer;
+}
+
+.change_pw:hover,
+.edit_info:hover {
+	cursor: pointer;
+	background-color: var(--yellow);
+}
+
+/* paylist_section */
+.paylist_section.show {
+	odisplay: block;
+	pointer-events: auto;
+}
+
+.paylist_section.show .paylist_div {
+	display: block;
+	pointer-events: auto;
+}
+
+.paylist_div {
+	display: none;
+	background: cornflowerblue;
+	width: 50rem;
+    height: 35rem;
+    line-height: 1.8rem;
 }

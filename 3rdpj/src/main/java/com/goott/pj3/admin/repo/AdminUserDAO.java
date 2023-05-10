@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.goott.pj3.admin.dto.chartDTO;
+import com.goott.pj3.admin.dto.ChartDTO;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -76,9 +76,15 @@ public class AdminUserDAO {
     }
 
 
-    public List<chartDTO> getUserMonthByAuth(String auth) {
+    public List<ChartDTO> getUserMonthByAuth(String auth) {
+        // SQL 쿼리에서 사용할 파라미터를 저장하는 맵을 생성
         Map<String, Object> paramMap = new HashMap<String, Object>();
+        // 맵에 'auth' 파라미터를 추가
         paramMap.put("auth", auth);
+        // SQL 쿼리를 실행 후 auth 데이터를 검색
+        // 검색된 결과는 'ChartDTO' 객체의 목록 형태로 반환
         return sqlSession.selectList("admin.getUserMonth", paramMap);
     }
+
+
 }
