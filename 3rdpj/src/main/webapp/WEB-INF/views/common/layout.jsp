@@ -37,6 +37,8 @@
 		      <li class="nav__item planner_page">마이페이지</li>
 		    </c:if>
 		    <li class="nav__item sign_out">로그아웃</li>
+		    <input class='session' type='hidden' value="${sessionScope.user_id}" />
+		    
 		  </c:if>
         </ul>
       </nav>

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cart">
     <!--카트추가-->
-    <insert id="add" parameterType="com.goott.pj3.plan.dto.PayDTO">
+    <insert id="add" parameterType="com.goott.pj3.plan.dto.PlanDTO">
         INSERT INTO plan_cart(user_id, plan_idx)
         SELECT #{user_id}, #{plan_idx}
         FROM dual
