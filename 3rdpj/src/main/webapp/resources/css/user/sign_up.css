@@ -1,18 +1,10 @@
-
-/*
-.signup_main { 
-	min-height: 100vh;
-	background-size: cover;
-}
-*/
-
 .signup_main_div {
 	display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: center;
 }
 
-.signup_box, .signup_accept {
+.signup_box, .accept_menu {
 	display: flex;
 	flex-direction: column;
     align-items: center;
@@ -25,14 +17,14 @@
 }
 
 .signup_box {
-	margin-top: 7rem;
+	margin: 4rem 0 5rem 0;
 	line-height: 2rem;
 	width: 25%;
+	padding: 2.5rem 0;
 }
 
-.signup_accept {
+.accept_menu {
 	height: 100%;
-	background-color: black;
 	color: white;
 	width: 40%;
 }

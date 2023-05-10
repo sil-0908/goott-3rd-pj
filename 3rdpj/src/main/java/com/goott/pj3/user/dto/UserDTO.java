@@ -14,6 +14,8 @@ public class UserDTO {
 	// 플래너 DTO : 사업용 폰번호, 자기소개, 사업자등록번호, 계좌, 성공횟수, 플래너 평균점수
 	private String hp_emp, intro, emp_num, acount, planner_score;
 	private int success_count;
+	// 회원가입 이용약관 DTO
+	private String accept_id, accept_title, accept_content;
 
 	public String getUser_id() {
 		return user_id;
@@ -149,6 +151,30 @@ public class UserDTO {
 
 	public void setSuccess_count(int success_count) {
 		this.success_count = success_count;
+	}		
+
+	public String getAccept_id() {
+		return accept_id;
+	}
+
+	public void setAccept_id(String accept_id) {
+		this.accept_id = accept_id;
+	}
+
+	public String getAccept_title() {
+		return accept_title;
+	}
+
+	public void setAccept_title(String accept_title) {
+		this.accept_title = accept_title;
+	}
+
+	public String getAccept_content() {
+		return accept_content;
+	}
+
+	public void setAccept_content(String accept_content) {
+		this.accept_content = accept_content;
 	}
 
 	@Override
@@ -170,6 +196,9 @@ public class UserDTO {
 			+ ", acount = " + acount
 			+ ", planner_score = " + planner_score
 			+ ", success_count = " + success_count
+			+ ", accept_id = " + accept_id
+			+ ", accept_title = " + accept_title
+			+ ", accept_content = " + accept_content
 			+ "]";
 	}
 

@@ -3,6 +3,20 @@
 // =================================== 공통 영역 start ===================================
 
 	$(document).ready(function() {
+	    $.ajax({
+			url : "/user/signup_accept",
+			type : "GET",
+			dataType: "json",
+			success : function(data) {
+				console.log(data);
+				$(".accept_1_input").attr("value", "dfdfdfdfdf");
+			},	// success end
+			error: function(xhr, status, error) {
+	               console.log(xhr);
+	               console.log(status);
+	               console.log(error);
+			}	// error end
+		});	// ajax end
 // 전제 input 입력 제한
 	// 아이디, 비밀번호, 비밀번호 확인 - 입력받는 영문자 무조건 소문자로 변환
 		$(".user_id, .pw, .pw_chk").css("text-transform", "lowercase");
@@ -54,7 +68,7 @@
 	    });
 	    $(".hp").focusout(function() {
 	    	$(this).val($(this).val().replace(/^([0-9]{3})([0-9]{3,4})([0-9]{4})$/, '$1-$2-$3'));
-	    }); 
+	    });
 	});	// function end
 	
 //	회원가입(엔터키)

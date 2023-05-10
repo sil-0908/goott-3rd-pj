@@ -1,6 +1,7 @@
 package com.goott.pj3.user.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -60,6 +61,17 @@ public class UserController {
 		return "redirect:/";
 	}
 	
+//	회원가입 이용약관
+	@GetMapping("signup_accept")
+	public Map<String, UserDTO> signup_accept() {
+		List<UserDTO> accept_list = userService.get_signup_accept();
+		Map<String, UserDTO> accept_map = new HashMap<String, UserDTO>();
+		for (UserDTO accept : accept_list) {
+			accept_map.put(accept.getAccept_id(), accept);
+		}
+		return accept_map;
+	}
+	
 //	아이디 중복체크
 	@PostMapping("id_chk")
 	@ResponseBody
@@ -102,7 +114,7 @@ public class UserController {
 	}
 	
 //	로그아웃
-	@RequestMapping("sign_out")
+	@GetMapping("sign_out")
 	public String sign_out(HttpSession session) {
 		session.invalidate();
 		return "redirect:/";
@@ -150,21 +162,29 @@ public class UserController {
 	}
 	
 //	사용자 마이페이지
-	@RequestMapping("mypage")
+	@PostMapping("user_page")
 	@ResponseBody
-	public Map<String, UserDTO> user_page(HttpSession session, UserDTO u_dto) {
+	public Map<String, UserDTO> user_page(@RequestParam("id") String id, HttpSession session, UserDTO u_dto) {
 		Map<String, UserDTO> mypage_map = new HashMap<>();
-		String id = (String)session.getAttribute("user_id");
+		String session_id = (String)session.getAttribute("user_id");
 		String auth = (String)session.getAttribute("auth");
-		u_dto.setUser_id(id);
-		if(auth.equals("auth_c")) {
-			mypage_map.put("dto", userService.get_user_info(u_dto));
-		}	// 접속자가 일반사용자일때 if end
-		else if(auth.equals("auth_b")) {
-			mypage_map.put("dto", userService.get_planner_info(u_dto));
-		}	// 접속자가 플래너일때 else if end
+		if(!id.equals(session_id)) {
+			u_dto.setUser_id(id);
+			mypage_map.put("planner_dto", userService.get_planner_info(u_dto));
+		}	// 로그인 사용자와 마이페이지 주인이 동일할 경우 if end
+		else {
+			if(auth.equals("auth_c")) {
+				u_dto.setUser_id(session_id);
+				mypage_map.put("dto", userService.get_user_my_info(u_dto));
+			}	// 접속자가 일반사용자 본인일때 if end
+			else if(auth.equals("auth_b")) {
+				u_dto.setUser_id(session_id);
+				mypage_map.put("dto", userService.get_planner_my_info(u_dto));
+			}	// 접속자가 플래너 본인일때 else if end
+		}	// 로그인 사용자와 마이페이지 주인이 동일할 경우 else if end
 		return mypage_map;
 	}
-
+	
+	
 	
 }

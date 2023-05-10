@@ -2,13 +2,22 @@
 <%@ include file="/WEB-INF/views/common/layout.jsp" %>
 
 <main class="signup_main">
-	<!-- 회원가입 전체 div -->
-	<div class="signup_main_div">
-		<!-- 이용약관 -->
-		<div class="signup_accept">
-			<h2 class="signup_h2 accept_text">약관동의</h2>
-		</div>
-		<!-- 회원가입 -->
+	<!-- 이용약관 -->
+	<div class="accept_menu">
+		<h2 class="signup_h2 accept_text">약관동의</h2>
+		<p class="accept_tab accecpt_1_p">목적 및 약관동의</p>
+		<p class="accept_tab accecpt_2_p">서비스 제공 및 회원관리</p>
+		<p class="accept_tab accecpt_3_p">구매, 계약 및 지급서비스</p>
+		<p class="accept_tab accecpt_4_p">개인정보 보호 및 법정의무</p>
+		<p class="accept_tab accecpt_5_p">개인정보 처리방침</p>
+	</div>
+	<section class="accept_section">
+		<div class="accept_box">
+			<input type="text" class="accept_text accept_1_input" readonly />
+		</div>	
+	</section>
+	<!-- 회원가입 -->
+	<section class="signup_section">
 		<div class="signup_box">
 			<form name="signup_form" method="post">
 				<!-- 아이디 -->
@@ -66,8 +75,7 @@
 				</div>
 			</form>
 		</div>
-		
-	</div>
+	</section>
 </main>
 	
 <script src="/resources/js/user/sign_up.js"></script>

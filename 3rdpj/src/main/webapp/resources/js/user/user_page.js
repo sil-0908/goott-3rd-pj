@@ -20,7 +20,7 @@ $(document).ready(function() {
 });
 
 $(".change_pw").on('click', function() {
-	// input 창 하나 열리면서 거기에 입력되는걸로 비밀번호 변경시키기(유효성검사 적용시키고 값 넘겨서 컨트롤러에서 암호화)
+	
 });
 
 // 좌측 탭마다 표시될 화면변경

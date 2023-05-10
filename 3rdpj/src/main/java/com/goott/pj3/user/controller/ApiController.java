@@ -16,37 +16,41 @@
 //
 //// 장민실 23.05.09
 //@RestController
-//@RequestMapping("/api/**")
+////@RequestMapping("/api/**")
 //public class ApiController {
-//	
+////	
 //	final DefaultMessageService messageService;
 //	
 //	public ApiController() {
-//		String api_key = "NCSMINAMEAOHNT2E";
-//		String api_secret = "ZDOP3TRPZXKC5RVTFJU4OJU8YL3XG3KU";
-//		this.messageService = NurigoApp.INSTANCE.initialize(api_key, api_secret, "https://api.coolsms.co.kr");
+//		this.messageService = NurigoApp.INSTANCE.initialize("NCSMINAMEAOHNT2E", "ZDOP3TRPZXKC5RVTFJU4OJU8YL3XG3KU", "https://api.coolsms.co.kr");
 //	}
+////	
+////	@PostMapping("send_sms")
+////	@ResponseBody
+////	public SingleMessageSentResponse send_sms(@RequestParam("hp") String hp) {
+////		Message msg = new Message();
+////		msg.setFrom(hp);
+////		msg.setTo(hp);
+////		msg.setText("[SunTour] 인증번호는 [] 입니다.");
+////		SingleMessageSentResponse response = this.messageService.sendOne(new SingleMessageSendingRequest(msg));
+////		return response;
+////	}
 //	
-//	@PostMapping("send_sms")
-//	@ResponseBody
-//	public SingleMessageSentResponse send_sms(@RequestParam("hp") String hp) {
-//		Random random = new Random();
-//		String ran_num = "";
-//		for (int i=0; i<8; i++) {
-//			int create_num = random.nextInt(9);
-//			ran_num += Integer.toString(create_num);
-//		}
-//		Message msg = new Message();
-//		msg.setFrom(hp);
-//		System.out.println("from : " + msg.getFrom());
-//		msg.setTo(hp);
-//		System.out.println("to : " + msg.getTo());
-//		msg.setText("[SunTour] 인증번호는 [" + ran_num + "] 입니다.");
-//		System.out.println("text : " + msg.getText());
-//		SingleMessageSentResponse response = this.messageService.sendOne(new SingleMessageSendingRequest(msg));
-//		System.out.println("response : " + response);
-//		return response;
-//	}
+//	
+//	
+//    @PostMapping("/send-one")
+//    public SingleMessageSentResponse sendOne() {
+//        Message message = new Message();
+//        // 발신번호 및 수신번호는 반드시 01012345678 형태로 입력되어야 합니다.
+//        message.setFrom("발신번호 입력");
+//        message.setTo("수신번호 입력");
+//        message.setText("한글 45자, 영자 90자 이하 입력되면 자동으로 SMS타입의 메시지가 추가됩니다.");
+//
+//        SingleMessageSentResponse response = this.messageService.sendOne(new SingleMessageSendingRequest(message));
+//        System.out.println(response);
+//
+//        return response;
+//    }
 //	
 //
 //}
