@@ -4,12 +4,14 @@
 <main class="signup_main">
 	<!-- 이용약관 -->
 	<div class="accept_menu">
-		<h2>약관동의</h2>
-		<p class="accept_tab accecpt_1_p">목적 및 약관동의</p>
-		<p class="accept_tab accecpt_2_p">서비스 제공 및 회원관리</p>
-		<p class="accept_tab accecpt_3_p">구매, 계약 및 지급서비스</p>
-		<p class="accept_tab accecpt_4_p">개인정보 보호 및 법정의무</p>
-		<p class="accept_tab pravacy_p">개인정보 처리방침</p>
+		<div class="menu_h2"><h2>약관동의</h2></div>
+		<div class="accept_menu_tab">
+			<p class="accept_tab accecpt_1_p active">목적 및 약관동의</p>
+			<p class="accept_tab accecpt_2_p">서비스 제공 및 회원관리</p>
+			<p class="accept_tab accecpt_3_p">구매, 계약 및 지급서비스</p>
+			<p class="accept_tab accecpt_4_p">개인정보 보호 및 법정의무</p>
+			<p class="accept_tab pravacy_p">개인정보 처리방침</p>
+		</div>
 	</div>
 	<section class="accept_section">
 		<div class="accept_box">

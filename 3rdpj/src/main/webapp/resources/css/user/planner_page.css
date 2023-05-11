@@ -41,6 +41,10 @@
     padding-right: 0.7rem;
 }
 
+.planner_page_main .tab_area_div .privacy_text {
+	margin-left: 9.5rem;
+}
+
 .tab_area_div .planner_info_text,
 .tab_area_div .privacy_text {
 	cursor: pointer;

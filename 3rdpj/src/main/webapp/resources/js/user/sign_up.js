@@ -57,6 +57,77 @@
 	    });
 	});	// function end
 	
+//	이용약관
+	$(".accecpt_1_p").on('click', function() {
+		$(".accecpt_1_p").addClass("active");
+		$(".accecpt_2_p").removeClass("active");
+		$(".accecpt_3_p").removeClass("active");
+		$(".accecpt_4_p").removeClass("active");
+		$(".pravacy_p").removeClass("active");
+		$(".accept1_div").removeClass("none");
+		$(".accept1_div").addClass("show");
+		$(".accept2_div").removeClass("show");
+		$(".accept3_div").removeClass("show");
+		$(".accept4_div").removeClass("show");
+		$(".privacy_div").removeClass("show");		
+	});
+	
+	$(".accecpt_2_p").on('click', function() {
+		$(".accecpt_2_p").addClass("active");
+		$(".accecpt_1_p").removeClass("active");
+		$(".accecpt_3_p").removeClass("active");
+		$(".accecpt_4_p").removeClass("active");
+		$(".pravacy_p").removeClass("active");
+		$(".accept1_div").addClass("none");
+		$(".accept2_div").addClass("show");
+		$(".accept1_div").removeClass("show");
+		$(".accept3_div").removeClass("show");
+		$(".accept4_div").removeClass("show");
+		$(".privacy_div").removeClass("show");		
+	});
+	
+	$(".accecpt_3_p").on('click', function() {
+		$(".accecpt_3_p").addClass("active");
+		$(".accecpt_1_p").removeClass("active");
+		$(".accecpt_2_p").removeClass("active");
+		$(".accecpt_4_p").removeClass("active");
+		$(".pravacy_p").removeClass("active");
+		$(".accept1_div").addClass("none");
+		$(".accept3_div").addClass("show");
+		$(".accept1_div").removeClass("show");
+		$(".accept2_div").removeClass("show");
+		$(".accept4_div").removeClass("show");
+		$(".privacy_div").removeClass("show");		
+	});
+	
+	$(".accecpt_4_p").on('click', function() {
+		$(".accecpt_4_p").addClass("active");
+		$(".accecpt_1_p").removeClass("active");
+		$(".accecpt_2_p").removeClass("active");
+		$(".accecpt_3_p").removeClass("active");
+		$(".pravacy_p").removeClass("active");
+		$(".accept1_div").addClass("none");
+		$(".accept4_div").addClass("show");
+		$(".accept1_div").removeClass("show");
+		$(".accept2_div").removeClass("show");
+		$(".accept3_div").removeClass("show");
+		$(".privacy_div").removeClass("show");		
+	});
+	
+	$(".pravacy_p").on('click', function() {
+		$(".pravacy_p").addClass("active");
+		$(".accecpt_1_p").removeClass("active");
+		$(".accecpt_2_p").removeClass("active");
+		$(".accecpt_3_p").removeClass("active");
+		$(".accecpt_4_p").removeClass("active");
+		$(".accept1_div").addClass("none");
+		$(".privacy_div").addClass("show");
+		$(".accept1_div").removeClass("show");
+		$(".accept2_div").removeClass("show");
+		$(".accept3_div").removeClass("show");
+		$(".accept4_div").removeClass("show");		
+	});
+	
 //	회원가입(엔터키)
 	document.addEventListener('keydown', function(e){
 		if(e.keyCode === 13 || e.keyCode === 108) {

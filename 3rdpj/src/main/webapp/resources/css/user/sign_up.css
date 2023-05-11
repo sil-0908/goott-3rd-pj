@@ -11,45 +11,106 @@
 /* accept_menu */
 .signup_main .accept_menu {
     width: 12rem;
-    background: antiquewhite;
+    height: 46.5rem;
+    padding: 0 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 0.8rem;
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;    
 }
 
-.signup_main .accept_section {
-	width: 45rem;
-    height: 30rem;
+.signup_main .accept_menu h2 {
+	margin-top: 1.7rem;
+	font-weight: 500;
+	font-size: 1.5rem;
+	cursor: default;	
 }
 
-.signup_main .accept_section .accept_box {
-	
+.accept_menu .accept_menu_tab {
+	width: 14rem;
+	display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.accept_menu .accept_menu_tab .accept_tab {
+	cursor: pointer;
+	margin: 2rem 1rem 0 1rem;
+    padding-right: 0.7rem;
+    height: 2rem;
+    padding-top: 1rem;
+}
+
+.accept_menu .accept_menu_tab .accept_tab:hover {
+	color: var(--yellow);
+	border-right: 3px solid var(--yellow);
+}
+
+.accept_menu .accept_menu_tab .accept_tab.active {
+	color: var(--blue);
+	border-right: 3px solid var(--blue);
 }
 
 .signup_main .accept_box .accept_div {
 	width: 45rem;
-    height: 30rem;
+    height: 46.5rem;
+    padding: 0 1rem;
     white-space: pre-line;
     overflow-y: scroll;
     line-height: 1.5rem;
-    background: bisque;
+    cursor: context-menu;
+    border-radius: 0.8rem;
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
 }
 
-.signup_main .accept_box .accept1_div {
-	
+.accept_section .accept_box .accept1_div.show {
+	display : block;
+	pointer-events: auto;
 }
 
-.signup_main .accept_box .accept2_div {
+.accept_section .accept_box .accept1_div.none {
 	display : none;
 }
 
-.signup_main .accept_box .accept3_div {
+.accept_section .accept_box .accept2_div {
 	display : none;
 }
 
-.signup_main .accept_box .accept4_div {
+.accept_section .accept_box .accept2_div.show {
+	display : block;
+	pointer-events: auto;
+}
+
+.accept_section .accept_box .accept3_div {
 	display : none;
 }
 
-.signup_main .accept_box .privacy_div {
+.accept_section .accept_box .accept3_div.show {
+	display : block;
+	pointer-events: auto;
+}
+
+.accept_section .accept_box .accept4_div {
 	display : none;
+}
+
+.accept_section .accept_box .accept4_div.show {
+	display : block;
+	pointer-events: auto;
+}
+
+.accept_section .accept_box .privacy_div {
+	display : none;
+}
+
+.accept_section .accept_box .privacy_div.show {
+	display : block;
+	pointer-events: auto;
+}
+
+.signup_main .accept_box .accept_div::-webkit-scrollbar {
+	display: none;
 }
 
 /* accept_section */
@@ -60,19 +121,20 @@
 	flex-direction: column;
     align-items: center;
     position: relative;
-    padding: 1rem 1.5rem 0.7rem 1.5rem;
+    padding: 1rem 1rem 0.7rem 2rem;
+    margin-left: 2rem;    
+    line-height: 3rem;    
+    height: 44.8rem;
     border-radius: 0.8rem;
-    line-height: 3rem;
     box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
 }
-/*
-.signup_box {
-	margin: 4rem 0 5rem 0;
-	line-height: 2rem;
-	width: 25%;
-	padding: 2.5rem 0;
+
+.signup_section .signup_box h2 {
+	font-weight: 500;
+	font-size: 1.5rem;
+	cursor: default;
 }
-*/
+
 .signup_main .sign_input {
 	height: 100%;
     width: 85%;
@@ -93,6 +155,13 @@
 .signup_main .input_box {
 	position: relative;
 	line-height: 2rem;
+}
+
+.signup_main .btn_area {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+    align-items: center;
 }
 
 .signup_main .sign_up_btn {
